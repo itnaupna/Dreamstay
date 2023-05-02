@@ -34,7 +34,7 @@
 
         <tr>
             <th>이메일</th>
-            <td><input type="text" name="email" id="email"></td>
+            <td><input type="text" name="email" id="email" required="required"></td>
             <td>
                 <button type="button" id="SendEmailBtn" class="btn btn-outline-primary btn-sm">인증번호 받기</button>
             </td>
@@ -42,7 +42,7 @@
 
         <tr>
             <td><label for="email_code">인증번호</label></td>
-            <td><input type="text" name="email_code" id="email_code"></td>
+            <td><input type="text" name="email_code" id="email_code" placeholder="인증번호를 입력해주세요" required="required"></td>
             <td>
                 <button type="button" id="CheckEmailBtn" class="btn btn-outline-primary btn-sm">인증번호 확인</button>
             </td>
@@ -53,32 +53,33 @@
 
         <tr>
             <th>아이디</th>
-            <td><label for="id"></label><input type="text" name="id" id="id" class="form-control"></td>
+            <td><label for="id"></label><input type="text" name="id" id="id" class="form-control" required="required"></td> <%-- label for 사용시 앞에 위치시켜도 연결됨 --%>
         </tr>
 
         <tr>
             <th>비밀번호</th>
-            <td><label for="pw"></label><input type="password" name="pw" id="pw" class="form-control"></td>
+            <td><label for="pw"></label><input type="password" name="pw" id="pw" class="form-control" required="required"></td>
         </tr>
 
         <tr>
             <th>이름</th>
-            <td><label for="user_name"></label><input type="text" id="user_name" name="user_name"/></td>
+            <td><label for="user_name"></label><input type="text" id="user_name" name="user_name" required="required"/></td>
         </tr>
 
         <tr>
             <th>번호</th>
-            <td><label for="phone"></label><input type="text" id="phone" name="phone"/></td>
+            <td><label for="phone"></label><input type="text" id="phone" name="phone" required="required"/></td>
         </tr>
 
         <tr>
             <th>주소</th>
-            <td><label for="addr"></label><input type="text" id="addr" name="addr"/></td>
+            <td><label for="addr"></label><input type="text" id="addr" name="addr"required="required"/></td>
         </tr>
         <tr>
             <th>상세 주소</th>
             <td><label for="addrdetail"></label><input type="text" name="addrdetail" id="addrdetail"/></td>
         </tr>
+
         <tr>
             <td>
                 <button type="submit" class="btn btn-outline-primary btn-sm">회원가입</button>
