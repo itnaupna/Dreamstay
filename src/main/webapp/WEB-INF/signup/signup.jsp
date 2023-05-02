@@ -112,7 +112,7 @@
             e.preventDefault(); // 기존의 form 전송 방지
             $.ajax({
                 type: 'POST',
-                url: 'checkemail',
+                url: '/checkemail',
                 data: {"email_code": email_code, "email": email}, // 입력한 인증번호 전달 ( form id 로 전달가능)
                 success: function (data) {
                     alert("인증번호가 맞습니다");
