@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 
-@ComponentScan({"com.bitnc4.*"})
+@ComponentScan({"com.bitnc4.*","naver.cloud"})
 @SpringBootApplication
 @MapperScan("com.bitnc4.mapper")
 public class DreamstayApplication {
