@@ -116,7 +116,7 @@
                 url: '/checkemail',
                 data: {"email_code": email_code, "email": email}, // 입력한 인증번호 전달 ( form id 로 전달가능)
                 success: function (data) {
-                    if (data === "success") { // data 가 success 일 때
+                    if (data === true ) { // data 가 success 일 때
                         alert("인증번호가 맞습니다");
                     } else {
                         alert("인증번호가 일치하지 않습니다"); // 인증번호 일치하지 않을 때
