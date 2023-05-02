@@ -5,6 +5,12 @@ spring:
     username: lekahelis
     password: bit123!@#
 
+  #mybatis
+  mybatis:
+    type-aliases-package: com.bitnc4.dto
+    mapper-locations:
+    - /mapper/**/*.xml
+
   mail:
     host: smtp.naver.com
     port: 465
