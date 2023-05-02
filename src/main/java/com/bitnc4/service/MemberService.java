@@ -1,5 +1,6 @@
 package com.bitnc4.service;
 
+import com.bitnc4.dto.MemberDto;
 import com.bitnc4.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
@@ -31,17 +32,20 @@ public class MemberService implements MemberServiceInter {
     }
 
     @Override
+    public int overlapEmail(String email) {
+        return memberMapper.overlapEmail(email);
+    }
+
+    @Override
     public boolean codeAuth(HashMap<String, String> auth, String mail, String code) {
         boolean certification = false;
-        System.out.println("service" + auth.size());
-        for(int i = 0; i < auth.size(); i++) {
+        if(auth.get(mail) == null){return false;}
 
-            if(auth.get(mail).equals(code)) {
-                certification = true;
-                auth.remove(mail);
-                break;
-            }
+        if(auth.get(mail).equals(code)) {
+            certification = true;
+            auth.remove(mail);
         }
+
         return certification;
     }
 
@@ -51,7 +55,12 @@ public class MemberService implements MemberServiceInter {
     }
 
     @Override
-    public boolean overlapId() {
-        return memberMapper.overlapId();
+    public int overlapId(String id) {
+        return memberMapper.overlapId(id);
+    }
+
+    @Override
+    public void joinMember(MemberDto dto) {
+        memberMapper.joinMember(dto);
     }
 }
