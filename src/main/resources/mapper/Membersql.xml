@@ -5,7 +5,15 @@
         select count(*) from member
     </select>
 
-    <select id="overlapId" parameterType="String" resultType="boolean">
+    <select id="overlapEmail" parameterType="String" resultType="int">
+        select  exists(select  email from member where email = #{email})
+    </select>
+    <select id="overlapId" parameterType="String" resultType="int">
         select exists(select id from member where id = #{id})
     </select>
+
+    <insert id="joinMember" parameterType="MemberDto">
+        insert into member (id, pw, user_name, email, phone, user_level, addr, point)
+        values (#{id}, #{pw}, #{user_name}, #{email}, #{phone}, 1, #{addr}, 0);
+    </insert>
 </mapper>

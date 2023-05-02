@@ -1,5 +1,7 @@
 package com.bitnc4.service;
 
+import com.bitnc4.dto.MemberDto;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +17,13 @@ public interface MemberServiceInter {
     public int memberCnt();
     
     // ID 중복검사
-    public boolean overlapId();
+    public int overlapId(String id);
+
+    // email 중복검사
+    public int overlapEmail(String email);
+    
+    // 회원가입
+    public void joinMember(MemberDto dto);
 
 
 }
