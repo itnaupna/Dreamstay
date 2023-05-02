@@ -63,17 +63,17 @@
 
         <tr>
             <th>이름</th>
-            <td><label for="user_name"></label><input type="text" id="user_name" name="user_name" readonly/></td>
+            <td><label for="user_name"></label><input type="text" id="user_name" name="user_name"/></td>
         </tr>
 
         <tr>
             <th>번호</th>
-            <td><label for="phone"></label><input type="text" id="phone" name="phone" readonly/></td>
+            <td><label for="phone"></label><input type="text" id="phone" name="phone"/></td>
         </tr>
 
         <tr>
             <th>주소</th>
-            <td><label for="addr"></label><input type="text" id="addr" name="addr" readonly/></td>
+            <td><label for="addr"></label><input type="text" id="addr" name="addr"/></td>
         </tr>
         <tr>
             <th>상세 주소</th>
@@ -115,18 +115,17 @@
                 url: '/checkemail',
                 data: {"email_code": email_code, "email": email}, // 입력한 인증번호 전달 ( form id 로 전달가능)
                 success: function (data) {
-                    alert("인증번호가 맞습니다");
-                    $(".successEmailChk").text("인증번호가 일치합니다."); // ( 인증번호 일치 할때 )
-                    $(".successEmailChk").css("color", "green");     //  ( 폰트색 변경 )
+                    if (data === "success") { // data 가 success 일 때
+                        alert("인증번호가 맞습니다");
+                    } else {
+                        alert("인증번호가 일치하지 않습니다"); // 인증번호 일치하지 않을 때
+                    }
                 },
                 error: function () {
-                    alert('인증번호가 일치하지 않습니다'); // 인증번호 실패 alert
-                    $(".successEmailChk").text("인증번호가 틀립니다.");
-                    $(".successEmailChk").css("color", "red");
+                    alert('인증번호 확인에 실패하였습니다');
                 }
             });
         });
-    });
 </script>
 
 </html>
