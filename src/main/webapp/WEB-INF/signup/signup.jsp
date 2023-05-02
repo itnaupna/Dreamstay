@@ -157,6 +157,10 @@
             url: '/checkemail',
             data: {"email_code": email_code, "email": email}, // 입력한 인증번호 전달 ( form id 로 전달가능)
             success: function (data) {
+                if(f_email == true) {
+                    alert("인증 되었습니다");
+                    return;
+                }
                 if (data === true) { // data 가 success 일 때
                     alert("인증번호가 맞습니다");
                     f_email = true;
