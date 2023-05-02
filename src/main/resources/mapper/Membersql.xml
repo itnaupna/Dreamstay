@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitnc4.mapper.MemberMapper">
+    <select id="memberCnt" resultType="int">
+        select count(*) from member
+    </select>
 
-
+    <select id="overlapId" parameterType="String" resultType="boolean">
+        select exists(select id from member where id = #{id})
+    </select>
 </mapper>

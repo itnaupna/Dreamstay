@@ -86,46 +86,46 @@
         </tr>
     </table>
 </form>
+<a href="/ff">db연결테스트</a>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- ajax script -->
 <script>
-    $(document).click(function () {
-        $('#SendEmailBtn').click(function (e) {
-            e.preventDefault(); // 기존의 form 전송 방지
-            $.ajax({
-                type: 'POST',
-                url: '/sendemail',
-                data: $('#email').serialize(), // 이메일 정보를 전달
-                success: function (data) {
-                    alert('인증번호가 발송되었습니다'); // 발송 성공시 alert
-                },
-                error: function () {
-                    alert('인증번호 발송에 실패하였습니다'); // 발송 실패시 alert
-                }
-            })
-        });
+    $('#SendEmailBtn').click(function (e) {
+        e.preventDefault(); // 기존의 form 전송 방지
+        $.ajax({
+            type: 'POST',
+            url: '/sendemail',
+            data: $('#email').serialize(), // 이메일 정보를 전달
+            success: function (data) {
+                alert('인증번호가 발송되었습니다'); // 발송 성공시 alert
+            },
+            error: function () {
+                alert('인증번호 발송에 실패하였습니다'); // 발송 실패시 alert
+            }
+        })
+    });
 
-        $('#CheckEmailBtn').click(function (e) {
-            let email_code = $("#email_code").var();
-            let email = $("#email").var();
-            e.preventDefault(); // 기존의 form 전송 방지
-            $.ajax({
-                type: 'POST',
-                url: '/checkemail',
-                data: {"email_code": email_code, "email": email}, // 입력한 인증번호 전달 ( form id 로 전달가능)
-                success: function (data) {
-                    if (data === "success") { // data 가 success 일 때
-                        alert("인증번호가 맞습니다");
-                    } else {
-                        alert("인증번호가 일치하지 않습니다"); // 인증번호 일치하지 않을 때
-                    }
-                },
-                error: function () {
-                    alert('인증번호 확인에 실패하였습니다');
+    $('#CheckEmailBtn').click(function (e) {
+        let email_code = $("#email_code").val();
+        let email = $("#email").val();
+        e.preventDefault(); // 기존의 form 전송 방지
+        $.ajax({
+            type: 'POST',
+            url: '/checkemail',
+            data: {"email_code": email_code, "email": email}, // 입력한 인증번호 전달 ( form id 로 전달가능)
+            success: function (data) {
+                if (data === true) { // data 가 success 일 때
+                    alert("인증번호가 맞습니다");
+                } else {
+                    alert("인증번호가 일치하지 않습니다"); // 인증번호 일치하지 않을 때
                 }
-            });
+            },
+            error: function () {
+                alert('인증번호 확인에 실패하였습니다');
+            }
         });
+    });
 </script>
 
 </html>

@@ -2,6 +2,7 @@ package com.bitnc4.service;
 
 import com.bitnc4.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public class MemberService implements MemberServiceInter {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private MemberMapper memberMapper;
 
     @Override
     public void mailCode(String mail, String code) {
@@ -39,5 +43,15 @@ public class MemberService implements MemberServiceInter {
             }
         }
         return certification;
+    }
+
+    @Override
+    public int memberCnt() {
+        return memberMapper.memberCnt();
+    }
+
+    @Override
+    public boolean overlapId() {
+        return memberMapper.overlapId();
     }
 }
