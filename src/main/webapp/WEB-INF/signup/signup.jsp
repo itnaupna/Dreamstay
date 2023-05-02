@@ -26,7 +26,7 @@
 <!-- 다음 맵 api script 끝 -->
 
 <%-- 나머지 데이터 입력 폼 --%>
-<form method="post" action="signup">
+<form method="post" action="joinmember">
     <table>
         <caption align="top"><b>회원가입</b></caption>
 
@@ -168,7 +168,7 @@
             url: '/overlapid',
             data: {"id": id},
             success: function (data) {
-                if (data == true) {
+                if (data == 0) {
                     alert("회원가입 가능한 아이디입니다");
                     f_id = true;
                 } else {
@@ -199,22 +199,28 @@
 
 <script type="text/javascript">
 
-    if($("#addr").val().length > 0) {
-        f_addr = true;
-    }
+    $(function () {
 
-    if($("#phone").val().length > 0) {
-        f_phone = true;
-    }
+        if ($("#addr").val().length > 0) {
+            f_addr = true;
+        }
 
-    if($("#user_name").val().length > 0) {
-        f_user_name = true;
-    }
+        if ($("#phone").val().length > 0) {
+            f_phone = true;
+        }
 
-    if(f_addr && f_phone && f_pw && f_id && f_user_name && f_email){
-        $("#signupBtn").prop("disabled", false);
-    }else {
-        $("#signupBtn").prop("disabled", true);
-    }
+        if ($("#user_name").val().length > 0) {
+            f_user_name = true;
+        }
 
+        setInterval(function () {
+            console.log(f_email, f_id, f_user_name, f_pw, f_phone, f_addr);
+            if (f_pw && f_id && f_email && f_user_name && f_phone && f_addr) {
+                $("#signupBtn").prop("disabled", false);
+            } else {
+                $("#signupBtn").prop("disabled", true);
+            }
+        }, 1000);
+
+    });
 </script>
