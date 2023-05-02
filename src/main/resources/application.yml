@@ -4,3 +4,8 @@ spring:
     url: jdbc:mysql://175.45.204.95:3306/bit701?serverTimezone=Asia/Seoul
     username: lekahelis
     password: bit123!@#
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
