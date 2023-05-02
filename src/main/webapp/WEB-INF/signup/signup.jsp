@@ -83,7 +83,8 @@
 
         <tr>
             <th>번호</th>
-            <td><label for="phone"></label><input type="text" id="phone" name="phone" required="required"/></td>
+            <td><label for="phone"></label><input type="text" id="phone" name="phone" title="형식에 맞춰주세요"  required="required"
+<%--                                                  pattern="(010)-\d{3,4}-\d{4}"/></td>--%>
         </tr>
 
         <tr>
@@ -100,7 +101,8 @@
         <tr>
             <td>
                 <button type="submit" class="btn btn-outline-primary btn-sm"
-                id="signupBtn" disabled="disabled">회원가입</button>
+                        id="signupBtn" disabled="disabled">회원가입
+                </button>
             </td>
         </tr>
     </table>
@@ -182,7 +184,7 @@
     });
 
     // 비밀번호 일치할때 text랑 color 변경
-    $('#pw, #pw1').on('keyup', function() {
+    $('#pw, #pw1').on('keyup', function () {
         let pw = document.getElementById('pw').value;
         let pw1 = document.getElementById('pw1').value;
 
