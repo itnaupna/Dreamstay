@@ -26,23 +26,20 @@
     </script>
 </head>
 <body>
-<%-- 인증번호 보내는 폼 --%>
-<form method="post" action="sendemail">
+
+<%-- 나머지 데이터 입력 폼 --%>
+<form method="post" action="signup">
     <table>
         <caption align="top"><b>회원가입</b></caption>
+
         <tr>
             <th>이메일</th>
             <td><input type="text" name="email" id="email"></td>
             <td>
-                <button type="submit" id="SendEmailBtn" class="btn btn-outline-primary btn-sm">인증번호 받기</button>
+                <button type="button" id="SendEmailBtn" class="btn btn-outline-primary btn-sm">인증번호 받기</button>
             </td>
         </tr>
-    </table>
-</form>
 
-<%-- 인증번호 확인하는 폼 --%>
-<form method="post" action="checkemail" id="checkForm">
-    <table>
         <tr>
             <td><label for="email_code">인증번호</label></td>
             <td><input type="text" name="email_code" id="email_code"></td>
@@ -53,12 +50,7 @@
                 <span class="point successEmailChk">이메일 입력후 인증번호 보내기를 해주십시오.</span>
             </td>
         </tr>
-    </table>
-</form>
 
-<%-- 나머지 데이터 입력 폼 --%>
-<form method="post" action="insert" id="signupForm">
-    <table>
         <tr>
             <th>아이디</th>
             <td><label for="id"></label><input type="text" name="id" id="id" class="form-control"></td>
@@ -98,7 +90,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- ajax script -->
 <script>
-    $(document).ready(function () {
+    $(document).click(function () {
         $('#SendEmailBtn').click(function (e) {
             e.preventDefault(); // 기존의 form 전송 방지
             $.ajax({
@@ -115,11 +107,13 @@
         });
 
         $('#CheckEmailBtn').click(function (e) {
+            let email_code = $("#email_code").var();
+            let email = $("#email").var();
             e.preventDefault(); // 기존의 form 전송 방지
             $.ajax({
                 type: 'POST',
                 url: 'checkemail',
-                data: $('checkForm').serialize(), // 입력한 인증번호 전달 ( form id 로 전달가능)
+                data: {"email_code": email_code, "email": email}, // 입력한 인증번호 전달 ( form id 로 전달가능)
                 success: function (data) {
                     alert("인증번호가 맞습니다");
                     $(".successEmailChk").text("인증번호가 일치합니다."); // ( 인증번호 일치 할때 )

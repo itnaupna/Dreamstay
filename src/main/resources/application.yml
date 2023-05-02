@@ -18,8 +18,3 @@ spring:
           ssl:
             enable: true
             required: true
-#mybatis
-mybatis:
-  type-aliases-package: study.mailsend.dto
-  mapper-locations:
-    - /mapper/**/*.xml
