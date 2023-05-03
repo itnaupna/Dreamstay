@@ -15,7 +15,7 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-
+<link rel="stylesheet" href="/css/mainlayout.css"/>
 </head>
 <body>
 	<div class="mainlayout">
@@ -31,6 +31,9 @@
 		<footer class="footer">
 			<tiles:insertAttribute name="footer" />
 		</footer>
+		<aside class="floatingchat">
+			<tiles:insertAttribute name="floating"/>
+		</aside>
 	</div>
 </body>
 </html>
