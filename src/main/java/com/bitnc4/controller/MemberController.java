@@ -74,6 +74,6 @@ public class MemberController {
         return "/main";
     }
 
-    @PostMapping()
+
 
 }
