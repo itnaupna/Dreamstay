@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/css/main.css" />
 
 <style>
+	/*메인타이틀 css*/
 	#main_txt{
 		display: inline-block;
 		text-align: center;
@@ -15,6 +16,7 @@
 		color: #ffffff;
 		margin-bottom: 70px;
 	}
+	/*메인 아래 기능들 css*/
 	.main_mini_dl{
 		height: 64px;
 		color: #ffffff;
@@ -22,6 +24,7 @@
 		font-weight: bold;
 		justify-content: space-between;
 	}
+	/*기능들 넓이 css*/
 	#main_mini_dl_01{
 		width: 205px;
 	}
@@ -52,42 +55,45 @@
 		width: 380px;
 	}
 
-	#main_mini_dl_04_room{
-		text-align: center;
-	}
 	#main_mini_dl_04_room01{
-		font-size: 20px;
+		font-size: 25px;
 		color: #ffffff;
 	}
 	#main_mini_dl_04_room02{
-		font-size: 20px;
+		font-size: 25px;
 		color: #ffffff;
 	}#main_mini_dl_04_room03{
-		 font-size: 20px;
+		 font-size: 25px;
 		 color: #ffffff;
 	 }
 
+	/*기능들을 감싸는 div css*/
 	#main_border_01{
 		border-right: 2px solid #c8c8c8;
 		width: 205px;
+		line-height: 30px;
 	}
 	#main_border_02{
 		border-right: 2px solid #c8c8c8;
 		width: 300px;
 		padding: 0px 30px;
 		padding-left: 0px;
+		line-height: 30px;
 	}
 	#main_border_03{
 		border-right: 2px solid #c8c8c8;
 		width: 380px;
 		padding: 0px 30px;
+		line-height: 30px;
 	}
 	#main_border_04{
 		width: 270px;
 		padding: 0px 0px 0px 30px;
 		justify-content: space-between;
+		line-height: 30px;
 
 	}
+	/*div 간격 css*/
 	#room_select01{
 		justify-content: space-between;
 		width: 70px;
@@ -103,20 +109,32 @@
 		width: 70px;
 		display: inline-block;
 	}
+	/*검색버튼 css*/
 	#search_box{
 		color: #ffffff;
-		font-size: 25px;
+		font-size: 20px;
 		border: 2px solid #ffffff;
-		padding: 0px 15px;
-		height: 60px;
+		padding-left: 35px;
+		padding-right: 35px;
+		height: 64px;
+		width: 165px;
 		text-align: center;
-		line-height: 30px;
-		margin-left: 23px;
+		line-height: 32px;
+		margin-left: 25px;
+		margin-bottom: 40px;
+		font-weight: bold;
+		position: relative;
+		top:0;
+		left: 15px;
+		vertical-align: middle;
+		transition: 0.6s;
+	}
+	#search_box:hover{
+		color: black;
+		background-color: #ffffff;
 	}
 
-	.op_select_sub{
-
-	}
+	/*기능들 겹치는 부분 클래스로 통합*/
 	.op_select{
 		text-align: center;
 	}
@@ -135,9 +153,67 @@
 		display: inline-block;
 
 	}
+	/*스크롤아이콘 css(마우스모양)*/
+	.txt-scroll{
+		text-align: center;
+		color: #ffffff;
+		font-weight: bold;
+		display: block;
+		font-size: 13px;
+		position: relative !important;
+	}
+	.arrows-scroll{
+		margin: 0px 18px;
 
-	.section{
-		border: 1px solid black;
+	}
+	.icon-scroll {
+		text-align: center;
+		display: block;
+		width: 50px;
+		height: 50px;
+		bottom: 20px;
+		left: 43%;
+		margin-left: 150px;
+		transform: translateX(-50%);
+		z-index: 9999;
+		position: relative !important;
+		top: 31%;
+	}
+	.icon-scroll .arrows-scroll span {
+		display: block;
+		bottom: 0;
+		left: 50%;
+		width: 10px;
+		height: 10px;
+		margin-left: 1px;
+		border-left: 1px solid #fff;
+		border-bottom: 1px solid #fff;
+		transform: rotate( -45deg );
+		animation: scrollDown 2s infinite;
+		opacity: 0;
+		box-sizing: border-box;
+	}
+	.icon-scroll .arrows-scroll span:nth-of-type(3) {
+		animation-delay: .3s;
+	}
+	.icon-scroll .arrows-scroll span:nth-of-type(2) {
+		bottom: 7px;
+		animation-delay: .15s;
+	}
+	.icon-scroll .arrows-scroll span:nth-of-type(1) {
+		bottom: 14px;
+		animation-delay: 0s;
+	}
+	@keyframes scrollDown {
+		0% {
+			opacity: 0;
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
 	}
 
 
@@ -148,7 +224,7 @@
 		<strong id="main_txt">
 			Experience the Difference
 		</strong>
-			<div class="main_mini_dl"><!-- contents01 일 경우 cts01, contents02 일 경우 cts02 클래스 적용 -->
+			<div class="main_mini_dl">
 				<div id="main_mini_dl_01" class="main_mini_dl_sub">
 					<div id="main_border_01" class="main_mini_dl_size">
 					RESERVATION
@@ -202,17 +278,19 @@
 					</div>
 				</div>
 				<div id="main_mini_dl_05" class="main_mini_dl_sub">
-					<button type="button" id="search_box">SEARCH</button>
+					<div id="main_border_05" class="main_mini_dl_size">
+						<button type="button" id="search_box">SEARCH</button>
+					</div>
 				</div>
 			</div>
 		<div class="icon-scroll">
-			<span class="txt-scroll" style="">SCROLL</span>
+			<a href="#secondPage"><span class="txt-scroll">SCROLL</span>
 			<img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_scroll.png" class="ico-scroll" alt="">
 			<div class="arrows-scroll">
 				<span></span>
 				<span></span>
 				<span></span>
-			</div>
+			</div></a>
 		</div>
 	</div>
 	<div class="section bg_imgs02">Some section2 <a href="#3rdPage">아래</a>
@@ -222,7 +300,7 @@
 	</div>
 	<div class="section bg_imgs03" >Some section3 <a href="#4thpage">아래</a></div>
 	<div class="section bg_imgs04" >Some section4 <a href="#firstPage">위로</a></div>
-
+	<div class="section bg_imgs05"></div>
 
 </div>
 <script type="text/javascript" src="/js/main.js"></script>
