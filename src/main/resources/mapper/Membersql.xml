@@ -17,8 +17,7 @@
         values (#{id}, sha2(#{pw}, 256), #{user_name}, #{email}, #{phone}, 1, #{addr}, 0)
     </insert>
 
-    <select id="login" parameterType="Map" resultType="int">
+    <select id="access" parameterType="Map" resultType="int">
         select exists(select * from member where id = #{id} and pw = sha2(#{pw}, 256))
     </select>
-
 </mapper>
