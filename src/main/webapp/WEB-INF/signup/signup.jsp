@@ -155,7 +155,7 @@
         $.ajax({
             type: 'POST',
             url: '/checkemail',
-            data: {"email_code": email_code, "email": email}, // 입력한 인증번호 전달 ( form id 로 전달가능)
+            data: {"email_code": email_code, "email": email},
             success: function (data) {
                 if(f_email == true) {
                     alert("인증 되었습니다");
@@ -264,6 +264,7 @@
        f_id = false;
        console.log("id=" + f_id);
     });
+
 </script>
 
 
