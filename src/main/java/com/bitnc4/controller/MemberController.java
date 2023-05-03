@@ -38,6 +38,12 @@ public class MemberController {
         auth.put(email, code);
     }
 
+    @PostMapping("/deletemail")
+    @ResponseBody
+    public boolean deletemail(String email) {
+        return memberService.deleteCode(auth, email);
+    }
+
     // 이메일 중복검사
     @PostMapping("/overlapemail")
     @ResponseBody
@@ -67,5 +73,7 @@ public class MemberController {
 
         return "/main";
     }
+
+    @PostMapping()
 
 }

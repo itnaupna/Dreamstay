@@ -6,6 +6,7 @@
 
 <script type="text/javascript">
     $(function(){
+        //btn 메뉴 dropdown
         var dropdownBtn = document.querySelector('.resvBtn .btn_opener');
         var dropdownList = document.querySelector('.resvBtn .dropdown_list');
 
@@ -16,22 +17,53 @@
         dropdownList.addEventListener('mouseleave', function() {
             dropdownList.classList.remove('open');
         });
+
+        // 3줄 메뉴
+        var dropdownMenuBtn = document.querySelector('.resvBtn .btn_opener');
+        var dropdownMenuList = document.querySelector('.resvBtn .dropdown_list');
+
+        dropdownBtn.addEventListener('click', function() {
+            dropdownList.classList.toggle('open');
+        });
+
+        dropdownList.addEventListener('mouseleave', function() {
+            dropdownList.classList.remove('open');
+        });
+
+
+
     });
 
+
+
 </script>
+
+<style>
+    div.header {
+        /* 기존에 있던 background 스타일 제거 */
+    }
+
+    /* .active 클래스에 원래 있던 스타일 추가 */
+    div.header.active {
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        /* 추가적으로 원하는 스타일을 추가할 수 있습니다. */
+    }
+
+</style>
 
 <body>
 <div class="wrapper mainWrapper">
     <div class="header">
         <div class="headArea">
             <strong class="logo">
-                <a href="">JOSUN HOTELS & RESORTS
+                <a href="/">JOSUN HOTELS & RESORTS
                 </a>
             </strong>
             <button type="button" class="btnMenu">메뉴 열기</button>
 
                 <div class="topUtil">
-                    <a href="" class="hotelFind" style="font-size: 15px;">
+                    <a href="" class="hotelFind" style="font-size: 8px;">
                         상품찾기
                     </a>
                 </div>
@@ -39,10 +71,10 @@
                 <div class="gnbUtil" >
                     <ul>
                         <li>
-                            <a href="" id="login">로그인</a>
+                            <a href="/login" id="login">로그인</a>
                         </li>
                         <li>
-                            <a href="" id="join">회원가입</a>
+                            <a href="/signup" id="join">회원가입</a>
                         </li>
                         <li>
                         <a href="" id="confirmReserve">예약확인</a>
@@ -52,13 +84,12 @@
 
                 <div class="resvBtn">
                     <div class="dropdown_list" aria-expanded="false">
-                        <div class="dropdown_value">
-                            <%--<input type="text" role="combobox" value="RESERVATION" aria-expanded="false" tabindex="-1" readonly="">--%>
+                        <div class="dropdown_value" style="font-size: 10px;">
                             <button type="button" aria-label="목록열기" class="btn_opener">RESERVATION</button>
                         </div>
-                        <ul class="item_list" role="listbox" style="width: 140px;">
-                            <li role="option"><a href="">ROOM</a></li>
-                            <li role="option"><a href="">MEMBERSHIP</a></li>
+                        <ul class="item_list" role="listbox" style="width: 120px;">
+                            <li role="option" style="font-size: 10px"><a href="">ROOM</a></li>
+                            <li role="option" style="font-size: 10px"><a href="">MEMBERSHIP</a></li>
                         </ul>
                     </div>
                 </div>

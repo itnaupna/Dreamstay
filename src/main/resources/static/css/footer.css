@@ -1,11 +1,11 @@
-body, input, textarea, select, button, table, th, td, pre {
+.footer body, input, textarea, select, table, th, td, pre {
     color: #000;
     font-family: notokrL, gothamL, playfair;
     font-weight: 400;
     font-size: 18px;
     line-height: 1.8;
 }
-
+/* footer div 첫번째 */
 .footer {
     position: absolute;
     left: 0;
@@ -13,8 +13,19 @@ body, input, textarea, select, button, table, th, td, pre {
     bottom: 0;
     background: #000;
     z-index: 100;
-}
 
+    /*재희 추가*/
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    /* 스크롤 관련 추가 설정ㅈ*/
+    display: none;
+    margin: 0 auto;
+
+}
+/* footer div 두번째 */
 .footer .footArea {
     position: relative;
     width: 1400px;
@@ -23,6 +34,7 @@ body, input, textarea, select, button, table, th, td, pre {
     padding: 150px 0 0 280px;
 }
 
+/* footer 이*/
 .footer .footArea .hotelList {
     position: absolute;
     left: 0;
@@ -88,12 +100,13 @@ body, input, textarea, select, button, table, th, td, pre {
     overflow: hidden;
 }
 
-ul, ol {
+.footer ul, ol {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
+/* footer logo*/
 .footer .footArea .logo {
     display: inline-block;
     position: absolute;
@@ -103,10 +116,10 @@ ul, ol {
     overflow: hidden;
     width: 130px;
     height: 64px;
-    background: url('./static/photo/josunresort.png') no-repeat 0 0;
+    background: url('/photo/josunresort.png') no-repeat 0 0;
 }
 
-body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, form, fieldset, legend, input, textarea, button, select, div {
+.footer body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, form, fieldset, legend, input, textarea, button, select, div {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -114,17 +127,17 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, form, fieldset, 
     word-wrap: break-word;
 }
 
-a, button {
+.footer a, button {
     cursor: pointer;
 }
 
-l, ol {
+.footer l, ol {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.dropdown_list {
+.footer .dropdown_list {
     display: inline-block;
     min-width: 230px;
     position: absolute;
@@ -189,7 +202,7 @@ l, ol {
     height: 38px;
 }
 
-ul:after, ol:after {
+.footer ul:after, ol:after {
     content: '';
     display: block;
     clear: both;
@@ -215,7 +228,7 @@ ul:after, ol:after {
     margin-right: 0;
 }
 
-.dropdown_list {
+.footer .dropdown_list {
     display: inline-block;
     min-width: 230px;
     position: absolute;
@@ -224,11 +237,11 @@ ul:after, ol:after {
     z-index: 999;
 }
 
-.dropdown_list .dropdown_value {
+.footer .dropdown_list .dropdown_value {
     position: relative;
 }
 
-.dropdown_list .dropdown_value input[type="text"] {
+.footer .dropdown_list .dropdown_value input[type="text"] {
     width: 100%;
     font: 400 16px gothamL;
     color: #fff;
@@ -241,7 +254,7 @@ ul:after, ol:after {
     text-transform: uppercase;
 }
 
-.dropdown_list .dropdown_value .btn_opener {
+.footer .dropdown_list .dropdown_value .btn_opener {
     display: block;
     position: absolute;
     top: 0;
@@ -254,7 +267,7 @@ ul:after, ol:after {
     outline: 0;
 }
 
-.dropdown_list .dropdown_value .btn_opener i {
+.footer .dropdown_list .dropdown_value .btn_opener i {
     float: right;
     position: relative;
     display: inline-block;
@@ -263,11 +276,11 @@ ul:after, ol:after {
     overflow: hidden;
 }
 
-i {
+.footer i {
     font-style: italic;
 }
 
-.dropdown_list .dropdown_value .btn_opener i:before {
+.footer .dropdown_list .dropdown_value .btn_opener i:before {
     content: '';
     position: absolute;
     top: 50%;
@@ -284,7 +297,7 @@ i {
     border-bottom: 2px solid #999;
 }
 
-.dropdown_list .item_list {
+.footer .dropdown_list .item_list {
     display: none;
     position: absolute;
     bottom: 45px;
@@ -295,7 +308,7 @@ i {
     background: #000;
     padding: 12px 0;
 }
-`
+
 :root {
     --swiper-navigation-size: 44px;
      --swiper-navigation-color: var(--swiper-theme-color);
@@ -305,7 +318,7 @@ i {
     --swiper-theme-color: #000;
 }
 
-a {
+.footer a {
     box-sizing: border-box;
     text-decoration: none;
 }

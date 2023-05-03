@@ -1,20 +1,27 @@
-.bg_test02{
+.bg_imgs01{
     width: 100%; height: 300px;
 
     /* 배경이미지는 최소 1920*960으로 제작해야 문제가 안생김 */
-    background-image: url(/imgs/bg2.jpg);
+    background-image: url("https://www.josunhotel.com/static/home/images/ko/pc/HUMA/bg_main01.jpg");
     background-repeat: no-repeat; /* 배경이미지X */
     background-size: cover; /* 요소를 비율에 맞게 커버 */
     background-position: center; /* 이미지를 요소의 정가운데로 처리 */
     background-attachment: fixed !important; /* 스크롤바 움직일때 이미지가 따라다님 */
 }
-.bg_test01{
+.bg_imgs04{
     width: 100%; height: 300px;
 
     /* 배경이미지는 최소 1920*960으로 제작해야 문제가 안생김 */
-    background-image: url(/imgs/bg1.jpg);
+    background-image: url("https://www.josunhotel.com/static/home/images/ko/pc/HUMA/bg_main02.jpg");
     background-repeat: no-repeat; /* 배경이미지X */
     background-size: cover; /* 요소를 비율에 맞게 커버 */
     background-position: center; /* 이미지를 요소의 정가운데로 처리 */
     background-attachment: fixed !important;/* 스크롤바 움직일때 이미지가 따라다님 */
+}
+
+/* main 영역 스크롤 가능 (재희추가)*/
+.main {
+    padding-top: 80px; /* header의 높이만큼 padding-top 추가 */
+    overflow-y: scroll; /* 세로 스크롤을 추가 */
+    height: calc(100vh - 80px); /* main 영역의 높이를 계산하여 지정 */
 }
