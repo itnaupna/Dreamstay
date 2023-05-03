@@ -50,8 +50,9 @@ $(document).ready(function() {
     $('.dropdown_list').click(function(event) {
         // 클릭 이벤트 버블링 막음
         event.stopPropagation();
-        // 다른 dropdown  list : active , aria-expanded 요소 false 처리
+        // 다른 dropdown  list : active , aria-expanded 제거
         $('.dropdown_list').not(this).removeClass('active').attr('aria-expanded', 'false');
+        // 클릭한 리스트 토글
         $(this).toggleClass('active');
         var expanded = $(this).attr('aria-expanded') === 'true' || false;
         $(this).attr('aria-expanded', !expanded);
@@ -62,6 +63,7 @@ $(document).ready(function() {
     // 다른 곳을 클릭하면 드롭다운 닫는 코드
     $(document).click(function() {
         $('.dropdown_list').removeClass('active').attr('aria-expanded', 'false');
+        // slide 처리
         $('.item_list').slideUp(300);
     });
 });

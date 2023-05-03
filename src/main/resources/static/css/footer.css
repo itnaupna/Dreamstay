@@ -298,9 +298,9 @@
 }
 
 .footer .dropdown_list .item_list {
-    display: none;
+    /*display: none;*/
     position: absolute;
-    bottom: 45px;
+    bottom: 200px;
     left: 0;
     z-index: 10;
     width: 100%;
