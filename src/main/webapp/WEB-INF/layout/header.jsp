@@ -6,6 +6,7 @@
 
 <script type="text/javascript">
     $(function(){
+        //btn 메뉴 dropdown
         var dropdownBtn = document.querySelector('.resvBtn .btn_opener');
         var dropdownList = document.querySelector('.resvBtn .dropdown_list');
 
@@ -16,13 +17,37 @@
         dropdownList.addEventListener('mouseleave', function() {
             dropdownList.classList.remove('open');
         });
+
+        // 3줄 메뉴
+        var dropdownMenuBtn = document.querySelector('.resvBtn .btn_opener');
+        var dropdownMenuList = document.querySelector('.resvBtn .dropdown_list');
+
+        dropdownBtn.addEventListener('click', function() {
+            dropdownList.classList.toggle('open');
+        });
+
+        dropdownList.addEventListener('mouseleave', function() {
+            dropdownList.classList.remove('open');
+        });
+
+
+
     });
+
+
 
 </script>
 
 <style>
-    .header{
-       background: transparent;
+    div.header {
+        /* 기존에 있던 background 스타일 제거 */
+    }
+
+    /* .active 클래스에 원래 있던 스타일 추가 */
+    div.header.active {
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        /* 추가적으로 원하는 스타일을 추가할 수 있습니다. */
     }
 
 </style>
