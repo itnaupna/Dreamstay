@@ -46,7 +46,6 @@ public class MemberService implements MemberServiceInter {
             certification = true;
             auth.remove(mail);
         }
-
         return certification;
     }
 

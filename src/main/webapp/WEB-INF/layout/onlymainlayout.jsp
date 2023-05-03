@@ -26,9 +26,6 @@
 		<section class="main">
 			<tiles:insertAttribute name="main" />
 		</section>
-		<footer class="footer">
-			<tiles:insertAttribute name="footer" />
-		</footer>
 		<aside class="floatingchat">
 			<tiles:insertAttribute name="floating"/>
 		</aside>

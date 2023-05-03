@@ -106,7 +106,7 @@ ul, ol {
     background: url('./static/photo/josunresort.png') no-repeat 0 0;
 }
 
-body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, form, fieldset, legend, input, textarea, button, select, div {
+.footer body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, form, fieldset, legend, input, textarea, button, select, div {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -241,7 +241,7 @@ ul:after, ol:after {
     text-transform: uppercase;
 }
 
-.dropdown_list .dropdown_value .btn_opener {
+.footer .dropdown_list .dropdown_value .btn_opener {
     display: block;
     position: absolute;
     top: 0;
@@ -295,7 +295,7 @@ i {
     background: #000;
     padding: 12px 0;
 }
-`
+
 :root {
     --swiper-navigation-size: 44px;
      --swiper-navigation-color: var(--swiper-theme-color);
