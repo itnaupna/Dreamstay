@@ -44,28 +44,81 @@
 		width: 205px;
 		padding: 0px;
 		font-size: 20px;
-		border-right: 2px solid #c8c8c8;
 	}
 	#main_mini_dl_02_hotel{
 		width: 300px;
-		border-right: 2px solid #c8c8c8;
 	}
 	#main_mini_dl_03_check{
 		width: 380px;
-		border-right: 2px solid #c8c8c8;
 	}
 
 	#main_mini_dl_04_room{
 		text-align: center;
 	}
+	#main_mini_dl_04_room01{
+		font-size: 20px;
+		color: #ffffff;
+	}
+	#main_mini_dl_04_room02{
+		font-size: 20px;
+		color: #ffffff;
+	}#main_mini_dl_04_room03{
+		 font-size: 20px;
+		 color: #ffffff;
+	 }
+
 	#main_border_01{
 		border-right: 2px solid #c8c8c8;
+		width: 205px;
 	}
 	#main_border_02{
 		border-right: 2px solid #c8c8c8;
+		width: 300px;
+		padding: 0px 30px;
+		padding-left: 0px;
 	}
 	#main_border_03{
 		border-right: 2px solid #c8c8c8;
+		width: 380px;
+		padding: 0px 30px;
+	}
+	#main_border_04{
+		width: 270px;
+		padding: 0px 0px 0px 30px;
+		justify-content: space-between;
+
+	}
+	#room_select01{
+		justify-content: space-between;
+		width: 70px;
+		display: inline-block;
+	}
+	#room_select02{
+		justify-content: space-between;
+		width: 70px;
+		display: inline-block;
+	}
+	#room_select03{
+		justify-content: space-between;
+		width: 70px;
+		display: inline-block;
+	}
+	#search_box{
+		color: #ffffff;
+		font-size: 25px;
+		border: 2px solid #ffffff;
+		padding: 0px 15px;
+		height: 60px;
+		text-align: center;
+		line-height: 30px;
+		margin-left: 23px;
+	}
+
+	.op_select_sub{
+
+	}
+	.op_select{
+		text-align: center;
 	}
 
 	.main_mini_dl_main_txt{
@@ -122,11 +175,34 @@
 				</div>
 				<div id="main_mini_dl_04" class="main_mini_dl_sub">
 					<div id="main_border_04" class="main_mini_dl_size">
-						ROOM
-						<div id="main_mini_dl_04_room" class="main_mini_dl_main_txt">
-							1
+						<div id="room_select01">
+							<div class="op_select op_select_sub">
+								ROOM
+							</div>
+							<div class="op_select" id="main_mini_dl_04_room01">
+								1
+							</div>
+						</div>
+						<div id="room_select02">
+							<div class="op_select op_select_sub">
+								ADULT
+							</div>
+							<div class="op_select" id="main_mini_dl_04_room02">
+								2
+							</div>
+						</div>
+						<div id="room_select03">
+							<div class="op_select op_select_sub">
+								CHILDREN
+							</div>
+							<div class="op_select" id="main_mini_dl_04_room03">
+								0
+							</div>
 						</div>
 					</div>
+				</div>
+				<div id="main_mini_dl_05" class="main_mini_dl_sub">
+					<button type="button" id="search_box">SEARCH</button>
 				</div>
 			</div>
 		<div class="icon-scroll">
