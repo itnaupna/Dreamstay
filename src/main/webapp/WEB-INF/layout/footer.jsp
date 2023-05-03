@@ -7,8 +7,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair Display SC:wght@400&display=swap"/>
 <link rel="stylesheet" href="css/footer.css" type="text/css">
+<script type="text/javascript" src="/js/footer.js"></script>
 
-<div class="footer">
+<div class="footer" id="footer">
     <div class="footArea">
         <div class="hotelList">
             <ul>
