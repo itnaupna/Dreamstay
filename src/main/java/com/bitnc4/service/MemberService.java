@@ -3,13 +3,11 @@ package com.bitnc4.service;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.Random;
 
 @Service
 public class MemberService implements MemberServiceInter {
@@ -47,6 +45,14 @@ public class MemberService implements MemberServiceInter {
             auth.remove(mail);
         }
         return certification;
+    }
+
+    @Override
+    public boolean deleteCode(HashMap<String, String> auth, String email) {
+        if(auth.containsKey(email)) {
+            auth.remove(email);
+        }
+        return false;
     }
 
     @Override

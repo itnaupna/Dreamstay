@@ -25,7 +25,7 @@
     <div class="header">
         <div class="headArea">
             <strong class="logo">
-                <a href="">JOSUN HOTELS & RESORTS
+                <a href="/">JOSUN HOTELS & RESORTS
                 </a>
             </strong>
             <button type="button" class="btnMenu">메뉴 열기</button>
@@ -39,10 +39,10 @@
                 <div class="gnbUtil" >
                     <ul>
                         <li>
-                            <a href="" id="login">로그인</a>
+                            <a href="/login" id="login">로그인</a>
                         </li>
                         <li>
-                            <a href="" id="join">회원가입</a>
+                            <a href="/signup" id="join">회원가입</a>
                         </li>
                         <li>
                         <a href="" id="confirmReserve">예약확인</a>

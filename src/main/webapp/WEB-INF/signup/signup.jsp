@@ -46,7 +46,7 @@
                 <button type="button" id="CheckEmailBtn" class="btn btn-outline-primary btn-sm">인증번호 확인</button>
             </td>
             <td>
-                <span class="point successEmailChk">이메일 입력후 인증번호 보내기를 해주십시오.</span>
+                <span class="point successEmailChk" id="timer"></span>
             </td>
         </tr>
 
@@ -101,7 +101,7 @@
         <tr>
             <td>
                 <button type="submit" class="btn btn-outline-primary btn-sm"
-                id="signupBtn" disabled="disabled">회원가입</button>
+                id="signupBtn" >회원가입</button>
             </td>
         </tr>
     </table>
@@ -115,10 +115,12 @@
     let f_pw = false;
     let f_pwform = false;
     let f_email = false;
+    let timer = "";
 
 
     // 이메일 인증번호 전송 이벤트
     $('#SendEmailBtn').click(function (e) {
+        f_email = false;
         e.preventDefault(); // 기존의 form 전송 방지
         $.ajax({
             type: "post",
@@ -133,7 +135,32 @@
                         url: '/sendemail',
                         data: $('#email').serialize(), // 이메일 정보를 전달
                         success: function (data) {
-                            alert('인증번호가 발송되었습니다'); // 발송 성공시 alert
+                            alert('인증번호가 발송되었습니다');
+                            let time = 180;// 발송 성공시
+                            let min = "";
+                            let sec = "";
+                            timer =  setInterval(function() {
+                                min = parseInt(time / 60);
+                                sec = time % 60;
+
+                                $("#timer").html(min + "분" + sec + "초");
+                                time--;
+
+                                var email = $("#email").val();
+
+                                if (time < 0) {
+                                    $.ajax({
+                                        type: "post",
+                                        url: '/deletemail',
+                                        data: {"email": email},
+                                        success: function(data) {
+                                            $("#timer").html("");
+                                            alert("인증 시간이 초과되었습니다");
+                                            clearInterval(timer);
+                                        }
+                                    });
+                                }
+                            }, 1000);// 발송 성공시 alert
                         },
                         error: function () {
                             alert('인증번호 발송에 실패하였습니다'); // 발송 실패시 alert
@@ -162,9 +189,11 @@
                     return;
                 }
                 if (data === true) { // data 가 success 일 때
-                    alert("인증번호가 맞습니다");
+                    clearInterval(timer);
+                    $("#timer").html("");
                     f_email = true;
                     console.log("email=" + f_email);
+                    alert("인증번호가 맞습니다");
                 } else {
                     alert("인증번호가 일치하지 않습니다"); // 인증번호 일치하지 않을 때
                 }
@@ -264,7 +293,6 @@
        f_id = false;
        console.log("id=" + f_id);
     });
-
 </script>
 
 

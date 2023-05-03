@@ -12,6 +12,9 @@ public interface MemberServiceInter {
     
     // 인증코드 검사
     public boolean codeAuth(HashMap<String, String> auth, String mail, String code);
+
+    // 시간초과 시 인증번호 삭제
+    public boolean deleteCode(HashMap<String, String> auth, String email);
     
     // (db연결 테스트) 회원 수 가져옴
     public int memberCnt();
