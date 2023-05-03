@@ -215,6 +215,17 @@
 			opacity: 0;
 		}
 	}
+	/*2번페이지 시작*/
+	.one_page{
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		margin: 0 auto;
+	}
+	.one_cont{
+		display: inline-block;
+		padding: 30px;
+	}
 
 
 </style>
@@ -294,13 +305,33 @@
 		</div>
 	</div>
 	<div class="section bg_imgs02">Some section2 <a href="#3rdPage">아래</a>
-		<div class="slide" id="slide1"><h1>Slide Backgrounds</h1></div>
+		<div class="slide" id="slide1">
+			<div class="one_page">
+				<div class="one_cont">
+					<div><img src="/photo/josu.png"></div>
+					<div>discoverseoul</div>
+					<div> 전통과 현대의 맛이 가득한 서울시티 버스를 타고...<br>2023.05.03 ~ 2023.05.09</div>
+					<div>포포인츠 바이 쉐라톤 조선 서울역</div>
+				</div>
+				<div class="one_cont">
+					<div><img src="/photo/josu.png"></div>
+					<div>discoverseoul</div>
+					<div> 전통과 현대의 맛이 가득한 서울시티 버스를 타고...<br>2023.05.03 ~ 2023.05.09</div>
+					<div>포포인츠 바이 쉐라톤 조선 서울역</div>
+				</div>
+				<div class="one_cont">
+					<div><img src="/photo/josu.png"></div>
+					<div>discoverseoul</div>
+					<div> 전통과 현대의 맛이 가득한 서울시티 버스를 타고...<br>2023.05.03 ~ 2023.05.09</div>
+					<div>포포인츠 바이 쉐라톤 조선 서울역</div>
+				</div>
+			</div>
+		</div>
 		<div class="slide" id="slide2"><h1>Totally customizable</h1></div>
 		<div class="slide" id="slide3"><h1>Totall customizable</h1></div>
 	</div>
 	<div class="section bg_imgs03" >Some section3 <a href="#4thpage">아래</a></div>
 	<div class="section bg_imgs04" >Some section4 <a href="#firstPage">위로</a></div>
-	<div class="section bg_imgs05"></div>
 
 </div>
 <script type="text/javascript" src="/js/main.js"></script>
