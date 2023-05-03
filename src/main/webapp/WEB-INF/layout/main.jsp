@@ -161,7 +161,7 @@
 					<div id="main_border_02" class="main_mini_dl_size">
 						HOTEL
 						<div id="main_mini_dl_02_hotel" class="main_mini_dl_main_txt">
-							텔호선조드랜그
+							그랜드조선호텔
 						</div>
 					</div>
 				</div>

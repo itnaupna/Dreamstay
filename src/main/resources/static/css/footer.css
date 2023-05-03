@@ -20,6 +20,10 @@
     bottom: 0;
     width: 100%;
 
+    /* 스크롤 관련 추가 설정ㅈ*/
+    display: none;
+    margin: 0 auto;
+
 }
 /* footer div 두번째 */
 .footer .footArea {
