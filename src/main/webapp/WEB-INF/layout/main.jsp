@@ -58,8 +58,17 @@
 			<option selected="selected" value="R">ROOM</option>
 			<option  value="M">MEMBERSHIP</option>
 		</select>
+		<button tabindex="0" id="ui-id-1-button" role="combobox" aria-expanded="false"
+				aria-autocomplete=""
+		></button>
+
+
 	</div>
+
+
 </div>
+
+
 
 <%--<div class="selectInner"></div>
 	<div class="selectRoom" role="area">
