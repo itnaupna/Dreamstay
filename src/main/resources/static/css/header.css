@@ -42,8 +42,16 @@ button {
     top: 0;
     z-index: 100;
     height: 100px;
-    background: #fff;
+    /*background: #fff;*/
+
 }
+
+
+/*header .main_mini_dl_02, header .main_mini_dl_03{*/
+/*    background: #ffffff;*/
+/*}*/
+
+
 
 .header .headArea {
     position: relative;
@@ -82,7 +90,7 @@ body > .wrapper {
 
 /* 상품찾기 */
 .topUtil .hotelFind {
-    font-size: 15px;
+    font-size: 8px;
     color: #000;
 }
 
@@ -92,8 +100,8 @@ body > .wrapper {
     display: inline-block; /* 줄바꿈X(요소 자체는 인라인요소), 내부에서는 블록 요소처럼 동작 */
     margin-left: 2px;
     position: absolute;
-    left: 60px;
-    top: 7px;
+    left: 40px;
+    top: 14px;
     width: 11px;
     height: 11px;
     background: url(
@@ -111,7 +119,8 @@ ul:after {
 .topUtil {
     position: absolute;
     left: 110px;
-    top: 37px;
+    left: 110px;
+    top: 30px;
 }
 
 /*회원가입,로그인*,예약확인 div 위치*/
@@ -135,26 +144,25 @@ ul:after {
     display: inline-block;
     vertical-align: middle;
     margin-left: 20px;
-    font-size: 15px;
+    font-size: 8px;
 }
+
 
 .gnbUtil > .resvBtn {
     display: inline-block;
-    margin-left: 35px;
+    margin-left: 25px;
+    margin-right: 15px;
 }
 
 .gnbUtil > .resvBtn .dropdown_list {
     display: inline-block;
     min-width: auto;
-    width: 145px;
+    width: 100px;
     position: relative;
     right: auto;
     top: auto;
     z-index: 1;
-
 }
-
-
 
 /* 버튼 메뉴 */
 .header .btnMenu {
@@ -174,16 +182,6 @@ ul:after {
 
 }
 
-.mainBg img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    transform: translate(-50%, -50%);
-}
-
-
 .dropdown_list.open .item_list {
     display: block;
     /*  .dropdown_list 클래스가 open 클래스를 포함하고 있는 경우, 그 하위 요소인 .item_list 클래스를 블록 레벨 요소로 표시 */
@@ -196,7 +194,7 @@ ul:after {
     top: 100%;
     left: 0;
     z-index: 1;
-    background-color: #ffffff;
+    background: transparent;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -218,5 +216,5 @@ ul:after {
 /*resurve 버튼css*/
 .btn_opener{
     padding: 8px;
-    width: 140px;
+    width: 120px;
 }

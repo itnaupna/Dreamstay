@@ -18,3 +18,10 @@
     background-position: center; /* 이미지를 요소의 정가운데로 처리 */
     background-attachment: fixed !important;/* 스크롤바 움직일때 이미지가 따라다님 */
 }
+
+/* main 영역 스크롤 가능 (재희추가)*/
+.main {
+    padding-top: 80px; /* header의 높이만큼 padding-top 추가 */
+    overflow-y: scroll; /* 세로 스크롤을 추가 */
+    height: calc(100vh - 80px); /* main 영역의 높이를 계산하여 지정 */
+}

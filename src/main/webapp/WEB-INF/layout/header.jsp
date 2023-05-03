@@ -20,6 +20,13 @@
 
 </script>
 
+<style>
+    .header{
+       background: transparent;
+    }
+
+</style>
+
 <body>
 <div class="wrapper mainWrapper">
     <div class="header">
@@ -31,7 +38,7 @@
             <button type="button" class="btnMenu">메뉴 열기</button>
 
                 <div class="topUtil">
-                    <a href="" class="hotelFind" style="font-size: 15px;">
+                    <a href="" class="hotelFind" style="font-size: 8px;">
                         상품찾기
                     </a>
                 </div>
@@ -52,13 +59,12 @@
 
                 <div class="resvBtn">
                     <div class="dropdown_list" aria-expanded="false">
-                        <div class="dropdown_value">
-                            <%--<input type="text" role="combobox" value="RESERVATION" aria-expanded="false" tabindex="-1" readonly="">--%>
+                        <div class="dropdown_value" style="font-size: 10px;">
                             <button type="button" aria-label="목록열기" class="btn_opener">RESERVATION</button>
                         </div>
-                        <ul class="item_list" role="listbox" style="width: 140px;">
-                            <li role="option"><a href="">ROOM</a></li>
-                            <li role="option"><a href="">MEMBERSHIP</a></li>
+                        <ul class="item_list" role="listbox" style="width: 120px;">
+                            <li role="option" style="font-size: 10px"><a href="">ROOM</a></li>
+                            <li role="option" style="font-size: 10px"><a href="">MEMBERSHIP</a></li>
                         </ul>
                     </div>
                 </div>

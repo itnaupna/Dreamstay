@@ -1,4 +1,4 @@
-body, input, textarea, select, button, table, th, td, pre {
+.footer body, input, textarea, select, table, th, td, pre {
     color: #000;
     font-family: notokrL, gothamL, playfair;
     font-weight: 400;
@@ -13,6 +13,13 @@ body, input, textarea, select, button, table, th, td, pre {
     bottom: 0;
     background: #000;
     z-index: 100;
+
+    /*재희 추가*/
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
 }
 /* footer div 두번째 */
 .footer .footArea {
@@ -105,7 +112,7 @@ body, input, textarea, select, button, table, th, td, pre {
     overflow: hidden;
     width: 130px;
     height: 64px;
-    background: url('./static/photo/josunresort.png') no-repeat 0 0;
+    background: url('/photo/josunresort.png') no-repeat 0 0;
 }
 
 .footer body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, form, fieldset, legend, input, textarea, button, select, div {
