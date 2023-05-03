@@ -22,6 +22,7 @@ public class MemberService implements MemberServiceInter {
 
     @Override
     public void mailCode(String mail, String code) {
+        
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("helloa1109@naver.com");
         msg.setTo(mail);
