@@ -4,5 +4,7 @@
     <select id="test" resultType="ChatDto">
         select * from chat;
     </select>
-
+    <insert id="saveChat" parameterType="ChatDto">
+        insert into chat (membernum,msg,recv,memberview,adminview) values (#{membernum},#{msg},#{recv},#{memberview},#{adminvew});
+    </insert>
 </mapper>

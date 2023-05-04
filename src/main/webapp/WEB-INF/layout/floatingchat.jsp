@@ -107,6 +107,7 @@
             </div>
         </div>
     </div>
+
     <div id="txtChatBottom" class="form-floating">
         <input type="text" id="txtChat" placeholder="_" class="form-control">
         <label class="form-label">실시간 문의 입력</label>
@@ -179,6 +180,7 @@
     #txtChat:focus{
         outline:none !important;
         box-shadow: 0 0 10px rgb(152,129,34);
+
     }
 
     aside.floatingchat{

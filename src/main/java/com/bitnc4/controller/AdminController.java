@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 @Slf4j
 public class AdminController {
-    @Autowired
-    ChatMapper cm;
+//    @Autowired
+//    ChatMapper cm;
 
     @GetMapping("/chat")
     public String chatList(Model m){
-        m.addAttribute("dto",cm.test());
-        log.info(cm.test().toString());
+//        m.addAttribute("dto",cm.test());
+//        log.info(cm.test().toString());
         return "/admin/chat/list";
     }
 
