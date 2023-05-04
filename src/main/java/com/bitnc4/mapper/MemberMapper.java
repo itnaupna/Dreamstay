@@ -26,5 +26,11 @@ public interface MemberMapper {
 
     // db에 있는 id && email 인지 확인
     public int overlapIdEmail(Map<String, String> idemail);
+    
+    // email로 db 정보 불러오는 메서드
+    public MemberDto searchInfoToEmail(String email);
+
+
+    
 
 }

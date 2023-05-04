@@ -25,4 +25,8 @@
     <select id="access" parameterType="Map" resultType="int">
         select exists(select * from member where id = #{id} and pw = sha2(#{pw}, 256))
     </select>
+
+    <select id="searchInfoToEmail" parameterType="String" resultType="MemberDto">
+        select * from member where email = #{email}
+    </select>
 </mapper>

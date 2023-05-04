@@ -43,7 +43,8 @@ public class MemberController {
         auth.put(email, code);
         System.out.println(auth.size());
     }
-
+    
+    // 시간 초과시 이메일에 해당하는 인증번호 삭제
     @PostMapping("/deletemail")
     @ResponseBody
     public boolean deletemail(String email) {
@@ -126,4 +127,17 @@ public class MemberController {
     public int chkIdPw(String email, String id) {
         return memberService.overlapEmail(email, id);
     }
+
+    @PostMapping("/findid")
+    public String findId(String email, Model model) {
+        model.addAttribute("mDto", memberService.searchInfoToEmail(email));
+        return "/main/signup/findid";
+    }
+
+    @PostMapping("/findpw")
+    public String findPw(String email, Model model) {
+        model.addAttribute("mDto", memberService.searchInfoToEmail(email));
+        return "/main/signup/findpw";
+    }
+
 }

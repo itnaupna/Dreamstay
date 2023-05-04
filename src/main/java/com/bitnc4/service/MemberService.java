@@ -104,5 +104,9 @@ public class MemberService implements MemberServiceInter {
         return memberMapper.access(idpwChk);
     }
 
-
+    @Override
+    public MemberDto searchInfoToEmail(String email) {
+        MemberDto dto = memberMapper.searchInfoToEmail(email);
+        return dto;
+    }
 }

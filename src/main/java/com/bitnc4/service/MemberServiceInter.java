@@ -31,7 +31,8 @@ public interface MemberServiceInter {
     // 로그인
     public int access(String id, String pw);
 
-    // 세션 생성
+    // email로 db 정보 불러오는 메서드
+    public MemberDto searchInfoToEmail(String email);
 
 
 

@@ -12,5 +12,6 @@ loginpage
 <button type="button" id="access">로그인</button>
 <a href="/findidpw">아이디/비밀번호찾기</a>
 <a href="/signup">회원가입</a>
+<a href="">계정활성화</a>
 
 <script type="text/javascript" src="/js/login.js"></script>
