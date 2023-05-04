@@ -8,8 +8,13 @@
     <select id="overlapEmail" parameterType="String" resultType="int">
         select  exists(select  email from member where email = #{email})
     </select>
+
     <select id="overlapId" parameterType="String" resultType="int">
         select exists(select id from member where id = #{id})
+    </select>
+
+    <select id="overlapIdEmail" parameterType="Map" resultType="int">
+        select exists(select id, email from member where id = #{id} and email = #{email})
     </select>
 
     <insert id="joinMember" parameterType="MemberDto">
@@ -17,8 +22,7 @@
         values (#{id}, sha2(#{pw}, 256), #{user_name}, #{email}, #{phone}, 1, #{addr}, 0)
     </insert>
 
-    <select id="login" parameterType="Map" resultType="int">
+    <select id="access" parameterType="Map" resultType="int">
         select exists(select * from member where id = #{id} and pw = sha2(#{pw}, 256))
     </select>
-
 </mapper>

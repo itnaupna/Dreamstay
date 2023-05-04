@@ -4,13 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 loginpage
 <br><br><br>
-<form action="/access" method="post">
-    <input type="text" name="id" placeholder="아이디">
-    <input type="password" name="pw" placeholder="비밀번호">
-    <button type="submit">로그인</button>
-</form>
-<a href="">아이디찾기</a>
-<a href="">비밀번호찾기</a>
-<a href="./signup">회원가입</a>
+<input type="text" name="id" id="login_id" placeholder="아이디">
+<input type="password" name="pw" id="login_pw" placeholder="비밀번호">
+<label>
+    <input type="checkbox" name="saveid" id="login_saveid">아이디 저장
+</label>
+<button type="button" id="access">로그인</button>
+<a href="/findidpw">아이디/비밀번호찾기</a>
+<a href="/signup">회원가입</a>
 
 <script type="text/javascript" src="/js/login.js"></script>
