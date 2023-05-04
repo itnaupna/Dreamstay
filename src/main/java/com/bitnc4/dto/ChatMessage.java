@@ -4,10 +4,10 @@ import lombok.Data;
 
 
 @Data
-public class ChatMessageDto {
+public class ChatMessage {
     //채팅용 패킷 헤더 : 입장, 대화
     public enum PacketHeader{
-        ENTER, SAY
+        ENTER, SAY, EXIT
     }
 
 

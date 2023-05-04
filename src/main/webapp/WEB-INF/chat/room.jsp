@@ -6,7 +6,7 @@
 <button onclick="createroom($('#rname').val());">만들기</button>
 <div id="res"></div>
 <script>
-
+getroomlist();
 
     function getroomlist(){
         $.ajax({

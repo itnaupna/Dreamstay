@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.util.*;
 
+
+//chatService 대체함.
 @Repository
 public class ChatRoomRepository {
     private Map<String, ChatRoomDto> chatRoomMap;
