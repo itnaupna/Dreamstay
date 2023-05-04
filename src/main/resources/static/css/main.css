@@ -24,4 +24,5 @@
     /*padding-top: 80px; !* header의 높이만큼 padding-top 추가 *!*/
     /*overflow-y: scroll; !* 세로 스크롤을 추가 *!*/
     /*height: calc(100vh - 80px); !* main 영역의 높이를 계산하여 지정 *!*/
+    /*max-height: 100%;*/
 }
