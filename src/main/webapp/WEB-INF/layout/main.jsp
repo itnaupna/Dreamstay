@@ -471,10 +471,14 @@
 						<div><img class="one_cont_imgs" src="https://www.josunhotel.com/util/file/download.do?fileSn=1358633&sysCode=FPBSM"></div>
 						<div class="one_cont_main_txt">자세히보기</div>
 						<div class="one_cont_sub_txt"><h2>HIPJIRO PACKAGE</h2></div><br>
-						<div class="one_cont_sub_txt">◆객실에서 느끼는 힙지로 바이브◆ 수페리어 객실...</div>
+						<div class="one_cont_sub_txt">◆객실에서 느끼는 힙지로 바이브◆ 수페리어..</div>
 						<div class="one_cont_sub_txt">2023.04.01 ~ 2023.05.31</div><br>
 						<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color07">포포인츠 바이 쉐라톤 조선,서울 명동</div>
 					</a>
+				</div>
+				<div class="one_cont">
+				</div>
+				<div class="one_cont">
 				</div>
 			</div>
 		</div>
