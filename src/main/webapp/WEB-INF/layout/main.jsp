@@ -49,6 +49,7 @@
 		padding: 0px;
 		font-size: 20px;
 	}
+
 	#main_mini_dl_02_hotel{
 		width: 300px;
 	}
@@ -319,6 +320,7 @@
 	#one_cont_sub_color07{
 		background-color: #3e97d3;
 	}
+
 </style>
 
 <div id="fullpage">
@@ -331,7 +333,7 @@
 					<div id="main_border_01" class="main_mini_dl_size">
 					RESERVATION
 						<div id="main_mini_dl_01_room" class="main_mini_dl_main_txt">
-							ROOM
+							Room
 						</div>
 						</div>
 					</div>

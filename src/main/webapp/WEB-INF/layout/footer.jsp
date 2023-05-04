@@ -204,12 +204,12 @@
             </div>
 
         </div>
-        <div class="f_dropdown_list" aria-expanded="false">
-            <div class="f_dropdown_value">
+        <div class="dropdown_list" aria-expanded="false">
+            <div class="dropdown_value">
                 <input type="text" role="combobox" value="Family Sites" aria-expanded="false" tabindex="-1" readonly="">
-                <button type="button" aria-label="목록열기" class="f_btnopener"><i></i></button>
+                <button type="button" aria-label="목록열기" class="btnopener"><i></i></button>
             </div>
-            <ul class="f_itemlist" role="listbox">
+            <ul class="itemlist" role="listbox">
                 <li role="option"><a href="#" target="_blank">신세계그룹 인사이드</a></li>
                 <li role="option"><a href="#" target="_blank">SSG.COM</a></li>
                 <li role="option"><a href="#" target="_blank">신세계TV쇼핑</a></li>
