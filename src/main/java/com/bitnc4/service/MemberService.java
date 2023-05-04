@@ -38,6 +38,19 @@ public class MemberService implements MemberServiceInter {
     public int overlapEmail(String email) {
         return memberMapper.overlapEmail(email);
     }
+    
+    // 아이디 비밀번호 찾기 시 가입된 아이디, 이메일인지 확인
+    public int overlapEmail(String email, String id) {
+        if(id.equals("")) {
+            return memberMapper.overlapEmail(email);
+        } else {
+            Map<String, String> idemail = new HashMap<String, String>();
+            idemail.put("email", email);
+            idemail.put("id", id);
+            return memberMapper.overlapIdEmail(idemail);
+        }
+
+    }
 
     // 이메일과 인증코드가 맞다면 인증코드 삭제 후 true
     @Override
@@ -49,6 +62,7 @@ public class MemberService implements MemberServiceInter {
             certification = true;
             auth.remove(mail);
         }
+        System.out.println(auth.size());
         return certification;
     }
 
@@ -58,6 +72,7 @@ public class MemberService implements MemberServiceInter {
         if(auth.containsKey(email)) {
             auth.remove(email);
         }
+        System.out.println(auth.size());
         return false;
     }
 
@@ -88,5 +103,6 @@ public class MemberService implements MemberServiceInter {
 
         return memberMapper.access(idpwChk);
     }
+
 
 }
