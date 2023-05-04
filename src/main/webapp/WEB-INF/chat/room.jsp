@@ -6,7 +6,7 @@
 <button onclick="createroom($('#rname').val());">만들기</button>
 <div id="res"></div>
 <script>
-getroomlist();
+    getroomlist();
 
     function getroomlist(){
         $.ajax({
@@ -14,6 +14,7 @@ getroomlist();
             type:'get',
             dataType:'json',
             success:e=>{
+                // console.log(e);
                 $('#res').empty();
                 $.each(e,(i,e)=>{
                     $('#res').append("<div onclick='enterRoom(\""+ e.roomId + "\");'>" + e.roomId + " " + e.roomName + "</div>");
@@ -22,12 +23,18 @@ getroomlist();
         });
     }
     function createroom(rname){
+        console.log(rname,'makeroom');
         $.ajax({
             url:'room',
             type:'post',
             dataType:'json',
             data:{name:rname},
-            success:getroomlist
+            success:(e)=>{
+                console.log(e);
+                getroomlist();
+                //TODO : 이부분 봐서 수정해야함.
+                //방생성 누를경우 리턴이 어떻게 넘어오고 있는거지???
+            }
         });
     }
     function enterRoom(roomId){
