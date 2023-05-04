@@ -11,15 +11,29 @@
 		<put-attribute name="floating" value="/WEB-INF/layout/floatingchat.jsp"/>
 	</definition>
 
+	<!-- 관리자 대시보드 레이아웃 디자인 / 최용주 -->
+	<definition name="adminLayout" template="/WEB-INF/layout/adminlayout/adminlayout.jsp">
+		<put-attribute name="side" value="/WEB-INF/layout/adminlayout/side.jsp"/>
+		<put-attribute name="top" value="/WEB-INF/layout/adminlayout/top.jsp"/>
+		<put-attribute name="adminmain" value="/WEB-INF/layout/adminlayout/adminmain.jsp"/>
+	</definition>
+
+
 
 
 	<definition name="/main" extends="mainLayout">
 		<put-attribute name="main" value="/WEB-INF/layout/main.jsp"/>
+	</definition>
+	<definition name="/admin" extends="adminLayout">
+		<put-attribute name="adminmain" value="/WEB-INF/layout/adminlayout/adminmain.jsp"/>
 	</definition>
 
 
 	<!-- wild card macro -->
 	<definition name="/main/*/*" extends="mainLayout">
 		<put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
+	</definition>
+	<definition name="/admin/*/*" extends="adminLayout">
+		<put-attribute name="adminmain" value="/WEB-INF/admin/{1}/{2}.jsp"/>
 	</definition>
 </tiles-definitions>

@@ -10,60 +10,139 @@
         <span id="btnCloseChat">X</span>
     </div>
     <div id="txtChatViewPort">
-
         <div class="chatMsgWrapper chatLeft">
             <div class="chatMsgBody">
                 안녕하세요, 채팅메세지 css뷰 테스트입니다.
             </div>
-            <div class="chatMsgTail">
-                <div class="chatMsgTailLeft">d</div>
-                <div class="chatMsgTime">오전 00:00</div>
-                <div class="chatMsgTailRight">d</div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
             </div>
         </div>
         <div class="chatMsgWrapper chatRight">
             <div class="chatMsgBody">
                 안녕하세요, 채팅메세지 css뷰 테스트입니다.
             </div>
-            <div class="chatMsgTail">
-                <div class="chatMsgTailLeft">d</div>
-                <div class="chatMsgTime">오전 00:00</div>
-                <div class="chatMsgTailRight">d</div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
             </div>
         </div>
         <div class="chatMsgWrapper chatLeft">
             <div class="chatMsgBody">
                 안녕하세요, 채팅메세지 css뷰 테스트입니다.
             </div>
-            <div class="chatMsgTail">
-                <div class="chatMsgTailLeft">d</div>
-                <div class="chatMsgTime">오전 00:00</div>
-                <div class="chatMsgTailRight">d</div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
+            </div>
+        </div>
+        <div class="chatMsgWrapper chatLeft">
+            <div class="chatMsgBody">
+                안녕하세요, 채팅메세지 css뷰 테스트입니다.
+            </div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
             </div>
         </div>
         <div class="chatMsgWrapper chatRight">
             <div class="chatMsgBody">
                 안녕하세요, 채팅메세지 css뷰 테스트입니다.
             </div>
-            <div class="chatMsgTail">
-                <div class="chatMsgTailLeft">d</div>
-                <div class="chatMsgTime">오전 00:00</div>
-                <div class="chatMsgTailRight">d</div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
             </div>
         </div>
-
+        <div class="chatMsgWrapper chatLeft">
+            <div class="chatMsgBody">
+                안녕하세요, 채팅메세지 css뷰 테스트입니다.
+            </div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
+            </div>
+        </div>
+        <div class="chatMsgWrapper chatLeft">
+            <div class="chatMsgBody">
+                안녕하세요, 채팅메세지 css뷰 테스트입니다.
+            </div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
+            </div>
+        </div>
+        <div class="chatMsgWrapper chatRight">
+            <div class="chatMsgBody">
+                안녕하세요, 채팅메세지 css뷰 테스트입니다.
+            </div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
+            </div>
+        </div>
+        <div class="chatMsgWrapper chatLeft">
+            <div class="chatMsgBody">
+                안녕하세요, 채팅메세지 css뷰 테스트입니다.
+            </div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
+            </div>
+        </div>
+        <div class="chatMsgWrapper chatRight">
+            <div class="chatMsgBody">
+                안녕하세요, 채팅메세지 css뷰 테스트입니다.
+            </div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
+            </div>
+        </div>
+        <div class="chatMsgWrapper chatRight">
+            <div class="chatMsgBody">
+                안녕하세요, 채팅메세지 css뷰 테스트입니다.
+            </div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
+            </div>
+        </div>
+        <div class="chatMsgWrapper chatRight">
+            <div class="chatMsgBody">
+                안녕하세요, 채팅메세지 css뷰 테스트입니다.
+            </div>
+            <div class="chatMsgBottom">
+                <span class="chatMsgTime">오전 00:00</span>
+            </div>
+        </div>
     </div>
-    <div id="txtChatBottom">
-        <input type="text" id="txtChat" placeholder="메세지를 입력하세요." class="form-control"><button class="btn">[&gt;]</button>
+
+    <div id="txtChatBottom" class="form-floating">
+        <input type="text" id="txtChat" placeholder="_" class="form-control">
+        <label class="form-label">실시간 문의 입력</label>
     </div>
 </div>
 <style>
     .chatMsgWrapper{
+        width:80%;
+        margin-bottom:10px;
+    }
+    .chatMsgBody{
         border: 2px solid skyblue;
         border-radius: 0.5rem;
     }
-    .chatMsgTail>div{
+    .chatRight{
+        float:right;
+    }
+    .chatLeft{
+        float:left;
+    }
+    .chatLeft .chatMsgBottom{
+        text-align:left;
+    }
+    .chatRight .chatMsgBottom{
+        text-align:right;
+    }
+    .chatMsgBottom>div{
         display:inline-flex;
+    }
+    .chatMsgBottom{
+        margin-bottom:10px;
+    }
+    .chatMsgTime{
+        color:gray;
+        font-size:0.8rem;
     }
 
     #chatInner{
@@ -82,6 +161,7 @@
     #txtChatViewPort{
         order:2;
         flex-grow: 98;
+        padding: 10px 0px;
         /*background:gray;*/
         overflow-x: hidden;
         overflow-y: auto;
@@ -89,17 +169,18 @@
     #txtChatBottom{
         order:3;
         flex-grow:1;
-        display:flex;
-        justify-content: space-between;
+        /*display:flex;*/
+        /*justify-content: space-between;*/
     }
     #txtChat{
-        width:200px;
+        /*width:200px;*/
         background:transparent;
         border:none;
     }
     #txtChat:focus{
         outline:none !important;
         box-shadow: 0 0 10px rgb(152,129,34);
+
     }
 
     aside.floatingchat{
