@@ -39,16 +39,7 @@
 </script>
 
 <style>
-    div.header {
-        /* 기존에 있던 background 스타일 제거 */
-    }
 
-    /* .active 클래스에 원래 있던 스타일 추가 */
-    div.header.active {
-        background: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        /* 추가적으로 원하는 스타일을 추가할 수 있습니다. */
-    }
 
 </style>
 
