@@ -23,4 +23,4 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/js/findidpw.js"></script>
+<script type="text/javascript" src="/js/member/findidpw.js"></script>

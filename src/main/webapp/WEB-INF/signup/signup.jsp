@@ -104,7 +104,7 @@
         </tr>
     </table>
 </form>
-<script type="text/javascript" src="/js/join.js"></script>
+<script type="text/javascript" src="/js/member/join.js"></script>
 
 
 

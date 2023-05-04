@@ -14,4 +14,4 @@ loginpage
 <a href="/signup">회원가입</a>
 <a href="">계정활성화</a>
 
-<script type="text/javascript" src="/js/login.js"></script>
+<script type="text/javascript" src="/js/member/login.js"></script>

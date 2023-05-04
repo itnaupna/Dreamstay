@@ -134,10 +134,10 @@ public class MemberController {
         return "/main/signup/findid";
     }
 
-    @PostMapping("/findpw")
+    @PostMapping("/changepassword")
     public String findPw(String email, Model model) {
         model.addAttribute("mDto", memberService.searchInfoToEmail(email));
-        return "/main/signup/findpw";
+        return "/main/signup/changepassword";
     }
 
 }

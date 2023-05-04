@@ -107,7 +107,7 @@ $("#findidpw_chkcode").click(function() {
                     clearInterval(timer);
                     $("#findidpw_timer").html("");
                     form.setAttribute("method", "post");
-                    form.setAttribute("action", "/findpw");
+                    form.setAttribute("action", "/changepassword");
                     document.body.appendChild(form);
                     form.submit();
                 } else {
