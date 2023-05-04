@@ -58,7 +58,6 @@
                         상품찾기
                     </a>
                 </div>
-
                 <div class="gnbUtil" >
                     <ul>
                         <c:if test="${userid != null}">

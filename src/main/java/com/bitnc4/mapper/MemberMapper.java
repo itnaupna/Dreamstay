@@ -3,6 +3,7 @@ package com.bitnc4.mapper;
 import com.bitnc4.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Mapper
@@ -22,5 +23,8 @@ public interface MemberMapper {
 
     // 로그인
     public int access(Map<String, String> idpw);
+
+    // db에 있는 id && email 인지 확인
+    public int overlapIdEmail(Map<String, String> idemail);
 
 }
