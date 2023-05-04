@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/css/main.css" />
 
 <style>
+	a:visited { color: black; text-decoration: none;}
 	/*메인타이틀 css*/
 	#main_txt{
 		display: inline-block;
@@ -225,9 +226,99 @@
 	.one_cont{
 		display: inline-block;
 		padding: 30px;
+		position: relative;
+		width: 430px;
+		height: 550px;
+	}
+	/*슬라이드 화살표 색 변경*/
+	.fp-controlArrow{
+		background-color: rgba(0,0,0,0);
+	}
+	.fp-controlArrow.fp-next{
+		right: 150px !important;
+		border-color: transparent transparent transparent #000000 !important;
+	}
+	.fp-controlArrow.fp-prev{
+		left: 150px !important;
+		border-color: transparent #000000 transparent transparent !important;
+	}
+	/*슬라이드 css*/
+	#cont_01_01{
+		margin-right: 5px;
+	}
+	#cont_01_02{
+		margin-right: 5px;
+	}
+	#cont_02_01{
+		margin-right: 5px;
+	}
+	#cont_02_02{
+		margin-right: 5px;
+	}
+	/*슬라이드 이미지 크기*/
+	.one_cont_imgs{
+		height: 250px;
+		width: 360px;
+		float: left;
+	}
+	.one_cont:hover .one_cont_main_txt{
+		opacity: 1;
+	}
+	.one_cont_main_txt{
+		color: #fff;
+		position: absolute; left: 31px; bottom: 270px;
+		background: rgba(0,0,0,0.3);
+		padding: 15px;
+		box-sizing: border-box;
+		opacity: 0;
+		transition: opacity 0.35s ease-in-out;
+		width: 360px;
+		height: 250px;
+		line-height: 220px;
+		font-weight: bold;
 	}
 
-
+	.one_cont_sub_txt{
+		text-align: left;
+	}
+	.one_cont_sub_txt h2{
+		font-weight: bold;
+		width: 360px;
+		padding-top: 300px;
+		height: 380px;
+	}
+	.one_cont_sub_txt div{
+		width: 360px;
+	}
+	.one_cont_sub_txt.one_cont_sub_color_txt{
+		color: #ffffff;
+		padding: 0 20px;
+		border: 1px solid #ffffff;
+		display: inline-block;
+		float: left;
+		font-weight: bold;
+	}
+	#one_cont_sub_color01{
+		background-color: #2e6781;
+	}
+	#one_cont_sub_color02{
+		background-color: #968a8b;
+	}
+	#one_cont_sub_color03{
+		background-color: #ac9652;
+	}
+	#one_cont_sub_color04{
+		background-color: #1f453b;
+	}
+	#one_cont_sub_color05{
+		background-color: #968a8b;
+	}
+	#one_cont_sub_color06{
+		background-color: #2e6781;
+	}
+	#one_cont_sub_color07{
+		background-color: #3e97d3;
+	}
 </style>
 
 <div id="fullpage">
@@ -304,31 +395,89 @@
 			</div></a>
 		</div>
 	</div>
-	<div class="section bg_imgs02">Some section2 <a href="#3rdPage">아래</a>
+	<div class="section bg_imgs02">
 		<div class="slide" id="slide1">
 			<div class="one_page">
-				<div class="one_cont">
-					<div><img src="/photo/josu.png"></div>
-					<div>discoverseoul</div>
-					<div> 전통과 현대의 맛이 가득한 서울시티 버스를 타고...<br>2023.05.03 ~ 2023.05.09</div>
-					<div>포포인츠 바이 쉐라톤 조선 서울역</div>
+				<div class="one_cont" id="cont_01_01">
+					<a href="#">
+						<div><img class="one_cont_imgs" src="https://www.josunhotel.com/util/file/download.do?fileSn=1545133&sysCode=FPBSS"></div>
+						<div class="one_cont_main_txt">자세히보기</div>
+						<div class="one_cont_sub_txt"><h2>DISCOVER SEOUL</h2></div><br>
+						<div class="one_cont_sub_txt">전통과 현대의 맛이 가득한 서울시티 버스를 타고..</div>
+						<div class="one_cont_sub_txt">2023.05.03 - 2023.10.31</div><br>
+						<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color01">포포인츠 바이 쉐라톤 조선 서울역</div>
+					</a>
 				</div>
-				<div class="one_cont">
-					<div><img src="/photo/josu.png"></div>
-					<div>discoverseoul</div>
-					<div> 전통과 현대의 맛이 가득한 서울시티 버스를 타고...<br>2023.05.03 ~ 2023.05.09</div>
-					<div>포포인츠 바이 쉐라톤 조선 서울역</div>
+				<div class="one_cont" id="cont_01_02">
+					<a href="#">
+						<div><img class="one_cont_imgs" src="https://www.josunhotel.com/util/file/download.do?fileSn=1533712&sysCode=TWCB"></div>
+						<div class="one_cont_main_txt">자세히보기</div>
+						<div class="one_cont_sub_txt"><h2>HAPPY PLAYCATION</h2></div><br>
+						<div class="one_cont_sub_txt">어른이들에게는 동심을, 아이들에게는 상상력..</div>
+						<div class="one_cont_sub_txt">2023.04.20 - 2023.07.20</div><br>
+						<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color02">웨스틴 조선 부산</div>
+					</a>
 				</div>
-				<div class="one_cont">
-					<div><img src="/photo/josu.png"></div>
-					<div>discoverseoul</div>
-					<div> 전통과 현대의 맛이 가득한 서울시티 버스를 타고...<br>2023.05.03 ~ 2023.05.09</div>
-					<div>포포인츠 바이 쉐라톤 조선 서울역</div>
+				<div class="one_cont" id="cont_01_03">
+					<a href="#">
+						<div><img class="one_cont_imgs" src="https://www.josunhotel.com/util/file/download.do?fileSn=1489591&sysCode=JPY"></div>
+						<div class="one_cont_main_txt">자세히보기</div>
+						<div class="one_cont_sub_txt"><h2>BOONTHESHOP X JOSUNPALACE</h2></div><br>
+						<div class="one_cont_sub_txt">국내최초 럭셔리 스페셜티 스토어 분더샾과 함께..</div>
+						<div class="one_cont_sub_txt">2023.03.17 ~ 2023.07.31</div><br>
+						<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color03">조선 펠리스</div>
+					</a>
 				</div>
 			</div>
 		</div>
-		<div class="slide" id="slide2"><h1>Totally customizable</h1></div>
-		<div class="slide" id="slide3"><h1>Totall customizable</h1></div>
+		<div class="slide" id="slide2">
+			<div class="one_page">
+				<div class="one_cont" id="cont_02_01">
+					<a href="#">
+						<div><img class="one_cont_imgs" src="https://www.josunhotel.com/util/file/download.do?fileSn=1481795&sysCode=GJB"></div>
+					<div class="one_cont_main_txt">자세히보기</div>
+					<div class="one_cont_sub_txt"><h2>2 NIGHTS ESCAPE!</h2></div><br>
+					<div class="one_cont_sub_txt">1박만으로 아쉽다면 최대 20% 할인 받고 2박..</div>
+					<div class="one_cont_sub_txt">2023.03.08 ~ 2023.06.30</div><br>
+					<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color04">그랜드 조선 부산</div>
+					</a>
+				</div>
+				<div class="one_cont" id="cont_02_02">
+					<a href="#">
+						<div><img class="one_cont_imgs" src="https://www.josunhotel.com/util/file/download.do?fileSn=1449440&sysCode=TWCB"></div>
+						<div class="one_cont_main_txt">자세히보기</div>
+						<div class="one_cont_sub_txt"><h2>ROMANTIC MOMENTS</h2></div><br>
+						<div class="one_cont_sub_txt">해운대 바다가 아름답게 펼쳐진 호텔 룸 안에서 스...</div>
+						<div class="one_cont_sub_txt">2023.02.07 ~ 2023.06.30</div><br>
+						<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color05">웨스턴 조선 부산</div>
+					</a>
+				</div>
+				<div class="one_cont" id="cont_02_03">
+					<a href="#">
+						<div><img class="one_cont_imgs" src="https://www.josunhotel.com/util/file/download.do?fileSn=1425533&sysCode=FPBSS"></div>
+						<div class="one_cont_main_txt">자세히보기</div>
+						<div class="one_cont_sub_txt"><h2>STAY & PLAY : GOLF</h2></div><br>
+						<div class="one_cont_sub_txt">호캉스와 골프를 모두 즐기는 완벽한 방법1..</div>
+						<div class="one_cont_sub_txt">2023.01.31 ~ 2023.05.31</div><br>
+						<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color06">포포인츠 바이 쉐라톤 조선 서울역</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="slide3">
+			<div class="one_page">
+				<div class="one_cont" id="cont_03_01">
+					<a href="#">
+						<div><img class="one_cont_imgs" src="https://www.josunhotel.com/util/file/download.do?fileSn=1358633&sysCode=FPBSM"></div>
+						<div class="one_cont_main_txt">자세히보기</div>
+						<div class="one_cont_sub_txt"><h2>HIPJIRO PACKAGE</h2></div><br>
+						<div class="one_cont_sub_txt">◆객실에서 느끼는 힙지로 바이브◆ 수페리어 객실...</div>
+						<div class="one_cont_sub_txt">2023.04.01 ~ 2023.05.31</div><br>
+						<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color07">포포인츠 바이 쉐라톤 조선,서울 명동</div>
+					</a>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="section bg_imgs03" >Some section3 <a href="#4thpage">아래</a></div>
 	<div class="section bg_imgs04" >Some section4 <a href="#firstPage">위로</a></div>
