@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitnc4.mapper.MemberMapper">
+    <select id="memberCnt" resultType="int">
+        select count(*) from member
+    </select>
+
+    <select id="overlapEmail" parameterType="String" resultType="int">
+        select  exists(select  email from member where email = #{email})
+    </select>
+    <select id="overlapId" parameterType="String" resultType="int">
+        select exists(select id from member where id = #{id})
+    </select>
+
+    <insert id="joinMember" parameterType="MemberDto">
+        insert into member (id, pw, user_name, email, phone, user_level, addr, point)
+        values (#{id}, sha2(#{pw}, 256), #{user_name}, #{email}, #{phone}, 1, #{addr}, 0)
+    </insert>
+
+    <select id="login" parameterType="Map" resultType="int">
+        select exists(select * from member where id = #{id} and pw = sha2(#{pw}, 256))
+    </select>
+
+</mapper>
