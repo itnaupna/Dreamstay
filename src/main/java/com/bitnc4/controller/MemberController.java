@@ -4,8 +4,10 @@ import com.bitnc4.dto.MemberDto;
 import com.bitnc4.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 @Controller
@@ -74,6 +76,22 @@ public class MemberController {
         return "/main";
     }
 
+    // 로그인
+    @PostMapping("/access")
+    @ResponseBody
+    public boolean idpwChk(String id, String pw, HttpSession session, Model model) {
+        if(memberService.access(id, pw) == 1) {
+            session.setAttribute("userid", id);
+            model.addAttribute("userid", id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-
+    @GetMapping("logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("userid");
+        return "/";
+    }
 }

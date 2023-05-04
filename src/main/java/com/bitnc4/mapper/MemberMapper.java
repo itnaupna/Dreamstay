@@ -21,6 +21,6 @@ public interface MemberMapper {
     public void joinMember(MemberDto dto);
 
     // 로그인
-    public int login(Map<String, String> idpw);
+    public int access(Map<String, String> idpw);
 
 }
