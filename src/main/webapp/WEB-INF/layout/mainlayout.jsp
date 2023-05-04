@@ -13,7 +13,12 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="/css/commonlayout.css"/>
-
+	<style>
+		/* footer 설정입니다 */
+		.footer{
+			display: none;
+		}
+	</style>
 </head>
 <body>
 	<div class="mainlayout">

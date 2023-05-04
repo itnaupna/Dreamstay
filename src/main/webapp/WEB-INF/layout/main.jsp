@@ -166,6 +166,8 @@
 	.arrows-scroll{
 		margin: 0px 18px;
 
+	.section{
+		border: 1px solid black;
 	}
 	.icon-scroll {
 		text-align: center;
@@ -485,6 +487,13 @@
 	</div>
 	<div class="section bg_imgs03" >Some section3 <a href="#4thpage">아래</a></div>
 	<div class="section bg_imgs04" >Some section4 <a href="#firstPage">위로</a></div>
+
+	<%-- footer section 입니다 --%>
+	<div class="section footer-wrap fp-auto-height">
+		<div class="m_footer">
+			<%@ include file="footer.jsp" %>
+		</div>
+	</div>
 
 </div>
 <script type="text/javascript" src="/js/main.js"></script>
