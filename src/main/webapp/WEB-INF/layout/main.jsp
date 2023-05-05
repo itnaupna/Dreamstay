@@ -6,70 +6,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" />
 <link rel="stylesheet" href="/css/main.css" />
 
-<style>
-	#page4{
-		color: #ffffff;
-		height: 530px;
-		width: 920px;
-		text-align: center;
-		margin: 0 auto;
-	}
-	#page4_main_title{
-		font-size: 60px;
-	}
-	#page4_sub_title{
-		font-size: 25px;
-		margin-top: 20px;
-		margin-bottom: 70px;
-	}
-	#page4_sub_box_01{
-		font-size: 0;
-	}
-	#page4_sub_box_02{
-		font-size: 0;
-	}
-	.page4_box_logo{
-		display: inline-block;
-		width: 229px;
-		height: 140px;
-		border: 1px solid rgba(200,200,200,0.3);
-		font-size: 10px;
-		opacity: .6;
-		padding-top: 25px;
-		margin-top:-1px;
-		margin-left: -1px;
-	}
-	.page4_box_logo:hover div{
-		opacity: 1.5;
-	}
-	.page4_box_logo:hover{
-		border: 1px solid rgba(200,200,200,0.1);
-		opacity: 1.5;
-		transition: opacity 0.24s ease-in-out;
-		background-color: rgba(1,1,1,0.37); ;
-	}
-	.page4_box_logo div{
-		font-size: 14px;
-		text-decoration: underline;
-		text-underline-offset : 8px;
-		opacity: 0;
-		transition: opacity 0.17s ease-in-out;
-		color: #ffffff;
-	}
-</style>
-
-
-<script>
-	$(function (){
-		$(".page4_box_logo").mouseover(function () {
-			const src = $(this).find(".inputs").val();
-			$(".bg_imgs04").css("background-image", "url(" + src + ")");
-		});
-		$(".page4_box_logo").mouseout(function () {
-			$(".bg_imgs04").css("background-image", "url(https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255595&cntntsSn=255594)");
-		});
-	});
-</script>
 
 <div id="fullpage">
 	<div class="section bg_imgs01" >
@@ -234,7 +170,7 @@
 		</div>
 	</div>
 	<div class="section bg_imgs03" >Some section3 <a href="#4thpage">아래</a></div>
-	<div class="section bg_imgs04" id="bg_imgs04" >
+	<div class="section bg_imgs04" id="bg_imgs04">
 		<div id="page4">
 			<div class="page4_title">
 				<div id="page4_main_title">
@@ -247,31 +183,31 @@
 			</div>
 			<div id="page4_box">
 				<div id="page4_sub_box_01">
-					<a href="#">
-						<div class="page4_box_logo">
+					<div class="page4_box_logo" id="logo_01">
+						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png">
-							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255595&cntntsSn=255594">
+							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_01.jpg">
 							<div>자세히 보기</div>
-						</div>
-					</a>
-					<div class="page4_box_logo">
+						</a>
+					</div>
+					<div class="page4_box_logo" id="logo_02">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo02.png">
-							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255356&cntntsSn=255355">
+							<input type="hidden" class="page4_box_logo_inputs" value="/photo/page4_box_logo_02.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo04.png">
-							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255714&cntntsSn=255713">
+							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_03.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo05.png">
-							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=254985&cntntsSn=254983">
+							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_04.jpg">
 							<div>자세히 보기</div
 						</a>
 					</div>
@@ -280,28 +216,28 @@
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo06.png">
-							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=667086&cntntsSn=667085">
+							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_05.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo07.png">
-							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=253901&cntntsSn=253899">
+							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_06.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo08.png">
-							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255574&cntntsSn=255573">
+							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_07.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo09.png">
-							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=672859&cntntsSn=672858">
+							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_08.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
