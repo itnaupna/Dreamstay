@@ -32,7 +32,16 @@
 
 
 /*메인 css*/
-a:visited { color: black; text-decoration: none;}
+a:visited {
+    color: black; text-decoration: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    color: black;
+}
 /*메인타이틀 css*/
 #main_txt{
     display: inline-block;
@@ -154,6 +163,7 @@ a:visited { color: black; text-decoration: none;}
     left: 15px;
     vertical-align: middle;
     transition: 0.6s;
+    background-color: rgba(0,0,0,0);
 }
 #search_box:hover{
     color: black;
@@ -254,6 +264,7 @@ a:visited { color: black; text-decoration: none;}
     position: relative;
     width: 430px;
     height: 550px;
+    text-decoration: none;
 }
 /*슬라이드 화살표 색 변경*/
 .fp-controlArrow{

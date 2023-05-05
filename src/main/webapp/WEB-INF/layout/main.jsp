@@ -41,7 +41,6 @@
 	}
 	.page4_box_logo:hover div{
 		opacity: 1.5;
-		color: #ffffff;
 	}
 	.page4_box_logo:hover{
 		border: 1px solid rgba(200,200,200,0.1);
@@ -55,8 +54,22 @@
 		text-underline-offset : 8px;
 		opacity: 0;
 		transition: opacity 0.17s ease-in-out;
+		color: #ffffff;
 	}
 </style>
+
+
+<script>
+	$(function (){
+		$(".page4_box_logo").mouseover(function () {
+			const src = $(this).find(".inputs").val();
+			$(".bg_imgs04").css("background-image", "url(" + src + ")");
+		});
+		$(".page4_box_logo").mouseout(function () {
+			$(".bg_imgs04").css("background-image", "url(https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255595&cntntsSn=255594)");
+		});
+	});
+</script>
 
 <div id="fullpage">
 	<div class="section bg_imgs01" >
@@ -221,7 +234,7 @@
 		</div>
 	</div>
 	<div class="section bg_imgs03" >Some section3 <a href="#4thpage">아래</a></div>
-	<div class="section bg_imgs04" >
+	<div class="section bg_imgs04" id="bg_imgs04" >
 		<div id="page4">
 			<div class="page4_title">
 				<div id="page4_main_title">
@@ -237,26 +250,28 @@
 					<a href="#">
 						<div class="page4_box_logo">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png">
-							<input type="hidden" value="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png">
+							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255595&cntntsSn=255594">
 							<div>자세히 보기</div>
 						</div>
 					</a>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo02.png">
-							<input type="hidden" value="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png">
+							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255356&cntntsSn=255355">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo04.png">
+							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255714&cntntsSn=255713">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo05.png">
+							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=254985&cntntsSn=254983">
 							<div>자세히 보기</div
 						</a>
 					</div>
@@ -265,24 +280,28 @@
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo06.png">
+							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=667086&cntntsSn=667085">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo07.png">
+							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=253901&cntntsSn=253899">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo08.png">
+							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255574&cntntsSn=255573">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo09.png">
+							<input type="hidden" class="inputs" value="https://www.josunhotel.com/revolution/content/fileImage.do?fileId=672859&cntntsSn=672858">
 							<div>자세히 보기</div>
 						</a>
 					</div>
