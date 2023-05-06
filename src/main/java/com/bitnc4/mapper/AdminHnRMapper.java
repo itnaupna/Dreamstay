@@ -1,0 +1,15 @@
+package com.bitnc4.mapper;
+
+import com.bitnc4.dto.HotelDto;
+import com.bitnc4.dto.RoomDto;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+@Mapper
+public interface AdminHnRMapper {
+
+    public List<HotelDto> getHotels();
+    public List<RoomDto> getRoomsByHotelNum(int hotelnum);
+    public HotelDto getHotelByRoomHotelNum(int hotelnum);
+}

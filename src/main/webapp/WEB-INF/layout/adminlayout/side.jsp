@@ -32,4 +32,5 @@
     <li id="liAdmin" onclick="location.href='/admin'"><i class="bi bi-clipboard-data"></i></li>
     <li id="liChat" onclick="location.href='/admin/chat'"><i class="bi bi-chat-dots"></i></li>
     <li id="liBoard" onclick="location.href='/admin/board'"><i class="bi bi-person-circle"></i></li>
+    <li id="liHotel" onclick="location.href='/admin/hotel'"><i class="bi bi-hospital"></i></li>
 </ul>
