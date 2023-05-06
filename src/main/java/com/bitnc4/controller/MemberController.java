@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 @Controller
-
+@RequestMapping("/signup")
 public class MemberController {
 
     @Autowired
@@ -140,4 +141,9 @@ public class MemberController {
         return "/main/signup/changepassword";
     }
 
+    @PostMapping("/updatepassword")
+    public String chgPass(String id, String pw){
+        memberService.changePassword(id, pw);
+        return "redirect:/";
+    }
 }

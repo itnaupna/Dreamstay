@@ -190,10 +190,10 @@
                 <br>
                 <span>CLUB JOSUN 회원이 되시면 더 많은 혜택이 있습니다.</span>
                 <div class="L_Link">
-                    <a href="/signup">회원가입<span class="material-symbols-outlined">
+                    <a href="/signup/signup">회원가입<span class="material-symbols-outlined">
 navigate_next
 </span></a>
-                    <a href="/findidpw">아이디/비밀번호찾기<span class="material-symbols-outlined">
+                    <a href="/signup/findidpw">아이디/비밀번호찾기<span class="material-symbols-outlined">
 navigate_next
 </span></a>
                     <a href="">계정활성화<span class="material-symbols-outlined">

@@ -11,7 +11,7 @@ $('#SendEmailBtn').click(function (e) {
     e.preventDefault(); // 기존의 form 전송 방지
     $.ajax({
         type: "post",
-        url: "/overlapemail",
+        url: "/signup/overlapemail",
         data: $("#email").serialize(),
         success: function(overlap) {
             if(overlap != 0) {
@@ -19,7 +19,7 @@ $('#SendEmailBtn').click(function (e) {
             } else {
                 $.ajax({
                     type: 'POST',
-                    url: '/sendemail',
+                    url: '/signup/sendemail',
                     data: $('#email').serialize(), // 이메일 정보를 전달
                     success: function (data) {
                         alert('인증번호가 발송되었습니다');
@@ -38,7 +38,7 @@ $('#SendEmailBtn').click(function (e) {
                             if (time < 0) {
                                 $.ajax({
                                     type: "post",
-                                    url: '/deletemail',
+                                    url: '/signup/deletemail',
                                     data: {"email": email},
                                     success: function(data) {
                                         $("#timer").html("");
@@ -68,7 +68,7 @@ $('#CheckEmailBtn').click(function (e) {
 
     $.ajax({
         type: 'POST',
-        url: '/checkemail',
+        url: '/signup/checkemail',
         data: {"email_code": email_code, "email": email},
         success: function (data) {
             if(f_email == true) {
@@ -99,7 +99,7 @@ $("#id_check").click(function (e) {
 
     $.ajax({
         type: 'get',
-        url: '/overlapid',
+        url: '/signup/overlapid',
         data: {"id": id},
         success: function (data) {
             if (data == 0) {
@@ -138,7 +138,7 @@ $("#pw").on("input", function() {
 });
 
 // 비밀번호 일치할때 text랑 color 변경
-$("#pwchk").on('input', function() {
+$("#pw,#pwchk").on('input', function() {
     pw = $("#pw").val();
     pwchk = $("#pwchk").val();
 
@@ -155,7 +155,7 @@ $("#pwchk").on('input', function() {
 
 // 이메일 인증, 중복확인, 비밀번호 확인 중 한개라도 하지 않을 시 가입 x
 $("#signupBtn").click(function(){
-    console.log(f_email, f_id, f_pw, f_pwform);
+    console.log(f_email, f_id, f_pw, confirm_pwform);
     if(f_email == false) {
         alert("이메일 인증해주세요");
         $("#email_code").focus();

@@ -34,6 +34,6 @@ public interface MemberServiceInter {
     // email로 db 정보 불러오는 메서드
     public MemberDto searchInfoToEmail(String email);
 
-
-
+    // 비밀번호 변경
+    public void changePassword(String id, String pw);
 }

@@ -22,14 +22,14 @@ $("#findidpw_sendmail").click(function() {
     let email = $("#findidpw_email").val();
 
     $.ajax({
-       url:"/searchidpw",
+       url:"/signup/searchidpw",
        type: "post",
        data: {"email": email, "id" : id},
        success: function(chk) {
             if(chk == 1) {
                 $.ajax({
                     type: 'post',
-                    url: '/sendemail',
+                    url: '/signup/sendemail',
                     data: {"email" : email}, // 이메일 정보를 전달
                     success: function () {
                         alert('인증번호가 발송되었습니다');
@@ -46,7 +46,7 @@ $("#findidpw_sendmail").click(function() {
                             if (time < 0) {
                                 $.ajax({
                                     type: "post",
-                                    url: '/deletemail',
+                                    url: '/signup/deletemail',
                                     data: {"email": email},
                                     success: function(data) {
                                         $("#findidpw_timer").html("");
@@ -59,7 +59,12 @@ $("#findidpw_sendmail").click(function() {
                     }
                 });
             } else if(chk == 0) {
-                alert("아이디나 이메일을 확인해주세요");
+                console.log($("#findidpw_id").is(":visible"));
+                if($("#findidpw_id").is(":visible")) {
+                    alert("아이디나 이메일을 확인해주세요");
+                } else {
+                    alert("가입된 이메일이 아닙니다");
+                }
             }
        }
     });
@@ -79,14 +84,14 @@ $("#findidpw_chkcode").click(function() {
     if(id == "") {
         $.ajax({
             type: 'post',
-            url: '/checkemail',
+            url: '/signup/checkemail',
             data: {"email_code": email_code, "email": email},
             success: function (data) {
                 if (data === true) { // data 가 success 일 때
                     clearInterval(timer);
                     $("#findidpw_timer").html("");
                     form.setAttribute("method", "post");
-                    form.setAttribute("action", "/findid");
+                    form.setAttribute("action", "/signup/findid");
                     document.body.appendChild(form);
                     form.submit();
                 } else {
@@ -100,14 +105,14 @@ $("#findidpw_chkcode").click(function() {
     } else {
         $.ajax({
             type: 'post',
-            url: '/checkemail',
+            url: '/signup/checkemail',
             data: {"email_code": email_code, "email": email},
             success: function (data) {
                 if (data === true) { // data 가 success 일 때
                     clearInterval(timer);
                     $("#findidpw_timer").html("");
                     form.setAttribute("method", "post");
-                    form.setAttribute("action", "/changepassword");
+                    form.setAttribute("action", "/signup/changepassword");
                     document.body.appendChild(form);
                     form.submit();
                 } else {

@@ -24,7 +24,8 @@
 <!-- 다음 맵 api script 끝 -->
 
 <%-- 나머지 데이터 입력 폼 --%>
-<form method="post" action="joinmember">
+<br><br><br><br><br><br>
+<form method="post" action="/signup/joinmember">
     <table>
         <caption align="top"><b>회원가입</b></caption>
 

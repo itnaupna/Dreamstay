@@ -1,14 +1,11 @@
-// $(function() {
-    let cookies = document.cookie.split("; ");
-    for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].split("=");
-        if(cookie[0] == "saveid") {
-            $("#login_saveid").attr("checked", true);
-            $("#login_id").val(cookie[1]);
-
-        }
+let cookies = document.cookie.split("; ");
+for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].split("=");
+    if(cookie[0] == "saveid") {
+        $("#login_saveid").attr("checked", true);
+        $("#login_id").val(cookie[1]);
     }
-// });
+}
 $("#access").click(function(){
     let login_id = $("#login_id").val();
     let login_pw = $("#login_pw").val();
@@ -22,7 +19,7 @@ $("#access").click(function(){
     }
 
     $.ajax({
-        url: "/access",
+        url: "/signup/access",
         type: "post",
         data: {"id": login_id, "pw": login_pw, "saveid": login_saveid},
         success: function(res) {
@@ -33,6 +30,12 @@ $("#access").click(function(){
             }
         }
     });
+});
+
+$("#login_id, #login_pw").keyup(function(e) {
+    if(e.code == "Enter" ) {
+        $("#access").click();
+    }
 });
 
 

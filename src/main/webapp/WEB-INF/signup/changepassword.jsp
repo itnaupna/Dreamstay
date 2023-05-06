@@ -14,11 +14,13 @@
         <p> 영문/숫자/특수문자 조합 8~12자리
             ID 포함, 연속되는 문자/숫자 3자리 이상 사용 불가
         </p>
-        <form action="/updatepw" method="post">
-            <input type="hidden" name="num" value="${mDto.num}">
+        <form action="/signup/updatepassword" method="post" id="findpw_submit">
+            <input type="hidden" name="id"  id="findpw_id" value="${mDto.id}">
             <input type="password" name="pw" id="findpw_pw">
+            <span id="findpw_pwform"></span>
             <input type="password" id="findpw_pw2">
-            <button type="submit">비밀번호 변경</button>
+            <span id="findpw_pwchk"></span>
+            <button type="button" id="changepassword_confirm">비밀번호 변경</button>
         </form>
     </div>
     <p>*변경된 비밀번호는 회원정보에 반영됩니다.</p>
