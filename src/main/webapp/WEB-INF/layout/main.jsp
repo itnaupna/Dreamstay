@@ -53,6 +53,9 @@
 	.calendar > .dates02 > .date02:nth-child(7n+1){color: red;}
 	.calendar > .dates02 > .last {color: #c8c8c8 !important;}
 	.calendar > .dates02 > .next {color: #c8c8c8 !important;}
+
+	/*달력슬라이드*/
+
 </style>
 
 
@@ -91,49 +94,51 @@
 								&nbsp;
 								<span>-</span>
 								&nbsp;
-								<span id="check_out">123</span>
+								<span id="check_out"></span>
 							</div>
 						</div>
 					</div>
 				</a>
 				<%--CHECK IN 달력--%>
-				<div class="calendar animate__animated animate__backInUp" id="calendar">
-						CHECK IN
-					<div class="cal_header">
-						<a class="calendar_btn" onclick="prevCal();">&lt;</a>
-						<div class="title"><span class="year"></span><span class="month"></span></div>
-						<a class="calendar_btn" onclick="nextCal();" >&gt;</a>
+				<div id="calendars" class="hidden">
+					<div class="calendar animate__animated animate__backInUp" id="calendar">
+							CHECK IN
+						<div class="cal_header">
+							<a class="calendar_btn" onclick="prevCal();">&lt;</a>
+							<div class="title"><span class="year"></span><span class="month"></span></div>
+							<a class="calendar_btn" onclick="nextCal();" >&gt;</a>
+						</div>
+						<div class="day">
+							<div>S</div>
+							<div>M</div>
+							<div>T</div>
+							<div>W</div>
+							<div>T</div>
+							<div>F</div>
+							<div>S</div>
+						</div>
+						<div class="dates"></div>
 					</div>
-					<div class="day">
-						<div>S</div>
-						<div>M</div>
-						<div>T</div>
-						<div>W</div>
-						<div>T</div>
-						<div>F</div>
-						<div>S</div>
+					<%--CHECK IN 달력끝--%>
+					<%--CHECK OUT  달력--%>
+					<div class="calendar animate__animated animate__backInUp" id="calendar02">
+						CHECK OUT
+						<div class="cal_header">
+							<a class="calendar_btn" onclick="prevCal02();">&lt;</a>
+							<div class="title"><span class="year02"></span><span class="month02"></span></div>
+							<a class="calendar_btn" onclick="nextCal02();" >&gt;</a>
+						</div>
+						<div class="day">
+							<div>S</div>
+							<div>M</div>
+							<div>T</div>
+							<div>W</div>
+							<div>T</div>
+							<div>F</div>
+							<div>S</div>
+						</div>
+						<div class="dates02"></div>
 					</div>
-					<div class="dates"></div>
-				</div>
-				<%--CHECK IN 달력끝--%>
-				<%--CHECK OUT  달력--%>
-				<div class="calendar animate__animated animate__backInUp" id="calendar02">
-					CHECK OUT
-					<div class="cal_header">
-						<a class="calendar_btn" onclick="prevCal02();">&lt;</a>
-						<div class="title"><span class="year02"></span><span class="month02"></span></div>
-						<a class="calendar_btn" onclick="nextCal02();" >&gt;</a>
-					</div>
-					<div class="day">
-						<div>S</div>
-						<div>M</div>
-						<div>T</div>
-						<div>W</div>
-						<div>T</div>
-						<div>F</div>
-						<div>S</div>
-					</div>
-					<div class="dates02"></div>
 				</div>
 				<%--CHECK OUT 달력끝--%>
 				<div id="main_mini_dl_04" class="main_mini_dl_sub">
@@ -308,7 +313,7 @@
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo05.png">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_04.jpg">
-							<div>자세히 보기</div
+							<div>자세히 보기</div>
 						</a>
 					</div>
 				</div>
@@ -591,6 +596,8 @@
 			e.value = e.value.slice(0, e.maxLength);
 		}
 	}
+
+	/*달력슬라이드*/
 
 </script>
 <script type="text/javascript" src="/js/main.js"></script>
