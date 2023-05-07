@@ -15,7 +15,16 @@
             아이디를 확인하실 수 있습니다.
         </pre>
         <input type="hidden" name="id" id="findidpw_id" placeholder="아이디">
-        <input type="text" name="email" id="findidpw_email" placeholder="이메일">
+        <input type="text" name="email" id="findidpw_email" placeholder="이메일">@
+        <input type="text" name="findidpw_domain" id="findidpw_domain">
+        <select id="findidpw_select_domain">
+            <option value="직접 입력" selected="selected">직접&nbsp;입력</option>
+            <option value="naver.com">naver.com</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="hanmail.net">hanmail.net</option>
+            <option value="hotmail.com">hotmail.com</option>
+            <option value="nate.com">nate.com</option>
+        </select>
         <button type="button" id="findidpw_sendmail">인증번호 받기</button>
         <span id="findidpw_timer"></span>
         <input type="text" name="email_code" id="findidpw_email_code" placeholder="인증번호">

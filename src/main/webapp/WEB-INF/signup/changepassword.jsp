@@ -11,7 +11,7 @@
     </div>
     <div>
         <p>새로운 비밀번호를 입력해주세요.</p>
-        <p> 영문/숫자/특수문자 조합 8~12자리
+        <p> 영문/숫자/특수문자 조합 8~15자리
             ID 포함, 연속되는 문자/숫자 3자리 이상 사용 불가
         </p>
         <form action="/signup/updatepassword" method="post" id="findpw_submit">

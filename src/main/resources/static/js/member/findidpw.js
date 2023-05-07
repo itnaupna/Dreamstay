@@ -3,7 +3,9 @@ $("#findidpw_findid").click(function() {
     $("#findidpw_id").attr("type", "hidden");
     $("#findidpw_id").val("");
     $("#findidpw_email").val("");
+    $("#findidpw_domain").val("");
     $("#findidpw_email_code").val("");
+    $("#findidpw_select_domain option:eq(0)").prop("selected", true);
     $("#findidpw_text").text("            아이디를 잊으셨나요?\n            이메일인증을 통해\n            아이디를 확인하실 수 있습니다.");
 });
 
@@ -12,14 +14,27 @@ $("#findidpw_findpw").click(function() {
     $("#findidpw_id").attr("type", "text");
     $("#findidpw_email").val("");
     $("#findidpw_email_code").val("");
+    $("#findidpw_domain").val("");
+    $("#findidpw_select_domain option:eq(0)").prop("selected", true);
     $("#findidpw_text").text("            비밀번호를 잊으셨나요?\n            휴대폰 본인인증을 통해 고객님의 비밀번호를\n            안전하게 재설정 가능합니다.");
 });
 
-// 아이디 입력값이 "" 이면 이메일 인증번호 발송 
-// 아이디 입력값이 있다면 db에 id, email 대조 후 인증번호 발송
+// 이메일 select box 이벤트
+$("#findidpw_select_domain").change(function() {
+    if($(this).val() == "직접 입력") {
+        $("#findidpw_domain").val("");
+        $("#findidpw_domain").attr("readonly", false);
+    } else {
+        $("#findidpw_domain").val($(this).val());
+        $("#findidpw_domain").attr("readonly", true);
+    }
+})
+// 아이디 입력값이 "" 이면 email만 확인 후 인증번호 발송(id찾기),
+// 아이디 입력값이 있다면 db에 id, email 대조 후 인증번호 발송 (비밀번호 찾기)
+let timer = "";
 $("#findidpw_sendmail").click(function() {
     let id = $("#findidpw_id").val();
-    let email = $("#findidpw_email").val();
+    let email = $("#findidpw_email").val() + "@" + $("#findidpw_domain").val();
 
     $.ajax({
        url:"/signup/searchidpw",
@@ -33,6 +48,8 @@ $("#findidpw_sendmail").click(function() {
                     data: {"email" : email}, // 이메일 정보를 전달
                     success: function () {
                         alert('인증번호가 발송되었습니다');
+                        clearInterval(timer);
+                        $("#timer").html("");
                         let time = 180;// 발송 성공시
                         let min = "";
                         let sec = "";
@@ -40,7 +57,7 @@ $("#findidpw_sendmail").click(function() {
                             min = parseInt(time / 60);
                             sec = time % 60;
 
-                            $("#findidpw_timer").html(min + "분" + sec + "초");
+                            $("#findidpw_timer").html(min + "분" + sec + "초").css("color", "red");
                             time--;
 
                             if (time < 0) {
@@ -73,7 +90,7 @@ $("#findidpw_sendmail").click(function() {
 // 이메일 인증
 $("#findidpw_chkcode").click(function() {
     let id = $("#findidpw_id").val();
-    let email = $("#findidpw_email").val();
+    let email = $("#findidpw_email").val() + "@" + $("#findidpw_domain").val();
     let email_code = $("#findidpw_email_code").val();
     let form = document.createElement("form");
     let object = document.createElement("input");
