@@ -4,6 +4,10 @@ spring:
     url: jdbc:mysql://175.45.204.95:3306/bit701?serverTimezone=Asia/Seoul
     username: lekahelis
     password: bit123!@#
+  servlet:
+    multipart:
+      max-file-size:
+        4MB
 
   mail:
     host: smtp.naver.com

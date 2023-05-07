@@ -59,7 +59,7 @@ public class NcpObjectStorageService implements ObjectStorageService {
 		}
 	}
 	@Override
-	public void deleteFile(String bucketName, String directoryPath, String fileName) {
+	public boolean deleteFile(String bucketName, String directoryPath, String fileName) {
 		// TODO Auto-generated method stub
 		String path=directoryPath+"/"+fileName;
 		//해당 버킷에 파일이 존재하면 true 반환
@@ -68,7 +68,10 @@ public class NcpObjectStorageService implements ObjectStorageService {
 		//존재할경우 삭제
 		if(isfind) {
 			s3.deleteObject(bucketName, path);
-			System.out.println(path+":삭제완료!");
+			//System.out.println(path+":삭제완료!");
+			return true;
+		}else{
+			return false;
 		}
 		
 	}

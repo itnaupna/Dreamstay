@@ -11,5 +11,6 @@ public interface AdminHnRMapper {
 
     public List<HotelDto> getHotels();
     public List<RoomDto> getRoomsByHotelNum(int hotelnum);
-    public HotelDto getHotelByRoomHotelNum(int hotelnum);
+    public HotelDto getHotelByHotelNum(int hotelnum);
+    public boolean updateHotelDetail(HotelDto dto);
 }

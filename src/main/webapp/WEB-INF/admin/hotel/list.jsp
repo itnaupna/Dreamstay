@@ -5,7 +5,7 @@
 <div id="lstHotel">
   <div id="toolbarHotel">
     <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_add.png">
-    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_detail.png">
+    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_detail.png" onclick="$('#detailHotel').toggle(200)">
   </div>
   <c:forEach items="${hDto}" var="dto">
     <div class="itemHotel" onclick="loadHotel(${dto.num})">
@@ -27,47 +27,52 @@
   <div id="lstRoomTitle">
     호텔을 선택하세요.
   </div>
-  <div id="detailHotel">
-    <table class="table table-bordered">
-      <caption style="text-align:right;font-size:0.8rem;caption-side: top;">
-        DblClick to edit value.
-      </caption>
-      <tr>
-        <td rowspan="3" style="width:160px;vertical-align: middle;">
-          <img src="" id="detailHotelImg" style="width:160px;height:120px;">
-        </td>
-        <td id="detailHotelName">
-          <div class="form-floating">
-            <input type="text" class="form-control" name="name" placeholder="_" readonly required>
-            <label class="form-label">이름</label>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td id="detailHotelAddr">
-          <div class="form-floating">
-          <input type="text" class="form-control" name="addr" placeholder="_" readonly required>
-            <label class="form-label">주소</label>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td id="detailHotelPhone">
-          <div class="form-floating">
-          <input type="text" class="form-control" placeholder="_" name="phone" readonly>
-            <label class="form-label">연락처</label>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" id="detailHotelMemo">
-          <div class="form-floating">
-          <textarea class="form-control" placeholder="_" name="memo" readonly></textarea>
-            <label class="form-label">추가설명</label>
-          </div>
-        </td>
-      </tr>
-    </table>
+  <div id="detailHotel" class="zeroheight">
+    <form id="formHotel" enctype="multipart/form-data">
+      <input type="hidden" name="num" id="detailHotelNum">
+      <table class="table table-bordered">
+        <caption style="font-size:0.8rem;caption-side: top;">
+          <span style="float:left;" onclick="if(confirm('Save the modify value?'))updateHotel();">Save</span>
+          <span style="float:right;">DblClick to edit value.</span>
+        </caption>
+        <tr>
+          <td rowspan="3" style="width:160px;vertical-align: middle;">
+            <img src="" id="detailHotelImg" style="width:160px;height:120px;" onclick="changePhoto();">
+            <input type="file" name="file" style="display:none" accept="image/*">
+          </td>
+          <td id="detailHotelName">
+            <div class="form-floating">
+              <input type="text" class="form-control" name="name" placeholder="_" readonly required>
+              <label class="form-label">이름</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td id="detailHotelAddr">
+            <div class="form-floating">
+              <input type="text" class="form-control" name="addr" placeholder="_" readonly required>
+              <label class="form-label">주소</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td id="detailHotelPhone">
+            <div class="form-floating">
+              <input type="text" class="form-control" placeholder="_" name="phone" readonly>
+              <label class="form-label">연락처</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" id="detailHotelMemo">
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="_" name="memo" readonly></textarea>
+              <label class="form-label">추가설명</label>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
   </div>
   <div id="summaryRoom">
     Total : <span id="summaryRoomTotal"></span><br/>
@@ -81,6 +86,13 @@
 </div>
 
 <style>
+  #detailHotelImg{
+    border:1px solid;
+  }
+  table caption span:first-child:hover{
+    text-decoration: underline;
+    cursor:pointer;
+  }
   #toolbarHotel {
     position: absolute;
     top: 0px;
@@ -156,8 +168,54 @@
     box-shadow: 0 0 5px rgb(152,129,34) !important;
 
   }
+
+  /*#detailHotel{*/
+  /*  transition: max-height ease 0.2s;*/
+  /*  overflow:hidden;*/
+  /*  max-height:100%;*/
+  /*}*/
+
+  /*.zeroheight {*/
+  /*  max-height:0px !important;*/
+  /*}*/
+
 </style>
 <script>
+  function changePhoto() {
+    let tempvar = $('input[type="file"]')[0].files;
+    $('input[type="file"]').click();
+    $('input[type="file"]').on({
+      'change':(e)=>{
+        if(e.target.files.length===0){
+          //Cancel
+          //Restore previous selection.
+          e.target.files = tempvar;
+        }else{
+          //Ok
+            var reader = new FileReader();
+            reader.onload = function(e) {
+              $("#detailHotelImg").attr("src", e.target.result);
+            }
+            reader.readAsDataURL($(e.target)[0].files[0]);
+        }
+      }
+    });
+  }
+  function updateHotel(){
+    let data = new FormData($('#formHotel')[0]);
+    // console.log(formData);
+    $.ajax({
+      url:'./hotel/update',
+      enctype:'multipart-form-data',
+      type:'post',
+      processData:false,
+      contentType:false,
+      data:data,
+      success:(e)=>{
+        console.log(e);
+      }
+    })
+  }
   $('table input,table textarea').on({
     'dblclick':(e)=>{
       $(e.target).removeAttr('readonly').css({
@@ -170,8 +228,7 @@
       $(e.target).attr({'readonly':true});
       $(e.target).css({
         'resize':'none',
-        'max-height':'10rem',
-        'transition':''
+        'max-height':'10rem'
       });
     }
   });
@@ -184,19 +241,23 @@
     }
   });
 
+
   function loadHotel(hotelnum){
     $('#lstRoomTitle').text("Loading Hotel info...");
     $.ajax({
       url:'./hotel/' + hotelnum,
       dataType:'json',
       success:(e)=>{
-        console.log(e);
+        console.log(e[0].memo==null);
+        $('input[type="file"]').val(null);
         $('#lstRoomTitle').text('hotel\'s room');
+        //https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/6ce87bf1-d4e6-4129-b9c7-1ed036ab9f82
+        $('#detailHotelImg').attr('src','https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/'+e[0].photo+'?type=f&w=160&h=120&faceopt=false');
+        $('#detailHotelNum').val(e[0].num);
         $('#detailHotelName input').val(e[0].name);
-        $('#detailHotelImg').attr('src','https://kr.object.ncloudstorage.com/dreamsstaybucket/'+e[0].photo);
         $('#detailHotelAddr input').val(e[0].addr);
         $('#detailHotelPhone input').val(e[0].phone);
-        $('#detailHotelMemo textarea').text(e[0].memo);
+        $('#detailHotelMemo textarea').text(e[0].memo==null ? '' : e[0].memo);
         $('#summaryRoomTotal').text(e[1].length);
         $('#lstRooms').empty();
         $.each(e[1],(idx,e)=>{
@@ -210,3 +271,4 @@
     });
   }
 </script>
+

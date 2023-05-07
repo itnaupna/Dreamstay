@@ -7,7 +7,15 @@
     <select id="getRoomsByHotelNum" resultType="RoomDto" parameterType="int">
         select * from room where hotelnum=#{hotelnum}
     </select>
-    <select id="getHotelByRoomHotelNum" resultType="HotelDto" parameterType="int">
+    <select id="getHotelByHotelNum" resultType="HotelDto" parameterType="int">
         select * from hotel where num=#{hotelnum}
     </select>
+    <update id="updateHotelDetail" parameterType="HotelDto">
+        <if test="photo != null">
+            update hotel set name=#{name}, addr=#{addr}, phone=#{phone}, photo=#{photo}, memo=#{memo} where num=#{num}
+        </if>
+        <if test="photo == null">
+            update hotel set name=#{name}, addr=#{addr}, phone=#{phone}, memo=#{memo} where num=#{num}
+        </if>
+    </update>
 </mapper>

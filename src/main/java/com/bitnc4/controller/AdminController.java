@@ -1,17 +1,15 @@
 package com.bitnc4.controller;
 
 
-import com.bitnc4.dto.RoomDto;
-import com.bitnc4.mapper.ChatMapper;
+import com.bitnc4.dto.HotelDto;
 import com.bitnc4.service.AdminHnRService;
 import lombok.extern.slf4j.Slf4j;
+import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,10 @@ public class AdminController {
 
     @Autowired
     AdminHnRService adminHnRService;
+    String bucketName="dreamsstaybucket";
+    @Autowired
+    NcpObjectStorageService ncp;
+
 
 
     @GetMapping("/chat")
@@ -48,8 +50,28 @@ public class AdminController {
     @ResponseBody
     public List<Object> rooms(@PathVariable int hotelnum){
         List<Object> lst = new ArrayList<>();
-        lst.add(adminHnRService.getHotelByRoomHotelNum(hotelnum));
+        lst.add(adminHnRService.getHotelByHotelNum(hotelnum));
         lst.add(adminHnRService.getRoomsByHotelNum(hotelnum));
         return lst;
     }
+
+    @PostMapping("/hotel/update")
+    @ResponseBody
+    public boolean updateHotel(HotelDto data, MultipartFile file){
+        System.out.println(file.getOriginalFilename().equals(""));
+        if(!file.getOriginalFilename().equals("")) {
+            ncp.deleteFile(bucketName,
+                    "hotel",
+                    adminHnRService.getHotelByHotelNum(data.getNum()).getPhoto()
+            );
+            data.setPhoto(ncp.uploadFile(bucketName, "hotel", file));
+        }
+//        else{
+//            data.setPhoto(adminHnRService.getHotelByHotelNum(data.getNum()).getPhoto());
+//        }
+        return adminHnRService.updateHotelDetail(data);
+    }
+
 }
+
+//TODO : Make CRUD for Hotel, room
