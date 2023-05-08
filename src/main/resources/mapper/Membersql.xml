@@ -6,7 +6,7 @@
     </select>
 
     <select id="overlapEmail" parameterType="String" resultType="int">
-        select  exists(select  email from member where email = #{email})
+        select exists(select email from member where email = #{email})
     </select>
 
     <select id="overlapId" parameterType="String" resultType="int">
