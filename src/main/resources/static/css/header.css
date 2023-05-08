@@ -10,7 +10,7 @@
 }
 
 /*커서*/
-.header a, button{
+.header a, .header button{
     cursor: pointer;
 }
 
@@ -20,10 +20,11 @@
     list-style: none;
 }
 
-.header button {
+.header button, .main button {
     box-sizing: border-box;
     background: none;
 }
+
 
 
 /* ****조선호텔 로고***** */
