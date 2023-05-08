@@ -8,6 +8,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,5 +110,13 @@ public class MemberService implements MemberServiceInter {
     public MemberDto searchInfoToEmail(String email) {
         MemberDto dto = memberMapper.searchInfoToEmail(email);
         return dto;
+    }
+
+    @Override
+    public void changePassword(String id, String pw) {
+        Map<String, String> changepw = new HashMap<String, String>();
+        changepw.put("id", id);
+        changepw.put("pw", pw);
+        memberMapper.changePassword(changepw);
     }
 }

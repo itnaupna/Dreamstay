@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 @Controller
-
+@RequestMapping("/signup")
 public class MemberController {
 
     @Autowired
@@ -76,8 +77,10 @@ public class MemberController {
     
     // 회원가입 -> db저장 후 메인
     @PostMapping("/joinmember")
-    public String joinmember(MemberDto dto, String addrdetail) {
-        dto.setAddr(dto.getAddr() + addrdetail);
+    public String joinmember(MemberDto dto, String addrdetail, String zipcode, String family_name, String email_domain) {
+        dto.setUser_name(family_name + "/"+dto.getUser_name());
+        dto.setAddr("(" + zipcode + ")" + dto.getAddr() + addrdetail);
+        dto.setEmail(dto.getEmail() + "@" + email_domain);
         memberService.joinMember(dto);
         return "/main";
     }
@@ -90,7 +93,6 @@ public class MemberController {
         if(memberService.access(id, pw) == 1) {
             session.setAttribute("userid", id);
             model.addAttribute("userid", id);
-            System.out.println(saveid);
             if(saveid.equals("true")) {
                 cookie = new Cookie("saveid", id);
                 cookie.setDomain("localhost");
@@ -130,7 +132,9 @@ public class MemberController {
 
     @PostMapping("/findid")
     public String findId(String email, Model model) {
-        model.addAttribute("mDto", memberService.searchInfoToEmail(email));
+        MemberDto mDto = memberService.searchInfoToEmail(email);
+        mDto.setUser_name(mDto.getUser_name().replaceAll("/", ""));
+        model.addAttribute("mDto", mDto);
         return "/main/signup/findid";
     }
 
@@ -140,4 +144,9 @@ public class MemberController {
         return "/main/signup/changepassword";
     }
 
+    @PostMapping("/updatepassword")
+    public String chgPass(String id, String pw){
+        memberService.changePassword(id, pw);
+        return "redirect:/";
+    }
 }

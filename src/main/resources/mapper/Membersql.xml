@@ -29,4 +29,8 @@
     <select id="searchInfoToEmail" parameterType="String" resultType="MemberDto">
         select * from member where email = #{email}
     </select>
+
+    <update id="changePassword" parameterType="Map">
+        update member set pw = sha2(#{pw}, 256) where id = #{id}
+    </update>
 </mapper>

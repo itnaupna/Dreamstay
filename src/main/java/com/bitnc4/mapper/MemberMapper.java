@@ -31,5 +31,7 @@ public interface MemberMapper {
     public MemberDto searchInfoToEmail(String email);
 
     // 비밀번호 변경
-    public void changePassword(int num);
+    public void changePassword(Map<String, String> changepw);
+
+
 }
