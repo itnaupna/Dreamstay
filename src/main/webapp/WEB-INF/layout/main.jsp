@@ -5,22 +5,25 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" />
+<!-- animate.css 라이브러리 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <link rel="stylesheet" href="/css/main.css" />
 
 <style>
 	.calendar {
 		font-size: 20px;
 		width: 400px;
+		height: 480px;
 		padding: 20px 20px 20px 20px;
 		box-sizing: border-box;
 		/*border: 1px solid #000000;*/
 		position: absolute;
 		background-color: #ffffff;
 		color:  #000000;
-		/*display: none;*/
+		left: 18%;
 	}
 	#calendar02{
-		margin-left: 400px;
+		margin-left: 600px;
 	}
 	.calendar > .cal_header {text-align: center;}
 	.calendar > .cal_header > .title {font-size: 25px; width:50%; display: inline-block;}
@@ -54,8 +57,27 @@
 	.calendar > .dates02 > .last {color: #c8c8c8 !important;}
 	.calendar > .dates02 > .next {color: #c8c8c8 !important;}
 
-	/*달력슬라이드*/
+	.hidden {
+		display: none;
+	}
 
+	.close-btn{
+		cursor: pointer;
+		position: absolute;
+		top: 20px;
+		left: 1490px;
+	}
+	#calendars{
+		position: absolute;
+		top: 3%;
+		left: 10%;
+		right: 10%;
+		height: 480px;
+		background-color: #ffffff;
+	}
+	.calendar_btn{
+		cursor: pointer;
+	}
 </style>
 
 
@@ -85,7 +107,7 @@
 						</div>
 					</div>
 				</div>
-				<a href="#">
+				<a href="#" id="total_calendars" onclick="toggleCalendars();">
 					<div id="main_mini_dl_03" class="main_mini_dl_sub">
 						<div id="main_border_03" class="main_mini_dl_size">
 							CHECK IN/OUT
@@ -101,7 +123,8 @@
 				</a>
 				<%--CHECK IN 달력--%>
 				<div id="calendars" class="hidden">
-					<div class="calendar animate__animated animate__backInUp" id="calendar">
+					<a class="close-btn" onclick="hideCalendars();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a> <!-- X 표시를 a 태그로 변경 -->
+					<div class="calendar animate__animated" id="calendar">
 							CHECK IN
 						<div class="cal_header">
 							<a class="calendar_btn" onclick="prevCal();">&lt;</a>
@@ -121,7 +144,7 @@
 					</div>
 					<%--CHECK IN 달력끝--%>
 					<%--CHECK OUT  달력--%>
-					<div class="calendar animate__animated animate__backInUp" id="calendar02">
+					<div class="calendar animate__animated" id="calendar02">
 						CHECK OUT
 						<div class="cal_header">
 							<a class="calendar_btn" onclick="prevCal02();">&lt;</a>
@@ -599,6 +622,67 @@
 
 	/*달력슬라이드*/
 
+	// 체크인 및 체크아웃 달력 보이기/숨기기 함수
+	function toggleCalendars() {
+		var calendars = document.getElementById("calendars");
+		var calendar = document.getElementById("calendar");
+		var calendar02 = document.getElementById("calendar02");
+
+		if (calendars.classList.contains("hidden")) {
+			// 달력을 나타내기 전에 숨겨진 상태일 때
+			calendars.classList.remove("hidden");
+			calendar.style.display = "block";
+			calendar02.style.display = "block";
+
+			calendar.classList.remove("animate__fadeOutDown");
+			calendar.classList.add("animate__fadeInUp");
+
+			calendar02.classList.remove("animate__fadeOutDown");
+			calendar02.classList.add("animate__fadeInUp");
+		} else {
+			// 달력을 숨길 때
+
+			calendar.classList.remove("animate__fadeInUp");
+			calendar.classList.add("animate__fadeOutDown");
+
+			calendar02.classList.remove("animate__fadeInUp");
+			calendar02.classList.add("animate__fadeOutDown");
+
+			// 애니메이션 완료 후 달력 숨김 처리
+			setTimeout(function() {
+				calendars.classList.add("hidden");
+				calendar.style.display = "none";
+				calendar02.style.display = "none";
+				
+				calendar.classList.remove("animate__fadeOutDown");
+				calendar02.classList.remove("animate__fadeOutDown");
+			}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
+		}
+	}
+
+	// CHECK IN 및 CHECK OUT 달력 숨김 처리 함수
+	function hideCalendars() {
+		var calendars = document.getElementById("calendars");
+		var calendar = document.getElementById("calendar");
+		var calendar02 = document.getElementById("calendar02");
+
+		// 달력을 숨길 때
+		calendar.classList.remove("animate__fadeInUp");
+		calendar.classList.add("animate__fadeOutDown");
+
+		calendar02.classList.remove("animate__fadeInUp");
+		calendar02.classList.add("animate__fadeOutDown");
+
+		// 애니메이션 완료 후 달력 숨김 처리
+		setTimeout(function() {
+			calendars.classList.add("hidden");
+			calendar.style.display = "none";
+			calendar02.style.display = "none";
+
+			calendar.classList.remove("animate__fadeOutDown");
+			calendar02.classList.remove("animate__fadeOutDown");
+		}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
+	}
 </script>
 <script type="text/javascript" src="/js/main.js"></script>
 
