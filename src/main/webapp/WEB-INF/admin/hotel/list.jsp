@@ -2,9 +2,9 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div id="lstHotel">
+<div id="partHotel">
   <div id="toolbarHotel">
-    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_add.png">
+    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_add.png" onclick="if(confirm('신규 호텔을 등록하시겠습니까?'))AddHotel();">
     <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_detail.png" onclick="$('#detailHotel').toggle(200)">
   </div>
   <c:forEach items="${hDto}" var="dto">
@@ -23,11 +23,11 @@
     </div>
   </c:forEach>
 </div>
-<div id="lstRoom">
+<div id="partRoom">
   <div id="lstRoomTitle">
     호텔을 선택하세요.
   </div>
-  <div id="detailHotel" class="zeroheight">
+  <div id="detailHotel" style="display:none;">
     <form id="formHotel" enctype="multipart/form-data">
       <input type="hidden" name="num" id="detailHotelNum">
       <table class="table table-bordered">
@@ -74,14 +74,15 @@
       </table>
     </form>
   </div>
-  <div id="summaryRoom">
-    Total : <span id="summaryRoomTotal"></span><br/>
-    Current : <span id="summaryRoomCurrent"></span><br/>
-    Reservation : <span id="summaryRoomReservation"></span><br/>
-    Remain : <span id="summaryRoomRemain"></span>
-  </div>
-  <div id="lstRooms">
-
+  <div id="lstRoom">
+    <div id="summaryRoom">
+      Total : <span id="summaryRoomTotal"></span><br/>
+      Current : <span id="summaryRoomCurrent"></span><br/>
+      Reservation : <span id="summaryRoomReservation"></span><br/>
+      Remain : <span id="summaryRoomRemain"></span>
+    </div>
+    <div id="lstRoomItems">
+    </div>
   </div>
 </div>
 
@@ -141,7 +142,7 @@
     align-items: center;
 
   }
-  #lstHotel,#lstRoom{
+  #partHotel,#partRoom{
     border:1px solid gray;
     border-radius:15px;
     padding:15px;
@@ -151,7 +152,7 @@
     position:relative;
     overflow-x:hidden;
   }
-  #lstHotel{
+  #partHotel{
     margin-right:10px;
   }
   table input, table textarea{
@@ -181,6 +182,18 @@
 
 </style>
 <script>
+
+  function AddHotel() {
+    $('#lstRoom').hide(200);
+    $('#detailHotel').hide(200,()=>{
+      $('#detailHotel input').val('');
+      $('#detailHotel textarea').text('');
+      $('#detailHotelImg').attr('src','');
+    });
+    $('#detailHotel').show(200);
+
+  }
+
   function changePhoto() {
     let tempvar = $('input[type="file"]')[0].files;
     $('input[type="file"]').click();
@@ -192,11 +205,11 @@
           e.target.files = tempvar;
         }else{
           //Ok
-            var reader = new FileReader();
-            reader.onload = function(e) {
-              $("#detailHotelImg").attr("src", e.target.result);
-            }
-            reader.readAsDataURL($(e.target)[0].files[0]);
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $("#detailHotelImg").attr("src", e.target.result);
+          }
+          reader.readAsDataURL($(e.target)[0].files[0]);
         }
       }
     });
@@ -212,7 +225,9 @@
       contentType:false,
       data:data,
       success:(e)=>{
-        console.log(e);
+        if(e){
+          //$('#detailHotelNum').val() === '' ?
+        }
       }
     })
   }
@@ -248,7 +263,7 @@
       url:'./hotel/' + hotelnum,
       dataType:'json',
       success:(e)=>{
-        console.log(e[0].memo==null);
+        //console.log(e[0].memo==null);
         $('input[type="file"]').val(null);
         $('#lstRoomTitle').text('hotel\'s room');
         //https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/6ce87bf1-d4e6-4129-b9c7-1ed036ab9f82
@@ -259,7 +274,8 @@
         $('#detailHotelPhone input').val(e[0].phone);
         $('#detailHotelMemo textarea').text(e[0].memo==null ? '' : e[0].memo);
         $('#summaryRoomTotal').text(e[1].length);
-        $('#lstRooms').empty();
+        $('#lstRoomItem').empty();
+        $('#lstRoom').show(200);
         $.each(e[1],(idx,e)=>{
           $('#lstRooms').append(e.hotelnum + ' ' + e.roomtype + ' ' + e.roomprice);
           $('#lstRooms').append('<br/>');
