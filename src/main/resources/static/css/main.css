@@ -114,11 +114,13 @@ a:hover{
     padding: 0px 30px;
     padding-left: 0px;
     line-height: 30px;
+    height: 60px;
 }
 #main_border_03{
     border-right: 2px solid #c8c8c8;
     width: 400px;
-    padding: 0px 30px;
+    padding-right: 30px;
+    padding-left: 10px;
     line-height: 30px;
 }
 #main_border_04{
@@ -463,7 +465,8 @@ a:hover{
     cursor: pointer;
     position: absolute;
     top: 20px;
-    left: 1340px;
+    left: 1358px;
+    z-index: 1;
 }
 #calendars {
     position: absolute;
@@ -471,7 +474,7 @@ a:hover{
     left: 0%;
     right: 0%;
     height: 480px;
-    width: 1385px;
+    width: 1408px;
     background-color: #ffffff;
 }
 .calendar_btn{
@@ -480,7 +483,7 @@ a:hover{
 #calendars_body{
     position: absolute;
     height: 480px;
-    width: 1385px;
+    width: 1408px;
 }
 .calendars_show{
     position: absolute;
@@ -493,4 +496,8 @@ a:hover{
 }
 .animate__fadeOut {
     animation-duration: 0.3s; /* 원하는 지속 시간으로 조정 */
+}
+#total_calendars{
+    margin-left: 25px;
+    display: inline-block;
 }

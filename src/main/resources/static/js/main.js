@@ -276,9 +276,14 @@ function numberMaxLength(e){
 function toggleCalendars() {
     var calendars_body = document.getElementById("calendars_body");
     var calendars = document.getElementById("calendars");
+    var room_options_body = document.getElementById("room_options_body");
+    var room_options = document.getElementById("room_options");
     var mainResveForm = document.getElementById("mainResveForm");
     var icon_scroll = document.getElementById("icon_scroll");
     var main_txt = document.getElementById("main_txt");
+
+    room_options.classList.remove("animate__fadeInUp");
+    room_options.classList.add("animate__fadeOutDown");
 
     if (calendars_body.classList.contains("hidden")) {
         // 달력을 나타내기 전에 숨겨진 상태일 때
@@ -287,6 +292,8 @@ function toggleCalendars() {
 
         calendars_body.classList.remove("hidden");
         calendars.style.display = "block";
+        room_options_body.classList.add("hidden");
+        room_options.style.display = "none";
 
         calendars.classList.remove("animate__fadeOutDown");
         calendars.classList.add("animate__fadeInUp");
@@ -294,6 +301,10 @@ function toggleCalendars() {
         icon_scroll.classList.add("icon_scroll_show");
         },300);
     } else {
+        room_options_body.classList.add("hidden");
+        room_options.style.display = "none";
+        room_options.classList.remove("animate__fadeOutDown");
+
         // 달력을 숨길 때
         calendars.classList.remove("animate__fadeInUp");
         calendars.classList.add("animate__fadeOutDown");

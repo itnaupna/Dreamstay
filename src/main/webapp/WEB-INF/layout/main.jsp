@@ -4,20 +4,149 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js"></script>
-<%--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>--%>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" />
 <!-- animate.css 라이브러리 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <link rel="stylesheet" href="/css/main.css" />
 
+<style>
+	#select_hotel{
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		color: #ffffff;
+		width: 280px;
+		font-weight: bold;
+		padding-left: 0;
+		display: inline-block;
+		position: relative;
+	}
+	#select_hotel option{
+		margin: 0;
+		padding: 0;
+		background-color: rgba(173,158,135,.9);
+		cursor: pointer;
+		border: 1px solid blue;
+		color: #ffffff;
+	}
+	#select_hotel:focus {
+		outline: none;
+
+	}
+
+	#room_options {
+		position: absolute;
+		top: -117%;
+		left: 0%;
+		right: 0%;
+		height: 480px;
+		width: 1408px;
+		background-color: #ffffff;
+	}
+	#room_options_body{
+		position: absolute;
+		height: 480px;
+		width: 1408px;
+	}
+	.room_option {
+		font-size: 20px;
+		width: 1408px;
+		height: 160px;
+		padding: 20px 20px 20px 20px;
+		box-sizing: border-box;
+		/*border: 1px solid #000000;*/
+		position: absolute;
+		background-color: #ffffff;
+		color:  #000000;
+		left: 0;
+		line-height: 120px;
+	}
+	#room_option01_select{
+	}
+	#room_option02_select{
+		top: 160px;
+	}
+	#room_option03_select{
+		top: 320px;
+	}
+	.roomContainer{
+		color: black;
+		list-style: none;
+	}
+	.mainRoom{
+		left:-965px;padding:90px 220px;
+		height: 480px;
+	}
+	.mainRoom .roomContainer{
+		padding:0;
+	}
+	.mainRoom .roomContainer .txtGuide{
+		position:absolute;
+		right:200px;
+		bottom:180px;
+	}
+	.mainRoom .roomContainer .txtGuide.gjb{
+		right:40px
+	}
+	.mainRoom .roomContainer .txtGuide li{
+		display:block
+	}
+	.mainRoom .roomInner{
+		position:relative;
+		padding-left:130px
+	}
+	.mainRoom .roomSel{
+		width:700px;
+		margin:30px 0 0;
+	}
+	.mainRoom .roomSel+.roomSel{
+		margin:80px 0 0;
+	}
+	.mainRoom .roomTit{
+		position:absolute;
+		left:0;
+		top:50%;
+		margin-top:-18px;
+		width:130px;
+		text-align:left;
+		font-size:24px;
+		font-weight:500;
+	}
+	.mainRoom .numPeople{
+		width: 200px;
+		border-bottom: 1px solid #000000;
+		text-align: center;
+		padding: 0 20px 10px 20px;
+	}
+	.mainRoom .numPeople+.numPeople{
+		margin-left:40px
+	}
+	#toggleop_select{
+		display: inline-block;
+	}
+	.numWrap {
+		display: flex;
+		align-items: center;
+	}
+
+	.numPeople {
+		display: flex;
+		align-items: center;
+		margin-right: 10px;
+		justify-content: space-between;
+		padding: 20px 0;
+	}
+	.btnDown,.btnUp{
+		border: none;
+	}
+</style>
 
 <div id="fullpage">
 	<div class="section bg_imgs01" >
-		<strong id="main_txt" class="animate__animated">
+		<strong id="main_txt" class="animate__animated animate__fadeIn">
 			Experience the Difference
 		</strong>
-		<form method="post" id="mainResveForm" name="mainResveForm">
+		<form method="post" id="mainResveForm" name="mainResveForm" class="animate__animated animate__fadeIn">
 			<input type="hidden" value="" id="check_in_hidden">
 			<input type="hidden" value="" id="check_out_hidden">
 			<div class="main_mini_dl">
@@ -32,8 +161,15 @@
 				<div id="main_mini_dl_02" class="main_mini_dl_sub">
 					<div id="main_border_02" class="main_mini_dl_size">
 						HOTEL
+
 						<div id="main_mini_dl_02_hotel" class="main_mini_dl_main_txt">
-							그랜드조선호텔
+							<select id="select_hotel" onclick="hideCalendars();hideroom_option();">
+								<option class="select_hotel_option" value="그랜드조선호텔" selected>그랜드 조선 호텔</option>
+								<option class="select_hotel_option" value="신라호텔" >신라호텔</option>
+								<option class="select_hotel_option" value="롯데호텔" >롯데호텔</option>
+								<option class="select_hotel_option" value="모텔" >모텔</option>
+								<option class="select_hotel_option" value="고시텔" >고시텔</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -53,8 +189,6 @@
 				</a>
 				<div id="calendars_body" class="hidden">
 					<div id="calendars" class="animate__animated">
-						<%--<input class="form-control seldate flatpickr flatpickr-input" id="seldate" type="datetime-local" placeholder="select check in">
-						<input class="form-control seldate2" id="seldate2" placeholder="select check out">--%>
 					<!--CHECK IN 달력-->
 						<a class="close-btn" onclick="hideCalendars();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a> <!-- X 표시를 a 태그로 변경 -->
 						<div class="calendar" id="calendar">
@@ -98,35 +232,112 @@
 				<!--CHECK OUT 달력끝-->
 					</div>
 				</div>
-				<div id="main_mini_dl_04" class="main_mini_dl_sub">
-					<div id="main_border_04" class="main_mini_dl_size">
-						<div id="room_select01">
-							<div class="op_select op_select_sub">
-								ROOM
+				<a  href="#" id="toggleop_select" onclick="toggleop_select();">
+					<div id="main_mini_dl_04" class="main_mini_dl_sub">
+						<div id="main_border_04" class="main_mini_dl_size">
+							<div id="room_select01">
+								<div class="op_select op_select_sub">
+									ROOM
+								</div>
+								<div class="op_select" id="main_mini_dl_04_room01">
+									<span id="room_option01">1</span>
+								</div>
 							</div>
-							<div class="op_select" id="main_mini_dl_04_room01">
-								1
+							<div id="room_select02">
+								<div class="op_select op_select_sub">
+									ADULT
+								</div>
+								<div class="op_select" id="main_mini_dl_04_room02">
+									<span id="room_option02">2</span>
+								</div>
+							</div>
+							<div id="room_select03">
+								<div class="op_select op_select_sub">
+									CHILDREN
+								</div>
+								<div class="op_select" id="main_mini_dl_04_room03">
+									<span id="room_option03">0</span>
+								</div>
 							</div>
 						</div>
-						<div id="room_select02">
-							<div class="op_select op_select_sub">
-								ADULT
-							</div>
-							<div class="op_select" id="main_mini_dl_04_room02">
-								2
-							</div>
-						</div>
-						<div id="room_select03">
-							<div class="op_select op_select_sub">
-								CHILDREN
-							</div>
-							<div class="op_select" id="main_mini_dl_04_room03">
-								0
+					</div>
+				</a>
+				<div id="room_options_body" class="hidden">
+					<div id="room_options" class="animate__animated">
+						<a class="close-btn" onclick="hideroom_option();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a>
+						<%--<div class="room_option" id="room_option01_select">나</div>
+						<div class="room_option" id="room_option02_select">도</div>
+						<div class="room_option" id="room_option03_select">보여</div>--%>
+						<div class="mainRoom clearCont opened" style="display: block;">
+							<div class="roomContainer">
+								<div class="roomWrap">
+									<div class="roomSel on">
+										<div class="roomInner">
+											<strong class="roomTit">객실1</strong>
+											<div class="numWrap" data-roomnum="1">
+												<div class="numPeople" data-target="adult">
+													<input type="hidden" name="adltCntArr" value="2">
+													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
+													<span>성인 <em>2</em></span>
+													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
+												</div>
+												<div class="numPeople" data-target="child">
+													<input type="hidden" name="chldCntArr" value="0">
+													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
+													<span>어린이 <em>0</em></span>
+													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="roomSel"> <!-- 객실 추가 시 클래스 on 추가 -->
+										<div class="roomInner">
+											<strong class="roomTit">객실2</strong>
+											<div class="numWrap" data-roomnum="2">
+												<div class="numPeople" data-target="adult">
+													<input type="hidden" name="adltCntArr" value="0">
+													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
+													<span>성인 <em>0</em></span>
+													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button> <!-- 인원 수 0 일 경우 감소 쪽에 blank 클래스 추가 -->
+												</div>
+												<div class="numPeople" data-target="child">
+													<input type="hidden" name="chldCntArr" value="0">
+													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
+													<span>어린이 <em>0</em></span>
+													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="roomSel">
+										<div class="roomInner">
+											<strong class="roomTit">객실3</strong>
+											<div class="numWrap" data-roomnum="3">
+												<div class="numPeople" data-target="adult">
+													<input type="hidden" name="adltCntArr" value="0">
+													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
+													<span>성인 <em>0</em></span>
+													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
+												</div>
+												<div class="numPeople" data-target="child">
+													<input type="hidden" name="chldCntArr" value="0">
+													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
+													<span>어린이 <em>0</em></span>
+													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- //roomWrap -->
+								<ul class="txtGuide">
+									<li>최대 3개 객실 예약 가능</li>
+									<li id="ageTxtGuide">어린이 기준 : 37개월 ~ 만 12세</li>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div id="main_mini_dl_05" class="main_mini_dl_sub">
 					<div id="main_border_05" class="main_mini_dl_size">
 						<button type="submit" id="search_box">SEARCH</button>
@@ -134,7 +345,7 @@
 				</div>
 			</div>
 		</form>
-		<div class="icon-scroll" id="icon_scroll">
+		<div class="icon-scroll animate__animated animate__fadeIn" id="icon_scroll" >
 			<a href="#secondPage"><span class="txt-scroll">SCROLL</span>
 			<img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_scroll.png" class="ico-scroll" alt="">
 			<div class="arrows-scroll">
@@ -319,8 +530,81 @@
 </div>
 
 <script>
+	function toggleop_select() {
+		var room_options_body = document.getElementById("room_options_body");
+		var room_options = document.getElementById("room_options");
+		var calendars_body = document.getElementById("calendars_body");
+		var calendars = document.getElementById("calendars");
+		var mainResveForm = document.getElementById("mainResveForm");
+		var icon_scroll = document.getElementById("icon_scroll");
+		var main_txt = document.getElementById("main_txt");
+
+		calendars.classList.remove("animate__fadeInUp");
+		calendars.classList.add("animate__fadeOutDown");
+
+		if (room_options_body.classList.contains("hidden")) {
+
+			// 방옵션을 나타내기 전에 숨겨진 상태일 때
+			main_txt.classList.add("animate__fadeOut");
+			setTimeout(function(){
+
+				room_options_body.classList.remove("hidden");
+				room_options.style.display = "block";
+				calendars_body.classList.add("hidden");
+				calendars.style.display = "none";
+
+				room_options.classList.remove("animate__fadeOutDown");
+				room_options.classList.add("animate__fadeInUp");
+				mainResveForm.classList.add("calendars_show");
+				icon_scroll.classList.add("icon_scroll_show");
+			},300);
+		} else {
+			calendars_body.classList.add("hidden");
+			calendars.style.display = "none";
+			calendars.classList.remove("animate__fadeOutDown");
+			// 방옵션을 숨길 때
+			room_options.classList.remove("animate__fadeInUp");
+			room_options.classList.add("animate__fadeOutDown");
 
 
+
+			// 애니메이션 완료 후 방옵션 숨김 처리
+			setTimeout(function() {
+				room_options_body.classList.add("hidden");
+				room_options.style.display = "none";
+				room_options.classList.remove("animate__fadeOutDown");
+				mainResveForm.classList.remove("calendars_show");
+				icon_scroll.classList.remove("icon_scroll_show");
+				main_txt.classList.remove("animate__fadeOut");
+				main_txt.classList.add("animate__fadeIn");
+			}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
+		}
+	}
+
+	// CHECK IN 및 CHECK OUT 방옵션 숨김 처리 함수
+	function hideroom_option() {
+		var room_options_body = document.getElementById("room_options_body");
+		var room_options = document.getElementById("room_options");
+		var mainResveForm = document.getElementById("mainResveForm");
+		var icon_scroll = document.getElementById("icon_scroll");
+		var main_txt = document.getElementById("main_txt");
+
+		// 방옵션을 숨길 때
+		room_options.classList.remove("animate__fadeInUp");
+		room_options.classList.add("animate__fadeOutDown");
+
+		// 애니메이션 완료 후 달력 숨김 처리
+		setTimeout(function() {
+			room_options_body.classList.add("hidden");
+			room_options.style.display = "none";
+
+			room_options.classList.remove("animate__fadeOutDown");
+			mainResveForm.classList.remove("calendars_show");
+			icon_scroll.classList.remove("icon_scroll_show");
+			main_txt.classList.remove("animate__fadeOut");
+			main_txt.classList.add("animate__fadeIn");
+		}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
+	}
 </script>
 <script type="text/javascript" src="/js/main.js"></script>
 
