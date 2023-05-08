@@ -67,7 +67,7 @@
 		top: 20px;
 		left: 1490px;
 	}
-	#calendars{
+	#calendars {
 		position: absolute;
 		top: 3%;
 		left: 10%;
@@ -121,8 +121,9 @@
 						</div>
 					</div>
 				</a>
-				<%--CHECK IN 달력--%>
+
 				<div id="calendars" class="hidden">
+				<!--CHECK IN 달력-->
 					<a class="close-btn" onclick="hideCalendars();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a> <!-- X 표시를 a 태그로 변경 -->
 					<div class="calendar animate__animated" id="calendar">
 							CHECK IN
@@ -142,8 +143,8 @@
 						</div>
 						<div class="dates"></div>
 					</div>
-					<%--CHECK IN 달력끝--%>
-					<%--CHECK OUT  달력--%>
+					<!--CHECK IN 달력끝-->
+					<!--CHECK OUT  달력-->
 					<div class="calendar animate__animated" id="calendar02">
 						CHECK OUT
 						<div class="cal_header">
@@ -163,7 +164,7 @@
 						<div class="dates02"></div>
 					</div>
 				</div>
-				<%--CHECK OUT 달력끝--%>
+				<!--CHECK OUT 달력끝-->
 				<div id="main_mini_dl_04" class="main_mini_dl_sub">
 					<div id="main_border_04" class="main_mini_dl_size">
 						<div id="room_select01">
@@ -192,6 +193,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div id="main_mini_dl_05" class="main_mini_dl_sub">
 					<div id="main_border_05" class="main_mini_dl_size">
 						<button type="submit" id="search_box">SEARCH</button>
@@ -624,6 +626,7 @@
 
 	// 체크인 및 체크아웃 달력 보이기/숨기기 함수
 	function toggleCalendars() {
+		var calendars_body = document.getElementById("calendars_body");
 		var calendars = document.getElementById("calendars");
 		var calendar = document.getElementById("calendar");
 		var calendar02 = document.getElementById("calendar02");
@@ -631,8 +634,12 @@
 		if (calendars.classList.contains("hidden")) {
 			// 달력을 나타내기 전에 숨겨진 상태일 때
 			calendars.classList.remove("hidden");
+			calendars.style.display = "block";
 			calendar.style.display = "block";
 			calendar02.style.display = "block";
+
+			calendars.classList.remove("animate__fadeOutDown");
+			calendars.classList.add("animate__fadeInUp");
 
 			calendar.classList.remove("animate__fadeOutDown");
 			calendar.classList.add("animate__fadeInUp");
@@ -641,6 +648,9 @@
 			calendar02.classList.add("animate__fadeInUp");
 		} else {
 			// 달력을 숨길 때
+
+			calendars.classList.remove("animate__fadeInUp");
+			calendars.classList.add("animate__fadeOutDown");
 
 			calendar.classList.remove("animate__fadeInUp");
 			calendar.classList.add("animate__fadeOutDown");
@@ -651,9 +661,11 @@
 			// 애니메이션 완료 후 달력 숨김 처리
 			setTimeout(function() {
 				calendars.classList.add("hidden");
+				calendars.style.display = "none";
 				calendar.style.display = "none";
 				calendar02.style.display = "none";
-				
+
+				calendars.classList.remove("animate__fadeOutDown");
 				calendar.classList.remove("animate__fadeOutDown");
 				calendar02.classList.remove("animate__fadeOutDown");
 			}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
@@ -662,11 +674,15 @@
 
 	// CHECK IN 및 CHECK OUT 달력 숨김 처리 함수
 	function hideCalendars() {
+		var calendars_body = document.getElementById("calendars_body");
 		var calendars = document.getElementById("calendars");
 		var calendar = document.getElementById("calendar");
 		var calendar02 = document.getElementById("calendar02");
 
 		// 달력을 숨길 때
+		calendars.classList.remove("animate__fadeInUp");
+		calendars.classList.add("animate__fadeOutDown");
+
 		calendar.classList.remove("animate__fadeInUp");
 		calendar.classList.add("animate__fadeOutDown");
 
@@ -676,9 +692,11 @@
 		// 애니메이션 완료 후 달력 숨김 처리
 		setTimeout(function() {
 			calendars.classList.add("hidden");
+			calendars.style.display = "none";
 			calendar.style.display = "none";
 			calendar02.style.display = "none";
 
+			calendars.classList.remove("animate__fadeOutDown");
 			calendar.classList.remove("animate__fadeOutDown");
 			calendar02.classList.remove("animate__fadeOutDown");
 		}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
