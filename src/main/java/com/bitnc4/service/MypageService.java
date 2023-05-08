@@ -41,4 +41,5 @@ public class MypageService implements MypageServiceInter{
         return mypageMapper.updateUserPass(map);
     }
 
+
 }

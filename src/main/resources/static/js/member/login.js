@@ -23,10 +23,23 @@ $("#access").click(function(){
         type: "post",
         data: {"id": login_id, "pw": login_pw, "saveid": login_saveid},
         success: function(res) {
-            if(res) {
+            if(res == 1) {
                 location.href = "/";
+            } else if(res == 0){
+                $.ajax({
+                    url: "/signup/lockcount",
+                    type: "post",
+                    data: {"id" : login_id},
+                    success : function(data) {
+                        if(data < 5) {
+                            alert("비밀번호 \"" + data + "\"회 오류 입니다. 비밀번호 5회 오류 시 계정이 잠금 됨으로 유의하시기 바랍니다.")
+                        } else {
+                            alert("계정이 잠겼습니다 계정 활성화를 통해 잠금을 해제해주세요");
+                        }
+                    }
+                })
             } else {
-                alert("아이디나 비밀번호를 확인해주세요");
+                alert("등록되지 않은 아이디입니다");
             }
         }
     });

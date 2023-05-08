@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto Sans KR:wght@400&display=swap"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair Display SC:wght@400&display=swap"/>
-<link rel="stylesheet" href="css/footer.css" type="text/css">
+<link rel="stylesheet" href="../css/footer.css" type="text/css">
 <script type="text/javascript" src="/js/footer.js"></script>
 
 
@@ -15,22 +15,22 @@
 <footer class="f_footer">
     <div class="f_top1">
         <div class="f_toplogo">
-            <a href="#"><img src="./photo/josu.png"></a>
-            <a href="#"><img src="./photo/westinjosun.png"></a>
-            <a href="#"><img src="./photo/westinjosunbusan.png"></a>
-            <a href="#"><img src="./photo/grandjosunbusan.png"></a>
-            <a href="#"><img src="./photo/grandjosunjeju.png"></a>
-            <a href="#"><img src="./photo/Lescape.png"></a>
-            <a href="#"><img src="./photo/gravity.png"></a>
-            <a href="#"><img src="./photo/fourpoints.png"></a>
-            <a href="#"><img src="./photo/fourpoints2.png"></a>
+            <a href="#"><img src="../photo/josu.png"></a>
+            <a href="#"><img src="../photo/westinjosun.png"></a>
+            <a href="#"><img src="../photo/westinjosunbusan.png"></a>
+            <a href="#"><img src="../photo/grandjosunbusan.png"></a>
+            <a href="#"><img src="../photo/grandjosunjeju.png"></a>
+            <a href="#"><img src="../photo/Lescape.png"></a>
+            <a href="#"><img src="../photo/gravity.png"></a>
+            <a href="#"><img src="../photo/fourpoints.png"></a>
+            <a href="#"><img src="../photo/fourpoints2.png"></a>
         </div>
     </div>
 
     <div class="f_top2">
         <div class="f_logo">
             <a href="#">
-                <img src="./photo/josunresort.png">
+                <img src="../photo/josunresort.png">
             </a>
         </div>
 

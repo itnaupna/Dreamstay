@@ -7,12 +7,16 @@
 <style>
     .footer2 {
         display: none;
-        position: fixed;
-        bottom: 0;
-        left: 0;
+        /*position: absolute;*/
+        /*left: 0;*/
+        /*bottom: -1000px;*/
+        /*z-index: 100;*/
+        /*width: 100%;*/
     }
 
     .header2{
+        top: 0;
+        position: fixed;
         z-index: 9999;
     }
 
@@ -24,6 +28,7 @@
         position: absolute;
         padding: 30px;
         margin-left: 500px;
+        z-index: 1;
     }
 
 </style>

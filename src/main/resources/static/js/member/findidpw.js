@@ -16,7 +16,7 @@ $("#findidpw_findpw").click(function() {
     $("#findidpw_email_code").val("");
     $("#findidpw_domain").val("");
     $("#findidpw_select_domain option:eq(0)").prop("selected", true);
-    $("#findidpw_text").text("            비밀번호를 잊으셨나요?\n            휴대폰 본인인증을 통해 고객님의 비밀번호를\n            안전하게 재설정 가능합니다.");
+    $("#findidpw_text").text("            비밀번호를 잊으셨나요?\n            이메일 인증을 통해 고객님의 비밀번호를\n            안전하게 재설정 가능합니다.\n            계정이 잠겼을경우 비밀번호 찾기를 진행하시면\n            계정이 활성화됩니다.");
 });
 
 // 이메일 select box 이벤트

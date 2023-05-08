@@ -32,6 +32,13 @@ public interface MemberMapper {
 
     // 비밀번호 변경
     public void changePassword(Map<String, String> changepw);
+    
+    // 비밀번호 틀린 횟수 카운팅
+    public void accountLockCount(String id);
 
+    // 틀린횟수 출력
+    public int showLockCount(String id);
 
+    // 로그인 성공시 틀린 횟수 리셋
+    public void resetLockCount(String id);
 }

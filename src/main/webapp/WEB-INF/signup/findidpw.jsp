@@ -6,7 +6,7 @@
 <div>
     <div>
         <span id="findidpw_findid">아이디 찾기</span>
-        <span id="findidpw_findpw">비밀번호 찾기</span>
+        <span id="findidpw_findpw">비밀번호 찾기,계정활성화</span>
     </div>
     <div>
         <pre id="findidpw_text">
