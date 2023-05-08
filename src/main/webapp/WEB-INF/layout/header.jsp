@@ -199,7 +199,7 @@
                             <a href="/logout" id="header_logout">로그아웃</a>
                         </li>
                         <li>
-                            <a href="/mypage" id="header_mypage">마이페이지</a>
+                            <a href="/mypage/" id="header_mypage">마이페이지</a>
                         </li>
                     </c:if>
                     <c:if test="${userid == null}">
