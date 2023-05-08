@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js"></script>
+<%--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>--%>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" />
 <!-- animate.css 라이브러리 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -51,6 +53,8 @@
 				</a>
 				<div id="calendars_body" class="hidden">
 					<div id="calendars" class="animate__animated">
+						<%--<input class="form-control seldate flatpickr flatpickr-input" id="seldate" type="datetime-local" placeholder="select check in">
+						<input class="form-control seldate2" id="seldate2" placeholder="select check out">--%>
 					<!--CHECK IN 달력-->
 						<a class="close-btn" onclick="hideCalendars();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a> <!-- X 표시를 a 태그로 변경 -->
 						<div class="calendar" id="calendar">
@@ -313,5 +317,10 @@
 	</div>
 
 </div>
+
+<script>
+
+
+</script>
 <script type="text/javascript" src="/js/main.js"></script>
 
