@@ -2,6 +2,7 @@ package com.bitnc4.controller;
 
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.service.MemberService;
+import com.sun.tools.jconsole.JConsoleContext;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -112,8 +113,9 @@ public class MemberController {
     // 로그아웃클릭 시 세션 지우고 홈으로
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("userid");
-        return "/";
+       session.removeAttribute("userid");
+
+        return "redirect:/";
     }
     
     // 아이디 비밀번호찾기로 이동

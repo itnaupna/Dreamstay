@@ -35,5 +35,4 @@ public interface MemberServiceInter {
     public MemberDto searchInfoToEmail(String email);
 
 
-
 }

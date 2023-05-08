@@ -5,17 +5,20 @@ $('#fullpage').fullpage({
     scrollingSpeed: 1000,
     css3:false,
     afterLoad: function(anchorLink, index) {
-        if (anchorLink === 'firstPage' || anchorLink === '4thpage') {
+        if (anchorLink === 'firstPage' || anchorLink === '4thpage' ) {
             $('.header').css({
                 'background': 'transparent',
-                'color':'#fff',
+                'color':'#fff'
             });
-        } else {
+
+        }else{
+
             $('.header').css({
                 'background': '#fff',
                 'color':'#000'
             });
 
         }
+
     }
 });

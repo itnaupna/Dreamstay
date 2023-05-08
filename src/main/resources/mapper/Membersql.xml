@@ -29,4 +29,5 @@
     <select id="searchInfoToEmail" parameterType="String" resultType="MemberDto">
         select * from member where email = #{email}
     </select>
+
 </mapper>

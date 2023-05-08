@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<style>
+
+    .ss{
+        position: absolute;
+        top: 200px;
+    }
+</style>
+
 <link href="css/signup.css" rel="stylesheet" type="text/css"/>
 
 <!-- 다음 맵 주소 입력 코드 Key -->
@@ -25,7 +33,7 @@
 
 <%-- 나머지 데이터 입력 폼 --%>
 <form method="post" action="joinmember">
-    <table>
+    <table class="ss">
         <caption align="top"><b>회원가입</b></caption>
 
         <tr>

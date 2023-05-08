@@ -109,4 +109,5 @@ public class MemberService implements MemberServiceInter {
         MemberDto dto = memberMapper.searchInfoToEmail(email);
         return dto;
     }
+
 }
