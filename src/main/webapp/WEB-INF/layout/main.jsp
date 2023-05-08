@@ -20,7 +20,7 @@
 		position: absolute;
 		background-color: #ffffff;
 		color:  #000000;
-		left: 18%;
+		left: 15%;
 	}
 	#calendar02{
 		margin-left: 600px;
@@ -65,18 +65,33 @@
 		cursor: pointer;
 		position: absolute;
 		top: 20px;
-		left: 1490px;
+		left: 1340px;
 	}
 	#calendars {
 		position: absolute;
-		top: 3%;
-		left: 10%;
-		right: 10%;
+		top: -117%;
+		left: 0%;
+		right: 0%;
 		height: 480px;
+		width: 1385px;
 		background-color: #ffffff;
 	}
 	.calendar_btn{
 		cursor: pointer;
+	}
+	#calendars_body{
+		position: absolute;
+		height: 480px;
+		width: 1385px;
+	}
+	.calendars_show{
+		position: absolute;
+		top: 70%;
+		left: 15%;
+	}
+	.icon_scroll_show{
+		position: absolute;
+		top: 34.3%;
 	}
 </style>
 
@@ -84,7 +99,7 @@
 
 <div id="fullpage">
 	<div class="section bg_imgs01" >
-		<strong id="main_txt">
+		<strong id="main_txt" class="animate__animated">
 			Experience the Difference
 		</strong>
 		<form method="post" id="mainResveForm" name="mainResveForm">
@@ -121,50 +136,51 @@
 						</div>
 					</div>
 				</a>
-
-				<div id="calendars" class="hidden">
-				<!--CHECK IN 달력-->
-					<a class="close-btn" onclick="hideCalendars();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a> <!-- X 표시를 a 태그로 변경 -->
-					<div class="calendar animate__animated" id="calendar">
-							CHECK IN
-						<div class="cal_header">
-							<a class="calendar_btn" onclick="prevCal();">&lt;</a>
-							<div class="title"><span class="year"></span><span class="month"></span></div>
-							<a class="calendar_btn" onclick="nextCal();" >&gt;</a>
+				<div id="calendars_body" class="hidden">
+					<div id="calendars" class="animate__animated">
+					<!--CHECK IN 달력-->
+						<a class="close-btn" onclick="hideCalendars();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a> <!-- X 표시를 a 태그로 변경 -->
+						<div class="calendar" id="calendar">
+								CHECK IN
+							<div class="cal_header">
+								<a class="calendar_btn" onclick="prevCal();">&lt;</a>
+								<div class="title"><span class="year"></span><span class="month"></span></div>
+								<a class="calendar_btn" onclick="nextCal();" >&gt;</a>
+							</div>
+							<div class="day">
+								<div>S</div>
+								<div>M</div>
+								<div>T</div>
+								<div>W</div>
+								<div>T</div>
+								<div>F</div>
+								<div>S</div>
+							</div>
+							<div class="dates"></div>
 						</div>
-						<div class="day">
-							<div>S</div>
-							<div>M</div>
-							<div>T</div>
-							<div>W</div>
-							<div>T</div>
-							<div>F</div>
-							<div>S</div>
+						<!--CHECK IN 달력끝-->
+						<!--CHECK OUT  달력-->
+						<div class="calendar" id="calendar02">
+							CHECK OUT
+							<div class="cal_header">
+								<a class="calendar_btn" onclick="prevCal02();">&lt;</a>
+								<div class="title"><span class="year02"></span><span class="month02"></span></div>
+								<a class="calendar_btn" onclick="nextCal02();" >&gt;</a>
+							</div>
+							<div class="day">
+								<div>S</div>
+								<div>M</div>
+								<div>T</div>
+								<div>W</div>
+								<div>T</div>
+								<div>F</div>
+								<div>S</div>
+							</div>
+							<div class="dates02"></div>
 						</div>
-						<div class="dates"></div>
-					</div>
-					<!--CHECK IN 달력끝-->
-					<!--CHECK OUT  달력-->
-					<div class="calendar animate__animated" id="calendar02">
-						CHECK OUT
-						<div class="cal_header">
-							<a class="calendar_btn" onclick="prevCal02();">&lt;</a>
-							<div class="title"><span class="year02"></span><span class="month02"></span></div>
-							<a class="calendar_btn" onclick="nextCal02();" >&gt;</a>
-						</div>
-						<div class="day">
-							<div>S</div>
-							<div>M</div>
-							<div>T</div>
-							<div>W</div>
-							<div>T</div>
-							<div>F</div>
-							<div>S</div>
-						</div>
-						<div class="dates02"></div>
+				<!--CHECK OUT 달력끝-->
 					</div>
 				</div>
-				<!--CHECK OUT 달력끝-->
 				<div id="main_mini_dl_04" class="main_mini_dl_sub">
 					<div id="main_border_04" class="main_mini_dl_size">
 						<div id="room_select01">
@@ -201,7 +217,7 @@
 				</div>
 			</div>
 		</form>
-		<div class="icon-scroll">
+		<div class="icon-scroll" id="icon_scroll">
 			<a href="#secondPage"><span class="txt-scroll">SCROLL</span>
 			<img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_scroll.png" class="ico-scroll" alt="">
 			<div class="arrows-scroll">
@@ -628,46 +644,36 @@
 	function toggleCalendars() {
 		var calendars_body = document.getElementById("calendars_body");
 		var calendars = document.getElementById("calendars");
-		var calendar = document.getElementById("calendar");
-		var calendar02 = document.getElementById("calendar02");
+		var mainResveForm = document.getElementById("mainResveForm");
+		var icon_scroll = document.getElementById("icon_scroll");
+		var main_txt = document.getElementById("main_txt");
 
-		if (calendars.classList.contains("hidden")) {
+		if (calendars_body.classList.contains("hidden")) {
 			// 달력을 나타내기 전에 숨겨진 상태일 때
-			calendars.classList.remove("hidden");
+			calendars_body.classList.remove("hidden");
 			calendars.style.display = "block";
-			calendar.style.display = "block";
-			calendar02.style.display = "block";
 
 			calendars.classList.remove("animate__fadeOutDown");
 			calendars.classList.add("animate__fadeInUp");
-
-			calendar.classList.remove("animate__fadeOutDown");
-			calendar.classList.add("animate__fadeInUp");
-
-			calendar02.classList.remove("animate__fadeOutDown");
-			calendar02.classList.add("animate__fadeInUp");
+			mainResveForm.classList.add("calendars_show");
+			icon_scroll.classList.add("icon_scroll_show");
+			main_txt.classList.add("animate__fadeOut");
 		} else {
 			// 달력을 숨길 때
-
 			calendars.classList.remove("animate__fadeInUp");
 			calendars.classList.add("animate__fadeOutDown");
 
-			calendar.classList.remove("animate__fadeInUp");
-			calendar.classList.add("animate__fadeOutDown");
 
-			calendar02.classList.remove("animate__fadeInUp");
-			calendar02.classList.add("animate__fadeOutDown");
 
 			// 애니메이션 완료 후 달력 숨김 처리
 			setTimeout(function() {
-				calendars.classList.add("hidden");
+				calendars_body.classList.add("hidden");
 				calendars.style.display = "none";
-				calendar.style.display = "none";
-				calendar02.style.display = "none";
-
 				calendars.classList.remove("animate__fadeOutDown");
-				calendar.classList.remove("animate__fadeOutDown");
-				calendar02.classList.remove("animate__fadeOutDown");
+				mainResveForm.classList.remove("calendars_show");
+				icon_scroll.classList.remove("icon_scroll_show");
+				main_txt.classList.remove("animate__fadeOut");
+				main_txt.classList.add("animate__fadeIn");
 			}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
 		}
 	}
@@ -676,29 +682,24 @@
 	function hideCalendars() {
 		var calendars_body = document.getElementById("calendars_body");
 		var calendars = document.getElementById("calendars");
-		var calendar = document.getElementById("calendar");
-		var calendar02 = document.getElementById("calendar02");
+		var mainResveForm = document.getElementById("mainResveForm");
+		var icon_scroll = document.getElementById("icon_scroll");
+		var main_txt = document.getElementById("main_txt");
 
 		// 달력을 숨길 때
 		calendars.classList.remove("animate__fadeInUp");
 		calendars.classList.add("animate__fadeOutDown");
 
-		calendar.classList.remove("animate__fadeInUp");
-		calendar.classList.add("animate__fadeOutDown");
-
-		calendar02.classList.remove("animate__fadeInUp");
-		calendar02.classList.add("animate__fadeOutDown");
-
 		// 애니메이션 완료 후 달력 숨김 처리
 		setTimeout(function() {
-			calendars.classList.add("hidden");
+			calendars_body.classList.add("hidden");
 			calendars.style.display = "none";
-			calendar.style.display = "none";
-			calendar02.style.display = "none";
 
 			calendars.classList.remove("animate__fadeOutDown");
-			calendar.classList.remove("animate__fadeOutDown");
-			calendar02.classList.remove("animate__fadeOutDown");
+			mainResveForm.classList.remove("calendars_show");
+			icon_scroll.classList.remove("icon_scroll_show");
+			main_txt.classList.remove("animate__fadeOut");
+			main_txt.classList.add("animate__fadeIn");
 		}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
 	}
 </script>
