@@ -1,20 +1,18 @@
 //btn 메뉴 dropdown 접고 펴기 이벤트, footer랑 이벤트 동일해서 주석처리하고 footer랑 같이 사용! (출동시 수정)
-// $(function(){
-//
-//     var dropdownBtn = document.querySelector('.resvBtn .btn_opener');
-//     var dropdownList = document.querySelector('.resvBtn .dropdown_list');
-//
-//     dropdownBtn.addEventListener('click', function() {
-//     dropdownList.classList.toggle('open');
-// });
-//
-// //     dropdownList.addEventListener('mouseleave', function() {
-// //     dropdownList.classList.remove('open');
-// // });
-//
-//
-//
-// });
+ $(function(){
+
+    var dropdownBtn = document.querySelector('.resvBtn .btn_opener');
+    var dropdownList = document.querySelector('.resvBtn .dropdown_list');
+
+    dropdownBtn.addEventListener('click', function() {
+    dropdownList.classList.toggle('open');
+ });
+
+   dropdownList.addEventListener('mouseleave', function() {
+   dropdownList.classList.remove('open');
+ });
+
+ });
 
     // btnMenu 접고 펴기
     $(function(){
