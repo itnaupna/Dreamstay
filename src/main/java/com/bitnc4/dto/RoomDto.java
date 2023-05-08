@@ -12,4 +12,6 @@ public class RoomDto {
     int roomprice;
     String roommemo;
     String roomdetail;
+    int islock;
+
 }

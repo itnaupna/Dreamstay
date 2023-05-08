@@ -2,6 +2,7 @@ package com.bitnc4.controller;
 
 
 import com.bitnc4.dto.HotelDto;
+import com.bitnc4.dto.RoomDto;
 import com.bitnc4.service.AdminHnRService;
 import lombok.extern.slf4j.Slf4j;
 import naver.cloud.NcpObjectStorageService;
@@ -57,21 +58,34 @@ public class AdminController {
 
     @PostMapping("/hotel/update")
     @ResponseBody
-    public boolean updateHotel(HotelDto data, MultipartFile file){
-        System.out.println(file.getOriginalFilename().equals(""));
-        if(!file.getOriginalFilename().equals("")) {
-            ncp.deleteFile(bucketName,
-                    "hotel",
-                    adminHnRService.getHotelByHotelNum(data.getNum()).getPhoto()
-            );
+    public boolean updateHotel(HotelDto data, MultipartFile file) {
+
+        if (!file.getOriginalFilename().equals("")) {
+            if(data.getNum() != 0)
+                ncp.deleteFile(bucketName,
+                        "hotel",
+                        adminHnRService.getHotelByHotelNum(data.getNum()).getPhoto()
+                );
             data.setPhoto(ncp.uploadFile(bucketName, "hotel", file));
         }
-//        else{
-//            data.setPhoto(adminHnRService.getHotelByHotelNum(data.getNum()).getPhoto());
-//        }
-        return adminHnRService.updateHotelDetail(data);
+        return data.getNum()==0 ? adminHnRService.insertHotel(data) : adminHnRService.updateHotelDetail(data);
     }
+
+    @GetMapping("/hotel/getroomtype/{hotelnum}")
+    @ResponseBody
+    public List<String> getRoomTypesOfHotel(@PathVariable int hotelnum){
+        System.out.println(hotelnum);
+        return adminHnRService.getRoomTypesOfHotel(hotelnum);
+    }
+
+    @PostMapping("/hotel/uploadroom/{hotelnum}")
+    @ResponseBody
+    public boolean uploadroom(RoomDto roomDto){
+
+
+        return adminHnRService.insertRoom(roomDto);
+    }
+
 
 }
 
-//TODO : Make CRUD for Hotel, room

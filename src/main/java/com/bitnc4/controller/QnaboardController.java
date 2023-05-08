@@ -62,7 +62,6 @@ public class QnaboardController {
 
       QnaBoardDto qnaBoardDto = qnaBoardService.qnaList(writer);
         model.addAttribute("qnaBoardDto", qnaBoardDto);
-
          return "/main/qnaboard/qnalist";
      }
 

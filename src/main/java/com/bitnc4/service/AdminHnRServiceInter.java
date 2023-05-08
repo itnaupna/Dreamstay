@@ -10,5 +10,7 @@ public interface AdminHnRServiceInter {
     public List<RoomDto> getRoomsByHotelNum(int hotelnum);
     public HotelDto getHotelByHotelNum(int hotelnum);
     public boolean updateHotelDetail(HotelDto dto);
-
+    public boolean insertHotel(HotelDto dto);
+    public List<String> getRoomTypesOfHotel(int hotelnum);
+    public boolean insertRoom(RoomDto dto);
 }

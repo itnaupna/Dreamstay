@@ -5,7 +5,7 @@
         select * from hotel;
     </select>
     <select id="getRoomsByHotelNum" resultType="RoomDto" parameterType="int">
-        select * from room where hotelnum=#{hotelnum}
+        select * from room where hotelnum=#{hotelnum} order by roomtype, num
     </select>
     <select id="getHotelByHotelNum" resultType="HotelDto" parameterType="int">
         select * from hotel where num=#{hotelnum}
@@ -18,4 +18,13 @@
             update hotel set name=#{name}, addr=#{addr}, phone=#{phone}, memo=#{memo} where num=#{num}
         </if>
     </update>
+    <insert id="insertHotel" parameterType="HotelDto">
+        insert into hotel (name,addr,phone,photo,memo) values (#{name},#{addr},#{phone},#{photo},#{memo})
+    </insert>
+    <select id="getRoomTypesOfHotel" parameterType="int" resultType="java.lang.String">
+        select roomtype from room where hotelnum=#{hotelnum} group by roomtype;
+    </select>
+    <insert id="insertRoom" parameterType="RoomDto">
+        insert into room (hotelnum,roomtype,roomprice,roommemo,roomdetail,islock) values (#{hotelnum},#{roomtype},#{roomprice},#{roommemo},#{roomdetail},#{islock});
+    </insert>
 </mapper>
