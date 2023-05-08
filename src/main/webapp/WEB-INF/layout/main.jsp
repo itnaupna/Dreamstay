@@ -139,6 +139,24 @@
 	.btnDown,.btnUp{
 		border: none;
 	}
+	#btnDown_01{
+		border: none;
+	}
+	#room_cnt,#adult_cnt,#children_cnt{
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		color: #ffffff;
+		width: 70px;
+		font-weight: bold;
+		padding-left: 0;
+		display: inline-block;
+		position: relative;
+		text-align: center;
+	}
+	#room_cnt:focus, #adult_cnt:focus, #children_cnt:focus{
+		outline: none;
+	}
 </style>
 
 <div id="fullpage">
@@ -240,7 +258,7 @@
 									ROOM
 								</div>
 								<div class="op_select" id="main_mini_dl_04_room01">
-									<span id="room_option01">1</span>
+									<span id="room_option01"><input id="room_cnt" value="1" type="text" readonly></span>
 								</div>
 							</div>
 							<div id="room_select02">
@@ -248,7 +266,7 @@
 									ADULT
 								</div>
 								<div class="op_select" id="main_mini_dl_04_room02">
-									<span id="room_option02">2</span>
+									<span id="room_option02"><input id="adult_cnt" value="2" type="text" readonly></span>
 								</div>
 							</div>
 							<div id="room_select03">
@@ -256,7 +274,7 @@
 									CHILDREN
 								</div>
 								<div class="op_select" id="main_mini_dl_04_room03">
-									<span id="room_option03">0</span>
+									<span id="room_option03"><input id="children_cnt" value="0" type="text" readonly></span>
 								</div>
 							</div>
 						</div>
@@ -265,9 +283,6 @@
 				<div id="room_options_body" class="hidden">
 					<div id="room_options" class="animate__animated">
 						<a class="close-btn" onclick="hideroom_option();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a>
-						<%--<div class="room_option" id="room_option01_select">나</div>
-						<div class="room_option" id="room_option02_select">도</div>
-						<div class="room_option" id="room_option03_select">보여</div>--%>
 						<div class="mainRoom clearCont opened" style="display: block;">
 							<div class="roomContainer">
 								<div class="roomWrap">
@@ -276,13 +291,13 @@
 											<strong class="roomTit">객실1</strong>
 											<div class="numWrap" data-roomnum="1">
 												<div class="numPeople" data-target="adult">
-													<input type="hidden" name="adltCntArr" value="2">
-													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
+													<input type="hidden" name="adltCntArr" value="2" id="adltCntArr01">
+													<button type="button" id="btnDown_01"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
 													<span>성인 <em>2</em></span>
 													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
 												</div>
 												<div class="numPeople" data-target="child">
-													<input type="hidden" name="chldCntArr" value="0">
+													<input type="hidden" name="chldCntArr" value="0" id="chldCntArr01">
 													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
 													<span>어린이 <em>0</em></span>
 													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
@@ -295,13 +310,13 @@
 											<strong class="roomTit">객실2</strong>
 											<div class="numWrap" data-roomnum="2">
 												<div class="numPeople" data-target="adult">
-													<input type="hidden" name="adltCntArr" value="0">
+													<input type="hidden" name="adltCntArr" value="0" id="adltCntArr02">
 													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
 													<span>성인 <em>0</em></span>
 													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button> <!-- 인원 수 0 일 경우 감소 쪽에 blank 클래스 추가 -->
 												</div>
 												<div class="numPeople" data-target="child">
-													<input type="hidden" name="chldCntArr" value="0">
+													<input type="hidden" name="chldCntArr" value="0" id="chldCntArr02">
 													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
 													<span>어린이 <em>0</em></span>
 													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
@@ -314,13 +329,13 @@
 											<strong class="roomTit">객실3</strong>
 											<div class="numWrap" data-roomnum="3">
 												<div class="numPeople" data-target="adult">
-													<input type="hidden" name="adltCntArr" value="0">
+													<input type="hidden" name="adltCntArr" value="0" id="adltCntArr03">
 													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
 													<span>성인 <em>0</em></span>
 													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
 												</div>
 												<div class="numPeople" data-target="child">
-													<input type="hidden" name="chldCntArr" value="0">
+													<input type="hidden" name="chldCntArr" value="0" id="chldCntArr03">
 													<button type="button" class="btnDown"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_down.png"></button>
 													<span>어린이 <em>0</em></span>
 													<button type="button" class="btnUp"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_up.png"></button>
@@ -605,6 +620,110 @@
 			main_txt.classList.add("animate__fadeIn");
 		}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
 	}
+
+
+	//룸 옵션 자바스크립트
+	$(".btnDown").click(function (){
+		var numPeople = $(this).parent().children("input").val();
+		$(this).parent().children("input").val(parseInt(numPeople)-1);
+		var numPeople_m = $(this).parent().children("input").val();
+		if(numPeople_m < 0){
+			alert("0보다 작을 수 없습니다.");
+			$(this).parent().children("input").val(0);
+			$(this).parent().children("span").children("em").text(0);
+		}else {
+			$(this).parent().children("span").children("em").text(numPeople_m);
+		}
+		var child_num =  $(this).parent().next().find("input").val();
+		if(child_num > 0 && numPeople_m <= 0){
+			$(this).parent().next().find("input").val(0);
+			$(this).parent().next().find("span").children("em").text(0);
+		}
+
+		var adltCntArr01 = $("#adltCntArr01").val();
+		var adltCntArr02 = $("#adltCntArr02").val();
+		var adltCntArr03 = $("#adltCntArr03").val();
+		var chldCntArr01 = $("#chldCntArr01").val();
+		var chldCntArr02 = $("#chldCntArr02").val();
+		var chldCntArr03 = $("#chldCntArr03").val();
+
+		if(adltCntArr02 > 0 && adltCntArr03 > 0){
+			$("#room_cnt").val(3);
+		} else if(adltCntArr02 > 0 || adltCntArr03 > 0){
+			$("#room_cnt").val(2);
+		} else{
+			$("#room_cnt").val(1);
+		}
+
+		$("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
+		$("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
+
+	});
+	$("#btnDown_01").click(function (){
+		var numPeople = $(this).parent().children("input").val();
+		$(this).parent().children("input").val(parseInt(numPeople)-1);
+		var numPeople_m = $(this).parent().children("input").val();
+		if(numPeople_m < 1){
+			alert("최소 한명은 필요합니다.");
+			$(this).parent().children("input").val(1);
+			$(this).parent().children("span").children("em").text(1);
+		}else {
+			$(this).parent().children("span").children("em").text(numPeople_m);
+		}
+		var adltCntArr01 = $("#adltCntArr01").val();
+		var adltCntArr02 = $("#adltCntArr02").val();
+		var adltCntArr03 = $("#adltCntArr03").val();
+		var chldCntArr01 = $("#chldCntArr01").val();
+		var chldCntArr02 = $("#chldCntArr02").val();
+		var chldCntArr03 = $("#chldCntArr03").val();
+
+		if(adltCntArr02 > 0 && adltCntArr03 > 0){
+			$("#room_cnt").val(3);
+		} else if(adltCntArr02 > 0 || adltCntArr03 > 0){
+			$("#room_cnt").val(2);
+		} else{
+			$("#room_cnt").val(1);
+		}
+
+		$("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
+		$("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
+	});
+	$(".btnUp").click(function (){
+		var numPeople = $(this).parent().children("input").val();
+		$(this).parent().children("input").val(parseInt(numPeople)+1);
+		var numPeople_s = $(this).parent().children("input").val();
+		if(numPeople_s > 4){
+			alert("최대 4명이 이용 가능합니다.");
+			$(this).parent().children("input").val(4);
+			$(this).parent().children("span").children("em").text(4);
+		}else {
+			$(this).parent().children("span").children("em").text(numPeople_s);
+		}
+
+		var adult_num =  $(this).parent().prev().find("input").val();
+		if(adult_num == 0){
+			alert("성인 없이 어린이만 예약 할 수 없습니다.");
+			$(this).parent().children("input").val(0);
+			$(this).parent().children("span").children("em").text(0);
+		}
+		var adltCntArr01 = $("#adltCntArr01").val();
+		var adltCntArr02 = $("#adltCntArr02").val();
+		var adltCntArr03 = $("#adltCntArr03").val();
+		var chldCntArr01 = $("#chldCntArr01").val();
+		var chldCntArr02 = $("#chldCntArr02").val();
+		var chldCntArr03 = $("#chldCntArr03").val();
+
+		if(adltCntArr02 > 0 && adltCntArr03 > 0){
+			$("#room_cnt").val(3);
+		} else if(adltCntArr02 > 0 || adltCntArr03 > 0){
+			$("#room_cnt").val(2);
+		} else{
+			$("#room_cnt").val(1);
+		}
+
+		$("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
+		$("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
+	});
 </script>
 <script type="text/javascript" src="/js/main.js"></script>
 
