@@ -12,16 +12,17 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
 <style>
 
+
     /* 메인 틀 */
     .L_main {
         position: absolute;
-        border: 2px solid pink;
+        /*border: 2px solid pink;*/
         /*display: flex;*/
         width: 1400px;
         height: 800px;
         padding: 1rem;
         /*top: 200px;*/
-        top: 50%;
+        top: 60%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
@@ -57,17 +58,18 @@
     .L_main .L_title .L_Login {
         /*border: 2px solid aqua;*/
         display: flex;
-        width: 1350px;
+        width: 1400px;
         height: 160px;
         justify-content: center;
         align-items: center;
+        font-size: 20px;
     }
 
     /* 로그인 타이틀 1 */
     .L_main .L_title .L_Login .L_Logintitle1 {
         text-align: center;
         text-transform: uppercase;
-        width: 600px;
+        width: 700px;
         height: 60px;
         border-left: 1px solid black;
         border-top: 1px solid black;
@@ -79,7 +81,7 @@
         text-align: center;
         letter-spacing: -1px;
         text-transform: uppercase;
-        width: 600px;
+        width: 700px;
         height: 60px;
         border-right: 1px solid #ccc;
         border-top: 1px solid #ccc;
@@ -88,8 +90,8 @@
 
     .L_main .L_title .L_Logintext {
         display: flex;
-        border: 3px dotted black;
-        height: 520px;
+        /*border: 3px dotted black;*/
+        height: 450px;
         /*justify-content: center;*/
         /*align-items: center;*/
     }
@@ -153,6 +155,29 @@
         border: 1px solid red;
         padding-left: 10px;
     }
+
+    .L_bttext ul{
+        color: #888;
+    }
+
+    .L_main .L_title .L_Logintext .btn-lg:hover{
+        background-color: white;
+        color: black;
+    }
+
+    input[type=checkbox]{
+        border-radius: 50%;
+        border: 1px solid #999;
+        appearance: none;
+        cursor: pointer;
+        width: 1rem;
+        height: 1rem;
+    }
+
+    input[type=checkbox]:checked{
+        background: #000;
+        border: none;
+    }
 </style>
 
 
@@ -186,7 +211,7 @@
                     <input type="checkbox" name="saveid" id="login_saveid">아이디 저장
                 </label>
 
-                <button type="button" id="access">로그인</button>
+                <button type="button" id="access" class="btn-lg">로그인</button>
                 <br>
                 <span>CLUB JOSUN 회원이 되시면 더 많은 혜택이 있습니다.</span>
                 <div class="L_Link">
@@ -207,27 +232,31 @@ navigate_next
             </div>
         </div>
 
+        <div>
+            <hr>
+            <div class="L_bttext">
+                <ul>
+                    <li>
+                        이용자 비밀번호 5회 연속 오류시 계정이 잠기게 됩니다
+                    </li>
+                    <li>
+                        오프라인 회원의 경우 온라인 회원가입 후 계정연동 가능합니다.
+                    </li>
+                    <li>
+                        유선 혹은 여행사를 통한 예약은 온라인 조회가 불가하오니 예약실로 문의 부탁드립니다.
+                    </li>
+                    <li>
+                        메리어트 호텔에서 예약하신 경우, 메리어트 사이트에서만 예약 확인이 가능합니다.
+                    </li>
+                    <li>
+                        카카오페이 간편가입 및 신세계 면세점 동시가입 회원은 '계정활성화' 버튼을 통해 서비스 이용이 가능합니다.
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
 </div>
-<%--<div>--%>
-<%--    <ul>--%>
-<%--        <li>--%>
-<%--            이용자 비밀번호 5회 연속 오류시 계정이 잠기게 됩니다--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            오프라인 회원의 경우 온라인 회원가입 후 계정연동 가능합니다.--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            유선 혹은 여행사를 통한 예약은 온라인 조회가 불가하오니 예약실로 문의 부탁드립니다.--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            메리어트 호텔에서 예약하신 경우, 메리어트 사이트에서만 예약 확인이 가능합니다.--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            카카오페이 간편가입 및 신세계 면세점 동시가입 회원은 '계정활성화' 버튼을 통해 서비스 이용이 가능합니다.--%>
-<%--        </li>--%>
-<%--    </ul>--%>
-<%--</div>--%>
+
 
 <script type="text/javascript" src="/js/member/login.js"></script>

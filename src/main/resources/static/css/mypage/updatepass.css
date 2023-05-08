@@ -1,0 +1,86 @@
+.up_pass .ps_title p {
+    font-size: 30px;
+}
+
+.up_pass .ps_pass {
+    /*border: 1px solid pink;*/
+    width: 700px;
+    height: 100px;
+    margin-top: 50px;
+    font-weight: 500;
+}
+
+/* 새로운 비밀번호 입력 틀 */
+.up_pass .ps_passck {
+    /*border: 1px solid brown;*/
+    width: 920px;
+    height: 100px;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    margin-top: 30px;
+}
+
+/* new ps , con ps 간격*/
+.up_pass .con_pass{
+    margin-left: 20px;
+}
+
+/* 글씨 굵기 */
+.up_pass .ps_passck p {
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* input password 디자인 */
+.up_pass input[type=password] {
+    width: 400px;
+    height: 40px;
+    flex: 1;
+    border: none;
+    border-bottom: solid #aaaaaa 1px;
+    background: none;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    position: relative;
+    font-size: 15px;
+}
+
+/* input 디자인 */
+input:focus {
+    outline: none;
+}
+
+.up_pass .ps_pass span {
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+.up_pass .ps_pass span {
+    color: #aaaaaa;
+}
+
+.up_pass .ps_bottom {
+    margin-top: 15px;
+}
+
+.up_pass .ps_sub {
+    color: #aaaaaa;
+}
+
+.up_pass .upbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 버튼 디자인 */
+.up_pass .upbtn .updatebtn {
+    font-size: 15px;
+    border-color: #000000;
+    border-width: thin;
+    width: 200px;
+    background-color: black;
+    height: 60px;
+    color: white;
+}

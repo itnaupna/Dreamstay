@@ -1,6 +1,6 @@
 package com.bitnc4.dreamstay;
 
-import com.bitnc4.DreamstayApplication;
+import com.bitnc4.dreamstay.DreamstayApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
