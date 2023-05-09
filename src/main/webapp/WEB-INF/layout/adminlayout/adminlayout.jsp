@@ -23,6 +23,7 @@
 			width:80px;
 			background-color:#f0f0f0;
 			border-right:1px solid #e0e0e0;
+			position:relative;
 		}
 		.top{
 			/*height:7.5vh;*/
@@ -39,7 +40,12 @@
 		}
 
 	</style>
-
+	<script>
+		function SetAdminTitle(title){
+			document.title = 'DreamStay ' + title;
+			$($('section.top>span')[0]).text(title);
+		}
+	</script>
 
 </head>
 <body>
@@ -56,5 +62,6 @@
 		</section>
 	</div>
 </div>
+
 </body>
 </html>

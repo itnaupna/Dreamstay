@@ -41,7 +41,7 @@
 
 </style>
 <script>
-    $('section.top').text('DreamStay 채팅문의');
+    SetAdminTitle('채팅관리페이지');
     $('#chatList').on('click','.chatlistWrapper',(e)=>{
        $('#chatView').text($(e.target).text());
     });
