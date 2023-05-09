@@ -4,6 +4,7 @@ $("#login_pw").on("keyup", function() {
     if (pw === "") {
         $("#ch_pw").prop("readonly", true);
         $("#ch_pw1").prop("readonly", true);
+        $("#ps_passck").hide();
     } else {
         $.ajax({
             url: "/mypage/chkidpw",
@@ -15,11 +16,13 @@ $("#login_pw").on("keyup", function() {
                     $("#nowpwch").css("color", "green");
                     $("#ch_pw").prop("readonly", false);
                     $("#ch_pw1").prop("readonly", false);
+                    $("#ps_passck").show(300);
                 } else {
                     $("#nowpwch").text("현재 비밀번호가 일치하지 않습니다");
                     $("#nowpwch").css("color", "red");
                     $("#ch_pw").prop("readonly", true);
                     $("#ch_pw1").prop("readonly", true);
+                    $("#ps_passck").hide();
                 }
             }
         });

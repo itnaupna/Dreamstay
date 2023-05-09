@@ -1,5 +1,8 @@
 package com.bitnc4.controller;
 
+import com.bitnc4.dto.HotelDto;
+import com.bitnc4.dto.MemberDto;
+import com.bitnc4.service.AdminHnRService;
 import com.bitnc4.service.MypageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
+
+    @Autowired
+    AdminHnRService adminHnRService;
 
     @Autowired
     private MypageService mypageService;
@@ -23,14 +30,29 @@ public class MyPageController {
     {
         String id = String.valueOf(session.getAttribute("userid"));
         model.addAttribute("memberDto",mypageService.selectInfoToId(id));
+        List<HotelDto> list = adminHnRService.getHotels();
+        model.addAttribute("list",list);
         return "/mypage/mypage";
     }
 
     @GetMapping("/updateinfo")
     public String updateinfo(HttpSession session,Model model)
     {
-        String id = String.valueOf(session.getAttribute("userid"));
-        model.addAttribute("memberDto",mypageService.selectInfoToId(id));
+        MemberDto dto = mypageService.selectInfoToId(String.valueOf(session.getAttribute("userid")));
+        String[] fnFn = dto.getUser_name().split("/");
+        dto.setUser_name(dto.getUser_name().replaceAll("/", ""));
+        model.addAttribute("memberDto", dto);
+        model.addAttribute("familyname", fnFn[0]);
+        model.addAttribute("firstname", fnFn[1]);
+        return "/mypage/updateinfo";
+    }
+
+    @PostMapping("/changeinfo")
+    @ResponseBody
+    public String changeinfo(HttpSession session,Model model,MemberDto dto)
+    {
+        dto.setId(String.valueOf(session.getAttribute("userid")));
+        mypageService.updateUserInfo(dto);
         return "/mypage/updateinfo";
     }
 
@@ -73,12 +95,18 @@ public class MyPageController {
         return "redirect:/";
     }
 
-    @GetMapping("/myreservation")
+    @GetMapping("/membership")
     public String myreservation(HttpSession session, Model model)
     {
         String id = String.valueOf(session.getAttribute("userid"));
         model.addAttribute("memberDto",mypageService.selectInfoToId(id));
-        return "/mypage/reservation";
+        return "/mypage/membership";
+    }
+
+    @GetMapping("/kakao")
+    public String mypagelg()
+    {
+        return "/mypage/kakao";
     }
 
 
