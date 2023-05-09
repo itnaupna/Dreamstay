@@ -52,7 +52,6 @@ var defaultDayOfWeek = CDate.getDay();
 
 var daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 var defaultDayOfWeekText = daysOfWeek[defaultDayOfWeek];
-
 var defaultFormattedDate = defaultYear + "." + defaultMonth + "." + defaultDate + " (" + defaultDayOfWeekText + ")";
 
 /*선택 안했을시*/
@@ -70,7 +69,6 @@ var tomorrowDate = tomorrow.getDate().toString().padStart(2, '0');
 var tomorrowDayOfWeek = tomorrow.getDay();
 
 var tomorrowDayOfWeekText = daysOfWeek[tomorrowDayOfWeek];
-
 var tomorrowFormattedDate = tomorrowYear + "." + tomorrowMonth + "." + tomorrowDate + " (" + tomorrowDayOfWeekText + ")";
 
 /*선택 안했을시*/
