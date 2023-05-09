@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="/css/header.css" />
-<%--<script src="/js/header.js"> </script>--%>
+<script src="/js/header.js"> </script>
 
 <style>
     .btnMenuText {
@@ -196,7 +196,7 @@
                 <ul>
                     <c:if test="${userid != null}">
                         <li>
-                            <a href="/logout" id="header_logout">로그아웃</a>
+                            <a href="/signup/logout" id="header_logout">로그아웃</a>
                         </li>
                         <li>
                             <a href="/mypage" id="header_mypage">마이페이지</a>

@@ -29,14 +29,7 @@ public class MainController {
         return "/main";
     }
 
-    @GetMapping("/search_room")
-    @ResponseBody
-    public List<HotelDto> hotelList(Model m)
-    {
-        List<HotelDto> list = mainHnRService.search_room();
-        m.addAttribute("list",list);
-        return list;
-    }
+
 
 
 

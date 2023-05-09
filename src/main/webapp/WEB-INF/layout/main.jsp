@@ -157,6 +157,7 @@
 	#room_cnt:focus, #adult_cnt:focus, #children_cnt:focus{
 		outline: none;
 	}
+
 </style>
 
 <div id="fullpage">
@@ -456,7 +457,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="section bg_imgs03" >Some section3 <a href="#4thpage">아래</a></div>
+
+	<%-- 이상혁 --%>
+	<div class="section bg_imgs03" >Some section3 <a href="#4thpage">아래</a>
+
+	</div>
+
 	<div class="section bg_imgs04" id="bg_imgs04">
 		<div id="page4">
 			<div class="page4_title">

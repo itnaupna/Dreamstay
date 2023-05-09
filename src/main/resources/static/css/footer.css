@@ -67,9 +67,10 @@
 
 .f_footer .f_top2 .f_banner .f_info {
     /*border: 3px solid chartreuse;*/
+    float: left;
     margin: 0 70px 20px 0;
     width: 900px;
-    height: 100px;
+    height: 20px;
 }
 
 .f_footer .f_top2 .f_banner .f_info a {

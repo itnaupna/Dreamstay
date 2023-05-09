@@ -6,16 +6,13 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <style>
     .footer2 {
-        display: none;
-        position: fixed;
-        bottom: 0;
+        /*display: none;*/
+        position:absolute;
+        bottom: -900px;
         left: 0;
+        width: 100%;
     }
-
-    .header2{
-        z-index: 9999;
-    }
-
+    <%-- 마이페이지 main content --%>
     .mypagecontent{
         /*border: 1px solid aqua;*/
         width: 1000px;
