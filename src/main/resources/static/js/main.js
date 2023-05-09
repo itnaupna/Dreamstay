@@ -202,6 +202,7 @@ function fn_selectDate(date){
         var period_1 = year + "." + month+"."+date_txt + " (" + dayOfWeek + ")";
         //alert(period_1);
         document.getElementById('check_in').innerText=period_1;
+        document.getElementById('check_in_show').value=period_1;
         check = 0;
         selectCk = 0;
 
@@ -243,6 +244,7 @@ function fn_selectDate02(date02){
         var period_2 = year02 + "." + month02+"."+date_txt02 + " (" + dayOfWeek02 + ")";
         //alert(period_2);
         document.getElementById('check_out').innerText=period_2;
+        document.getElementById('check_out_show').value=period_2;
         check02 = 0;
         selectCk02 = 0;
         //alert(year02 + "-" + month02 +"-"+date02);
