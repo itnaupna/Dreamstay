@@ -17,6 +17,8 @@
             <button type="button" onclick="search_room">세션 가지고오기</button>
             <input type="text" value="${sessionScope.checkIn}">
             <input type="text" value="${sessionScope.checkOut}">
+            <input type="text" value="${sessionScope.checkInShow}">
+            <input type="text" value="${sessionScope.checkOutShow}">
             <input type="text" value="${sessionScope.selectedHotel}">
             <input type="text" value="${sessionScope.roomCount}">
             <input type="text" value="${sessionScope.adultCount}">

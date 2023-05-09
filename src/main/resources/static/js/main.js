@@ -56,6 +56,8 @@ var defaultDayOfWeekText = daysOfWeek[defaultDayOfWeek];
 var defaultFormattedDate = defaultYear + "." + defaultMonth + "." + defaultDate + " (" + defaultDayOfWeekText + ")";
 
 document.getElementById("check_in").innerText = defaultFormattedDate;
+document.getElementById("check_in_hidden").value = defaultYear + "-" + defaultMonth + "-" + defaultDate;
+document.getElementById("check_in_show").value = defaultFormattedDate;
 
 /*내일날짜*/
 var tomorrow = new Date();
@@ -71,7 +73,8 @@ var tomorrowDayOfWeekText = daysOfWeek[tomorrowDayOfWeek];
 var tomorrowFormattedDate = tomorrowYear + "." + tomorrowMonth + "." + tomorrowDate + " (" + tomorrowDayOfWeekText + ")";
 
 document.getElementById("check_out").innerText = tomorrowFormattedDate;
-
+document.getElementById("check_out_hidden").value = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDate;
+document.getElementById("check_out_show").value = tomorrowFormattedDate;
 
 var buildcalendar = function(){
     /*check in*/

@@ -167,6 +167,8 @@
 		<form method="post" id="mainResveForm" name="mainResveForm" class="animate__animated animate__fadeIn" action="search_room">
 			<input type="hidden" value="" id="check_in_hidden" name="check_in_hidden">
 			<input type="hidden" value="" id="check_out_hidden" name="check_out_hidden">
+			<input type="hidden" value="" id="check_in_show" name="check_in_show">
+			<input type="hidden" value="" id="check_out_show" name="check_out_show">
 			<div class="main_mini_dl">
 				<div id="main_mini_dl_01" class="main_mini_dl_sub">
 					<div id="main_border_01" class="main_mini_dl_size">

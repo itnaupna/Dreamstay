@@ -40,6 +40,8 @@ public class MainController {
     {
         String checkIn = request.getParameter("check_in_hidden");
         String checkOut = request.getParameter("check_out_hidden");
+        String checkInShow = request.getParameter("check_in_show");
+        String checkOutShow = request.getParameter("check_out_show");
         String selectedHotel = request.getParameter("select_hotel");
         String roomCount = request.getParameter("room_cnt");
         String adultCount = request.getParameter("adult_cnt");
@@ -48,6 +50,8 @@ public class MainController {
         // Store form data in session
         session.setAttribute("checkIn", checkIn);
         session.setAttribute("checkOut", checkOut);
+        session.setAttribute("checkInShow", checkInShow);
+        session.setAttribute("checkOutShow", checkOutShow);
         session.setAttribute("selectedHotel", selectedHotel);
         session.setAttribute("roomCount", roomCount);
         session.setAttribute("adultCount", adultCount);
