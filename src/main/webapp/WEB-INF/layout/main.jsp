@@ -157,7 +157,6 @@
 	#room_cnt:focus, #adult_cnt:focus, #children_cnt:focus{
 		outline: none;
 	}
-
 </style>
 
 <div id="fullpage">
@@ -166,8 +165,8 @@
 			Experience the Difference
 		</strong>
 		<form method="post" id="mainResveForm" name="mainResveForm" class="animate__animated animate__fadeIn" action="search_room">
-			<input type="hidden" value="" id="check_in_hidden">
-			<input type="hidden" value="" id="check_out_hidden">
+			<input type="hidden" value="" id="check_in_hidden" name="check_in_hidden">
+			<input type="hidden" value="" id="check_out_hidden" name="check_out_hidden">
 			<div class="main_mini_dl">
 				<div id="main_mini_dl_01" class="main_mini_dl_sub">
 					<div id="main_border_01" class="main_mini_dl_size">
@@ -182,7 +181,7 @@
 						HOTEL
 
 						<div id="main_mini_dl_02_hotel" class="main_mini_dl_main_txt">
-							<select id="select_hotel" onclick="hideCalendars();hideroom_option();">
+							<select id="select_hotel" onclick="hideCalendars();hideroom_option();" name="select_hotel">
 								<c:forEach var="dto" items="${list }">
 									<option class="select_hotel_option" value="${dto.num }">${dto.name }</option>
 								</c:forEach>
@@ -257,7 +256,7 @@
 									ROOM
 								</div>
 								<div class="op_select" id="main_mini_dl_04_room01">
-									<span id="room_option01"><input id="room_cnt" value="1" type="text" readonly></span>
+									<span id="room_option01"><input id="room_cnt" value="1" type="text" readonly name="room_cnt"></span>
 								</div>
 							</div>
 							<div id="room_select02">
@@ -265,7 +264,7 @@
 									ADULT
 								</div>
 								<div class="op_select" id="main_mini_dl_04_room02">
-									<span id="room_option02"><input id="adult_cnt" value="2" type="text" readonly></span>
+									<span id="room_option02"><input id="adult_cnt" value="2" type="text" readonly name="adult_cnt"></span>
 								</div>
 							</div>
 							<div id="room_select03">
@@ -273,7 +272,7 @@
 									CHILDREN
 								</div>
 								<div class="op_select" id="main_mini_dl_04_room03">
-									<span id="room_option03"><input id="children_cnt" value="0" type="text" readonly></span>
+									<span id="room_option03"><input id="children_cnt" value="0" type="text" readonly name="children_cnt"></span>
 								</div>
 							</div>
 						</div>
@@ -457,12 +456,7 @@
 			</div>
 		</div>
 	</div>
-
-	<%-- 이상혁 --%>
-	<div class="section bg_imgs03" >Some section3 <a href="#4thpage">아래</a>
-
-	</div>
-
+	<div class="section bg_imgs03" >Some section3 <a href="#">아래</a></div>
 	<div class="section bg_imgs04" id="bg_imgs04">
 		<div id="page4">
 			<div class="page4_title">
