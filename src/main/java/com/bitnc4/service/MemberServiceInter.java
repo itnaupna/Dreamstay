@@ -29,7 +29,7 @@ public interface MemberServiceInter {
     public void joinMember(MemberDto dto);
 
     // 로그인
-    public int access(String id, String pw);
+    public MemberDto access(String id, String pw);
 
     // email로 db 정보 불러오는 메서드
     public MemberDto searchInfoToEmail(String email);

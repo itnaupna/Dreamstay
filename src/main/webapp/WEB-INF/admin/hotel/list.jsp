@@ -5,8 +5,8 @@
 ${mycustom.value1}
 <div id="partHotel">
   <div id="toolbarHotel">
-    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_add.png" onclick="if(confirm('신규 호텔을 등록하시겠습니까?'))AddHotel();">
-    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_detail.png" onclick="$('#detailHotel').toggle(200)">
+    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_add.png" onclick="if(confirm('신규 호텔을 등록하시겠습니까?'))ClickAddHotelBtn();">
+    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_detail.png" onclick="$('#detailHotel').toggle(200);loadHotel(-1);">
   </div>
   <c:forEach items="${hDto}" var="dto">
     <div class="itemHotel" onclick="loadHotel(${dto.num})">
@@ -34,7 +34,10 @@ ${mycustom.value1}
         <input type="hidden" name="num" id="detailHotelNum">
         <table class="table table-bordered">
           <caption style="font-size:0.8rem;caption-side: top;">
-            <span class="spanbtn" style="float:left;" onclick="if(confirm('Save the modify value?'))updateHotel();">저장</span>
+            <span style="float:left;">
+              <span class="spanbtn"  onclick="if(confirm('Save the modify value?'))updateHotel();">저장</span>
+              <span class="spanbtn" onclick="$('#detailHotel').hide(200);">취소</span>
+            </span>
             <span style="float:right;">값을 수정하려면 더블클릭하세요.</span>
           </caption>
           <tr>
@@ -248,7 +251,11 @@ ${mycustom.value1}
     box-shadow: 0 0 5px rgb(152,129,34) !important;
 
   }
-
+  #lstRoomItems tr{
+    /*max-height:41px;*/
+    height:47px;
+    vertical-align: middle;
+  }
 
   #summaryRoom {
     display:flex;
@@ -268,33 +275,23 @@ ${mycustom.value1}
   }
   .spanbtn:hover{
     font-weight: bolder;
-
   }
 </style>
 <script>
-  function UploadRoom() {
-    let data = new FormData($('#formRoom')[0]);
-    //console.log(data.get('islock'));
-    data.set('islock',data.get('islock') === 'on' ? 1 : 0);
-    $.ajax({
-      url:'./hotel/uploadroom/' + $('#detailHotelNum').val(),
-      data:data,
-      enctype:'multipart-form-data',
-      type:'post',
-      processData: false,
-      contentType: false,
-      success:(e)=>{
-        console.log(e);
-        if(e){
-
-        }else{
-
-        }
-      }
-
-    })
-  }
-
+  $('#lstRoomItems tbody')
+          .on('mouseenter','tr',(e)=>{
+    let dest = $($($(e.target).parent()).children()[2]);
+    let tmp = dest.text();
+    let c = dest.clone().css({display:'inline',width:'auto',visibility:'hidden',position:'absolute'}).appendTo('body');
+    if(c.width() > dest.width())
+      dest.html('<marquee behavior="alternate" scrollamount="5" class="form-control" style="border:none;margin:0px;padding:0px;">'+tmp+'</marquee>');
+    c.remove();
+  })
+          .on('mouseleave','tr',(e)=>{
+    let dest = $($($(e.target).parent()).children()[2]);
+    let tmp = dest.text();
+    dest.html(tmp);
+  });
   $('#roomtype').on({
     'dblclick':(e)=>{
       $('#roomtypedatalist').empty().append($('<option/>').text('기존 객실 타입 검색 중...'));
@@ -315,64 +312,6 @@ ${mycustom.value1}
       })
     }
   });
-
-  function AddHotel() {
-    $('#lstRoom').hide(200);
-    $('#detailHotel').hide(200,()=>{
-      $('#detailHotel input').val('');
-      $('#detailHotel textarea').text('');
-      $('#detailHotelImg').attr('src','');
-      $('#detailHotelNum').val('0');
-    });
-    $('#detailHotel').show(200);
-
-  }
-  function changePhoto() {
-    let tempvar = $('input[type="file"]')[0].files;
-    $('input[type="file"]').click();
-    $('input[type="file"]').on({
-      'change':(e)=>{
-        if(e.target.files.length===0){
-          //Cancel
-          //Restore previous selection.
-          e.target.files = tempvar;
-        }else{
-          //Ok
-          var reader = new FileReader();
-          reader.onload = function(e) {
-            $("#detailHotelImg").attr("src", e.target.result);
-          }
-          reader.readAsDataURL($(e.target)[0].files[0]);
-        }
-      }
-    });
-  }
-  function updateHotel(){
-    let data = new FormData($('#formHotel')[0]);
-
-
-
-    // console.log(formData);
-    $.ajax({
-      url:'./hotel/update',
-      enctype:'multipart-form-data',
-      type:'post',
-      processData:false,
-      contentType:false,
-      data:data,
-      success:(e)=>{
-        //TODO : 호텔 추가 및 수정의 결과에 대한 로직처리
-        //ex)새로고침 또는 ajax를 이용한 바로 표시 등.
-        if(e){
-          //호텔 추가 및 수정 성공
-
-        }else{
-          //호텔 추가 및 수정 실패
-
-        }
-      }
-    })
-  }
   $('table input,table textarea').on({
     'dblclick':(e)=>{
       $(e.target).removeAttr('readonly').css({
@@ -396,7 +335,78 @@ ${mycustom.value1}
       });
       console.log(e.target.scrollHeight);
     }
-  }); //TODO : Textarea 높이 자동조절. 이유는 모르겠는데 갑자기 동작안함.
+  }); //FIXME : Textarea 높이 자동조절. 이유는 모르겠는데 갑자기 동작안함.
+  function UploadRoom() {
+    let data = new FormData($('#formRoom')[0]);
+    data.set('islock',data.get('islock') === 'on' ? 1 : 0);
+    $.ajax({
+      url:'./hotel/uploadroom/' + $('#detailHotelNum').val(),
+      data:data,
+      enctype:'multipart-form-data',
+      type:'post',
+      processData: false,
+      contentType: false,
+      success:(e)=>{
+        if(e>0){
+          loadHotel($('#detailHotelNum').val());
+        }else{
+          alert('객실추가에 실패하였습니다. 다시 시도해주세요.');
+        }
+      }
+
+    })
+  }
+  function ClickAddHotelBtn() {
+    $('#lstRoomTitle').text('신규 호텔 등록');
+    $('#lstRoom').hide(200);
+    $('#detailHotel').hide(200,()=>{
+      $('#detailHotel input').val('');
+      $('#detailHotel textarea').text('');
+      $('#detailHotelImg').attr('src','');
+      $('#detailHotelNum').val('0');
+    });
+    $('#detailHotel').show(200);
+  }
+  function changePhoto() {
+    let tempvar = $('input[type="file"]')[0].files;
+    $('input[type="file"]').click();
+    $('input[type="file"]').on({
+      'change':(e)=>{
+        if(e.target.files.length===0){
+          //Cancel
+          //Restore previous selection.
+          e.target.files = tempvar;
+        }else{
+          //Ok
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $("#detailHotelImg").attr("src", e.target.result);
+          }
+          reader.readAsDataURL($(e.target)[0].files[0]);
+        }
+      }
+    });
+  }
+  function updateHotel(){
+    let data = new FormData($('#formHotel')[0]);
+    $.ajax({
+      url:'./hotel/update',
+      enctype:'multipart-form-data',
+      type:'post',
+      processData:false,
+      contentType:false,
+      data:data,
+      success:(e)=>{
+        //TODO : 새로고침이 아니라 최신정보 바로 띄우게 수정해야함.
+        if(e>0){
+
+          location.reload();
+        }else{
+          alert('호텔 추가에 실패하였습니다. 다시 시도해주세요.');
+        }
+      }
+    })
+  }
   function loadHotel(hotelnum){
     $('#lstRoomTitle').text("Loading Hotel info...");
     $('#lstRoomWrapper').hide(100,()=>{
@@ -406,7 +416,7 @@ ${mycustom.value1}
         success:(e)=>{
           console.log(e[0].memo);
 
-          $('input[type="file"]').val(null);
+          $('input[type="file "]').val(null);
           $('#lstRoomTitle').text('hotel\'s room');
           //https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/6ce87bf1-d4e6-4129-b9c7-1ed036ab9f82
           $('#detailHotelImg').attr('src','https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/'+e[0].photo+'?type=f&w=160&h=120&faceopt=false');
@@ -428,6 +438,11 @@ ${mycustom.value1}
                                     $('<div>').append(
                                             $('<span>').text('상세정보').addClass('spanbtn'),
                                             $('<span>').text('삭제').addClass('spanbtn')
+                                                    .on({
+                                                      'click':(f)=>{
+                                                        if(confirm('이 객실을 삭제하시겠습니까?')) DeleteRoom(f.target,e.num);
+                                                      }
+                                                    })
                                     ).css({
                                       'display':'flex',
                                       'justify-content':'space-between'
@@ -444,6 +459,20 @@ ${mycustom.value1}
         }
       });
     }).show(100);
+  }
+  function DeleteRoom(t,roomnum){
+    $.ajax({
+      url:'./hotel/deleteroom/' + roomnum,
+      type:'post',
+      success:(e)=>{
+        if(e>0){
+          loadHotel($('#detailHotelNum').val());
+          //$($(t).parents('tr')).remove();
+        }else{
+          alert('객실 삭제에 실패하였습니다. 다시 시도해주세요.');
+        }
+      }
+    })
   }
 </script>
 

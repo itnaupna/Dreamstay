@@ -60,7 +60,6 @@ public class NcpObjectStorageService implements ObjectStorageService {
 	}
 	@Override
 	public boolean deleteFile(String bucketName, String directoryPath, String fileName) {
-		// TODO Auto-generated method stub
 		String path=directoryPath+"/"+fileName;
 		//해당 버킷에 파일이 존재하면 true 반환
 		boolean isfind=s3.doesObjectExist(bucketName, path);

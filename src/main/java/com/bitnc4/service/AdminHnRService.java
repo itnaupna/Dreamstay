@@ -32,25 +32,15 @@ public class AdminHnRService implements AdminHnRServiceInter{
     }
 
     @Override
-    public boolean updateHotelDetail(HotelDto dto) {
-        try{
-            m.updateHotelDetail(dto);
-            return true;
-        }catch (Exception e) {
-            log.error(e.getMessage());
-            return false;
-        }
+    public int updateHotelDetail(HotelDto dto) {
+        m.updateHotelDetail(dto);
+        return dto.getNum();
     }
 
     @Override
-    public boolean insertHotel(HotelDto dto){
-        try{
-            m.insertHotel(dto);
-            return true;
-        }catch (Exception e) {
-            log.error(e.getMessage());
-            return false;
-        }
+    public int insertHotel(HotelDto dto){
+        m.insertHotel(dto);
+        return dto.getNum();
     }
 
     @Override
@@ -59,13 +49,13 @@ public class AdminHnRService implements AdminHnRServiceInter{
     }
 
     @Override
-    public boolean insertRoom(RoomDto dto) {
-        try{
-            m.insertRoom(dto);
-            return true;
-        }catch (Exception e) {
-            log.error(e.getMessage());
-            return false;
-        }
+    public int insertRoom(RoomDto dto) {
+        m.insertRoom(dto);
+        return dto.getNum();
+    }
+
+    @Override
+    public int deleteRoom(int roomnum) {
+        return m.deleteRoom(roomnum);
     }
 }

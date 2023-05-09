@@ -98,7 +98,7 @@ public class MemberService implements MemberServiceInter {
 
     // 로그인
     @Override
-    public int access(String id, String pw) {
+    public MemberDto access(String id, String pw) {
         Map<String, String> idpwChk = new HashMap<String, String>();
         idpwChk.put("id", id);
         idpwChk.put("pw", pw);

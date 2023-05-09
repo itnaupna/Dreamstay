@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Member;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
@@ -91,7 +92,9 @@ public class MemberController {
     @ResponseBody
     public boolean idpwChk(String id, String pw, String saveid, HttpSession session, HttpServletResponse response, Model model) {
         Cookie cookie;
-        if(memberService.access(id, pw) == 1) {
+        MemberDto loginuser = memberService.access(id,pw);
+        if(loginuser != null) {
+            session.setAttribute("loginuser",loginuser);
             session.setAttribute("userid", id);
             model.addAttribute("userid", id);
             if(saveid.equals("true")) {
@@ -115,6 +118,7 @@ public class MemberController {
     // 로그아웃클릭 시 세션 지우고 홈으로
     @GetMapping("/logout")
     public String logout(HttpSession session) {
+        session.removeAttribute("loginuser");
        session.removeAttribute("userid");
 
         return "redirect:/";
