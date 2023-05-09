@@ -2,18 +2,18 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<link rel="stylesheet" href="/css/header2.css" />
+<%--<link rel="stylesheet" href="/css/mypage/header2.css" />--%>
 <script src="/js/header.js"> </script>
 <%--<script src="/js/header.js"> </script>--%>
 
 <style>
-    .btnMenuText2 {
+    .btnMenuText {
         position: absolute;
         top: 100px;
         margin-left: 250px;
     }
     /*닫기 버튼 이미지 */
-    .btnMenulist2>img{
+    .btnMenulist>img{
         position: absolute;
         top: 30px;
         left: 1700px;
@@ -22,16 +22,14 @@
         cursor: pointer;
     }
 
-
-
     /*3줄 메뉴 클릭시 나오는 박스에 타이틀*/
-    .btnMenuText2 .header_btntitle{
+    .btnMenuText .header_btntitle{
         font-weight: bold;
         display: flex;
     }
 
 
-    .header2 .btntitlebox2 span {
+    .header .btntitlebox span {
         color: #989442;
         font-size: 17px;
         margin-right: 120px;
@@ -39,25 +37,25 @@
 
     }
 
-    .header2 .btntitlebox2 li {
+    .header .btntitlebox li {
         margin-bottom: 30px;
         font-weight: bold;
         font-size: 18px;
         color: white !important;
     }
 
-    .header2 .btntitlebox2 img {
+    .header .btntitlebox img {
         width: 180px;
         height: 140px;
     }
 
 
-    .btnMenulist2{
+    .btnMenulist{
         position: absolute;
     }
 
 
-    .header2 .hotelFind2:after {
+    .header .hotelFind:after {
         content: '';
         display: inline-block; /* 줄바꿈X(요소 자체는 인라인요소), 내부에서는 블록 요소처럼 동작 */
         margin-left: 2px;
@@ -72,7 +70,7 @@
 
 
     /*태그 밑줄 제거*/
-    .header2 a {
+    .header a {
         /* color: inherit; /* 상속된 부모 요소의 텍스트 색상을 현재 요소에 적용하는 CSS*/
         text-decoration: none;
         box-sizing: border-box;
@@ -80,17 +78,17 @@
     }
 
     /*커서*/
-    .heade2r a, .header2 button{
+    .header a, .header button{
         cursor: pointer;
     }
 
-    .header2 ul {
+    .header ul {
         margin: 0;
         padding: 0;
         list-style: none;
     }
 
-    .header2 button {
+    .header button {
         box-sizing: border-box;
         background: none;
     }
@@ -99,14 +97,14 @@
 
     /* ****조선호텔 로고***** */
 
-    .header2 .logo2 a {
+    .header .logo a {
         display: block; /* 새로운 라인(line)에서 시작, 시작 라인 width 100% 적용됨*/
         width: 350px;
         height: 24px;
     }
 
     /* 전체 header div, 고정, 배경색 하얗게*/
-    .header2 {
+    .header {
         position: fixed;
         left: 0;
         right: 0;
@@ -119,22 +117,22 @@
     }
 
 
-    .header2 li{
+    .header li a{
         color: #000;
     }
 
-    .header2 li:hover{
+    .header li a:hover{
         color: #000;
     }
 
-    .header2 .headArea2 {
+    .header .headArea {
         position: relative;
         padding: 0 50px;
         height: 100px;
     }
 
 
-    .header2 .wrapper2 {
+    .header .wrapper {
         min-height: 100%;
         position: relative;
         padding-bottom: 0px;
@@ -143,7 +141,8 @@
     }
 
 
-    .header2 .logo2{
+    .header .logo{
+        display: block;
         display: block;
         position: absolute;
         right: 41%;
@@ -158,43 +157,43 @@
     }
 
 
-    .header2 ul:after {
+    .header ul:after {
         content: '';
         display: block;
         clear: both;
     }
 
     /*상품찾기 전체 div 위치*/
-    .topUtil2 {
+    .topUtil {
         position: absolute;
         left: 110px;
-        left: 110px;
-        top: 33px;
+        top: 38px;
     }
 
     /* 상품찾기 */
-    .topUtil2 .hotelFind2 {
+    .topUtil .hotelFind {
         font-size: 11px;
+        color: #000;
     }
 
     /*회원가입,로그인*,예약확인 div 위치*/
-    .gnbUtil2 {
+    .gnbUtil {
         position: absolute;
         right: 50px;
         top: 30px;
     }
 
-    .gnbUtil2 > ul {
+    .gnbUtil > ul {
         display: inline-block;
         vertical-align: middle;
         margin-top: -6px;
     }
 
-    .gnbUtil2 > ul > li:first-child {
+    .gnbUtil > ul > li:first-child {
         margin-left: 0;
     }
 
-    .gnbUtil2 > ul > li {
+    .gnbUtil > ul > li {
         display: inline-block;
         vertical-align: middle;
         margin-left: 20px;
@@ -202,13 +201,13 @@
     }
 
 
-    .gnbUtil2 > .resvBtn {
+    .gnbUtil > .resvBtn {
         display: inline-block;
         margin-left: 25px;
         margin-right: 15px;
     }
 
-    .gnbUtil2 > .resvBtn .dropdown_list {
+    .gnbUtil > .resvBtn .dropdown_list {
         display: inline-block;
         min-width: auto;
         width: 100px;
@@ -219,7 +218,7 @@
     }
 
     /* 3줄 메뉴 */
-    .header2 .btnMenu2 {
+    .header .btnMenu {
         display: block;
         position: absolute;
         left: 50px;
@@ -237,7 +236,7 @@
     }
 
 
-    .btnMenulist2{
+    .btnMenulist{
         display: none;
         position: absolute;
         top: 100px;
@@ -248,13 +247,13 @@
     }
 
 
-    .header2 .dropdown_list.open .item_list {
+    .header .dropdown_list.open .item_list {
         display: block;
         /*  .dropdown_list 클래스가 open 클래스를 포함하고 있는 경우, 그 하위 요소인 .item_list 클래스를 블록 레벨 요소로 표시 */
         /* 자바스크립트로 toggle open 효과 줬음 지우면 list 안보임*/
     }
 
-    .header2 .dropdown_list .item_list {
+    .header .dropdown_list .item_list {
         display: none;
         position: absolute;
         top: 100%;
@@ -267,14 +266,14 @@
 
     }
 
-    .header2 .dropdown_list .item_list li a {
+    .header .dropdown_list .item_list li a {
         display: block;
         padding: 10px;
         text-decoration: none;
     }
 
     /*resurve 버튼css*/
-    .btn_opener2{
+    .btn_opener{
         padding: 8px;
         width: 120px;
         font-size: 13px;
@@ -290,21 +289,22 @@
 </style>
 
 
+
 <body>
-<div class="wrapper2 mainWrapper2">
-    <div class="header2">
-        <div class="headArea2">
-            <strong class="logo2">
+<div class="wrappe mainWrapper">
+    <div class="header">
+        <div class="headArea">
+            <strong class="logo">
                 <a href="/">JOSUN HOTELS & RESORTS
                 </a>
             </strong>
-            <button type="button" class="btnMenu2">메뉴 열기</button>
-            <div class="btnMenulist2">
-                <img class="btnMenuClose2" src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_white_25x25.png">
+            <button type="button" class="btnMenu">메뉴 열기</button>
+            <div class="btnMenulist">
+                <img class="btnMenuClose" src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_white_25x25.png">
 
-                <div class="btnMenuText2">
-                    <div class="header_btntitle2">
-                        <div class="btntitlebox2">
+                <div class="btnMenuText">
+                    <div class="header_btntitle">
+                        <div class="btntitlebox">
                         <span>ABOUT US</span><br><br>
                             <ul>
                                 <li>JOSUN HOTELS & <br>RESORTS</li>
@@ -318,7 +318,7 @@
 
                         </div>
 
-                        <div class="btntitlebox2">
+                        <div class="btntitlebox">
                             <span>HOTELS</span><br><br>
                             <ul>
                                 <li>기업소개</li>
@@ -329,7 +329,7 @@
                             </ul>
                         </div>
 
-                        <div class="btntitlebox2">
+                        <div class="btntitlebox">
                             <span>OFFERS</span><br><br>
                             <ul>
                                 <li>기업소개</li>
@@ -340,7 +340,7 @@
                             </ul>
                         </div>
 
-                        <div class="btntitlebox2">
+                        <div class="btntitlebox">
                             <span>MEMBERSHIP</span><br><br>
                             <ul>
                                 <li>기업소개</li>
@@ -351,7 +351,7 @@
                             </ul>
                         </div>
 
-                        <div class="btntitlebox2" >
+                        <div class="btntitlebox" >
                             <span>MY PAGE</span><br><br>
                             <ul>
                                 <li>기업소개</li>
@@ -362,7 +362,7 @@
                             </ul>
                         </div>
 
-                        <div class="btntitlebox2">
+                        <div class="btntitlebox">
                             <span>RETAIL BUSINESS</span><br><br>
                             <ul>
                                 <li>기업소개</li>
@@ -373,7 +373,7 @@
                             </ul>
                         </div>
 
-                        <div class="btntitlebox2">
+                        <div class="btntitlebox">
                             <span>JOSUN LOUNGE</span><br><br>
                             <ul>
                                 <a>
@@ -411,7 +411,7 @@
                 </a>
             </div>
 
-            <div class="gnbUtil2" >
+            <div class="gnbUtil" >
                 <ul>
                     <c:if test="${userid != null}">
                         <li>
@@ -438,7 +438,7 @@
                 <div class="resvBtn">
                     <div class="dropdown_list" aria-expanded="false">
                         <div class="dropdown_value" style="font-size: 11px;">
-                            <button type="button" aria-label="목록열기" class="btn_opener2">RESERVATION</button>
+                            <button type="button" aria-label="목록열기" class="btn_opener">RESERVATION</button>
                         </div>
                         <ul class="item_list" role="listbox" style="width: 120px;">
                             <li role="option" style="font-size: 13px"><a href="">ROOM</a></li>

@@ -38,5 +38,10 @@ public class QnaBoardService implements QnaBoardServiceInter {
         return qnaBoardMapper.qnaList(writer);
    }
 
+    @Override
+    public QnaBoardDto getQna(int num) {
+        return qnaBoardMapper.getQna(num);
+    }
+
 
 }

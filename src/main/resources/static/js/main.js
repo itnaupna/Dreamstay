@@ -37,7 +37,10 @@ $('#fullpage').fullpage({
 
             }
     }
+
 });
+
+
 $(function (){
     $(".page4_box_logo").mouseenter(function () {
         const src = $(this).find(".page4_box_logo_inputs").val();

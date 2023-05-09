@@ -15,5 +15,6 @@ public interface QnaBoardMapper {
 
     public MemberDto searchIdOfinfo(String writer);
    public List<QnaBoardDto> qnaList(String writer);
+   public QnaBoardDto getQna (int num);
 
 }

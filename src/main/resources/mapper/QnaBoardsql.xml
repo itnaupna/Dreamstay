@@ -20,4 +20,8 @@
         from board_qna
         where writer=#{writer}
     </select>
+
+    <select id="getQna" parameterType="int" resultType="QnaBoardDto">
+        select * from board_qna where num = #{num}
+    </select>
 </mapper>

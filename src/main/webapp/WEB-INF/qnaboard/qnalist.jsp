@@ -10,7 +10,12 @@
         top: 150px;
     }
 
-    .qmalisttable
+    .qnaboardlist a{
+        text-decoration: none;
+        color: #000;
+    }
+
+
 </style>
 
 <div class="qnaboardlist">
@@ -25,7 +30,8 @@
             <c:forEach items="${qnaBoardList}" var="qnaBoardDto">
                 <tr>
                     <td>${qnaBoardDto.hotelname}</td>
-                    <td><span style="color: #989442">${qnaBoardDto.category_txt}</span> ${qnaBoardDto.subject}</td>
+                    <td><span style="color: #989442">${qnaBoardDto.category_txt}</span>
+                        <a href='/mypage/qnadetail?num=${qnaBoardDto.num}'>${qnaBoardDto.subject}</a></td>
                     <td>${qnaBoardDto.writer}</td>
                     <td><fmt:formatDate value="${qnaBoardDto.writeday}" pattern="yyyy-MM-dd HH:mm" /></td>
                 </tr>

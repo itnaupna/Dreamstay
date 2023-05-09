@@ -101,6 +101,7 @@ body > .wrapper {
     height: 60px;
     text-indent: -9999px; /* 요소에 텍스트 안보이도록 (조선 호텔 홈페이지에서 요소에 어떤 기능인지 텍스트로 써놓은게 있어서  주석용으로 화면엔 안보이게 텍스트를 밖으로 내보냄)*/
     overflow: hidden; /* 텍스트가 이미지 또는 요소 경계 상자 외부로 나가는 것을 방지 */
+
 }
 /*호텔 로고 이미지 (black)*/
 .black_logo {
@@ -233,6 +234,7 @@ body > .wrapper {
     padding: 0;
     margin: 0;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background: #fff;
 
 }
 
@@ -240,6 +242,7 @@ body > .wrapper {
     display: block;
     padding: 10px;
     text-decoration: none;
+    color: #968a8b !important;
 }
 
 /*resurve 버튼css*/

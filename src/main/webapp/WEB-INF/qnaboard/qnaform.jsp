@@ -12,6 +12,7 @@
     }
 </style>
 
+
 <div class="qnaboard">
     <form action="/insertqna" method="post" name="qnaboard">
         <table class="table table qnatable" style="width: 600px;">

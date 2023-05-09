@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,6 +72,15 @@ public class QnaboardController {
       model.addAttribute("qnaBoardList", qnaBoardList);
 
          return "/mypage/qnaboard/qnalist";
+     }
+
+     @GetMapping("/mypage/qnadetail")
+        public String detail(int num, Model model)
+     {
+         QnaBoardDto dto = qnaBoardService.getQna(num);
+         model.addAttribute("dto",dto);
+
+         return "/mypage/qnaboard/qnadetail";
      }
 
    }
