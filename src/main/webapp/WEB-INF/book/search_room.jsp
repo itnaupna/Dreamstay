@@ -106,8 +106,8 @@
 
             <dl class="dl02">
                 <dt>DATE</dt>
-                <dd><input type="text" value="${sessionScope.checkIn}" readonly="readonly">
-                    <input type="text" value="${sessionScope.checkOut}" readonly="readonly"></dd>
+                <dd><input type="text" value="${sessionScope.checkInShow}" readonly="readonly">
+                    <input type="text" value="${sessionScope.checkOutShow}" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl03">
