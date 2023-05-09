@@ -1,37 +1,72 @@
+let timer = "";
 // 아이디 찾기 클릭 시
 $("#findidpw_findid").click(function() {
-    $("#findidpw_id").attr("type", "hidden");
-    $("#findidpw_id").val("");
+    $(this).css({
+        "border-left": "1px solid black",
+        "border-top": "1px solid black",
+        "border-right": "1px solid black",
+        "border-bottom": "none",
+        color: "black"
+    });
+    $("#findidpw_findpw").css({
+        "border-top": "1px solid #cccccc",
+        "border-right": "1px solid #cccccc",
+        "border-bottom": "1px solid black",
+        color: "#cccccc"
+    });
+    $("#findidpw_id").attr("type", "hidden").val("");
     $("#findidpw_email").val("");
-    $("#findidpw_domain").val("");
     $("#findidpw_email_code").val("");
-    $("#findidpw_select_domain option:eq(0)").prop("selected", true);
-    $("#findidpw_text").text("            아이디를 잊으셨나요?\n            이메일인증을 통해\n            아이디를 확인하실 수 있습니다.");
+    $("#findidpw_domain").val("").attr("readonly", false);
+    $("#findidpw_select_domain").text("직접 입력");
+    $("#findidpw_text").html("<b>아이디를 잊으셨나요?</b><br>\n이메일인증을 통해\n아이디를 확인하실 수 있습니다.");
+    clearInterval(timer);
+    $("#findidpw_timer").html("");
 });
 
 // 비밀번호 찾기 클릭 시
 $("#findidpw_findpw").click(function() {
+    $(this).css({
+        "border-left": "none",
+        "border-top": "1px solid black",
+        "border-right": "1px solid black",
+        "border-bottom": "none",
+        color: "black"
+    });
+    $("#findidpw_findid").css({
+        "border-top": "1px solid #cccccc",
+        "border-left": "1px solid #cccccc",
+        "border-bottom": "1px solid black",
+        color: "#cccccc"
+    });
     $("#findidpw_id").attr("type", "text");
     $("#findidpw_email").val("");
     $("#findidpw_email_code").val("");
-    $("#findidpw_domain").val("");
-    $("#findidpw_select_domain option:eq(0)").prop("selected", true);
-    $("#findidpw_text").text("            비밀번호를 잊으셨나요?\n            이메일 인증을 통해 고객님의 비밀번호를\n            안전하게 재설정 가능합니다.\n            계정이 잠겼을경우 비밀번호 찾기를 진행하시면\n            계정이 활성화됩니다.");
+    $("#findidpw_domain").val("").attr("readonly", false);
+    $("#findidpw_select_domain").text("직접 입력");
+    $("#findidpw_text").html("<b>비밀번호를 잊으셨나요?</b><br>\n이메일 인증을 통해 고객님의 비밀번호를\n안전하게 재설정 가능합니다.\n계정이 잠겼을경우 비밀번호 찾기를 진행하시면\n계정이 활성화됩니다.");
+    clearInterval(timer);
+    $("#findidpw_timer").html("");
 });
 
 // 이메일 select box 이벤트
-$("#findidpw_select_domain").change(function() {
-    if($(this).val() == "직접 입력") {
-        $("#findidpw_domain").val("");
-        $("#findidpw_domain").attr("readonly", false);
+$("#findidpw_select_domain").click(  function () {
+    $("#findidpw_custom_option").slideToggle();
+});
+
+// select option 선택시 domain 에 적용
+$(".findidpw_select_option").click(function() {
+    if($(this).text() == "직접 입력") {
+        $("#findidpw_domain").val("").attr("readonly", false);
+        $("#findidpw_select_domain").text($(this).text()).click();
     } else {
-        $("#findidpw_domain").val($(this).val());
-        $("#findidpw_domain").attr("readonly", true);
+        $("#findidpw_domain").val($(this).text()).attr("readonly", true);
+        $("#findidpw_select_domain").text($(this).text()).click();
     }
-})
+});
+
 // 아이디 입력값이 "" 이면 email만 확인 후 인증번호 발송(id찾기),
 // 아이디 입력값이 있다면 db에 id, email 대조 후 인증번호 발송 (비밀번호 찾기)
-let timer = "";
 $("#findidpw_sendmail").click(function() {
     let id = $("#findidpw_id").val();
     let email = $("#findidpw_email").val() + "@" + $("#findidpw_domain").val();
@@ -49,7 +84,7 @@ $("#findidpw_sendmail").click(function() {
                     success: function () {
                         alert('인증번호가 발송되었습니다');
                         clearInterval(timer);
-                        $("#timer").html("");
+                        $("#findidpw_timer").html("");
                         let time = 180;// 발송 성공시
                         let min = "";
                         let sec = "";
@@ -142,4 +177,12 @@ $("#findidpw_chkcode").click(function() {
         });
     }
 });
+
+$(".findidpw_input").focus(function() {
+    $(this).css("border-bottom", "1px solid black");
+})
+
+$(".findidpw_input").focusout(function() {
+    $(this).css("border-bottom", "1px solid #cccccc");
+})
 
