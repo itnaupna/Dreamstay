@@ -164,7 +164,7 @@
 		<strong id="main_txt" class="animate__animated animate__fadeIn">
 			Experience the Difference
 		</strong>
-		<form method="post" id="mainResveForm" name="mainResveForm" class="animate__animated animate__fadeIn">
+		<form method="post" id="mainResveForm" name="mainResveForm" class="animate__animated animate__fadeIn" action="search_room">
 			<input type="hidden" value="" id="check_in_hidden">
 			<input type="hidden" value="" id="check_out_hidden">
 			<div class="main_mini_dl">
@@ -182,11 +182,9 @@
 
 						<div id="main_mini_dl_02_hotel" class="main_mini_dl_main_txt">
 							<select id="select_hotel" onclick="hideCalendars();hideroom_option();">
-								<option class="select_hotel_option" value="그랜드조선호텔" selected>그랜드 조선 호텔</option>
-								<option class="select_hotel_option" value="신라호텔" >신라호텔</option>
-								<option class="select_hotel_option" value="롯데호텔" >롯데호텔</option>
-								<option class="select_hotel_option" value="모텔" >모텔</option>
-								<option class="select_hotel_option" value="고시텔" >고시텔</option>
+								<c:forEach var="dto" items="${list }">
+									<option class="select_hotel_option" value="${dto.num }">${dto.name }</option>
+								</c:forEach>
 							</select>
 						</div>
 					</div>
