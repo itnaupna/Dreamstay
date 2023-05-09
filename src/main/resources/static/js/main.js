@@ -55,6 +55,7 @@ var defaultDayOfWeekText = daysOfWeek[defaultDayOfWeek];
 
 var defaultFormattedDate = defaultYear + "." + defaultMonth + "." + defaultDate + " (" + defaultDayOfWeekText + ")";
 
+/*선택 안했을시*/
 document.getElementById("check_in").innerText = defaultFormattedDate;
 document.getElementById("check_in_hidden").value = defaultYear + "-" + defaultMonth + "-" + defaultDate;
 document.getElementById("check_in_show").value = defaultFormattedDate;
@@ -72,6 +73,7 @@ var tomorrowDayOfWeekText = daysOfWeek[tomorrowDayOfWeek];
 
 var tomorrowFormattedDate = tomorrowYear + "." + tomorrowMonth + "." + tomorrowDate + " (" + tomorrowDayOfWeekText + ")";
 
+/*선택 안했을시*/
 document.getElementById("check_out").innerText = tomorrowFormattedDate;
 document.getElementById("check_out_hidden").value = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDate;
 document.getElementById("check_out_show").value = tomorrowFormattedDate;
