@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class QnaboardController {
@@ -23,20 +24,16 @@ public class QnaboardController {
     @Autowired
     private QnaBoardService qnaBoardService;
     @GetMapping("/mypage/qnaboard")
-    public String quaboard(QnaBoardDto dto, Model model, HttpSession session){
+    public String quaboard(Model model, HttpSession session){
         // 세션에 저장된 id
-        String id = (String) session.getAttribute("userid");
-
-        // 로그인 안하면 못보게
-        if (id == null || id.isEmpty()) {
-            
-            return "redirect:/login";
+        String writer = (String) session.getAttribute("userid");
+        // 비회원일 경우 공란
+        if (writer == null || writer.isEmpty()) {
+            return "/mypage/qnaboard/qnaform";
         }
-
-        MemberDto memberDto = qnaBoardService.searchIdOfinfo(id);
+        MemberDto memberDto = qnaBoardService.searchIdOfinfo(writer);
         model.addAttribute("memberDto", memberDto);
-
-        return "/main/qnaboard/qnaform";
+        return "/mypage/qnaboard/qnaform";
     }
     @PostMapping("/insertqna")
     public String insertqna(QnaBoardDto dto,
@@ -44,9 +41,14 @@ public class QnaboardController {
                             HttpSession session){
 
         //세션에 저장된 id
-        String id=(String)session.getAttribute("userid");
+        String writer=(String)session.getAttribute("userid");
+
+        // 비회원일시 nomember로 저장
+        if (writer == null || writer.isEmpty()) {
+            writer = "nomember";
+        }
         //dto에 id 저장
-        dto.setWriter(id);
+        dto.setWriter(writer);
 
         qnaBoardService.insertqna(dto);
 
@@ -57,13 +59,18 @@ public class QnaboardController {
    public String qnalist(QnaBoardDto dto, HttpSession session, HttpServletResponse response, Model model){
        //세션에 저장된 id
        String writer=(String)session.getAttribute("userid");
+
+       // 비회원으로 로그인 시 로그인 페이지로 이동
+       if (writer == null || writer.isEmpty()) {
+            return "/main/signup/login";
+       }
        //dto에 id 저장
        dto.setWriter(writer);
 
-      QnaBoardDto qnaBoardDto = qnaBoardService.qnaList(writer);
-        model.addAttribute("qnaBoardDto", qnaBoardDto);
+      List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(writer);
+      model.addAttribute("qnaBoardList", qnaBoardList);
 
-         return "/main/qnaboard/qnalist";
+         return "/mypage/qnaboard/qnalist";
      }
 
    }

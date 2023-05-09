@@ -2,16 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitnc4.mapper.QnaBoardMapper">
     <insert id="insertqna" parameterType="QnaBoardDto">
-        insert into board_qna(category,subject,content,writer,writeday) values (#{category},#{subject},#{content},#{writer},now());
+        insert into board_qna(category,subject,content,writer,qna_name,qna_email,qna_phone,hotelname)
+        values (#{category},#{subject},#{content},#{writer},#{qna_name},#{qna_email},#{qna_phone},#{hotelname});
     </insert>
 
     <select id="searchIdOfinfo" parameterType="String" resultType="MemberDto">
-            select u.user_name, u.email, u.phone
-            from board_qna q join member u on q.writer=u.id
-            LIMIT 1
+        select user_name,email,phone from member where id=#{writer}
     </select>
 
-   <select id="qnaList" parameterType="String" resultType="QnaBoardDto">
-      select * from board_qna where writer=#{writer}
+    <select id="qnaList" parameterType="String" resultType="QnaBoardDto">
+        select *, case category
+         when 1 then '[가입문의]'
+         when 2 then '[예약문의]'
+         when 3 then '[객실/패키지문의]'
+         when 4 then '[기타]'
+        end as category_txt
+        from board_qna
+        where writer=#{writer}
     </select>
 </mapper>

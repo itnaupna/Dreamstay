@@ -37,11 +37,11 @@
                     <span>문의</span>
                     <ul>
                         <li>
-                            <a href="#">문의 내역 확인</a>
+                            <a href="/mypage/qnalist">문의 내역 확인</a>
                         </li>
 
                         <li>
-                            <a href="#">문의 하기</a>
+                            <a href="/mypage/qnaboard">문의 하기</a>
                         </li>
                     </ul>
                 </li>

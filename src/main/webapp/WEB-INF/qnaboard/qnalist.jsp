@@ -2,21 +2,34 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-    .qnaboard table{
+    .qnaboardlist {
         position: absolute;
         top: 150px;
     }
+
+    .qmalisttable
 </style>
 
 <div class="qnaboardlist">
-        <table class="table table-bordered qmalisttable" style="width: 600px;">
-            <tr>
-                <td>제목</td>
-                <td>작성자</td>
-                <td>작성일</td>
+        <table class="table table-bordered qmalisttable" style="width: 1100px;">
+            <tr style="text-align: center">
+                <td style="width: 250px">호텔</td>
+                <td style="width: 600px">제목</td>
+                <td style="width: 200px">작성자</td>
+                <td style="width: 200px">작성일</td>
             </tr>
+
+            <c:forEach items="${qnaBoardList}" var="qnaBoardDto">
+                <tr>
+                    <td>${qnaBoardDto.hotelname}</td>
+                    <td><span style="color: #989442">${qnaBoardDto.category_txt}</span> ${qnaBoardDto.subject}</td>
+                    <td>${qnaBoardDto.writer}</td>
+                    <td><fmt:formatDate value="${qnaBoardDto.writeday}" pattern="yyyy-MM-dd HH:mm" /></td>
+                </tr>
+            </c:forEach>
 
         </table>
 
