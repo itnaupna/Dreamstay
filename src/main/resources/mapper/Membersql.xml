@@ -22,10 +22,13 @@
         values (#{id}, sha2(#{pw}, 256), #{user_name}, #{email}, #{phone}, 1, #{addr}, 0)
     </insert>
 
-    <select id="access" parameterType="Map" resultType="MemberDto">
-        select * from member where id = #{id} and pw = sha2(#{pw}, 256)
+    <select id="joinSiteMember" parameterType="String" resultType="int">
+        select exists(select * from member where id = #{id} and issocial = 0)
     </select>
 
+    <select id="access" parameterType="Map" resultType="MemberDto">
+        select * from member where id = #{id} and pw = sha2(#{pw}, 256) and not account_lock = 5
+    </select>
 
     <select id="searchInfoToEmail" parameterType="String" resultType="MemberDto">
         select * from member where email = #{email}
@@ -46,4 +49,14 @@
     <update id="resetLockCount" parameterType="String">
         update member set account_lock = 0 where id = #{id}
     </update>
+
+    <insert id="kakaoJoin" parameterType="Map">
+        insert into member (id, pw, user_name, email, phone, user_level, addr, point, issocial)
+        values (concat('kakao-',#{id}), sha2(#{id}, 256), #{user_name}, #{email}, #{id}, 1, 'kakao-user', 0, 1)
+    </insert>
+
+    <select id="getKakaoMember" parameterType="String" resultType="MemberDto">
+        select * from member where id = concat('kakao-', #{id}) and issocial = 1
+    </select>
+
 </mapper>

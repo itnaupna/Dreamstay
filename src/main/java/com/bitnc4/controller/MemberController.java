@@ -2,8 +2,6 @@ package com.bitnc4.controller;
 
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.service.MemberService;
-import com.sun.tools.jconsole.JConsoleContext;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 @Controller
@@ -92,12 +89,13 @@ public class MemberController {
     public int idpwChk(String id, String pw, String saveid, HttpSession session, HttpServletResponse response) {
         Cookie cookie;
         // 아이디만 맞을경우
-        if(memberService.overlapId(id) == 1) {
+        if(memberService.overlapId(id)== 1) {
             MemberDto loginuser = memberService.access(id,pw);
             // 아이디와 비밀번호가 모두 맞을경우
             if(loginuser != null) {
                 memberService.resetLockCount(id);
                 session.setAttribute("loginuser",loginuser);
+                System.out.println(session.getAttribute("loginuser"));
                 session.setAttribute("userid", id);
                 // 아이디 저장 체크여부  if 문 체크 시 쿠키 생성
                 if(saveid.equals("true")) {
@@ -173,4 +171,19 @@ public class MemberController {
         return lockCount;
     }
 
+    @PostMapping("/kakaologin")
+    @ResponseBody
+    public String kakaoLogin(String id, String user_name, String email, HttpSession session) {
+        MemberDto socialLogin = memberService.getKakaoMember(id);
+        if(socialLogin != null) {
+            System.out.println("아이디 있음");
+            session.setAttribute("loginuser", socialLogin);
+            System.out.println(session.getAttribute("loginuser"));
+        } else {
+            System.out.println("아이디 없음");
+            memberService.kakaoJoin(id, user_name, email);
+            session.setAttribute("loginuser", socialLogin);
+        }
+        return "redirect:/";
+    }
 }

@@ -17,4 +17,5 @@ public class MemberDto {
     private int account_lock;
     private int email_code;
     private int point;
+    private int issocial;
 }

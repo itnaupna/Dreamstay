@@ -96,6 +96,12 @@ public class MemberService implements MemberServiceInter {
         memberMapper.joinMember(dto);
     }
 
+    // 사이트에서 가입한 멤버인지 확인
+    @Override
+    public int joinSiteMember(String id) {
+        return memberMapper.joinSiteMember(id);
+    }
+
     // 로그인
     @Override
     public MemberDto access(String id, String pw) {
@@ -133,5 +139,19 @@ public class MemberService implements MemberServiceInter {
     @Override
     public void resetLockCount(String id) {
         memberMapper.resetLockCount(id);
+    }
+
+    @Override
+    public void kakaoJoin(String id, String user_name, String email) {
+        Map<String, String> info = new HashMap<String, String>();
+        info.put("id", id);
+        info.put("user_name", user_name);
+        info.put("email", email);
+        memberMapper.kakaoJoin(info);
+    }
+
+    @Override
+    public MemberDto getKakaoMember(String id) {
+        return memberMapper.getKakaoMember(id);
     }
 }

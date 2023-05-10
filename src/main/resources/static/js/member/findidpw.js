@@ -53,8 +53,7 @@ $("#findidpw_findpw").click(function() {
 $("#findidpw_select_domain").click(  function () {
     let posi = Number($(this).position().left + 30);
     console.log(posi);
-    $("#findidpw_custom_option").slideToggle();
-    $('#findidpw_custom_option').css('left',posi);
+    $("#findidpw_custom_option").slideToggle().css("left", posi);
 });
 
 // select option 선택시 domain 에 적용

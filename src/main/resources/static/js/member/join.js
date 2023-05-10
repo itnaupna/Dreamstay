@@ -25,8 +25,7 @@ $("#zipcode, #addr").focus(function() {
 
 // 이메일 select box 이벤트
 $("#join_domain").click(  function () {
-    $("#signup_custom_option").slideToggle();
-    $('#signup_custom_option').css('left',$(this).position().left + 30);
+    $("#signup_custom_option").slideToggle().css("left", $(this).position().left + 30);
 });
 
 // select option 선택시 domain 에 적용

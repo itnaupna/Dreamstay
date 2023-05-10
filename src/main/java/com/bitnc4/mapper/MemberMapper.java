@@ -3,6 +3,7 @@ package com.bitnc4.mapper;
 import com.bitnc4.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,9 @@ public interface MemberMapper {
     
     // 회원가입
     public void joinMember(MemberDto dto);
+
+    // 사이트에서 가입한 아이디인지 확인
+    public int joinSiteMember(String id);
 
     // 로그인
     public MemberDto access(Map<String, String> idpw);
@@ -41,4 +45,11 @@ public interface MemberMapper {
 
     // 로그인 성공시 틀린 횟수 리셋
     public void resetLockCount(String id);
+
+    // 카카오 첫 로그인 시 db에 추가
+    public void kakaoJoin(Map<String, String> info);
+
+    // 카카오 로그인 시 기존에 카카오로 가입한 회원인지 확인
+    public MemberDto getKakaoMember(String id);
+
 }
