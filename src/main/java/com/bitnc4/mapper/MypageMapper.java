@@ -15,4 +15,8 @@ public interface MypageMapper {
     public int matchForIdPw(Map<String, String> map);
 
     public int updateUserPass(Map<String, Object> map);
+
+    public void updateUserInfo(MemberDto dto);
+
+
 }

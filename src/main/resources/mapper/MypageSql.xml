@@ -10,11 +10,15 @@
     </update>
 
     <delete id="deleteUser" parameterType="String">
-        delete from member where id=#{id}
+        delete from member where id=#{id}d
     </delete>
 
     <select id="matchForIdPw" parameterType="Map" resultType="int">
         select exists(select * from member where id = #{id} and pw = sha2(#{pw}, 256))
     </select>
+
+    <update id="updateUserInfo" parameterType="MemberDto">
+        update member set user_name=#{user_name},phone=#{phone},addr=#{addr} where id=#{id}
+    </update>
 
 </mapper>
