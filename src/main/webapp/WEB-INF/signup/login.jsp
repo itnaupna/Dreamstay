@@ -218,10 +218,7 @@
                     <a href="/signup/signup">회원가입<span class="material-symbols-outlined">
 navigate_next
 </span></a>
-                    <a href="/signup/findidpw">아이디/비밀번호찾기<span class="material-symbols-outlined">
-navigate_next
-</span></a>
-                    <a href="">계정활성화<span class="material-symbols-outlined">
+                    <a href="/signup/findidpw">아이디/비밀번호찾기/계정활성화<span class="material-symbols-outlined">
 navigate_next
 </span></a>
                 </div>

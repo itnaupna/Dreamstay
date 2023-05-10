@@ -24,15 +24,30 @@ $("#zipcode, #addr").focus(function() {
 });
 
 // 이메일 select box 이벤트
-$("#join_domain").change(function() {
-    if($(this).val() == "직접 입력") {
-        $("#email_domain").val("");
-        $("#email_domain").attr("readonly", false);
+$("#join_domain").click(  function () {
+    $("#signup_custom_option").slideToggle();
+});
+
+// // 이메일 select box 이벤트
+// $("#join_domain").change(function() {
+//     if($(this).val() == "직접 입력") {
+//         $("#email_domain").val("");
+//         $("#email_domain").attr("readonly", false);
+//     } else {
+//         $("#email_domain").val($(this).val());
+//         $("#email_domain").attr("readonly", true);
+//     }
+// })
+// select option 선택시 domain 에 적용
+$(".signup_select_option").click(function() {
+    if($(this).text() == "직접 입력") {
+        $("#email_domain").val("").attr("readonly", false);
+        $("#join_domain").text($(this).text()).click();
     } else {
-        $("#email_domain").val($(this).val());
-        $("#email_domain").attr("readonly", true);
+        $("#email_domain").val($(this).text()).attr("readonly", true);
+        $("#join_domain").text($(this).text()).click();
     }
-})
+});
 
 // 이메일 인증번호 전송 이벤트
 $('#SendEmailBtn').click(function (e) {
@@ -115,7 +130,7 @@ $('#CheckEmailBtn').click(function (e) {
                 joinConfirm.c_email = true;
                 $("#join_code_chk").html("");
                 console.log("email=" + joinConfirm.c_email);
-                alert("인증번호가 맞습니다");
+                alert("인증번호가 일치합니다");
             } else {
                 alert("인증번호가 일치하지 않습니다"); // 인증번호 일치하지 않을 때
             }
@@ -131,25 +146,30 @@ $('#CheckEmailBtn').click(function (e) {
 $("#id_check").click(function (e) {
 
     let id = $("#id").val();
-
-    $.ajax({
-        type: 'get',
-        url: '/signup/overlapid',
-        data: {"id": id},
-        success: function (data) {
-            if (data == 0) {
-                alert("사용가능한 아이디입니다");
-                $("#join_idchk").html("");
-                joinConfirm.c_id = true;
-                console.log("id=" + joinConfirm.c_id);
-            } else {
-                alert("중복된 아이디 입니다.");
+    console.log(id.length);
+    if(id != "" && (id.length >= 5 && id.length <= 15)) {
+        $.ajax({
+            type: 'get',
+            url: '/signup/overlapid',
+            data: {"id": id},
+            success: function (data) {
+                if (data == 0) {
+                    alert("사용가능한 아이디입니다");
+                    $("#join_idchk").html("");
+                    joinConfirm.c_id = true;
+                    console.log("id=" + joinConfirm.c_id);
+                } else {
+                    alert("중복된 아이디 입니다.");
+                }
+            },
+            error: function () {
+                alert('중복확인 오류메세지입니다');
             }
-        },
-        error: function () {
-            alert('중복확인 오류메세지입니다');
-        }
-    });
+        });
+    } else {
+        alert("아이디는 5자리 이상 15이하로 사용가능합니다");
+    }
+
 });
 let pw;
 let pwchk;
@@ -198,7 +218,7 @@ $("#signupBtn").click(function(){
             $("#email_code").focus();
         }
         if (joinConfirm.c_pw == false || joinConfirm.c_pwform == false) {
-            $("#successpwCheck").text("비밀번호는 특수문자, 문자, 숫자 포함 8 ~ 15 자리의 형태로 사용 가능합니다").css("color", "red");
+            $("#pwform").text("비밀번호는 특수문자, 문자, 숫자 포함 8 ~ 15 자리의 형태로 사용 가능합니다").css("color", "red");
             $("#pw").focus();
         }
         if (joinConfirm.c_id == false) {
@@ -241,5 +261,9 @@ $("#phone").on("input", function() {
         joinConfirm.c_phonenum = true;
         $("#join_null_check_phonenum").html("");
     }
+});
+
+$("#signup_back").click(function() {
+    location.href="/";
 });
 

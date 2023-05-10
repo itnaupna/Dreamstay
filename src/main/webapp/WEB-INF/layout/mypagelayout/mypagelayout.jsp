@@ -21,6 +21,7 @@
         position: absolute;
         padding: 30px;
         margin-left: 500px;
+        z-index: 1;
     }
 
 </style>

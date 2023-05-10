@@ -34,6 +34,7 @@ $("#findpw_pw, #findpw_pw2").on('input', function() {
 
 $("#changepassword_confirm").click(function() {
     if(confirm_pwform && confirm_pw) {
+        alert("비밀번호가 재설정 되었습니다 변경된 비밀번호로 로그인 하십시오");
         $("#findpw_submit").submit();
     }
 });

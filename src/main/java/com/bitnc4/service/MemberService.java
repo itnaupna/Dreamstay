@@ -119,4 +119,19 @@ public class MemberService implements MemberServiceInter {
         changepw.put("pw", pw);
         memberMapper.changePassword(changepw);
     }
+
+    @Override
+    public void accountLockCount(String id) {
+        memberMapper.accountLockCount(id);
+    }
+
+    @Override
+    public int showLockCount(String id) {
+        return memberMapper.showLockCount(id);
+    }
+
+    @Override
+    public void resetLockCount(String id) {
+        memberMapper.resetLockCount(id);
+    }
 }

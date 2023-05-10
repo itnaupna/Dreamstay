@@ -26,11 +26,24 @@
         select * from member where id = #{id} and pw = sha2(#{pw}, 256)
     </select>
 
+
     <select id="searchInfoToEmail" parameterType="String" resultType="MemberDto">
         select * from member where email = #{email}
     </select>
 
     <update id="changePassword" parameterType="Map">
-        update member set pw = sha2(#{pw}, 256) where id = #{id}
+        update member set pw = sha2(#{pw}, 256), account_lock = 0 where id = #{id}
+    </update>
+
+    <update id="accountLockCount" parameterType="String">
+        update member set account_lock = account_lock + 1 where id = #{id}
+    </update>
+
+    <select id="showLockCount" parameterType="String" resultType="int">
+        select account_lock from member where id = #{id}
+    </select>
+
+    <update id="resetLockCount" parameterType="String">
+        update member set account_lock = 0 where id = #{id}
     </update>
 </mapper>

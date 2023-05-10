@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
@@ -90,28 +89,37 @@ public class MemberController {
     // 로그인
     @PostMapping("/access")
     @ResponseBody
-    public boolean idpwChk(String id, String pw, String saveid, HttpSession session, HttpServletResponse response, Model model) {
+    public int idpwChk(String id, String pw, String saveid, HttpSession session, HttpServletResponse response) {
         Cookie cookie;
-        MemberDto loginuser = memberService.access(id,pw);
-        if(loginuser != null) {
-            session.setAttribute("loginuser",loginuser);
-            session.setAttribute("userid", id);
-            model.addAttribute("userid", id);
-            if(saveid.equals("true")) {
-                cookie = new Cookie("saveid", id);
-                cookie.setDomain("localhost");
-                cookie.setPath("/");
-                cookie.setMaxAge(60 * 60);
-                cookie.setSecure(true);
-                response.addCookie(cookie);
-            } else if(saveid.equals("false")) {
-                cookie = new Cookie("saveid", null);
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
+        // 아이디만 맞을경우
+        if(memberService.overlapId(id) == 1) {
+            MemberDto loginuser = memberService.access(id,pw);
+            // 아이디와 비밀번호가 모두 맞을경우
+            if(loginuser != null) {
+                memberService.resetLockCount(id);
+                session.setAttribute("loginuser",loginuser);
+                session.setAttribute("userid", id);
+                // 아이디 저장 체크여부  if 문 체크 시 쿠키 생성
+                if(saveid.equals("true")) {
+                    cookie = new Cookie("saveid", id);
+                    cookie.setDomain("localhost");
+                    cookie.setPath("/");
+                    cookie.setMaxAge(60 * 60 * 24 * 7);
+                    cookie.setSecure(true);
+                    response.addCookie(cookie);
+                } else {
+                    cookie = new Cookie("saveid", "");
+                    cookie.setDomain("localhost");
+                    cookie.setPath("/");
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
+                return 1;
+            } else {
+                return 0;
             }
-            return true;
         } else {
-            return false;
+            return 34543643;
         }
     }
     
@@ -120,8 +128,7 @@ public class MemberController {
     public String logout(HttpSession session) {
         session.removeAttribute("loginuser");
        session.removeAttribute("userid");
-
-        return "redirect:/";
+       return "redirect:/";
     }
     
     // 아이디 비밀번호찾기로 이동
@@ -153,6 +160,17 @@ public class MemberController {
     @PostMapping("/updatepassword")
     public String chgPass(String id, String pw){
         memberService.changePassword(id, pw);
-        return "redirect:/";
+        return "redirect:/signup/login";
     }
+
+    @PostMapping("/lockcount")
+    @ResponseBody
+    public int lockcount(String id) {
+        int lockCount = memberService.showLockCount(id) + 1;
+        if (lockCount <= 5) {
+            memberService.accountLockCount(id);
+        }
+        return lockCount;
+    }
+
 }

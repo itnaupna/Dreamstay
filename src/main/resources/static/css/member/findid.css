@@ -1,0 +1,48 @@
+.findid_titlebox {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 180px auto 0 auto;
+    text-align: center;
+    width: 600px;
+    height: 400px;
+}
+.findid_title {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 40px;
+    font-size: 35px;
+}
+.findid_subjectbox {
+    display: table-cell;
+    vertical-align: middle;
+    background-color: #f9f9f9;
+    width: 600px;
+    height: 300px;
+}
+
+.findid_span {
+    display: block;
+    font-size: 20px;
+}
+
+.findid_subject {
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+.findid_text {
+    margin-bottom: 30px;
+}
+
+#findid_gomain {
+    width: 200px;
+    background-color: black;
+    border: none;
+    color: white;
+    height: 60px;
+    cursor: pointer;
+}
+
+#findid_gomain:hover{
+    background-color: white;
+    color: black;
+}
