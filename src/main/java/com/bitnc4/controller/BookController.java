@@ -18,15 +18,15 @@ public class BookController {
     @Autowired
     private HttpSession session;
 
-    @GetMapping("/search_room")
+    @GetMapping("/book/search_room")
     public String book(HttpSession session){
 
-     /*var checkIn = session.getAttribute("checkIn");
+     var checkIn = session.getAttribute("checkIn");
      var checkOut = session.getAttribute("checkOut");
      var selectedHotel = session.getAttribute("selectedHotel");
      var roomCount = session.getAttribute("roomCount");
      var adultCount = session.getAttribute("adultCount");
-     var childrenCount = session.getAttribute("childrenCount");*/
+     var childrenCount = session.getAttribute("childrenCount");
 
 
         return "/main/book/search_room";

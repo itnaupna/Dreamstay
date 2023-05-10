@@ -57,7 +57,7 @@ public class MainController {
         session.setAttribute("adultCount", adultCount);
         session.setAttribute("childrenCount", childrenCount);
 
-        return "/main/book/search_room";
+        return "redirect:/book/search_room";
     }
 
 
