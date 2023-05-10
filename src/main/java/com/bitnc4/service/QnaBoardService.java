@@ -6,6 +6,8 @@ import com.bitnc4.mapper.QnaBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QnaBoardService implements QnaBoardServiceInter {
 
@@ -31,9 +33,15 @@ public class QnaBoardService implements QnaBoardServiceInter {
 
 
     @Override
-   public QnaBoardDto qnaList(String writer) {
+   public List<QnaBoardDto> qnaList(String writer) {
+
         return qnaBoardMapper.qnaList(writer);
    }
+
+    @Override
+    public QnaBoardDto getQna(int num) {
+        return qnaBoardMapper.getQna(num);
+    }
 
 
 }
