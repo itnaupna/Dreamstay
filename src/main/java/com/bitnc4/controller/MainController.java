@@ -48,7 +48,6 @@ public class MainController {
         String roomCount = request.getParameter("room_cnt");
         String adultCount = request.getParameter("adult_cnt");
         String childrenCount = request.getParameter("children_cnt");
-
         // Store form data in session
         session.setAttribute("checkIn", checkIn);
         session.setAttribute("checkOut", checkOut);
@@ -64,5 +63,4 @@ public class MainController {
 
         return "/main/book/search_room";
     }
-
 }
