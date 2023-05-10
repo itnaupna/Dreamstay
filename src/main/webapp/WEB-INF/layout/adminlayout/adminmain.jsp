@@ -240,6 +240,29 @@
         background-color: #f8f9fc;
         border-bottom: 1px solid #e3e6f0;
     }
+    .boxlist1{
+        margin: 10px;
+        width:100%;
+        height:30px;
+        border-bottom:0.25rem solid rgba(246, 242, 201, 0.67) !important;
+        box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.15)!important;
+        transition: box-shadow 0.1s ease;
+        list-style-type: none;
+        float: left;
+
+
+    }
+    .test2{
+        overflow: auto;
+    }
+    .test2 ul{
+        padding-left: 0px;
+        font-size:.7rem;
+        color:#5a5c69!important;
+        font-weight: 700!important;
+        text-transform: uppercase!important;
+        margin-bottom: 0.25rem!important;
+    }
 </style>
 <div class="card0">
     <div id="card1">
@@ -290,13 +313,16 @@
 <div id="box0">
     <div id="box1">
         <div class="boxtitle1">
-            <span>[확성기 아이콘]최근 공지사항</span> <span>글쓰기아이콘</span>
+            <span style="font-size:1.25rem;color:#5a5c69;font-weight: 700!important;"><i class="bi bi-megaphone" style="margin-right: 10px;">
+            </i>최근 공지사항</span> <span style="cursor: pointer"><i class="bi bi-pencil-square"></i></span>
         </div>
+        <div class="test2">
         <ul>
             <c:forEach items="${data.Notice}" var="item">
-                <li>${item.subject}</li>
+                <li class="boxlist1">${item.subject}</li>
             </c:forEach>
         </ul>
+        </div>
     </div>
     <div id="box2">
         <div class="boxtitle2">

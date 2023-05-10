@@ -11,7 +11,7 @@
 
 <table id="noticeTable" class="table-bordered">
     <caption>
-        <span>Write</span>
+        <button type="button" class="btn btn-secondary"><i class="bi bi-pencil-square" style="padding-right:8px;"></i>Write</button>
     </caption>
     <thead>
     <tr>
@@ -57,6 +57,28 @@
 <style>
     .currpage{
         font-weight:bolder;
+    }
+    th {
+        text-align: left;
+    }
+
+    thead {
+        font-weight: bold;
+        color: #fff;
+        background: #73685d;
+    }
+    td, th {
+        padding: 1em .5em;
+        vertical-align: middle;
+        text-align: center;
+    }
+    td, th tr{
+        font-size:.7rem;
+        color:#5a5c69!important;
+        font-weight: 700!important;
+    }
+    #noticeTable{
+        width: 100%;
     }
 </style>
 
