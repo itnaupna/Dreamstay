@@ -246,7 +246,7 @@
         <div class="info0">
             <div class="info1">
                 <div class="text-area1">회원수</div>
-                <div class="count-area1">4000</div>
+                <div class="count-area1">${data.MemberCount}</div>
             </div>
             <div class="icon-area0">
                 <div class="icon-area1"><i class="bi bi-person-circle"></i></div>
@@ -257,7 +257,7 @@
         <div class="info0">
             <div class="info1">
                 <div class="text-area1">등록된 호텔 수</div>
-                <div class="count-area1">100</div>
+                <div class="count-area1">${data.HotelCount}</div>
             </div>
             <div class="icon-area0">
                 <div class="icon-area1"><i class="bi bi-hospital"></i></div>
@@ -290,8 +290,13 @@
 <div id="box0">
     <div id="box1">
         <div class="boxtitle1">
-            <h6>제목 000</h6>
+            <span>[확성기 아이콘]최근 공지사항</span> <span>글쓰기아이콘</span>
         </div>
+        <ul>
+            <c:forEach items="${data.Notice}" var="item">
+                <li>${item.subject}</li>
+            </c:forEach>
+        </ul>
     </div>
     <div id="box2">
         <div class="boxtitle2">

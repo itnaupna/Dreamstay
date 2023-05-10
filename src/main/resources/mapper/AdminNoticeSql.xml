@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitnc4.mapper.AdminNoticeMapper">
+    <select id="getList" parameterType="Map" resultType="NoticeDto">
+        SELECT * from board_notice ORDER BY num DESC LIMIT #{start},#{count};
+    </select>
+    <select id="getCount" parameterType="int" resultType="int">
+        select count(*) from board_notice;
+    </select>
+</mapper>
