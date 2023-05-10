@@ -59,9 +59,10 @@ public class MainController {
         session.setAttribute("adultCount", adultCount);
         session.setAttribute("childrenCount", childrenCount);
 
+        System.out.println(checkIn);
+        System.out.println("post search");
+
         return "/main/book/search_room";
     }
-
-
 
 }
