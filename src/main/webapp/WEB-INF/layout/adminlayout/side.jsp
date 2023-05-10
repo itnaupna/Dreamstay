@@ -37,10 +37,17 @@
 </style>
 
 <ul class="ulMaster">
-    <li id="liAdmin" onclick="location.href='/admin'"><i class="bi bi-clipboard-data"></i></li>
-    <li id="liChat" onclick="location.href='/admin/chat'"><i class="bi bi-chat-dots"></i></li>
-    <li id="liBoard" onclick="location.href='/admin/notice'"><i class="bi bi-person-circle"></i></li>
-    <li id="liHotel" onclick="location.href='/admin/hotel'"><i class="bi bi-hospital"></i></li>
+    <li id="liAdmin" onclick="location.href='/admin'" data-bs-toggle="tooltip" data-bs-placement="right" title="대시보드"><i class="bi bi-clipboard-data"></i></li>
+    <li id="liChat" onclick="location.href='/admin/chat'" data-bs-toggle="tooltip" data-bs-placement="right" title="채팅관리"><i class="bi bi-chat-dots"></i></li>
+    <li id="liBoard" onclick="location.href='/admin/notice'" data-bs-toggle="tooltip" data-bs-placement="right" title="ㅇㅇㅇ"><i class="bi bi-person-circle"></i></li>
+    <li id="liHotel" onclick="location.href='/admin/hotel'" data-bs-toggle="tooltip" data-bs-placement="right" title="호텔관리"><i class="bi bi-hospital"></i></li>
 </ul>
 <div id="liLogout" onclick="if(confirm('로갓?'))location.href='/signup/logout'"><i class="bi bi-box-arrow-left"></i></div>
 
+<script>
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
