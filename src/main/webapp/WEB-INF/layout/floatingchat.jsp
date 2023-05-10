@@ -114,13 +114,18 @@
     </div>
 </div>
 <style>
-    .chatMsgWrapper{
+    .chatMsgWrapper.chatLeft{
         width:80%;
         margin-bottom:10px;
+        border-right: #c3a61785;
+        border-radius: 20px;
+        box-shadow: 0px 3px 3px rgba(0,0,0,0.2);
+        color:#333333;
+        padding: 10px;
+
+
     }
     .chatMsgBody{
-        border: 2px solid skyblue;
-        border-radius: 0.5rem;
     }
     .chatRight{
         float:right;

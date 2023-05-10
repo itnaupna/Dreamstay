@@ -50,4 +50,7 @@
 	<definition name="/mypage/*" extends="myPageLayout">
 		<put-attribute name="mypagecontent" value="/WEB-INF/mypage/{1}.jsp"/>
 	</definition>
+	<definition name="/mypage/*/*" extends="myPageLayout">
+		<put-attribute name="mypagecontent" value="/WEB-INF/{1}/{2}.jsp"/>
+	</definition>
 </tiles-definitions>

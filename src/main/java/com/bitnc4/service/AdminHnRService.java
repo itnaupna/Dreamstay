@@ -32,15 +32,30 @@ public class AdminHnRService implements AdminHnRServiceInter{
     }
 
     @Override
-    public boolean updateHotelDetail(HotelDto dto) {
-        try{
-            m.updateHotelDetail(dto);
-            return true;
-        }catch (Exception e) {
-            log.error(e.getMessage());
-            return false;
-        }
+    public int updateHotelDetail(HotelDto dto) {
+        m.updateHotelDetail(dto);
+        return dto.getNum();
     }
 
+    @Override
+    public int insertHotel(HotelDto dto){
+        m.insertHotel(dto);
+        return dto.getNum();
+    }
 
+    @Override
+    public List<String> getRoomTypesOfHotel(int hotelnum) {
+        return m.getRoomTypesOfHotel(hotelnum);
+    }
+
+    @Override
+    public int insertRoom(RoomDto dto) {
+        m.insertRoom(dto);
+        return dto.getNum();
+    }
+
+    @Override
+    public int deleteRoom(int roomnum) {
+        return m.deleteRoom(roomnum);
+    }
 }

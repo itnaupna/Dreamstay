@@ -2,10 +2,11 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+${mycustom.value1}
 <div id="partHotel">
   <div id="toolbarHotel">
-    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_add.png" onclick="if(confirm('신규 호텔을 등록하시겠습니까?'))AddHotel();">
-    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_detail.png" onclick="$('#detailHotel').toggle(200)">
+    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_add.png" onclick="if(confirm('신규 호텔을 등록하시겠습니까?'))ClickAddHotelBtn();">
+    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_detail.png" onclick="$('#detailHotel').toggle(200);loadHotel(-1);">
   </div>
   <c:forEach items="${hDto}" var="dto">
     <div class="itemHotel" onclick="loadHotel(${dto.num})">
@@ -14,10 +15,10 @@
       </div>
       <div class="summaryHotel">
         <div class="minititleHotel">
-            ${dto.name}
+            호텔명: ${dto.name}
         </div>
         <div class="miniaddressHotel">
-            ${dto.addr}
+            주소: ${dto.addr}
         </div>
       </div>
     </div>
@@ -27,78 +28,163 @@
   <div id="lstRoomTitle">
     호텔을 선택하세요.
   </div>
-  <div id="detailHotel" style="display:none;">
-    <form id="formHotel" enctype="multipart/form-data">
-      <input type="hidden" name="num" id="detailHotelNum">
-      <table class="table table-bordered">
-        <caption style="font-size:0.8rem;caption-side: top;">
-          <span style="float:left;" onclick="if(confirm('Save the modify value?'))updateHotel();">Save</span>
-          <span style="float:right;">DblClick to edit value.</span>
-        </caption>
-        <tr>
-          <td rowspan="3" style="width:160px;vertical-align: middle;">
-            <img src="" id="detailHotelImg" style="width:160px;height:120px;" onclick="changePhoto();">
-            <input type="file" name="file" style="display:none" accept="image/*">
-          </td>
-          <td id="detailHotelName">
-            <div class="form-floating">
-              <input type="text" class="form-control" name="name" placeholder="_" readonly required>
-              <label class="form-label">이름</label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td id="detailHotelAddr">
-            <div class="form-floating">
-              <input type="text" class="form-control" name="addr" placeholder="_" readonly required>
-              <label class="form-label">주소</label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td id="detailHotelPhone">
-            <div class="form-floating">
-              <input type="text" class="form-control" placeholder="_" name="phone" readonly>
-              <label class="form-label">연락처</label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" id="detailHotelMemo">
-            <div class="form-floating">
-              <textarea class="form-control" placeholder="_" name="memo" readonly></textarea>
-              <label class="form-label">추가설명</label>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </div>
-  <div id="lstRoom">
-    <div id="summaryRoom">
-      Total : <span id="summaryRoomTotal"></span><br/>
-      Current : <span id="summaryRoomCurrent"></span><br/>
-      Reservation : <span id="summaryRoomReservation"></span><br/>
-      Remain : <span id="summaryRoomRemain"></span>
+  <div id="lstRoomWrapper">
+    <div id="detailHotel" style="display:none;">
+      <form id="formHotel" enctype="multipart/form-data">
+        <input type="hidden" name="num" id="detailHotelNum">
+        <table class="table table-bordered">
+          <caption style="font-size:0.8rem;caption-side: top;">
+            <span style="float:left;">
+              <span class="spanbtn"  onclick="if(confirm('Save the modify value?'))updateHotel();">저장</span>
+              <span class="spanbtn" onclick="$('#detailHotel').hide(200);">취소</span>
+            </span>
+            <span style="float:right;">값을 수정하려면 더블클릭하세요.</span>
+          </caption>
+          <tr>
+            <td rowspan="3" style="width:160px;vertical-align: middle;">
+              <img src="" id="detailHotelImg" style="width:160px;height:120px;" onclick="changePhoto();">
+              <input type="file" name="file" style="display:none" accept="image/*">
+            </td>
+            <td id="detailHotelName">
+              <div class="form-floating">
+                <input type="text" class="form-control" name="name" placeholder="_" readonly required>
+                <label class="form-label">이름</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td id="detailHotelAddr">
+              <div class="form-floating">
+                <input type="text" class="form-control" name="addr" placeholder="_" readonly required>
+                <label class="form-label">주소</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td id="detailHotelPhone">
+              <div class="form-floating">
+                <input type="text" class="form-control" placeholder="_" name="phone" readonly>
+                <label class="form-label">연락처</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" id="detailHotelMemo">
+              <div class="form-floating">
+                <textarea class="form-control" placeholder="_" name="memo" readonly></textarea>
+                <label class="form-label">추가설명</label>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
     </div>
-    <div id="lstRoomItems">
+    <div id="lstRoom">
+      <div id="summaryRoom">
+        <%--
+        호텔별 방 현황 요약
+        방 전체 표시
+        추가 할수도 있는것들 : 오늘날짜에 사용중인 방, 예약잡힌 방, 예약이 잡히지 않은 방 등등...
+         --%>
+        <span>등록된 객실 : <span id="summaryRoomTotal">999</span></span>
+        <span>가용 객실 : <span id="summaryRoomCurrent">999</span></span>
+        <span>미사용 객실 : <span id="summaryRoomReservation">999</span></span>
+        <span  class="spanbtn" id="addRoom" onclick="$('#formRoom').show(200);$('#detailHotel').hide(200);">추가</span>
+        <!--Remain : <span id="summaryRoomRemain"></span>-->
+      </div>
+      <form id="formRoom" style="display:none;">
+        <table class="table" style="width:100%">
+          <caption style="caption-side: top;">
+            <label>
+              <input type="checkbox" name="islock"> 미사용 객실
+            </label>
+            <span style="float:right;">내용을 입력하려면 필드를 더블클릭하세요.</span>
+
+          </caption>
+          <tr>
+            <td colspan="2" style="width:50%;">
+              <div class="form-floating">
+                <input id="roomtype" type="text" class="form-control" name="roomtype" placeholder="_" list="roomtypedatalist" required readonly>
+                <label class="form-label">객실 타입</label>
+                <datalist id="roomtypedatalist">
+                  <option>Eong</option>
+                </datalist>
+              </div>
+            </td>
+            <td colspan="2" style="width:50%;">
+              <div class="form-floating">
+                <input type="number" class="form-control" name="roomprice" placeholder="_" required readonly>
+                <label class="form-label">1박 요금</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" style="width:75%;">
+              <div class="form-floating">
+                <input type="text" class="form-control" name="roommemo" placeholder="_" readonly>
+                <label class="form-label">객실 설명</label>
+              </div>
+            </td>
+            <td style="width:25%;vertical-align: middle">
+              <div style="display:flex;justify-content: space-around">
+                <span class="spanbtn" onclick="UploadRoom();">저장</span>
+                <span  class="spanbtn" onclick="$('#formRoom').hide(200);">취소</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+      <div id="lstRoomItems" style="margin:5px 0px;">
+        <table style="width:100%;table-layout: fixed;" class="table">
+          <thead>
+          <tr style="background-color:#e9ddb8">
+            <th style="width:20%;">객실타입</th>
+            <th style="width:15%;">1일요금</th>
+            <th style="width:45%;">객실 설명</th>
+            <th style="width:20%;">상세정보</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr>
+            <td>TypeEong</td>
+            <td>1,500,000</td>
+            <td>애옹이들이 애옹하는 객실입니다. 정말 편안하고 즐거운 객실이죠.</td>
+            <td>상세정보 삭제</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
-
 <style>
+  #lstRoomItems > table > tbody > tr:hover{
+    background-color: rgba(243, 219, 190, 0.74);
+    cursor:pointer;
+  }
+  #lstRoomItems>table td{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+  }
+  #lstRoomItems>table th{
+    text-align: center;
+  }
   #detailHotelImg{
     border:1px solid;
   }
-  table caption span:first-child:hover{
-    text-decoration: underline;
-    cursor:pointer;
-  }
+  /*table caption span:first-child:hover{*/
+  /*  text-decoration: underline;*/
+  /*  cursor:pointer;*/
+  /*}*/
   #toolbarHotel {
     position: absolute;
     top: 0px;
     right: 0px;
-    background-color: navajowhite/*#1c1c1c*/;
+    background-color: #efedea;
     padding:5px;
     border-bottom-left-radius: 5px;
   }
@@ -116,7 +202,7 @@
     margin: -15px 0px 10px -15px;
     padding:5px;
     font-size: 1.5rem;
-    background-color:skyblue;
+    background-color: #ecd2a9;
     width:calc(100% + 30px);
     height:3rem;
     text-align: center;
@@ -124,7 +210,8 @@
   .thumbsHotel{
     width: 80px;
     height:80px;
-    border:1px solid black;
+    border:1px solid #e3dddd;
+    border-radius: 0.825rem;
     margin-right:10px;
   }
   .adminmain{
@@ -132,8 +219,10 @@
     justify-content: left;
   }
   .itemHotel{
-    border:1px solid black;
-    border-radius:15px;
+    border-radius: 0.825rem;
+    border-left: 0.25rem solid rgba(219,195,150,0.48) !important;
+    box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.15) !important;
+    transition: box-shadow 0.1s ease;
     padding:10px;
     width:100%;
     height:100px;
@@ -142,9 +231,13 @@
     align-items: center;
 
   }
+  .itemHotel:hover{
+    box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.9) !important;
+    cursor: pointer;
+  }
   #partHotel,#partRoom{
-    border:1px solid gray;
-    border-radius:15px;
+    border-radius:0.825rem;
+    border:0.25rem solid #dbc396 !important;
     padding:15px;
     overflow-y:auto;
     width:45%;
@@ -169,68 +262,75 @@
     box-shadow: 0 0 5px rgb(152,129,34) !important;
 
   }
+  #lstRoomItems tr{
+    /*max-height:41px;*/
+    height:47px;
+    vertical-align: middle;
+  }
 
-  /*#detailHotel{*/
-  /*  transition: max-height ease 0.2s;*/
-  /*  overflow:hidden;*/
-  /*  max-height:100%;*/
-  /*}*/
+  #summaryRoom {
+    display:flex;
+    justify-content: space-between;
+    background-color: #e7e7e7;
+    padding:10px;
+    border-radius: 0.375rem;
+  }
 
-  /*.zeroheight {*/
-  /*  max-height:0px !important;*/
-  /*}*/
+  #addRoom {
+    font-size:0.8rem;
+  }
+  .spanbtn {
+    cursor:pointer;
+    text-decoration: underline;
 
+  }
+  .spanbtn:hover{
+    font-weight: bolder;
+  }
+  #partRoom marquee{
+    font-size:.7rem;
+  }
+  .summaryHotel, #partRoom{
+    font-size:.7rem;
+    color:gray;
+    font-weight: 700 !important;
+  }
 </style>
 <script>
-
-  function AddHotel() {
-    $('#lstRoom').hide(200);
-    $('#detailHotel').hide(200,()=>{
-      $('#detailHotel input').val('');
-      $('#detailHotel textarea').text('');
-      $('#detailHotelImg').attr('src','');
-    });
-    $('#detailHotel').show(200);
-
-  }
-
-  function changePhoto() {
-    let tempvar = $('input[type="file"]')[0].files;
-    $('input[type="file"]').click();
-    $('input[type="file"]').on({
-      'change':(e)=>{
-        if(e.target.files.length===0){
-          //Cancel
-          //Restore previous selection.
-          e.target.files = tempvar;
-        }else{
-          //Ok
-          var reader = new FileReader();
-          reader.onload = function(e) {
-            $("#detailHotelImg").attr("src", e.target.result);
-          }
-          reader.readAsDataURL($(e.target)[0].files[0]);
+  $('#lstRoomItems tbody')
+          .on('mouseenter','tr',(e)=>{
+    let dest = $($($(e.target).parent()).children()[2]);
+    let tmp = dest.text();
+    let c = dest.clone().css({display:'inline',width:'auto',visibility:'hidden',position:'absolute'}).appendTo('body');
+    if(c.width() > dest.width())
+      dest.html('<marquee behavior="alternate" scrollamount="5" class="form-control" style="border:none;margin:0px;padding:0px;">'+tmp+'</marquee>');
+    c.remove();
+  })
+          .on('mouseleave','tr',(e)=>{
+    let dest = $($($(e.target).parent()).children()[2]);
+    let tmp = dest.text();
+    dest.html(tmp);
+  });
+  $('#roomtype').on({
+    'dblclick':(e)=>{
+      $('#roomtypedatalist').empty().append($('<option/>').text('기존 객실 타입 검색 중...'));
+      $.ajax({
+        url:'./hotel/getroomtype/' + $('#detailHotelNum').val(),
+        dataType:'json',
+        success:(e)=>{
+          $('#roomtypedatalist').empty();
+          $.each(e,(i,e)=>{
+            console.log(e);
+            $('#roomtypedatalist').append($('<option/>').text(e));
+          });
+        },
+        fail:(e)=>{
+          console.log("error");
+          $('#roomtypedatalist').empty().append($('<option/>').text('검색에 실패하였습니다.'));
         }
-      }
-    });
-  }
-  function updateHotel(){
-    let data = new FormData($('#formHotel')[0]);
-    // console.log(formData);
-    $.ajax({
-      url:'./hotel/update',
-      enctype:'multipart-form-data',
-      type:'post',
-      processData:false,
-      contentType:false,
-      data:data,
-      success:(e)=>{
-        if(e){
-          //$('#detailHotelNum').val() === '' ?
-        }
-      }
-    })
-  }
+      })
+    }
+  });
   $('table input,table textarea').on({
     'dblclick':(e)=>{
       $(e.target).removeAttr('readonly').css({
@@ -254,37 +354,144 @@
       });
       console.log(e.target.scrollHeight);
     }
-  });
-
-
-  function loadHotel(hotelnum){
-    $('#lstRoomTitle').text("Loading Hotel info...");
+  }); //FIXME : Textarea 높이 자동조절. 이유는 모르겠는데 갑자기 동작안함.
+  function UploadRoom() {
+    let data = new FormData($('#formRoom')[0]);
+    data.set('islock',data.get('islock') === 'on' ? 1 : 0);
     $.ajax({
-      url:'./hotel/' + hotelnum,
-      dataType:'json',
+      url:'./hotel/uploadroom/' + $('#detailHotelNum').val(),
+      data:data,
+      enctype:'multipart-form-data',
+      type:'post',
+      processData: false,
+      contentType: false,
       success:(e)=>{
-        //console.log(e[0].memo==null);
-        $('input[type="file"]').val(null);
-        $('#lstRoomTitle').text('hotel\'s room');
-        //https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/6ce87bf1-d4e6-4129-b9c7-1ed036ab9f82
-        $('#detailHotelImg').attr('src','https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/'+e[0].photo+'?type=f&w=160&h=120&faceopt=false');
-        $('#detailHotelNum').val(e[0].num);
-        $('#detailHotelName input').val(e[0].name);
-        $('#detailHotelAddr input').val(e[0].addr);
-        $('#detailHotelPhone input').val(e[0].phone);
-        $('#detailHotelMemo textarea').text(e[0].memo==null ? '' : e[0].memo);
-        $('#summaryRoomTotal').text(e[1].length);
-        $('#lstRoomItem').empty();
-        $('#lstRoom').show(200);
-        $.each(e[1],(idx,e)=>{
-          $('#lstRooms').append(e.hotelnum + ' ' + e.roomtype + ' ' + e.roomprice);
-          $('#lstRooms').append('<br/>');
-        });
-        // console.log(e);
-      },fail:(e)=>{
-        $('#lstRoomTitle').text("Failed to load info.")
+        if(e>0){
+          loadHotel($('#detailHotelNum').val());
+        }else{
+          alert('객실추가에 실패하였습니다. 다시 시도해주세요.');
+        }
+      }
+
+    })
+  }
+  function ClickAddHotelBtn() {
+    $('#lstRoomTitle').text('신규 호텔 등록');
+    $('#lstRoom').hide(200);
+    $('#detailHotel').hide(200,()=>{
+      $('#detailHotel input').val('');
+      $('#detailHotel textarea').text('');
+      $('#detailHotelImg').attr('src','');
+      $('#detailHotelNum').val('0');
+    });
+    $('#detailHotel').show(200);
+  }
+  function changePhoto() {
+    let tempvar = $('input[type="file"]')[0].files;
+    $('input[type="file"]').click();
+    $('input[type="file"]').on({
+      'change':(e)=>{
+        if(e.target.files.length===0){
+          //Cancel
+          //Restore previous selection.
+          e.target.files = tempvar;
+        }else{
+          //Ok
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $("#detailHotelImg").attr("src", e.target.result);
+          }
+          reader.readAsDataURL($(e.target)[0].files[0]);
+        }
       }
     });
+  }
+  function updateHotel(){
+    let data = new FormData($('#formHotel')[0]);
+    $.ajax({
+      url:'./hotel/update',
+      enctype:'multipart-form-data',
+      type:'post',
+      processData:false,
+      contentType:false,
+      data:data,
+      success:(e)=>{
+        //TODO : 새로고침이 아니라 최신정보 바로 띄우게 수정해야함.
+        if(e>0){
+
+          location.reload();
+        }else{
+          alert('호텔 추가에 실패하였습니다. 다시 시도해주세요.');
+        }
+      }
+    })
+  }
+  function loadHotel(hotelnum){
+    $('#lstRoomTitle').text("Loading Hotel info...");
+    $('#lstRoomWrapper').hide(100,()=>{
+      $.ajax({
+        url:'./hotel/' + hotelnum,
+        dataType:'json',
+        success:(e)=>{
+          console.log(e[0].memo);
+
+          $('input[type="file "]').val(null);
+          $('#lstRoomTitle').text('hotel\'s room');
+          //https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/6ce87bf1-d4e6-4129-b9c7-1ed036ab9f82
+          $('#detailHotelImg').attr('src','https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/'+e[0].photo+'?type=f&w=160&h=120&faceopt=false');
+          $('#detailHotelNum').val(e[0].num);
+          $('#detailHotelName input').val(e[0].name);
+          $('#detailHotelAddr input').val(e[0].addr);
+          $('#detailHotelPhone input').val(e[0].phone);
+          $('#detailHotelMemo textarea').val(e[0].memo==null ? '' : e[0].memo);
+          $('#summaryRoomTotal').text(e[1].length);
+          $('#lstRoom').show(200);
+          $('#lstRoomItems tbody').empty();
+          $.each(e[1],(idx,e)=>{
+            $('#lstRoomItems tbody').append(
+                    $('<tr>').append(
+                            $('<td>').text(e.roomtype),
+                            $('<td>').text(e.roomprice.toLocaleString('ko-KR')),
+                            $('<td>').text(e.roommemo == null ? '내용없음' : e.roommemo),
+                            $('<td>').append(
+                                    $('<div>').append(
+                                            $('<span>').text('상세정보').addClass('spanbtn'),
+                                            $('<span>').text('삭제').addClass('spanbtn')
+                                                    .on({
+                                                      'click':(f)=>{
+                                                        if(confirm('이 객실을 삭제하시겠습니까?')) DeleteRoom(f.target,e.num);
+                                                      }
+                                                    })
+                                    ).css({
+                                      'display':'flex',
+                                      'justify-content':'space-between'
+                                    })
+                            )
+                    )
+            );
+            //$('#lstRoomItems').append('<br/>');
+          });
+          $('#lstRoomTitle').text(e[0].name);
+          // console.log(e);
+        },fail:(e)=>{
+          $('#lstRoomTitle').text("Failed to load info.")
+        }
+      });
+    }).show(100);
+  }
+  function DeleteRoom(t,roomnum){
+    $.ajax({
+      url:'./hotel/deleteroom/' + roomnum,
+      type:'post',
+      success:(e)=>{
+        if(e>0){
+          loadHotel($('#detailHotelNum').val());
+          //$($(t).parents('tr')).remove();
+        }else{
+          alert('객실 삭제에 실패하였습니다. 다시 시도해주세요.');
+        }
+      }
+    })
   }
 </script>
 

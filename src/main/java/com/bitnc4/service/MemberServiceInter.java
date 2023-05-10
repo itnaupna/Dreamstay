@@ -29,11 +29,20 @@ public interface MemberServiceInter {
     public void joinMember(MemberDto dto);
 
     // 로그인
-    public int access(String id, String pw);
+    public MemberDto access(String id, String pw);
 
     // email로 db 정보 불러오는 메서드
     public MemberDto searchInfoToEmail(String email);
 
     // 비밀번호 변경
     public void changePassword(String id, String pw);
+    
+    // 비빌번호 틀린 횟수 카운팅
+    public void accountLockCount(String id);
+
+    // 틀린횟수 출력
+    public int showLockCount(String id);
+
+    // 로그인 성공시 틀린 횟수 리셋
+    public void resetLockCount(String id);
 }

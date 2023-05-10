@@ -98,7 +98,7 @@ public class MemberService implements MemberServiceInter {
 
     // 로그인
     @Override
-    public int access(String id, String pw) {
+    public MemberDto access(String id, String pw) {
         Map<String, String> idpwChk = new HashMap<String, String>();
         idpwChk.put("id", id);
         idpwChk.put("pw", pw);
@@ -118,5 +118,20 @@ public class MemberService implements MemberServiceInter {
         changepw.put("id", id);
         changepw.put("pw", pw);
         memberMapper.changePassword(changepw);
+    }
+
+    @Override
+    public void accountLockCount(String id) {
+        memberMapper.accountLockCount(id);
+    }
+
+    @Override
+    public int showLockCount(String id) {
+        return memberMapper.showLockCount(id);
+    }
+
+    @Override
+    public void resetLockCount(String id) {
+        memberMapper.resetLockCount(id);
     }
 }

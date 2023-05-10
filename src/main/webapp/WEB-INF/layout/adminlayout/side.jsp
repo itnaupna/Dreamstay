@@ -13,7 +13,7 @@
     li{
         text-align: center;
     }
-    li:hover{
+    li:hover, #liLogout:hover{
         background: linear-gradient(90deg, #c8c8c8cc,transparent) transparent;
         cursor:pointer;
     }
@@ -26,6 +26,14 @@
     .liclicked{
         background: linear-gradient(90deg, #c8c8c8cc,transparent) transparent;
     }
+    #liLogout{
+        position:absolute;
+        bottom:10px;
+        font-size: 2rem;
+        text-align: center;
+        width:100%;
+    }
+
 </style>
 
 <ul class="ulMaster">
@@ -34,3 +42,5 @@
     <li id="liBoard" onclick="location.href='/admin/board'"><i class="bi bi-person-circle"></i></li>
     <li id="liHotel" onclick="location.href='/admin/hotel'"><i class="bi bi-hospital"></i></li>
 </ul>
+<div id="liLogout" onclick="if(confirm('로갓?'))location.href='/signup/logout'"><i class="bi bi-box-arrow-left"></i></div>
+

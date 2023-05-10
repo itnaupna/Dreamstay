@@ -5,6 +5,22 @@
 <input type="text" id="rname">
 <button onclick="createroom($('#rname').val());">만들기</button>
 <div id="res"></div>
+<br><br>
+<br><br>
+
+<div style="border:1px solid">
+    <span>메뉴1</span><span>메뉴1</span><span>메뉴1</span><span>메뉴1</span>
+</div>
+
+<style>
+    span:not(:last-child)::after{
+        content:'|';
+        margin:0px 3px;
+    }
+    span:hover{
+        text-decoration: underline;
+    }
+</style>
 <script>
     getroomlist();
 

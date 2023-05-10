@@ -14,7 +14,7 @@ public class MemberDto {
     private String phone;
     private int user_level;
     private String addr;
-    private int email_confirm;
+    private int account_lock;
     private int email_code;
     private int point;
 }
