@@ -32,4 +32,10 @@ public class BookController {
         return "/main/book/search_room";
     }
 
+    @GetMapping("/payment")
+    public String payment()
+    {
+        return "/main/book/payment";
+    }
+
 }

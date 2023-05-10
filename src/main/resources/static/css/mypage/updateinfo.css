@@ -68,7 +68,7 @@
 }
 
 .u_info .u_name1 .last_name{
-    margin-left: 225px;
+    margin-left: 320px;
 }
 
 /* LAST NAME 위치 */
@@ -78,7 +78,8 @@
 
 /* 이름 수정 text 따로 설정 */
 .u_info .u_name2 input[type=text]{
-    width: 300px;
+    width: 400px;
+    font-size: 17px;
 }
 
 /* 텍스트타입 디자인 */
@@ -112,7 +113,6 @@ input:focus {
     justify-content: center;
     align-items: center;
     font-size: 30px;
-
 }
 
 .u_info .up_btn .update_btn{
