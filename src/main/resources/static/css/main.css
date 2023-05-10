@@ -32,14 +32,14 @@
 
 
 /*메인 css*/
-a:visited {
+.main a:visited {
     color: black; text-decoration: none;
 }
-a{
+.main a{
     text-decoration: none;
     color: black;
 }
-a:hover{
+.main a:hover{
     color: black;
 }
 /*메인타이틀 css*/
@@ -114,11 +114,13 @@ a:hover{
     padding: 0px 30px;
     padding-left: 0px;
     line-height: 30px;
+    height: 60px;
 }
 #main_border_03{
     border-right: 2px solid #c8c8c8;
-    width: 380px;
-    padding: 0px 30px;
+    width: 400px;
+    padding-right: 30px;
+    padding-left: 10px;
     line-height: 30px;
 }
 #main_border_04{
@@ -404,4 +406,98 @@ a:hover{
     opacity: 0;
     transition: opacity 0.17s ease-in-out;
     color: #ffffff;
+}
+
+/*달력 css*/
+
+.calendar {
+    font-size: 20px;
+    width: 400px;
+    height: 480px;
+    padding: 20px 20px 20px 20px;
+    box-sizing: border-box;
+    /*border: 1px solid #000000;*/
+    position: absolute;
+    background-color: #ffffff;
+    color:  #000000;
+    left: 15%;
+}
+#calendar02{
+    margin-left: 600px;
+}
+.calendar > .cal_header {text-align: center;}
+.calendar > .cal_header > .title {font-size: 25px; width:50%; display: inline-block;}
+.calendar > .cal_header > .calendar_btn {
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    padding: 0;
+    background-color: rgba(0,0,0,0);
+    vertical-align: middle;
+    color: black;
+
+}
+.calendar > .day {width:100%; display: table; table-layout: fixed; margin-top: 10px; font-size: 22px;}
+.calendar > .day > div {display: table-cell; text-align: center; height: 50px; vertical-align: middle;}
+.calendar > .day > div:first-child {color: red;}
+.calendar > .day > div:last-of-type {color: blue;}
+/*check in*/
+.calendar > .dates {display: flex; flex-wrap: wrap; width: 100%;}
+.calendar > .dates > .date {text-align: center; width: calc(100%/7); height: 50px; box-sizing: border-box;line-height: 3; border-radius: 3px;}
+.calendar > .dates > .date:nth-child(7n){color: blue;}
+.calendar > .dates > .date:nth-child(7n+1){color: red;}
+.calendar > .dates > .last {color: #c8c8c8 !important;}
+.calendar > .dates > .next {color: #c8c8c8 !important;}
+/*check OUT*/
+.calendar > .dates02 {display: flex; flex-wrap: wrap; width: 100%;}
+.calendar > .dates02 > .date02 {text-align: center; width: calc(100%/7); height: 50px; box-sizing: border-box;line-height: 3; border-radius: 3px;}
+.calendar > .dates02 > .date02:nth-child(7n){color: blue;}
+.calendar > .dates02 > .date02:nth-child(7n+1){color: red;}
+.calendar > .dates02 > .last {color: #c8c8c8 !important;}
+.calendar > .dates02 > .next {color: #c8c8c8 !important;}
+
+.hidden {
+    display: none;
+}
+
+.close-btn{
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 1358px;
+    z-index: 1;
+}
+#calendars {
+    position: absolute;
+    top: -117%;
+    left: 0%;
+    right: 0%;
+    height: 480px;
+    width: 1408px;
+    background-color: #ffffff;
+}
+.calendar_btn{
+    cursor: pointer;
+}
+#calendars_body{
+    position: absolute;
+    height: 480px;
+    width: 1408px;
+}
+.calendars_show{
+    position: absolute;
+    top: 70%;
+    left: 15%;
+}
+.icon_scroll_show{
+    position: absolute;
+    top: 34.3%;
+}
+.animate__fadeOut {
+    animation-duration: 0.3s; /* 원하는 지속 시간으로 조정 */
+}
+#total_calendars{
+    margin-left: 25px;
+    display: inline-block;
 }

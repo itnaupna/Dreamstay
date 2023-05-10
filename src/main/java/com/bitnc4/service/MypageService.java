@@ -41,5 +41,11 @@ public class MypageService implements MypageServiceInter{
         return mypageMapper.updateUserPass(map);
     }
 
+    @Override
+    public void updateUserInfo(MemberDto dto) {
+        mypageMapper.updateUserInfo(dto);
+    }
+
+
 
 }

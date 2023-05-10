@@ -11,7 +11,7 @@
         top: 100px;
         margin-left: 250px;
     }
-    /*닫기 버튼 이미지*/
+    /*닫기 버튼 이미지 */
     .btnMenulist>img{
         position: absolute;
         top: 30px;
@@ -20,6 +20,7 @@
         height: 35px;
         cursor: pointer;
     }
+
 
 
     /*3줄 메뉴 클릭시 나오는 박스에 타이틀*/
@@ -38,10 +39,10 @@
     }
 
     .header .btntitlebox li {
-        color: white;
         margin-bottom: 30px;
         font-weight: bold;
         font-size: 18px;
+        color: white !important;
     }
 
     .header .btntitlebox img {
@@ -64,14 +65,26 @@
         top: 10px;
         width: 11px;
         height: 11px;
+    }
+
+    /*상품 찾기 돋보기 (black)*/
+    .black_find:after{
         background: url(
         https://www.josunhotel.com/static/home/images/ko/pc/common/ico_search_black_11x11.png) no-repeat 0 0;
     }
 
 
+    /*상품 찾기 돋보기 (white)*/
+    .white_find:after{
+        background: url(
+        https://kr.object.ncloudstorage.com/dreamsstaybucket/ico_search_white.png) no-repeat 0 0;
+    }
+
+
+
 </style>
 <!--EONG-->
-<body>
+
 <div class="wrapper mainWrapper">
     <div class="header">
         <div class="headArea">
@@ -187,9 +200,12 @@
             </div>
 
             <div class="topUtil">
-                <a href="" class="hotelFind" style="font-size: 14px;">
-                    상품찾기
-                </a>
+                <ul>
+                    <li>
+                         <a href="" class="hotelFind" style="font-size: 14px;">
+                            상품찾기
+                         </a>
+                    </li>
             </div>
 
             <div class="gnbUtil" >
@@ -236,4 +252,4 @@
 
 
 
-</body>
+

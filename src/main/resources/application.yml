@@ -1,3 +1,5 @@
+mycustom:
+  value1:"Eong"
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

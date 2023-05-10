@@ -1,7 +1,7 @@
 package com.bitnc4.controller;
 
-
 import com.bitnc4.dto.HotelDto;
+import com.bitnc4.dto.RoomDto;
 import com.bitnc4.service.AdminHnRService;
 import lombok.extern.slf4j.Slf4j;
 import naver.cloud.NcpObjectStorageService;
@@ -29,8 +29,6 @@ public class AdminController {
 
     @GetMapping("/chat")
     public String chatList(Model m){
-//        m.addAttribute("dto",cm.test());
-//        log.info(cm.test().toString());
         return "/admin/chat/list";
     }
 
@@ -49,6 +47,10 @@ public class AdminController {
     @GetMapping("/hotel/{hotelnum}")
     @ResponseBody
     public List<Object> rooms(@PathVariable int hotelnum){
+        /*
+        특정 호텔의 호텔정보와 객실목록 불러옴
+        Return : [{호텔정보, List<RoomDto>()}]
+         */
         List<Object> lst = new ArrayList<>();
         lst.add(adminHnRService.getHotelByHotelNum(hotelnum));
         lst.add(adminHnRService.getRoomsByHotelNum(hotelnum));
@@ -57,21 +59,48 @@ public class AdminController {
 
     @PostMapping("/hotel/update")
     @ResponseBody
-    public boolean updateHotel(HotelDto data, MultipartFile file){
-        System.out.println(file.getOriginalFilename().equals(""));
-        if(!file.getOriginalFilename().equals("")) {
-            ncp.deleteFile(bucketName,
-                    "hotel",
-                    adminHnRService.getHotelByHotelNum(data.getNum()).getPhoto()
-            );
+    public int updateHotel(HotelDto data, MultipartFile file) {
+        /*
+        호텔정보 insert/update 호출
+        Return : HotelDto.getNum();
+         */
+        if (!file.getOriginalFilename().equals("")) {
+            if(data.getNum() != 0)
+                ncp.deleteFile(bucketName,
+                        "hotel",
+                        adminHnRService.getHotelByHotelNum(data.getNum()).getPhoto()
+                );
             data.setPhoto(ncp.uploadFile(bucketName, "hotel", file));
         }
-//        else{
-//            data.setPhoto(adminHnRService.getHotelByHotelNum(data.getNum()).getPhoto());
-//        }
-        return adminHnRService.updateHotelDetail(data);
+        return data.getNum()==0 ? adminHnRService.insertHotel(data) : adminHnRService.updateHotelDetail(data);
     }
+
+    @GetMapping("/hotel/getroomtype/{hotelnum}")
+    @ResponseBody
+    public List<String> getRoomTypesOfHotel(@PathVariable int hotelnum){
+        /*
+        객실추가에서 객실타입 입력도움을 위해 추가
+        Return : 해당 호텔에 등록된 객실의 타입들 반환
+         */
+        return adminHnRService.getRoomTypesOfHotel(hotelnum);
+    }
+
+    @PostMapping("/hotel/uploadroom/{hotelnum}")
+    @ResponseBody
+    public int uploadroom(RoomDto roomDto){
+        /*
+        객실 추가
+        Return : 추가된 객실의 RoomDto.getNum()
+         */
+        return adminHnRService.insertRoom(roomDto);
+    }
+
+    @PostMapping("/hotel/deleteroom/{roomnum}")
+    @ResponseBody
+    public int deleteRoom(@PathVariable int roomnum){
+        return adminHnRService.deleteRoom(roomnum);
+    }
+
 
 }
 
-//TODO : Make CRUD for Hotel, room

@@ -89,15 +89,16 @@ public class MemberController {
     // 로그인
     @PostMapping("/access")
     @ResponseBody
-    public int idpwChk(String id, String pw, String saveid, HttpSession session, HttpServletResponse response, Model model) {
+    public int idpwChk(String id, String pw, String saveid, HttpSession session, HttpServletResponse response) {
         Cookie cookie;
         // 아이디만 맞을경우
         if(memberService.overlapId(id) == 1) {
+            MemberDto loginuser = memberService.access(id,pw);
             // 아이디와 비밀번호가 모두 맞을경우
-            if(memberService.access(id, pw) == 1) {
+            if(loginuser != null) {
                 memberService.resetLockCount(id);
+                session.setAttribute("loginuser",loginuser);
                 session.setAttribute("userid", id);
-                model.addAttribute("userid", id);
                 // 아이디 저장 체크여부  if 문 체크 시 쿠키 생성
                 if(saveid.equals("true")) {
                     cookie = new Cookie("saveid", id);
@@ -125,6 +126,7 @@ public class MemberController {
     // 로그아웃클릭 시 세션 지우고 홈으로
     @GetMapping("/logout")
     public String logout(HttpSession session) {
+        session.removeAttribute("loginuser");
        session.removeAttribute("userid");
        return "redirect:/";
     }

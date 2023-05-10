@@ -1,3 +1,4 @@
+/* 제목 */
 .u_info .u_title {
     /*border: 1px solid green;*/
     font-size: 30px;
@@ -7,6 +8,7 @@
     margin-top: 10px;
 }
 
+/* 부제목 */
 .u_info .u_information {
     font-family: 'Carlito', sans-serif;
     /*border: 1px solid pink;*/
@@ -14,6 +16,7 @@
     font-weight: bold;
 }
 
+/* 로그인한 회원 */
 .u_info .u_username {
     /*border: 1px solid blue;*/
     margin-top: 10px;
@@ -34,12 +37,14 @@
     margin-bottom: 10px;
 }
 
+/* 휴대폰 입력*/
 .u_info .u_phonein {
     width: 300px;
     height: 50px;
     margin-top: 20px;
 }
 
+/* 번호 수정 버튼 */
 .u_info .ch_phbtn {
     width: 200px;
     height: 50px;
@@ -48,17 +53,36 @@
     border-width: thin;
     background-color: white;
     margin-left: 20px;
+    cursor: pointer;
 }
 
+/* 이름 수정 타이틀 */
 .u_info .u_name1 {
     margin-top: 30px;
 }
 
+/* 이름 수정 div */
 .u_info .u_name2{
     top: 60px;
     /*border: 1px solid green;*/
 }
 
+.u_info .u_name1 .last_name{
+    margin-left: 320px;
+}
+
+/* LAST NAME 위치 */
+.u_info .u_name2 .ch_name2{
+    margin-left: 20px;
+}
+
+/* 이름 수정 text 따로 설정 */
+.u_info .u_name2 input[type=text]{
+    width: 400px;
+    font-size: 17px;
+}
+
+/* 텍스트타입 디자인 */
 .u_info input[type=text] {
     width: 500px;
     height: 50px;
@@ -70,6 +94,7 @@
     position: relative;
 }
 
+/* input */
 input:focus {
     outline: none;
 }
@@ -98,4 +123,5 @@ input:focus {
     background-color: black;
     height: 60px;
     color: white;
+    cursor: pointer;
 }
