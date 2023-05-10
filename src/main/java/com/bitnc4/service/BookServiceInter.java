@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface BookServiceInter {
 
-    BookDto searchroomdto();
-    public List<RoomDto> getroomlist();
+
+    public List<RoomDto> searchroom(BookDto dto);
+
+   /* public List<RoomDto> getroomlist();*/
 }
