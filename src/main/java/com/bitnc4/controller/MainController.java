@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
@@ -48,6 +47,7 @@ public class MainController {
         String roomCount = request.getParameter("room_cnt");
         String adultCount = request.getParameter("adult_cnt");
         String childrenCount = request.getParameter("children_cnt");
+
         // Store form data in session
         session.setAttribute("checkIn", checkIn);
         session.setAttribute("checkOut", checkOut);
@@ -58,9 +58,9 @@ public class MainController {
         session.setAttribute("adultCount", adultCount);
         session.setAttribute("childrenCount", childrenCount);
 
-        System.out.println(checkIn);
-        System.out.println("post search");
-
-        return "/main/book/search_room";
+        return "redirect:/book/search_room";
     }
+
+
+
 }

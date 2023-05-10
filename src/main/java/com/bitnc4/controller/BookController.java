@@ -21,20 +21,13 @@ public class BookController {
     @GetMapping("/book/search_room")
     public String book(HttpSession session,Model model) {
 
-        var checkIn = session.getAttribute("checkIn");
-        var checkOut = session.getAttribute("checkOut");
-        var selectedHotel = session.getAttribute("selectedHotel");
-        var roomCount = session.getAttribute("roomCount");
-        var adultCount = session.getAttribute("adultCount");
-        var childrenCount = session.getAttribute("childrenCount");
+     var checkIn = session.getAttribute("checkIn");
+     var checkOut = session.getAttribute("checkOut");
+     var selectedHotel = session.getAttribute("selectedHotel");
+     var roomCount = session.getAttribute("roomCount");
+     var adultCount = session.getAttribute("adultCount");
+     var childrenCount = session.getAttribute("childrenCount");
 
-        System.out.println(checkIn);
-        System.out.println(checkOut);
-        System.out.println(selectedHotel);
-        System.out.println(roomCount);
-        System.out.println(adultCount);
-        System.out.println(childrenCount);
-        System.out.println("get search");
 
         model.addAttribute("checkin", checkIn);
         model.addAttribute("checkout", checkOut);
@@ -43,7 +36,6 @@ public class BookController {
         model.addAttribute("adultCount", adultCount);
         model.addAttribute("childrenCount", childrenCount);
 
-        System.out.println(checkOut);
 
         return "/main/book/search_room";
     }
