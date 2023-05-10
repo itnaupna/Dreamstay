@@ -51,7 +51,10 @@ $("#findidpw_findpw").click(function() {
 
 // 이메일 select box 이벤트
 $("#findidpw_select_domain").click(  function () {
+    let posi = Number($(this).position().left + 30);
+    console.log(posi);
     $("#findidpw_custom_option").slideToggle();
+    $('#findidpw_custom_option').css('left',posi);
 });
 
 // select option 선택시 domain 에 적용

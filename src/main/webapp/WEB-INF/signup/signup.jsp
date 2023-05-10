@@ -75,9 +75,9 @@
         list-style-type: none;
         overflow-x: hidden;
         overflow-y: scroll;
-        position: relative;
+        position: absolute;
         display: none;
-        left: 30px;
+        background-color: white;
         text-align: left;
         padding-left: 0;
         border: 1px solid black;
