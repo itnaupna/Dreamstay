@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
+    <%-- first div --%>
     .book_main {
         width: 2000px;
         height: 1200px;
@@ -12,16 +13,18 @@
         flex-direction: column;
     }
 
+    <%-- second div --%>
     .book_main .book_top {
         padding: 70px 0 70px;
     }
 
+    <%-- 타이틀--%>
     .book_main .book_title {
-        /*border: 1px solid aqua;*/
         width: 1400px;
         height: 130px;
     }
 
+    <%-- 타이틀 글씨 --%>
     .book_main .book_title .booking {
         /*border: 1px solid blue;*/
         font-family: 'Playfair Display SC', serif;
@@ -31,7 +34,6 @@
     }
 
     .book_main .book_select {
-        /*border: 1px solid yellow;*/
         margin-top: 20px;
         justify-content: center;
         align-items: center;
@@ -49,6 +51,7 @@
         margin-left: 260px;
     }
 
+    <%-- 두번째 div 큰 틀 --%>
     .book_main .book_select {
         /*border: 1px solid hotpink;*/
         height: 150px;
@@ -57,6 +60,7 @@
         width: 100%;
     }
 
+    <%-- 여기서부터는 선택한 옵션들 출력하는 곳 css --%>
     .book_main .book_select .book_inner {
         padding: 30px;
     }
@@ -83,7 +87,7 @@
     .book_main .book_select .book_inner .dl02 {
         line-height: normal;
     }
-
+    <%-- 끝 --%>
     .mainbtn {
         width: 140px;
         height: 60px;
@@ -95,18 +99,21 @@
         cursor: pointer;
     }
 
+    <%-- 3번째 div 틀 --%>
     .pay {
         margin-left: 280px;
         margin-top: 30px;
         display: inline-block;
     }
 
+    <%-- 제목 입니다 --%>
     .pay .pay_main .pay_choice {
         display: inline-block;
         font-family: 'Playfair Display SC', serif;
         font-size: 50px;
     }
 
+    <%-- 서브 타이틀입니다 --%>
     .pay .pay_main .pay_room {
         display: flex;
         flex-direction: column;
@@ -369,10 +376,9 @@
     .book_box{
         border: 1px solid red;
         width: 500px;
-        height: 400px;
+        height: 100px;
         float: right;
-        margin-right: 200px;
-        margin-top: 240px;
+        margin-top: 50px;
     }
 </style>
 
@@ -425,7 +431,9 @@
 
     <section class="pay">
         <div class="book_box">
-
+            <div class="box_title">
+                객실
+            </div>
         </div>
         <div class="pay_main">
             <div class="pay_choice">
@@ -566,4 +574,5 @@
         selected1.textContent = event.target.textContent;
         options1.classList.remove('show');
     });
+
 </script>
