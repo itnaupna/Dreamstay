@@ -15,10 +15,10 @@ ${mycustom.value1}
       </div>
       <div class="summaryHotel">
         <div class="minititleHotel">
-            ${dto.name}
+            호텔명: ${dto.name}
         </div>
         <div class="miniaddressHotel">
-            ${dto.addr}
+            주소: ${dto.addr}
         </div>
       </div>
     </div>
@@ -122,7 +122,7 @@ ${mycustom.value1}
             <td colspan="3" style="width:75%;">
               <div class="form-floating">
                 <input type="text" class="form-control" name="roommemo" placeholder="_" readonly>
-                <label class="form-label">객실 한 줄 설명</label>
+                <label class="form-label">객실 설명</label>
               </div>
             </td>
             <td style="width:25%;vertical-align: middle">
@@ -138,11 +138,11 @@ ${mycustom.value1}
       <div id="lstRoomItems" style="margin:5px 0px;">
         <table style="width:100%;table-layout: fixed;" class="table">
           <thead>
-          <tr style="background-color:#d4e8ff">
+          <tr style="background-color:#e9ddb8">
             <th style="width:20%;">객실타입</th>
             <th style="width:15%;">1일요금</th>
-            <th style="width:45%;">객실 한 줄 설명</th>
-            <th style="width:20%;"></th>
+            <th style="width:45%;">객실 설명</th>
+            <th style="width:20%;">상세정보</th>
           </tr>
           </thead>
           <tbody>
@@ -160,6 +160,10 @@ ${mycustom.value1}
   </div>
 </div>
 <style>
+  #lstRoomItems > table > tbody > tr:hover{
+    background-color: rgba(243, 219, 190, 0.74);
+    cursor:pointer;
+  }
   #lstRoomItems>table td{
     text-overflow: ellipsis;
     overflow: hidden;
@@ -180,7 +184,7 @@ ${mycustom.value1}
     position: absolute;
     top: 0px;
     right: 0px;
-    background-color: navajowhite/*#1c1c1c*/;
+    background-color: #efedea;
     padding:5px;
     border-bottom-left-radius: 5px;
   }
@@ -198,7 +202,7 @@ ${mycustom.value1}
     margin: -15px 0px 10px -15px;
     padding:5px;
     font-size: 1.5rem;
-    background-color:skyblue;
+    background-color: #ecd2a9;
     width:calc(100% + 30px);
     height:3rem;
     text-align: center;
@@ -206,7 +210,8 @@ ${mycustom.value1}
   .thumbsHotel{
     width: 80px;
     height:80px;
-    border:1px solid black;
+    border:1px solid #e3dddd;
+    border-radius: 0.825rem;
     margin-right:10px;
   }
   .adminmain{
@@ -214,8 +219,10 @@ ${mycustom.value1}
     justify-content: left;
   }
   .itemHotel{
-    border:1px solid black;
-    border-radius:15px;
+    border-radius: 0.825rem;
+    border-left: 0.25rem solid rgba(219,195,150,0.48) !important;
+    box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.15) !important;
+    transition: box-shadow 0.1s ease;
     padding:10px;
     width:100%;
     height:100px;
@@ -224,9 +231,13 @@ ${mycustom.value1}
     align-items: center;
 
   }
+  .itemHotel:hover{
+    box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.9) !important;
+    cursor: pointer;
+  }
   #partHotel,#partRoom{
-    border:1px solid gray;
-    border-radius:15px;
+    border-radius:0.825rem;
+    border:0.25rem solid #dbc396 !important;
     padding:15px;
     overflow-y:auto;
     width:45%;
@@ -275,6 +286,14 @@ ${mycustom.value1}
   }
   .spanbtn:hover{
     font-weight: bolder;
+  }
+  #partRoom marquee{
+    font-size:.7rem;
+  }
+  .summaryHotel, #partRoom{
+    font-size:.7rem;
+    color:gray;
+    font-weight: 700 !important;
   }
 </style>
 <script>

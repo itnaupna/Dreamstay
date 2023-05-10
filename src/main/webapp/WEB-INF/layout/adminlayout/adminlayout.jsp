@@ -30,7 +30,7 @@
 			width:calc(100vw - 80px);
 			/*max-height: 80px;*/
 			height:80px;
-			background-color:#98944250;
+			background-color: rgba(136, 93, 54, 0.62);
 			padding:10px;
 		}
 		.adminmain{

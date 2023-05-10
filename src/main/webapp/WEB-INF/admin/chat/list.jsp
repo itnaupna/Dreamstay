@@ -45,7 +45,7 @@
     $('#chatList').on('click','.chatlistWrapper',(e)=>{
        $('#chatView').text($(e.target).text());
     });
-    getroomlist();
+    //getroomlist();
     function getroomlist(){
         $.ajax({
             url:'/chat/rooms',
