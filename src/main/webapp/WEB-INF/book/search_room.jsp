@@ -128,8 +128,14 @@
         </div>
     </div>
     <c:forEach var="room" items="${roomList}">
-        <p>${room.roomtype}</p>
-        <p>${room.roomprice}</p>
+        <p>방번호 : ${room.num}</p>
+        <p>호텔번호 : ${room.hotelnum}</p>
+        <p>방 타입 : ${room.roomtype}</p>
+        <p>방 가격 : ${room.roomprice}</p>
+        <p>요청사항 : ${room.roommemo}</p>
+        <p>방 상세정보 : ${room.roomdetail}</p>
+        <div>-------------</div>
+
         <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
     </c:forEach>
 </div>
