@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class BookDto {
 
-    Date checkin;
-    Date checkout;
+    String checkin;
+    String checkout;
     String selectedHotel;
 }

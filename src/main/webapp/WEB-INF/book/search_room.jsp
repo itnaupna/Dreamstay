@@ -127,6 +127,11 @@
             <button type="button" onclick="search_room">세션 가지고오기</button>
         </div>
     </div>
+    <c:forEach var="room" items="${roomList}">
+        <p>${room.roomtype}</p>
+        <p>${room.roomprice}</p>
+        <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
+    </c:forEach>
 </div>
 
 <script>

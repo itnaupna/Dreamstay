@@ -14,13 +14,13 @@ public class BookService implements BookServiceInter{
     @Autowired
     BookMapper bookMapper;
 
-    @Override
-    public BookDto searchroomdto() {
-        return bookMapper.searchroomdto();
-    }
+        @Override
+        public List<RoomDto> searchroom(BookDto dto) {
+            return bookMapper.searchroom(dto);
+        }
 
-    @Override
+ /*   @Override
     public List<RoomDto> getroomlist() {
         return bookMapper.getroomlist();
-    }
+    }*/
 }

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-
 @Controller
 public class MainController {
 
@@ -37,7 +36,7 @@ public class MainController {
     }
 
     @PostMapping("/search_room")
-    public String search_room(HttpServletRequest request,HttpSession session,int ho)
+    public String search_room(HttpServletRequest request,HttpSession session)
     {
         String checkIn = request.getParameter("check_in_hidden");
         String checkOut = request.getParameter("check_out_hidden");

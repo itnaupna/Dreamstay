@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper
 public interface BookMapper {
 
-    BookDto searchroomdto();
-    public List<RoomDto> getroomlist();
+/*    public List<RoomDto> getroomlist();*/
+
+    public List<RoomDto> searchroom(BookDto dto);
 }
