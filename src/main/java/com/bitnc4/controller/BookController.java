@@ -24,7 +24,7 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping("/book/search_room")
-    public String book(HttpSession session,Model model,BookDto dto ) {
+    public String book(HttpSession session,Model model,BookDto dto) {
 
      var checkIn = session.getAttribute("checkIn");
      var checkOut = session.getAttribute("checkOut");
@@ -45,15 +45,22 @@ public class BookController {
         dto.setCheckin((String) checkIn);
         dto.setCheckout((String)checkOut);
         dto.setSelectedHotel((String) selectedHotel);
+        //System.out.println(selectedHotel);
 
         List<RoomDto> roomList = bookService.searchroom(dto);
         model.addAttribute("roomList", roomList);
+
+        String hotelname = bookService.hotelname(Integer.parseInt((String) selectedHotel));
+        model.addAttribute("hotelname", hotelname);
+
+        session.setAttribute("hotelname",hotelname);
 
         return "/main/book/search_room";
     }
 
     @GetMapping("/payment")
     public String payment() {
+
         return "/main/book/payment";
     }
 

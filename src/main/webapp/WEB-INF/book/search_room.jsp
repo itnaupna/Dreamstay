@@ -101,7 +101,7 @@
 
             <dl class="dl01">
                 <dt>HOTEL</dt>
-                <dd><input type="text" value="${sessionScope.selectedHotel}" readonly="readonly"></dd>
+                <dd><input type="text" value="${hotelname }" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl02">
@@ -124,13 +124,20 @@
                 <dt>ROOMS</dt>
                 <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly"></dd>
             </dl>
-            <button type="button" onclick="search_room">세션 가지고오기</button>
+            <button type="button" onclick="location.href='/'">다시 검색하기</button>
         </div>
     </div>
     <c:forEach var="room" items="${roomList}">
-        <p>${room.roomtype}</p>
-        <p>${room.roomprice}</p>
+        <form action="payment" method="get" name="payment">
+            <p>방번호 : ${room.num}</p>
+            <p>호텔번호 : ${room.hotelnum}</p>
+            <p>방 타입 : ${room.roomtype}</p>
+            <p>방 가격 : ${room.roomprice}</p>
+            <p>요청사항 : ${room.roommemo}</p>
+            <p>방 상세정보 : ${room.roomdetail}</p>
+            <button type="submit">예약하기</button>
         <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
+        </form>
     </c:forEach>
 </div>
 

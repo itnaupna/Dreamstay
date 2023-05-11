@@ -395,28 +395,28 @@
 
             <dl class="dl01">
                 <dt>HOTEL</dt>
-                <dd><input type="text" value="${sessionScope.selectedHotel}" readonly="readonly"></dd>
+                <dd><input type="text" value="${sessionScope.hotelname }" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl02">
                 <dt>DATE</dt>
-                <dd><input type="text" value="${sessionScope.checkInShow}" readonly="readonly">
-                    <input type="text" value="${sessionScope.checkOutShow}" readonly="readonly"></dd>
+                <dd><input type="text" value="${sessionScope.checkInShow }" readonly="readonly">
+                    <input type="text" value="${sessionScope.checkOutShow }" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl03">
                 <dt>ROOMS</dt>
-                <dd><input type="text" value="${sessionScope.roomCount}" readonly="readonly"></dd>
+                <dd><input type="text" value="${sessionScope.roomCount }" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl04">
                 <dt>ROOMS</dt>
-                <dd><input type="text" value="${sessionScope.adultCount}" readonly="readonly"></dd>
+                <dd><input type="text" value="${sessionScope.adultCount }" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl05">
                 <dt>ROOMS</dt>
-                <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly"></dd>
+                <dd><input type="text" value="${sessionScope.childrenCount }" readonly="readonly"></dd>
             </dl>
 
             <button type="button" onclick="location.href='/'" class="mainbtn">MAIN PAGE</button>
