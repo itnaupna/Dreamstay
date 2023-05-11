@@ -111,15 +111,14 @@ $("#kakao_login").click(function() {
                     let id = JSON.stringify(response.id);
                     let nickname = " /" + JSON.stringify(response.properties.nickname).replaceAll("\"", "");
                     let email = JSON.stringify(response.kakao_account.email).replaceAll("\"", "");
-                    console.log(id);
-                    console.log(nickname);
-                    console.log(email);
+                    let social = "kakao-";
+                    let issocial = 1;
                     $.ajax({
                         url: "/signup/kakaologin",
-                        data: {"id": id, "user_name": nickname, "email": email},
+                        data: {"id": id, "user_name": nickname, "email": email, "issocial": issocial, "social": social},
                         type: "post",
                         success: function() {
-                            alert("카카오 로그인 성공");
+                            alert("카카오 로그인");
                             location.href = "/";
                         },
                         error: function () {
@@ -136,4 +135,17 @@ $("#kakao_login").click(function() {
             alert(JSON.stringify(error));
         }
     });
+});
+
+// 네이버 로그인
+var naver_id_login = new naver_id_login("2plAFu6gKZlsog8ZfGkK", "http://localhost:8080/signup/callbacknaver");
+var state = naver_id_login.getUniqState();
+naver_id_login.setButton();
+naver_id_login.setDomain("http://localhost:8080/signup/login");
+naver_id_login.setState(state);
+naver_id_login.setPopup();
+naver_id_login.init_naver_id_login();
+
+$("#naver_loginbox, #naver_logintext").click(function() {
+    $("#naver_id_login").click();
 });

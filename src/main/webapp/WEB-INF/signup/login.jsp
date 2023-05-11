@@ -129,20 +129,41 @@
 
     }
 
-    #kakao_login {
-        background-image: url("/photo/kakaoicon.png");
-        background-color: #F7DE10;
-        background-position: 1%;
-        background-size: 43px 43px;
-        background-repeat: no-repeat;
-        width: 650px;
-        height: 60px;
-    }
-
     #login_social_login {
         border: 1px solid blue; /*영역*/
         text-align: right;
         width: 700px;
+    }
+
+    #kakao_login {
+        background-image: url("/photo/kakaoicon.png");
+        background-color: #F7DE10;
+        background-position: 1.5%;
+        background-size: 43px 43px;
+        background-repeat: no-repeat;
+        border: 1px solid black;
+        width: 650px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+
+    #naver_loginbox {
+        border: 1px solid black;
+        width: 650px;
+        height: 60px;
+    }
+
+    #naver_loginwrap {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+
+    #naver_loginbox span {
+        width: 590px;
     }
 
     #login_bottom_textbox {
@@ -161,6 +182,7 @@
 </style>
 
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 
 <div id="login_main">
     <div id="login_title">
@@ -190,6 +212,12 @@
         </div>
         <div id="login_social_login">
             <button type="button" id="kakao_login">카카오톡 로그인</button>
+            <button type="button" id="naver_loginbox">
+                <div id="naver_loginwrap">
+                    <div id="naver_id_login"></div>
+                    <span id="naver_logintext">네이버 로그인</span>
+                </div>
+            </button>
         </div>
     </div>
     <div id="login_reservation">

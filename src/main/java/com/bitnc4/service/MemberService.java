@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Member;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -142,16 +143,17 @@ public class MemberService implements MemberServiceInter {
     }
 
     @Override
-    public void kakaoJoin(String id, String user_name, String email) {
-        Map<String, String> info = new HashMap<String, String>();
-        info.put("id", id);
-        info.put("user_name", user_name);
-        info.put("email", email);
-        memberMapper.kakaoJoin(info);
+    public void socialJoin(MemberDto social) {
+        memberMapper.socialJoin(social);
     }
 
     @Override
-    public MemberDto getKakaoMember(String id) {
-        return memberMapper.getKakaoMember(id);
+    public MemberDto getSocialMember(String id,  String issocial, String social) {
+        Map<String, String> memberChk = new HashMap<String, String>();
+        memberChk.put("id", id);
+        memberChk.put("issocial", issocial);
+        memberChk.put("social", social);
+        return memberMapper.getSocialMember(memberChk);
     }
+
 }

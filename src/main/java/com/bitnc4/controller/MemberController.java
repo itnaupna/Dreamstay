@@ -1,5 +1,6 @@
 package com.bitnc4.controller;
 
+import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,12 +136,14 @@ public class MemberController {
         return "/main/signup/findidpw";
     }
     
+    // 아이디 비밀번호 찾기 페이지
     @PostMapping("/searchidpw")
     @ResponseBody
     public int chkIdPw(String email, String id) {
         return memberService.overlapEmail(email, id);
     }
-
+    
+    // 아이디 찾기 페이지
     @PostMapping("/findid")
     public String findId(String email, Model model) {
         MemberDto mDto = memberService.searchInfoToEmail(email);
@@ -148,19 +151,23 @@ public class MemberController {
         model.addAttribute("mDto", mDto);
         return "/main/signup/findid";
     }
-
+    
+    // 비밀번호 변경 페이지
     @PostMapping("/changepassword")
     public String findPw(String email, Model model) {
         model.addAttribute("mDto", memberService.searchInfoToEmail(email));
         return "/main/signup/changepassword";
     }
-
+    
+    
+    // 비밀번호 변경
     @PostMapping("/updatepassword")
     public String chgPass(String id, String pw){
         memberService.changePassword(id, pw);
         return "redirect:/signup/login";
     }
-
+    
+    // 계정 잠금
     @PostMapping("/lockcount")
     @ResponseBody
     public int lockcount(String id) {
@@ -170,18 +177,44 @@ public class MemberController {
         }
         return lockCount;
     }
-
+    
+    // 카카오 로그인
     @PostMapping("/kakaologin")
     @ResponseBody
-    public String kakaoLogin(String id, String user_name, String email, HttpSession session) {
-        MemberDto socialLogin = memberService.getKakaoMember(id);
-        if(socialLogin != null) {
+    public String kakaoLogin(MemberDto socialLogin, HttpSession session) {
+        boolean memberChk = memberService.getSocialMember(socialLogin.getId(), String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial() ) != null;
+        System.out.println(memberChk);
+        if(memberChk) {
             System.out.println("아이디 있음");
             session.setAttribute("loginuser", socialLogin);
             System.out.println(session.getAttribute("loginuser"));
         } else {
             System.out.println("아이디 없음");
-            memberService.kakaoJoin(id, user_name, email);
+            memberService.socialJoin(socialLogin);
+            session.setAttribute("loginuser", socialLogin);
+        }
+        return "redirect:/";
+    }
+
+    // 네이버 팝업
+    @GetMapping("/callbacknaver")
+    public String callBackNaver() {
+        return "/main/signup/callbacknaver";
+    }
+
+    // 네이버 로그인
+    @PostMapping("/naverlogin")
+    @ResponseBody
+    public String naverLogin(MemberDto socialLogin, HttpSession session) {
+        boolean memberChk = memberService.getSocialMember(socialLogin.getId() , String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial()) != null;
+        System.out.println(memberChk);
+        if(memberChk) {
+            System.out.println("아이디 있음");
+            session.setAttribute("loginuser", socialLogin);
+            System.out.println(session.getAttribute("loginuser"));
+        } else {
+            System.out.println("아이디 없음");
+            memberService.socialJoin(socialLogin);
             session.setAttribute("loginuser", socialLogin);
         }
         return "redirect:/";

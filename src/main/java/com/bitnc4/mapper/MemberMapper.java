@@ -46,10 +46,10 @@ public interface MemberMapper {
     // 로그인 성공시 틀린 횟수 리셋
     public void resetLockCount(String id);
 
-    // 카카오 첫 로그인 시 db에 추가
-    public void kakaoJoin(Map<String, String> info);
+    // 소셜 첫 로그인 시 db에 추가
+    public void socialJoin(MemberDto social);
 
-    // 카카오 로그인 시 기존에 카카오로 가입한 회원인지 확인
-    public MemberDto getKakaoMember(String id);
+    // 소셜 로그인 시 기존에 해당소셜로 가입한 회원인지 확인
+    public MemberDto getSocialMember(Map<String, String> socialMemberChk);
 
 }

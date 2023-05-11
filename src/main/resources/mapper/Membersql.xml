@@ -50,13 +50,12 @@
         update member set account_lock = 0 where id = #{id}
     </update>
 
-    <insert id="kakaoJoin" parameterType="Map">
+    <insert id="socialJoin" parameterType="MemberDto">
         insert into member (id, pw, user_name, email, phone, user_level, addr, point, issocial)
-        values (concat('kakao-',#{id}), sha2(#{id}, 256), #{user_name}, #{email}, #{id}, 1, 'kakao-user', 0, 1)
+        values (concat(#{social}, #{id}), sha2(#{id}, 256), #{user_name},concat(#{social}, #{email}), #{id}, 1,#{social}, 0, #{issocial})
     </insert>
 
-    <select id="getKakaoMember" parameterType="String" resultType="MemberDto">
-        select * from member where id = concat('kakao-', #{id}) and issocial = 1
+    <select id="getSocialMember" parameterType="Map" resultType="MemberDto">
+        select * from member where id = concat(#{social}, #{id}) and issocial = #{issocial}
     </select>
-
 </mapper>
