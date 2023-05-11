@@ -7,7 +7,7 @@
     <%-- first div --%>
     .book_main {
         width: 2000px;
-        height: 1500px;
+        height: 1900px;
         margin: 100px auto 0;
         display: flex;
         flex-direction: column;
@@ -380,6 +380,7 @@
     }
 
     .options2 {
+        position: absolute;
         top: 100%;
         left: 0;
         right: 0;
@@ -435,8 +436,9 @@
         margin-top: 20px;
     }
 
-    .sideBanner .txt-label strong {
+    .sideBanner .txt-label .for_num {
         font-size: 25px;
+        font-weight: bold;
     }
 
     .sp_email {
@@ -475,7 +477,7 @@
         cursor: pointer;
     }
 
-    .divbtn{
+    .divbtn {
         justify-content: center;
         align-items: center;
         display: flex;
@@ -483,17 +485,71 @@
         margin-top: 25px;
     }
 
-    #bupin{
+    #bupin {
         margin-left: 30px;
     }
 
-    .pay_card span{
+    .pay_card span {
         margin-left: 15px;
     }
 
-    .ex_card{
+    .ex_card {
         display: inline-block;
         margin-top: 30px;
+    }
+
+    .gujung {
+        margin-top: 100px;
+        left: 0;
+    }
+
+    .gujung span {
+        font-weight: bolder;
+    }
+
+    .gujung .guhr {
+        width: 900px;
+        background-color: black;
+    }
+
+    .gujung .open_ul .open_li {
+        list-style: none;
+    }
+
+    .gujung .close_ul {
+        margin-top: 30px;
+        background-color: #f9f9f9;
+        width: 880px;
+        height: 200px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .gujung .close_toggle {
+        display: none;
+    }
+
+    .gujung .close_ul li {
+        color: #909090;
+        left: 0;
+        line-height: 40px;
+        font-size: 15px;
+        list-style: disc;
+    }
+
+    .clickimg {
+        background-color: white;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+        font-size: 17px;
+        background: #ffffff url("/photo/arrow_196221.png") no-repeat;
+        background-position: 99% center;
+        background-size: 10px 10px;
+        width: 400px;
+    }
+
+    .close_inul li{
+        list-style-type: disc;
     }
 </style>
 
@@ -549,7 +605,9 @@
         <div class="sideBanner">
             <div class="txt-label">
                 <span>객실예약</span>
-                <strong>${roomprice}</strong>
+                <div class="for_num">
+                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${roomprice}"/>
+                </div>
                 <hr class="sidehr">
                 <div class="divbtn">
                     <button type="button" class="paybtn">예약완료</button>
@@ -577,7 +635,8 @@
 
             <div class="pay_email">
                 <span class="sp_email">EMAIL *</span>
-                <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일" value="${username}">
+                <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
+                       value="${username}">
                 <span id="at">@</span>
                 <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}">
                 <div class="email_selectbox">
@@ -607,25 +666,27 @@
             </div>
 
             <span class="ex_card">CREDIT CARD COMPANY*</span>
-            <div class="custom-select2">
-                <div class="selected2">카드선택</div>
-                <ul class="options2">
-                    <li>비씨</li>
-                    <li>국민</li>
-                    <li>하나</li>
-                    <li>삼성</li>
-                    <li>신한</li>
-                    <li>현대</li>
-                    <li>롯데</li>
-                    <li>시티</li>
-                    <li>농협</li>
-                    <li>수협</li>
-                    <li>우리</li>
-                    <li>카카오뱅크</li>
-                    <li>광주</li>
-                    <li>전북</li>
-                    <li>제주</li>
-                </ul>
+            <div class="selectli2">
+                <div class="custom-select2">
+                    <div class="selected2">카드선택</div>
+                    <ul class="options2">
+                        <li>비씨</li>
+                        <li>국민</li>
+                        <li>하나</li>
+                        <li>삼성</li>
+                        <li>신한</li>
+                        <li>현대</li>
+                        <li>롯데</li>
+                        <li>시티</li>
+                        <li>농협</li>
+                        <li>수협</li>
+                        <li>우리</li>
+                        <li>카카오뱅크</li>
+                        <li>광주</li>
+                        <li>전북</li>
+                        <li>제주</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="cardnumber">
@@ -672,6 +733,45 @@
                         <li>2033년</li>
                     </ul>
                 </div>
+            </div>
+
+            <div class="gujung">
+                <span>취소 규정</span>
+                <hr class="guhr">
+
+                <ul class="open_ul">
+                    <li class="open_li">
+                        <input type="checkbox">
+                        <label class="clickimg">
+                            [필수] 취소 및 노쇼(No - Show) 규정에 동의합니다
+                        </label>
+                    </li>
+
+                    <div class="close_toggle">
+                        <ul class="close_ul">
+                            <li class="close_li">
+                                " 체크인 7일 전 오후 6시 이전 : 위약금 없이 변경 및 취소 가능 "
+                            </li>
+
+                            <li>
+                                " 체크인 7일 전 오후 6시 이후 ~ 1일 전 오후 6시 이전 : 최초 1박 요금의 20% 부과 "
+                            </li>
+
+                            <li>
+                                " 체크인 1일 전 오후 6시 이후 : 취소 및 No - Show 위약금 발생 "
+                                <ul class="close_inul">
+                                    <li>
+                                        " 1박 투숙 : 객실료의 80% 위약금 부과 "
+                                    </li>
+
+                                    <li>
+                                        " 2박 이상 투숙 : 최초 1박 요금의 100% 부과 "
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
             </div>
         </div>
     </section>
@@ -764,11 +864,22 @@
     }).scroll();
 
     // 이메일 선택 하면 값 들어가게 하기
-    $(function() {
-        // 이메일 도메인 선택 목록의 li 요소 클릭 이벤트 처리
-        $('#email_custom_option li').click(function() {
-            // 클릭한 li 요소의 텍스트 값을 가져와서 도메인 입력란의 값을 변경
+    $(function () {
+        $('#email_custom_option li').click(function () {
             $('#input_domain').val($(this).text());
         });
+    });
+
+    // 규정 스크립트
+    const clickimg = document.querySelector('.clickimg');
+
+    clickimg.addEventListener('click', function () {
+        const closeToggle = document.querySelector('.close_toggle');
+
+        if (closeToggle.style.display === 'none') {
+            closeToggle.style.display = 'block';
+        } else {
+            closeToggle.style.display = 'none';
+        }
     });
 </script>
