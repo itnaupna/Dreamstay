@@ -98,7 +98,7 @@ public class MemberController {
             if(loginuser != null) {
                 memberService.resetLockCount(id);
                 session.setAttribute("loginuser",loginuser);
-                session.setAttribute("userid", id);
+                session.setAttribute("userid", ((MemberDto)session.getAttribute("loginuser")).getId());
                 // 아이디 저장 체크여부  if 문 체크 시 쿠키 생성
                 if(saveid.equals("true")) {
                     cookie = new Cookie("saveid", id);

@@ -3,6 +3,7 @@ package com.bitnc4.controller;
 import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.NoticeDto;
 import com.bitnc4.dto.RoomDto;
+import com.bitnc4.repo.ChatRoomRepository;
 import com.bitnc4.service.AdminHnRService;
 import com.bitnc4.service.AdminNoticeService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,10 +31,12 @@ public class AdminController {
     @Autowired
     NcpObjectStorageService ncp;
 
-
+    @Autowired
+    ChatRoomRepository chatRoomRepository;
 
     @GetMapping("/chat")
     public String chatList(Model m){
+        m.addAttribute(chatRoomRepository.getAll());
         return "/admin/chat/list";
     }
 
