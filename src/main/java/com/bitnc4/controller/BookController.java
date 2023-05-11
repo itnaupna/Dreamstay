@@ -2,10 +2,12 @@ package com.bitnc4.controller;
 
 import com.bitnc4.dto.BookDto;
 import com.bitnc4.dto.HotelDto;
+import com.bitnc4.dto.MemberDto;
 import com.bitnc4.dto.RoomDto;
 import com.bitnc4.service.AdminHnRService;
 import com.bitnc4.service.BookService;
 import com.bitnc4.service.MainHnRService;
+import com.bitnc4.service.MypageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,9 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private MypageService mypageService;
 
     @GetMapping("/book/search_room")
     public String book(HttpSession session,Model model,BookDto dto ) {
@@ -53,7 +58,17 @@ public class BookController {
     }
 
     @GetMapping("/payment")
-    public String payment() {
+    public String payment(HttpSession session, Model model)
+    {
+        MemberDto dto = mypageService.selectInfoToId(String.valueOf(session.getAttribute("userid")));
+        String email = dto.getEmail();
+        String[] emailSplit = email.split("@");
+        String username = emailSplit[0];
+        String domain = emailSplit[1];
+        model.addAttribute("memberDto", dto);
+        model.addAttribute("username", username);
+        model.addAttribute("domain", domain);
+
         return "/main/book/payment";
     }
 

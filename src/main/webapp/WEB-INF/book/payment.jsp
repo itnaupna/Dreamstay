@@ -7,7 +7,7 @@
     <%-- first div --%>
     .book_main {
         width: 2000px;
-        height: 1200px;
+        height: 1600px;
         margin: 100px auto 0;
         display: flex;
         flex-direction: column;
@@ -87,6 +87,7 @@
     .book_main .book_select .book_inner .dl02 {
         line-height: normal;
     }
+
     <%-- 끝 --%>
     .mainbtn {
         width: 140px;
@@ -97,6 +98,7 @@
         background-color: black;
         color: black;
         cursor: pointer;
+        margin-top: 10px;
     }
 
     <%-- 3번째 div 틀 --%>
@@ -130,14 +132,14 @@
     }
 
     .pay .pay_main .pay_phone {
-        margin-top: 20px;
+        margin-top: 50px;
         display: flex;
         flex-direction: column;
         width: 500px;
     }
 
     .pay .pay_main .pay_phone input[type=text] {
-        width: 450px;
+        width: 300px;
         height: 40px;
         flex: 1;
         border: none;
@@ -265,6 +267,7 @@
         position: relative;
         font-size: 15px;
         margin-right: 40px;
+        width: 190px;
     }
 
     .pay .pay_main .cardnumber input[type=text]:focus {
@@ -361,11 +364,12 @@
     .options1 li:hover {
         background-color: white;
     }
+
     .show {
         display: block;
     }
 
-    .selectli{
+    .selectli {
         /*border: 1px solid red;*/
         display: flex;
         flex-direction: row;
@@ -373,12 +377,79 @@
         width: 926px;
     }
 
-    .book_box{
-        border: 1px solid red;
-        width: 500px;
-        height: 100px;
+    .sideBanner {
+        border: 1px solid black;
+        width: 400px;
+        height: 230px;
         float: right;
         margin-top: 50px;
+        position: absolute;
+        margin-left: 1000px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sideBanner .txt-label {
+        display: flex;
+        flex-direction: column;
+        left: 0;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .sideBanner .txt-label strong {
+        font-size: 25px;
+    }
+
+    .sp_email {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pay_card p {
+        margin-top: 40px;
+    }
+
+    .cardnumber p {
+        margin-top: 40px;
+    }
+
+    .ex_date {
+        display: flex;
+        flex-direction: column;
+        margin-top: 40px;
+    }
+
+    .sidehr {
+        width: 340px;
+    }
+
+    .book_main .pay .sideBanner .txt-label .paybtn {
+        text-align: center;
+        font-size: 15px;
+        border-color: #000000;
+        border-width: thin;
+        width: 250px;
+        background-color: black;
+        height: 60px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .divbtn{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin-top: 40px;
+    }
+
+    #bupin{
+        margin-left: 30px;
+    }
+
+    .pay_card span{
+        margin-left: 15px;
     }
 </style>
 
@@ -416,12 +487,12 @@
             </dl>
 
             <dl class="dl04">
-                <dt>ROOMS</dt>
+                <dt>ADULT</dt>
                 <dd><input type="text" value="${sessionScope.adultCount}" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl05">
-                <dt>ROOMS</dt>
+                <dt>CHILDREN</dt>
                 <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly"></dd>
             </dl>
 
@@ -430,9 +501,14 @@
     </div>
 
     <section class="pay">
-        <div class="book_box">
-            <div class="box_title">
-                객실
+        <div class="sideBanner">
+            <div class="txt-label">
+                <span>객실</span>
+                <strong>290,000 KRW</strong>
+                <hr class="sidehr">
+                <div class="divbtn">
+                    <button type="button" class="paybtn">예약완료</button>
+                </div>
             </div>
         </div>
         <div class="pay_main">
@@ -446,18 +522,19 @@
 
             <div class="pay_name">
                 <p>RESERVATION NAME *</p>
-                <span>이름 수정 ~</span>
+                <span>${memberDto.user_name}</span>
             </div>
 
             <div class="pay_phone">
                 <span>PHONE NUMBER *</span>
-                <input type="text" id="pay_phone" name="pay_phone">
+                <input type="text" id="pay_phone" name="pay_phone" value="${memberDto.phone}">
             </div>
 
             <div class="pay_email">
-                <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일">
+                <span class="sp_email">EMAIL *</span>
+                <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일" value="${username}">
                 <span id="at">@</span>
-                <input type="text" name="input_domain" class="input_domain" id="input_domain">
+                <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}">
                 <div class="email_selectbox">
                     <div id="email_select_domain">직접 입력</div>
                     <ul id="email_custom_option">
@@ -473,23 +550,26 @@
 
             <div class="pay_card">
                 <p>CREDIT CARD *</p>
-
                 <label>
-                    <input type="checkbox" class="chcard" id="chcard">개인
+                    <input type="checkbox" class="chcard" id="chcard" name="gaein">
+                    <span>개인</span>
                 </label>
 
                 <label>
-                    <input type="checkbox" class="bupin" id="bupin">법인
+                    <input type="checkbox" class="bupin" id="bupin" name="bupin">
+                    <span>법인</span>
                 </label>
             </div>
 
             <div class="cardnumber">
                 <p>CARD NUMBER *</p>
-                <input type="text" class="c_num" id="c_num1">
+                <input type="text" class="c_num" id="c_num1" placeholder="CARD NUMBER">
                 <input type="text" class="c_num" id="c_num2">
                 <input type="text" class="c_num" id="c_num3">
                 <input type="text" class="c_num" id="c_num4">
             </div>
+
+            <span class="ex_date">EXPIRY DATE *</span>
             <div class="selectli">
                 <div class="custom-select">
                     <div class="selected">월</div>
@@ -575,4 +655,39 @@
         options1.classList.remove('show');
     });
 
+    // 체크 박스
+    $('input[type="checkbox"][name="gaein"]').click(function () {
+        if ($(this).prop('checked')) {
+            $('input[type="checkbox"][name="bupin"]').prop('checked', false);
+        }
+    });
+
+    $('input[type="checkbox"][name="bupin"]').click(function () {
+        if ($(this).prop('checked')) {
+            $('input[type="checkbox"][name="gaein"]').prop('checked', false);
+        }
+    });
+
+    // 플로팅 메뉴
+    var floatPosition = parseInt($(".sideBanner").css('top'))
+
+    $(window).scroll(function () {
+
+        var currentTop = $(window).scrollTop();
+        var bannerTop = currentTop + floatPosition + "px";
+
+        $(".sideBanner").stop().animate({
+            "top": bannerTop
+        }, 700);
+
+    }).scroll();
+
+    // 이메일 선택 하면 값 들어가게 하기
+    $(function() {
+        // 이메일 도메인 선택 목록의 li 요소 클릭 이벤트 처리
+        $('#email_custom_option li').click(function() {
+            // 클릭한 li 요소의 텍스트 값을 가져와서 도메인 입력란의 값을 변경
+            $('#input_domain').val($(this).text());
+        });
+    });
 </script>
