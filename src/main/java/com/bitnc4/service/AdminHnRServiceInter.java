@@ -14,4 +14,6 @@ public interface AdminHnRServiceInter {
     public List<String> getRoomTypesOfHotel(int hotelnum);
     public int insertRoom(RoomDto dto);
     public int deleteRoom(int roomnum);
+    public int getMemberCount(boolean containAdmin);
+    public int getHotelCount();
 }

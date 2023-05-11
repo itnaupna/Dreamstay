@@ -114,24 +114,53 @@
     </div>
 </div>
 <style>
-    .chatMsgWrapper.chatLeft{
+    .chatMsgWrapper{
         width:80%;
         margin-bottom:10px;
-        border-right: #c3a61785;
         border-radius: 20px;
         box-shadow: 0px 3px 3px rgba(0,0,0,0.2);
         color:#333333;
         padding: 10px;
-
+        position: relative;
+        text-align: left;
 
     }
     .chatMsgBody{
+        font-size:.7rem;
+        color:#000000b8;
+        font-weight: 700!important;
+        text-transform: uppercase!important;
+        margin-bottom: 0.25rem!important;
     }
     .chatRight{
         float:right;
+        border-left: .25rem solid #eb971f5c!important;
+        align-self: flex-start;
     }
+    .chatRight:before{
+        content:"";
+        position: absolute;
+        border-style:solid;
+        border-width: 0 15px 15px 0;
+        border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) transparent transparent;
+        bottom:-15px;
+        left: 150px;
+    }
+
     .chatLeft{
         float:left;
+        border-right: .25rem solid #7899fb5c!important;
+        align-self: flex-end;
+
+    }
+    .chatLeft:after{
+        content:"";
+        position: absolute;
+        border-style: solid;
+        border-width: 15px 15px 0 0;
+        border-color:rgba(0,0,0,0.1) transparent transparent transparent;
+        bottom:-15px;
+        right: 150px;
     }
     .chatLeft .chatMsgBottom{
         text-align:left;
@@ -143,11 +172,15 @@
         display:inline-flex;
     }
     .chatMsgBottom{
-        margin-bottom:10px;
+        margin-bottom:-5px;
+        padding-top: 20px;
     }
     .chatMsgTime{
-        color:gray;
-        font-size:0.8rem;
+        font-size:.6rem;
+        color:#000000b8;
+        font-weight: 700!important;
+        text-transform: uppercase!important;
+        margin-bottom: 0.25rem!important;
     }
 
     #chatInner{
@@ -162,6 +195,9 @@
         flex-grow:1;
         justify-content: space-between;
         display:flex;
+        font-size:1.1rem;
+        color:#000000b8;
+        font-weight: 600!important;
     }
     #txtChatViewPort{
         order:2;

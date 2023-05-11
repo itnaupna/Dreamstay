@@ -9,6 +9,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <style>
     .book_main {
@@ -18,6 +19,7 @@
         margin: 100px auto 0;
         display: flex;
         flex-direction: column;
+
     }
 
     .book_main .book_top {
@@ -27,7 +29,7 @@
     .book_main .book_title {
         /*border: 1px solid aqua;*/
         width: 1400px;
-        height: 130px;
+        height: 200px;
     }
 
     .book_main .book_title .booking {
@@ -41,6 +43,7 @@
     .book_main .book_select {
         /*border: 1px solid yellow;*/
         margin-top: 20px;
+        width: 100%;
         justify-content: center;
         align-items: center;
     }
@@ -59,10 +62,10 @@
 
     .book_main .book_select {
         /*border: 1px solid hotpink;*/
-        height: 150px;
+        height: 180px;
         background-color: #F9F9F9;
         display: flex;
-        width: 100%
+        flex-direction: row;
     }
 
     .book_main .book_select .book_inner {
@@ -85,6 +88,10 @@
         background-color: #f9f9f9;
     }
 
+    .book_main .book_select .book_inner dl dd input[type=text]:focus {
+        outline: none;
+    }
+
     .mainbtn {
         width: 140px;
         height: 60px;
@@ -95,84 +102,38 @@
         background-color: black;
         color: black;
         cursor: pointer;
+        font-weight: 700 !important;
+
     }
 
-    .room_div {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        width: 400px;
-        position: relative;
-        margin-left: 280px;
-        margin-top: 30px;
-    }
-
-    .room_table {
-        width: 350px;
-        margin-top: 100px;
-        margin: 20px;
-        border-collapse: collapse;
-        border: 1px solid #ddd;
-    }
-
-    .room_row {
-        display: flex;
-        justify-content: space-between;
+    .RoomList {
+        margin: 10px;
         width: 100%;
-        margin-bottom: 20px;
+        height: auto;
+        /*border:1px solid;*/
+        border-radius: 0.825rem;
+        border-left: 0.25rem solid #f1c27a7d !important;
+        box-shadow: 0 .15rem 1.0rem 0 rgba(58, 59, 69, .15) !important;
+        transition: box-shadow 0.1s ease;
+        font-weight: 900 !important;
+        font-size: .6rem;
+        padding-left: 300px;
+        padding-top:20px;
+        padding-bottom: 20px;
     }
 
-    .room_table td {
-        padding: 10px;
-        cursor: pointer;
+    #BookBtn {
+        float: right;
+        margin-top: -130px;
+        color: #ffffff;
+        font-weight: 700 !important;
+        background-color: #333333;
+        margin-right: 350px;
     }
 
-    .room_table .room_type {
-        font-weight: bold;
+    .test3 {
+        width: 2000px;
     }
-
-    .room_table .room_price {
-        color: #777;
-    }
-
-    #clickroom {
-        /*border: 1px solid red;*/
-        display: none;
-        width: 980px;
-        height: 500px;
-        position: absolute;
-        top: 0;
-        margin-top: 580px;
-        right: -170px;
-        margin-right: 250px;
-    }
-
-    .room_info {
-        border-collapse: collapse;
-        width: 100%;
-        border: none;
-        border-bottom: 1px solid #ccc;
-        justify-content: space-between;
-    }
-
-    .c_room span{
-        display: inline-block;
-        border: 1px solid black;
-        font-size: 15px;
-        font-weight: lighter;
-        width: 100px;
-        text-align: center;
-    }
-
-    .room_info{
-        margin-top: 20px;
-    }
-
-    .room_info td {
-        padding-right: 10px; /* 오른쪽 padding 값 설정 */
-    }
-
-
 </style>
 
 <div class="book_main">
@@ -194,7 +155,8 @@
 
             <dl class="dl01">
                 <dt>HOTEL</dt>
-                <dd><input type="text" value="${sessionScope.selectedHotel}" readonly="readonly"></dd>
+                <input type="hidden" value="${selectedHotel }" readonly="readonly">
+                <dd><input type="text" value="${hotelname }" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl02">
@@ -209,48 +171,67 @@
             </dl>
 
             <dl class="dl04">
-                <dt>ROOMS</dt>
+                <dt>Adults</dt>
                 <dd><input type="text" value="${sessionScope.adultCount}" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl05">
-                <dt>ROOMS</dt>
+                <dt>Children</dt>
                 <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly"></dd>
             </dl>
-            <button type="button" onclick="location.href='/'" class="mainbtn">MAIN PAGE</button>
+            <button type="button" class="mainbtn" onclick="location.href='/'">다시 검색하기</button>
         </div>
     </div>
+<%--    <div class="test3">--%>
+<%--        <c:forEach var="room" items="${roomList}">--%>
+<%--            <form action="payment" method="get" name="payment">--%>
+<%--                <span>--%>
+<%--                    <img src="../photo/profile.png" style="display: flex;float: left;margin-left: 100px;margin-top: 20px;">--%>
+<%--                </span>--%>
+<%--                <div class="RoomList">--%>
+<%--                    <p>방번호 : ${room.num}</p>--%>
+<%--                    <p>호텔번호 : ${room.hotelnum}</p>--%>
+<%--                    <p>방 타입 : ${room.roomtype}</p>--%>
+<%--                    <p>방 가격 : ${room.roomprice}</p>--%>
+<%--                    <p>요청사항 : ${room.roommemo}</p>--%>
+<%--                    <p>방 상세정보 : ${room.roomdetail}</p>--%>
+<%--                    <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>--%>
+<%--                </div>--%>
+<%--                <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->--%>
+<%--            </form>--%>
 
-    <div class="room_div">
-        <c:forEach var="room" items="${roomList}" varStatus="loop">
-            <div class="room_row">
-                <div class="room_item" onclick="showRoom('${room.roomtype}', '${room.roomprice}')">
-                    <table class="room_table">
-                        <tr>
-                            <td class="room_type" value="${room.roomtype}">TYPE : ${room.roomtype}</td>
-                            <td class="room_price" value="${room.roomprice}">PRICE : ${room.roomprice}</td>
-                        </tr>
-                    </table>
-                </div>
+<%--        </c:forEach>--%>
+<%--    </div>--%>
+    <div class="test3">
+
+    <c:forEach var="room" items="${roomList}">
+        <form action="../payment" method="post" name="payment">
+            <span>
+                <img src="../photo/profile.png" style="display: flex;float: left;margin-left: 100px;margin-top: 20px;">
+            </span>
+            <div class="RoomList">
+                <input type="hidden" value="${totaldays}" name="totaldays" readonly>
+                <p>방번호 : <input value="${room.num}" type="number" name="roomnum" readonly></p>
+                <p>호텔번호 : <input value="${room.hotelnum}" type="number" name="hotelnum" readonly></p>
+                <p>방 타입 : <input value="${room.roomtype}" type="text" name="roomtype" readonly></p>
+            <c:if test="${totaldays >= 3}">ㄴㄴ
+                <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays)/10*9}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
+            </c:if>
+            <c:if test="${totaldays < 3}">
+                <p>방 가격 : <input value="${room.roomprice * totaldays}" type="number" name="roomprice" readonly></p>
+            </c:if>
+                <p>요청사항 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
+                <p>상세정보 : <input value="${room.roomdetail}" type="text" name="roomdetail" readonly></p>
+                <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>
+            <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
             </div>
-        </c:forEach>
-    </div>
-
-    <div id="clickroom" class="c_room">
-        <p>Selected room:</p>
-        <p>Type: <span id="roomType"></span></p>
-        <p>Price: <span id="roomPrice"></span></p>
-        <button type="button" class="paybtn" onclick="window.location.href='/payment'">결제</button>
+        </form>
+    </c:forEach>
     </div>
 </div>
 
-<script>
-    function showRoom(roomType, roomPrice) {
-        var clickroom = document.getElementById('clickroom');
-        var roomTypeEl = document.getElementById('roomType');
-        var roomPriceEl = document.getElementById('roomPrice');
-        clickroom.style.display = "block";
-        roomTypeEl.innerHTML = roomType; // Set the value of the roomType element to the selected room type
-        roomPriceEl.innerHTML = roomPrice; // Set the value of the roomPrice element to the selected room price
-    }
-</script>
+    <script>
+
+
+    </script>
+

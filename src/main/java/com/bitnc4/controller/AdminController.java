@@ -1,8 +1,10 @@
 package com.bitnc4.controller;
 
 import com.bitnc4.dto.HotelDto;
+import com.bitnc4.dto.NoticeDto;
 import com.bitnc4.dto.RoomDto;
 import com.bitnc4.service.AdminHnRService;
+import com.bitnc4.service.AdminNoticeService;
 import lombok.extern.slf4j.Slf4j;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -21,6 +24,8 @@ public class AdminController {
 
     @Autowired
     AdminHnRService adminHnRService;
+    @Autowired
+    AdminNoticeService adminNoticeService;
     String bucketName="dreamsstaybucket";
     @Autowired
     NcpObjectStorageService ncp;
@@ -33,7 +38,13 @@ public class AdminController {
     }
 
     @GetMapping({"/","/dashboard",""})
-    public String dashboard(){
+    public String dashboard(Model m){
+        HashMap<String,Object> data = new HashMap<>();
+        data.put("MemberCount",adminHnRService.getMemberCount(false));
+        data.put("HotelCount",adminHnRService.getHotelCount());
+        data.put("Notice",adminNoticeService.getList(1));
+        m.addAttribute("data",data);
+
         return "/admin";
     }
 
@@ -100,6 +111,33 @@ public class AdminController {
     public int deleteRoom(@PathVariable int roomnum){
         return adminHnRService.deleteRoom(roomnum);
     }
+
+    @GetMapping("/notice")
+    public String notice(Model m){
+        m.addAttribute("list",adminNoticeService.getList(1));
+        m.addAttribute("page",adminNoticeService.getCount(1));
+        return "/admin/notice/list";
+    }
+    @GetMapping("/notice/list/{page}")
+    @ResponseBody
+    public List<Object> getNoticeList(@PathVariable int page){
+        List<Object> result = new ArrayList<>();
+        result.add(adminNoticeService.getList(page));
+        result.add(adminNoticeService.getCount(page));
+        return result;
+    }
+
+
+
+
+    @GetMapping("/qna")
+    public String qna(){
+        return "/admin/qna/list";
+    }
+//    @GetMapping("/qna/list/{page}")
+//    @ResponseBody
+
+
 
 
 }

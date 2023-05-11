@@ -11,4 +11,9 @@
                                  (checkin <![CDATA[  <=]]> #{checkin } and checkout <![CDATA[  >=]]> #{checkout })
                               or (checkin <![CDATA[  <=]]> #{checkout } and checkout <![CDATA[  >=]]> #{checkin})))
     </select>
+    <select id="hotelname" parameterType="int" resultType="String">
+        select name
+            from hotel
+            where num = #{selectedHotel }
+    </select>
 </mapper>
