@@ -724,6 +724,8 @@
 		$("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
 		$("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
 	});
+
+
 </script>
 <script type="text/javascript" src="/js/main.js"></script>
 

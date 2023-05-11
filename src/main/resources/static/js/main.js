@@ -52,6 +52,10 @@ $(function (){
     });
 });
 
+window.onload = function(){
+    $("#search_box").prop("disabled", false);
+}
+
 /*check in*/
 document.body.style.overflow = "hidden";
 var CDate = new Date();
@@ -81,6 +85,8 @@ document.getElementById("check_in_show").value = defaultFormattedDate;
 /*내일날짜*/
 var tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
+var  yesterday = new Date();
+yesterday.setDate(yesterday.getDate() + -1);
 
 var tomorrowYear = tomorrow.getFullYear();
 var tomorrowMonth = (tomorrow.getMonth() + 1).toString().padStart(2, '0');
@@ -160,8 +166,8 @@ var buildcalendar02 = function(){
             htmlDates02 += '<div class="date02 last">'+dates02[i]+'</div>';
         }else if(i >= nextFirst02.getDay() + nextLast02.getDate()){
             htmlDates02 += '<div class="date02 next">'+dates02[i]+'</div>';
-        }else if(today.getDate()==dates02[i] && today.getMonth()==CDate.getMonth() && today.getFullYear()==CDate.getFullYear()){
-            htmlDates02 += '<div id="date02_'+dates02[i]+'" class="date02 today" onclick="fn_selectDate02('+dates02[i]+');">'+dates02[i]+'</div>';
+        }else if(tomorrow.getDate()==dates02[i] && tomorrow.getMonth()==CDate.getMonth() && tomorrow.getFullYear()==CDate.getFullYear()){
+            htmlDates02 += '<div id="date02_'+dates02[i]+'" class="date02 tomorrow" onclick="fn_selectDate02('+dates02[i]+');">'+dates02[i]+'</div>';
         }else{
             htmlDates02 += '<div id="date02_'+dates02[i]+'" class="date02" onclick="fn_selectDate02('+dates02[i]+');">'+dates02[i]+'</div>';
         }
@@ -192,87 +198,111 @@ function nextCal02(){
 }
 
 /*check in*/
-function fn_selectDate(date){
-
+var selectedDay = today;
+/*checkOut*/
+var selectedDay02 = tomorrow;
+function fn_selectDate(date) {
     var year = CDate.getFullYear();
     var month = CDate.getMonth() + 1;
-    var selectedDay = new Date(year, month - 1, date);
+    selectedDay = new Date(year, month - 1, date);
     var day = selectedDay.getDay();
     var date_txt = "";
-    if(CDate.getMonth() + 1 < 10){
-        month = "0" + (CDate.getMonth() + 1);
-    }
-    if(date < 10){
-        date_txt = "0" + date;
-    }
-    else{
-        date_txt = date;
-    }
-    var daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-    var dayOfWeek = daysOfWeek[day];
 
-    if(selectCk == 0){
-        $(".date").css("background-color", "");
-        $(".date").css("color", "");
-        $("#date_"+date).css("background-color", "red");
-        $("#date_"+date).css("color", "white");
-
-        $("#check_in_hidden").val(year+"-"+month+"-"+date);
-        var period_1 = year + "." + month+"."+date_txt + " (" + dayOfWeek + ")";
-        //alert(period_1);
-        document.getElementById('check_in').innerText=period_1;
-        document.getElementById('check_in_show').value=period_1;
-        check = 0;
-        selectCk = 0;
-
-        if(check == 0){
-            const target = document.getElementById('btnS');
-            target.disabled = false;
+    if(selectedDay-1 > selectedDay02-2){
+        $("#search_box").prop("disabled", true);
+    }else{
+        $("#search_box").prop("disabled", false);
+    }
+    if (yesterday <= selectedDay) {
+        if (CDate.getMonth() + 1 < 10) {
+            month = "0" + (CDate.getMonth() + 1);
+        }
+        if (date < 10) {
+            date_txt = "0" + date;
+        } else {
+            date_txt = date;
         }
 
+        var daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+        var dayOfWeek = daysOfWeek[day];
+
+        if (selectCk == 0) {
+            $(".date").css("background-color", "");
+            $(".date").css("color", "");
+            $(".today").css("background-color", "white");
+            $(".today").css("color", "black");
+            $("#date_" + date).css("background-color", "red");
+            $("#date_" + date).css("color", "white");
+
+            $("#check_in_hidden").val(year + "-" + month + "-" + date);
+            var period_1 = year + "." + month + "." + date_txt + " (" + dayOfWeek + ")";
+            document.getElementById('check_in').innerText = period_1;
+            document.getElementById('check_in_show').value = period_1;
+            check = 0;
+            selectCk = 0;
+
+            if (check == 0) {
+                const target = document.getElementById('btnS');
+                target.disabled = false;
+            }
+        }
     }
 
 }
-/*checkOut*/
-function fn_selectDate02(date02){
+function fn_selectDate02(date02) {
     var year02 = CDate02.getFullYear();
-    var month02 = CDate02.getMonth() + 1;
-    var selectedDay02 = new Date(year02, month02 - 1, date02);
+    var month02 = CDate02.getMonth();
+    selectedDay02 = new Date(year02, month02, date02);
     var day02 = selectedDay02.getDay();
     var date_txt02 = "";
 
-    if(CDate02.getMonth() + 1 < 10){
-        month02 = "0" + (CDate02.getMonth() + 1);
+    if(selectedDay-1 > selectedDay02-2){
+        $("#search_box").prop("disabled", true);
+    }else{
+        $("#search_box").prop("disabled", false);
     }
-    if(date02 < 10){
-        date_txt02 = "0" + date02;
-    }
-    else{
-        date_txt02 = date02;
-    }
-    var daysOfWeek02 = ["일", "월", "화", "수", "목", "금", "토"];
-    var dayOfWeek02 = daysOfWeek02[day02];
+    if (today <= selectedDay02 && selectedDay02 > selectedDay) {
+        month02 = selectedDay02.getMonth();
+        year02 = selectedDay02.getFullYear();
 
-    if(selectCk02 == 0){
-        $(".date02").css("background-color", "");
-        $(".date02").css("color", "");
-        $("#date02_"+date02).css("background-color", "red");
-        $("#date02_"+date02).css("color", "white");
-
-        $("#check_out_hidden").val(year02 + "-" + month02+"-"+date02);
-        var period_2 = year02 + "." + month02+"."+date_txt02 + " (" + dayOfWeek02 + ")";
-        //alert(period_2);
-        document.getElementById('check_out').innerText=period_2;
-        document.getElementById('check_out_show').value=period_2;
-        check02 = 0;
-        selectCk02 = 0;
-        //alert(year02 + "-" + month02 +"-"+date02);
-
-        if(check02 == 0){
-            const target02 = document.getElementById('btnS');
-            target02.disabled = false;
+        if (month02 < 9) {
+            month02 = "0" + (month02 + 1);
+        } else {
+            month02 = month02 + 1;
         }
 
+        if (date02 < 10) {
+            date_txt02 = "0" + date02;
+        } else {
+            date_txt02 = date02;
+        }
+
+        var daysOfWeek02 = ["일", "월", "화", "수", "목", "금", "토"];
+        var dayOfWeek02 = daysOfWeek02[day02];
+
+        if (selectCk02 == 0) {
+            $(".date02").css("background-color", "");
+            $(".date02").css("color", "");
+            $(".tomorrow").css("background-color", "white");
+            $(".tomorrow").css("color", "black");
+            $("#date02_" + date02).css("background-color", "red");
+            $("#date02_" + date02).css("color", "white");
+
+            $("#check_out_hidden").val(year02 + "-" + month02 + "-" + date02);
+            var period_2 = year02 + "." + month02 + "." + date_txt02 + " (" + dayOfWeek02 + ")";
+            //alert(period_2);
+            document.getElementById('check_out').innerText = period_2;
+            document.getElementById('check_out_show').value = period_2;
+            check02 = 0;
+            selectCk02 = 0;
+            //alert(year02 + "-" + month02 +"-"+date02);
+
+            if (check02 == 0) {
+                const target02 = document.getElementById('btnS');
+                target02.disabled = false;
+            }
+
+        }
     }
 
 }

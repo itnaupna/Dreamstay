@@ -425,6 +425,15 @@
 #calendar02{
     margin-left: 600px;
 }
+/*달력 오늘 내일 자동 색 채우기*/
+.today{
+    background-color: red;
+    color: white;
+}
+.tomorrow{
+    background-color: red;
+    color: white;
+}
 .calendar > .cal_header {text-align: center;}
 .calendar > .cal_header > .title {font-size: 25px; width:50%; display: inline-block;}
 .calendar > .cal_header > .calendar_btn {
