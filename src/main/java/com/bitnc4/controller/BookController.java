@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,21 @@ public class BookController {
      var adultCount = session.getAttribute("adultCount");
      var childrenCount = session.getAttribute("childrenCount");
 
+     /*차이날짜 계산*/
+     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date endday = null;
+        Date startday = null;
+        try {
+            startday = formatter.parse((String) checkOut);
+            endday = formatter.parse((String) checkIn);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        var totalday = startday.getTime() - endday.getTime() ;
+        var totaldays = totalday/(1000*60*60*24) ;
+        model.addAttribute("totaldays", totaldays);
+        //System.out.println(totaldays);
 
         model.addAttribute("checkin", checkIn);
         model.addAttribute("checkout", checkOut);
@@ -45,7 +62,6 @@ public class BookController {
         dto.setCheckin((String) checkIn);
         dto.setCheckout((String)checkOut);
         dto.setSelectedHotel((String) selectedHotel);
-        //System.out.println(selectedHotel);
 
         List<RoomDto> roomList = bookService.searchroom(dto);
         model.addAttribute("roomList", roomList);
@@ -58,8 +74,25 @@ public class BookController {
         return "/main/book/search_room";
     }
 
-    @GetMapping("/payment")
-    public String payment() {
+    @PostMapping("/payment")
+    public String payment(HttpServletRequest request, Model model) {
+
+        String roomnum = request.getParameter("roomnum");
+        String hotelnum = request.getParameter("hotelnum");
+        String roomtype = request.getParameter("roomtype");
+        String roomprice = request.getParameter("roomprice");
+        String roommemo = request.getParameter("roommemo");
+        String roomdetail = request.getParameter("roomdetail");
+        String totaldays = request.getParameter("totaldays");
+
+        model.addAttribute("roomnum", roomnum);
+        model.addAttribute("hotelnum", hotelnum);
+        model.addAttribute("roomtype", roomtype);
+        model.addAttribute("roomprice", roomprice);
+        model.addAttribute("roommemo", roommemo);
+        model.addAttribute("roomdetail", roomdetail);
+        model.addAttribute("totaldays", totaldays);
+
 
         return "/main/book/payment";
     }

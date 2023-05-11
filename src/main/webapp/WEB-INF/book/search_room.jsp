@@ -9,6 +9,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <style>
     .book_main {
@@ -101,6 +102,7 @@
 
             <dl class="dl01">
                 <dt>HOTEL</dt>
+                <input type="hidden" value="${selectedHotel }" readonly="readonly">
                 <dd><input type="text" value="${hotelname }" readonly="readonly"></dd>
             </dl>
 
@@ -112,31 +114,37 @@
 
             <dl class="dl03">
                 <dt>ROOMS</dt>
-                <dd><input type="text" value="${sessionScope.roomCount}" readonly="readonly"></dd>
+                <dd><input type="text" value="${roomCount}" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl04">
                 <dt>ROOMS</dt>
-                <dd><input type="text" value="${sessionScope.adultCount}" readonly="readonly"></dd>
+                <dd><input type="text" value="${adultCount}" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl05">
                 <dt>ROOMS</dt>
-                <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly"></dd>
+                <dd><input type="text" value="${childrenCount}" readonly="readonly"></dd>
             </dl>
             <button type="button" onclick="location.href='/'">다시 검색하기</button>
         </div>
     </div>
     <c:forEach var="room" items="${roomList}">
-        <form action="payment" method="get" name="payment">
-            <p>방번호 : ${room.num}</p>
-            <p>호텔번호 : ${room.hotelnum}</p>
-            <p>방 타입 : ${room.roomtype}</p>
-            <p>방 가격 : ${room.roomprice}</p>
-            <p>요청사항 : ${room.roommemo}</p>
-            <p>방 상세정보 : ${room.roomdetail}</p>
+        <form action="../payment" method="post" name="payment">
+            <input type="hidden" value="${totaldays}" name="totaldays" readonly>
+            방번호 : <input value="${room.num}" type="number" name="roomnum" readonly>
+            호텔번호 : <input value="${room.hotelnum}" type="number" name="hotelnum" readonly>
+            방 타입 : <input value="${room.roomtype}" type="text" name="roomtype" readonly>
+            <c:if test="${totaldays >= 3}">ㄴㄴ
+                방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays)/10*9}" pattern="#,##0원"/>" type="text" name="roomprice" readonly>
+            </c:if>
+            <c:if test="${totaldays < 3}">
+                방 가격 : <input value="${room.roomprice * totaldays}" type="number" name="roomprice" readonly>
+            </c:if>
+            요청사항 : <input value="${room.roommemo}" type="text" name="roommemo" readonly>
+            상세정보 : <input value="${room.roomdetail}" type="text" name="roomdetail" readonly>
             <button type="submit">예약하기</button>
-        <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
+            <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
         </form>
     </c:forEach>
 </div>
