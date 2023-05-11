@@ -182,26 +182,26 @@
             <button type="button" class="mainbtn" onclick="location.href='/'">다시 검색하기</button>
         </div>
     </div>
-    <div class="test3">
-        <c:forEach var="room" items="${roomList}">
-            <form action="payment" method="get" name="payment">
-                <span>
-                    <img src="../photo/profile.png" style="display: flex;float: left;margin-left: 100px;margin-top: 20px;">
-                </span>
-                <div class="RoomList">
-                    <p>방번호 : ${room.num}</p>
-                    <p>호텔번호 : ${room.hotelnum}</p>
-                    <p>방 타입 : ${room.roomtype}</p>
-                    <p>방 가격 : ${room.roomprice}</p>
-                    <p>요청사항 : ${room.roommemo}</p>
-                    <p>방 상세정보 : ${room.roomdetail}</p>
-                    <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>
-                </div>
-                <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
-            </form>
+<%--    <div class="test3">--%>
+<%--        <c:forEach var="room" items="${roomList}">--%>
+<%--            <form action="payment" method="get" name="payment">--%>
+<%--                <span>--%>
+<%--                    <img src="../photo/profile.png" style="display: flex;float: left;margin-left: 100px;margin-top: 20px;">--%>
+<%--                </span>--%>
+<%--                <div class="RoomList">--%>
+<%--                    <p>방번호 : ${room.num}</p>--%>
+<%--                    <p>호텔번호 : ${room.hotelnum}</p>--%>
+<%--                    <p>방 타입 : ${room.roomtype}</p>--%>
+<%--                    <p>방 가격 : ${room.roomprice}</p>--%>
+<%--                    <p>요청사항 : ${room.roommemo}</p>--%>
+<%--                    <p>방 상세정보 : ${room.roomdetail}</p>--%>
+<%--                    <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>--%>
+<%--                </div>--%>
+<%--                <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->--%>
+<%--            </form>--%>
 
-        </c:forEach>
-    </div>
+<%--        </c:forEach>--%>
+<%--    </div>--%>
     <div class="test3">
 
     <c:forEach var="room" items="${roomList}">
@@ -211,17 +211,17 @@
             </span>
             <div class="RoomList">
                 <input type="hidden" value="${totaldays}" name="totaldays" readonly>
-            방번호 : <input value="${room.num}" type="number" name="roomnum" readonly>
-            호텔번호 : <input value="${room.hotelnum}" type="number" name="hotelnum" readonly>
-            방 타입 : <input value="${room.roomtype}" type="text" name="roomtype" readonly>
+                <p>방번호 : <input value="${room.num}" type="number" name="roomnum" readonly></p>
+                <p>호텔번호 : <input value="${room.hotelnum}" type="number" name="hotelnum" readonly></p>
+                <p>방 타입 : <input value="${room.roomtype}" type="text" name="roomtype" readonly></p>
             <c:if test="${totaldays >= 3}">ㄴㄴ
-                방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays)/10*9}" pattern="#,##0원"/>" type="text" name="roomprice" readonly>
+                <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays)/10*9}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
             </c:if>
             <c:if test="${totaldays < 3}">
-                방 가격 : <input value="${room.roomprice * totaldays}" type="number" name="roomprice" readonly>
+                <p>방 가격 : <input value="${room.roomprice * totaldays}" type="number" name="roomprice" readonly></p>
             </c:if>
-            요청사항 : <input value="${room.roommemo}" type="text" name="roommemo" readonly>
-            상세정보 : <input value="${room.roomdetail}" type="text" name="roomdetail" readonly>
+                <p>요청사항 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
+                <p>상세정보 : <input value="${room.roomdetail}" type="text" name="roomdetail" readonly></p>
                 <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>
             <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
             </div>
