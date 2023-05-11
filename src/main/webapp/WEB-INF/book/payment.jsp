@@ -7,7 +7,7 @@
     <%-- first div --%>
     .book_main {
         width: 2000px;
-        height: 1600px;
+        height: 1500px;
         margin: 100px auto 0;
         display: flex;
         flex-direction: column;
@@ -82,10 +82,6 @@
 
     .book_main .book_select .book_inner dl dd input[type=text]:focus {
         outline: none;
-    }
-
-    .book_main .book_select .book_inner .dl02 {
-        line-height: normal;
     }
 
     <%-- 끝 --%>
@@ -324,7 +320,7 @@
     .custom-select1 {
         position: relative;
         width: 400px;
-        margin-top: 40px;
+        margin-top: 30px;
         margin-left: 100px;
     }
 
@@ -365,6 +361,48 @@
         background-color: white;
     }
 
+    .custom-select2 {
+        position: relative;
+        width: 400px;
+        margin-top: 30px;
+    }
+
+    .selected2 {
+        background-color: white;
+        border: none;
+        border-bottom: 1px solid black;
+        padding: 5px;
+        cursor: pointer;
+        font-size: 17px;
+        background: #ffffff url("/photo/arrow_196221.png") no-repeat;
+        background-position: 96% center;
+        background-size: 10px 10px;
+    }
+
+    .options2 {
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-top: none;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: none;
+        overflow-y: scroll;
+        max-height: 150px;
+    }
+
+    .options2 li {
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .options2 li:hover {
+        background-color: white;
+    }
+
     .show {
         display: block;
     }
@@ -379,7 +417,7 @@
 
     .sideBanner {
         border: 1px solid black;
-        width: 400px;
+        width: 440px;
         height: 230px;
         float: right;
         margin-top: 50px;
@@ -422,7 +460,7 @@
     }
 
     .sidehr {
-        width: 340px;
+        width: 380px;
     }
 
     .book_main .pay .sideBanner .txt-label .paybtn {
@@ -441,7 +479,8 @@
         justify-content: center;
         align-items: center;
         display: flex;
-        margin-top: 40px;
+        flex: 1;
+        margin-top: 25px;
     }
 
     #bupin{
@@ -450,6 +489,11 @@
 
     .pay_card span{
         margin-left: 15px;
+    }
+
+    .ex_card{
+        display: inline-block;
+        margin-top: 30px;
     }
 </style>
 
@@ -472,7 +516,8 @@
 
             <dl class="dl01">
                 <dt>HOTEL</dt>
-                <dd><input type="text" value="${sessionScope.selectedHotel}" readonly="readonly"></dd>
+                <dd><input type="hidden" value="${selectedHotel}" readonly="readonly"></dd>
+                <dd><input type="text" value="${hotelname }" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl02">
@@ -503,8 +548,8 @@
     <section class="pay">
         <div class="sideBanner">
             <div class="txt-label">
-                <span>객실</span>
-                <strong>290,000 KRW</strong>
+                <span>객실예약</span>
+                <strong>${roomprice}</strong>
                 <hr class="sidehr">
                 <div class="divbtn">
                     <button type="button" class="paybtn">예약완료</button>
@@ -517,7 +562,7 @@
             </div>
 
             <div class="pay_room">
-                <p>DELUXE / 2DOUBLE /STANDARD 추후 수정</p>
+                <p>TYPE : ${roomtype}</p>
             </div>
 
             <div class="pay_name">
@@ -559,6 +604,28 @@
                     <input type="checkbox" class="bupin" id="bupin" name="bupin">
                     <span>법인</span>
                 </label>
+            </div>
+
+            <span class="ex_card">CREDIT CARD COMPANY*</span>
+            <div class="custom-select2">
+                <div class="selected2">카드선택</div>
+                <ul class="options2">
+                    <li>비씨</li>
+                    <li>국민</li>
+                    <li>하나</li>
+                    <li>삼성</li>
+                    <li>신한</li>
+                    <li>현대</li>
+                    <li>롯데</li>
+                    <li>시티</li>
+                    <li>농협</li>
+                    <li>수협</li>
+                    <li>우리</li>
+                    <li>카카오뱅크</li>
+                    <li>광주</li>
+                    <li>전북</li>
+                    <li>제주</li>
+                </ul>
             </div>
 
             <div class="cardnumber">
@@ -653,6 +720,20 @@
     options1.addEventListener('click', (event) => {
         selected1.textContent = event.target.textContent;
         options1.classList.remove('show');
+    });
+
+    // 카드 선택
+    const select2 = document.querySelector('.custom-select2');
+    const selected2 = select2.querySelector('.selected2');
+    const options2 = select2.querySelector('.options2');
+
+    selected2.addEventListener('click', () => {
+        options2.classList.toggle('show');
+    });
+
+    options2.addEventListener('click', (event) => {
+        selected2.textContent = event.target.textContent;
+        options2.classList.remove('show');
     });
 
     // 체크 박스

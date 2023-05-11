@@ -214,7 +214,7 @@
                 <p>방번호 : <input value="${room.num}" type="number" name="roomnum" readonly></p>
                 <p>호텔번호 : <input value="${room.hotelnum}" type="number" name="hotelnum" readonly></p>
                 <p>방 타입 : <input value="${room.roomtype}" type="text" name="roomtype" readonly></p>
-            <c:if test="${totaldays >= 3}">ㄴㄴ
+            <c:if test="${totaldays >= 3}">
                 <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays)/10*9}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
             </c:if>
             <c:if test="${totaldays < 3}">

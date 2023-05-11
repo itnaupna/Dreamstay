@@ -81,7 +81,11 @@ public class BookController {
         return "/main/book/search_room";
     }
 
-
+//    @GetMapping("/paymentmain")
+//    public String paymentmain()
+//    {
+//        return "/main/book/payment";
+//    }
 
     @PostMapping("/payment")
     public String payment(HttpServletRequest request, Model model,HttpSession session) {
