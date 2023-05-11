@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitnc4.mapper.BookMapper">
+    <select id="searchroom" parameterType="BookDto" resultType="RoomDto">
+        select *
+        from room
+        where hotelnum = #{selectedHotel }
+          and (num NOT in (select room_num
+                           from book
+                           where room_num IN (SELECT num FROM room WHERE hotelnum = #{selectedHotel}) and
+                                 (checkin <![CDATA[  <=]]> #{checkin } and checkout <![CDATA[  >=]]> #{checkout })
+                              or (checkin <![CDATA[  <=]]> #{checkout } and checkout <![CDATA[  >=]]> #{checkin})))
+    </select>
+</mapper>

@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 public class MainController {
 
@@ -59,7 +57,7 @@ public class MainController {
         session.setAttribute("adultCount", adultCount);
         session.setAttribute("childrenCount", childrenCount);
 
-        return "/main/book/search_room";
+        return "redirect:/book/search_room";
     }
 
 
