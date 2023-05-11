@@ -4,33 +4,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="chatWrapper">
     <div id="chatList">
-        <div class="chatlistWrapper">
-            <div class="chatBody">
-                <div class="chatlistName">
-                    애옹이
+        <c:forEach items="${list}" var="list">
+            <div class="chatlistWrapper">
+                <div class="chatBody">
+                    <div class="chatlistName">
+                        방제
+                    </div>
+                    <div class="chatlistContent">
+                        내용
+                    </div>
                 </div>
-                <span class="chatlistContent">이 호텔은 고양이 말고 사람도 숙박이 가능한가요.알고 싶어요.</span>
+                <div class="chatlistTimestamp">2222-22-22 22:22</div>
             </div>
-            <span class="chatlistTimestamp">2023-05-10 23:23</span>
-        </div>
-        <div class="chatlistWrapper">
-            <div class="chatBody">
-                <div class="chatlistName">
-                    김oo
-                </div>
-                <span class="chatlistContent">이 호텔은 사람 말고 고양이도 숙박이 가능한가요.알고 싶어요.</span>
-            </div>
-            <span class="chatlistTimestamp">2023-05-03 07:23</span>
-        </div>
-        <div class="chatlistWrapper">
-            <div class="chatBody">
-                <div class="chatlistName">
-                    강아지
-                </div>
-                <span class="chatlistContent">안녕하세요 칭찬드리고자 씁니다.</span>
-            </div>
-            <span class="chatlistTimestamp">2023-05-01 14:23</span>
-        </div>
+        </c:forEach>
+<%--        <div class="chatlistWrapper">--%>
+<%--            <div class="chatBody">--%>
+<%--                <div class="chatlistName">--%>
+<%--                    애옹이--%>
+<%--                </div>--%>
+<%--                <span class="chatlistContent">이 호텔은 고양이 말고 사람도 숙박이 가능한가요.알고 싶어요.</span>--%>
+<%--            </div>--%>
+<%--            <span class="chatlistTimestamp">2023-05-10 23:23</span>--%>
+<%--        </div>--%>
     </div>
     <div id="chatView">
         <div id="chatViewTitle">
@@ -237,7 +232,6 @@
             dataType:'json',
             success:e=>{
                 $('#chatList').empty();
-                // $('#res').empty();
                 $.each(e,(i,e)=>{
                     $('#chatList').append(
                         `<div class="chatlistWrapper">
@@ -246,7 +240,6 @@
                             <div class="chatlistTimestamp">2323.23.23 23:23</div>
                         </div>`
                     );
-                    //$('#res').append("<div onclick='enterRoom(\""+ e.roomId + "\");'>" + e.roomId + " " + e.roomName + "</div>");
                 });
             }
         });

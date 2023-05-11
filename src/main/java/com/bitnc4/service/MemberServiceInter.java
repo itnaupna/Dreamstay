@@ -45,4 +45,7 @@ public interface MemberServiceInter {
 
     // 로그인 성공시 틀린 횟수 리셋
     public void resetLockCount(String id);
+
+    //멤버 num으로 DTO 얻기
+    public MemberDto getMemberByNumber(int num);
 }

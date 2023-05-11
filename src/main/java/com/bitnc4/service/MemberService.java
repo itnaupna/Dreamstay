@@ -134,4 +134,9 @@ public class MemberService implements MemberServiceInter {
     public void resetLockCount(String id) {
         memberMapper.resetLockCount(id);
     }
+
+    @Override
+    public MemberDto getMemberByNumber(int num) {
+        return memberMapper.getMemberByNumber(num);
+    }
 }

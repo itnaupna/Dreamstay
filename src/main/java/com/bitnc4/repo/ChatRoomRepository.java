@@ -2,7 +2,7 @@ package com.bitnc4.repo;
 
 
 import com.bitnc4.dto.ChatRoomDto;
-import com.bitnc4.service.MemberService;
+import com.bitnc4.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +15,8 @@ import java.util.*;
 public class ChatRoomRepository {
     private Map<String, ChatRoomDto> chatRoomMap;
 
+    @Autowired
+    ChatService cs;
     
 
     @PostConstruct
@@ -28,13 +30,17 @@ public class ChatRoomRepository {
         return lst;
     }
 
-    public ChatRoomDto getRoomById(String id){
-        return chatRoomMap.get(id);
+    public ChatRoomDto getRoomById(String memberName)
+    {
+
+        return chatRoomMap.get(memberName);
+
     }
 
-    public ChatRoomDto createChatRoom(String name){
-        ChatRoomDto cRoom = ChatRoomDto.create(name);
-        chatRoomMap.put(cRoom.getRoomId(),cRoom);
+    public ChatRoomDto createChatRoom(String memberName){
+        ChatRoomDto cRoom = ChatRoomDto.create(memberName);
+        cRoom.setMemberLastchat(cs.getLastChatByMemberName(memberName).getMsg());
+        chatRoomMap.put(cRoom.getMemberName(),cRoom);
         return cRoom;
     }
 }

@@ -46,4 +46,8 @@
     <update id="resetLockCount" parameterType="String">
         update member set account_lock = 0 where id = #{id}
     </update>
+
+    <select id="getMemberByNum" parameterType="int" resultType="MemberDto">
+        select * from member where num=#{num}
+    </select>
 </mapper>

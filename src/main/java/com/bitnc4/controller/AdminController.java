@@ -36,7 +36,7 @@ public class AdminController {
 
     @GetMapping("/chat")
     public String chatList(Model m){
-        m.addAttribute(chatRoomRepository.getAll());
+        m.addAttribute("list",chatRoomRepository.getAll());
         return "/admin/chat/list";
     }
 
