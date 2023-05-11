@@ -52,7 +52,7 @@
 
     <insert id="socialJoin" parameterType="MemberDto">
         insert into member (id, pw, user_name, email, phone, user_level, addr, point, issocial)
-        values (concat(#{social}, #{id}), sha2(#{id}, 256), #{user_name},concat(#{social}, #{email}), #{id}, 1,#{social}, 0, #{issocial})
+        values (concat(#{social}, #{id}), sha2(#{id}, 256), #{user_name},concat(#{social}, #{email}), #{id}, 1, concat(#{social}, 'user'), 0, #{issocial})
     </insert>
 
     <select id="getSocialMember" parameterType="Map" resultType="MemberDto">

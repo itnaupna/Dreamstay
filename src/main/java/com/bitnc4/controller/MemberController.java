@@ -2,6 +2,7 @@ package com.bitnc4.controller;
 
 import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.MemberDto;
+import com.bitnc4.service.HotelService;
 import com.bitnc4.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/signup")
@@ -19,6 +21,9 @@ public class MemberController {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    HotelService hotelService;
 
     HashMap<String, String> auth = new HashMap<String, String>();
 
@@ -41,7 +46,6 @@ public class MemberController {
         String code = String.valueOf((int)(Math.random() * (999999 - 100000 + 1) + 100000));
         memberService.mailCode(email, code);
         auth.put(email, code);
-        System.out.println(auth.size());
     }
     
     // 시간 초과시 이메일에 해당하는 인증번호 삭제
@@ -63,7 +67,6 @@ public class MemberController {
     @ResponseBody
     public boolean chkemail(String email, String email_code) {
         boolean check = memberService.codeAuth(auth ,email, email_code);
-        System.out.println(auth.size());
         return check;
     }
 
