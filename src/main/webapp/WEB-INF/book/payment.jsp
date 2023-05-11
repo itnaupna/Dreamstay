@@ -395,6 +395,7 @@
 
             <dl class="dl01">
                 <dt>HOTEL</dt>
+               <input type="hidden" value="${sessionScope.selectedHotel }" readonly="readonly">
                 <dd><input type="text" value="${sessionScope.hotelname }" readonly="readonly"></dd>
             </dl>
 
@@ -418,6 +419,8 @@
                 <dt>ROOMS</dt>
                 <dd><input type="text" value="${sessionScope.childrenCount }" readonly="readonly"></dd>
             </dl>
+
+
 
             <button type="button" onclick="location.href='/'" class="mainbtn">MAIN PAGE</button>
         </div>
