@@ -2,28 +2,37 @@ package com.bitnc4.controller;
 
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.dto.QnaBoardDto;
-import com.bitnc4.service.MemberService;
 import com.bitnc4.service.QnaBoardService;
+import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class QnaboardController {
 
     @Autowired
-    private MemberService memberService;
+    private QnaBoardService qnaBoardService;
 
     @Autowired
-    private QnaBoardService qnaBoardService;
+    private NcpObjectStorageService storageService;
+    String bucketName="dreamsstaybucket";
+
     @GetMapping("/mypage/qnaboard")
     public String quaboard(Model model, HttpSession session){
         // 세션에 저장된 id
@@ -39,21 +48,40 @@ public class QnaboardController {
     @PostMapping("/insertqna")
     public String insertqna(QnaBoardDto dto,
                             HttpServletRequest request,
-                            HttpSession session){
+                            HttpSession session,
+                            MultipartFile photo)
+    {
 
-        //세션에 저장된 id
+        String filename="";
+        //업로드를 한 경우만 버킷에 이미지 저장
+        if(!photo.getOriginalFilename().equals("")){
+           filename = storageService.uploadFile(bucketName, "qnaboard", photo);
+        }
+
+        // dto에 photo 저장\
+        dto.setQna_photo(filename);
+
+       // 아이디 저장 세션에 저장된 id
         String writer=(String)session.getAttribute("userid");
 
         // 비회원일시 nomember로 저장
-        if (writer == null || writer.isEmpty()) {
+       if (writer == null || writer.isEmpty()) {
             writer = "nomember";
-        }
+       }
         //dto에 id 저장
         dto.setWriter(writer);
 
+       //radio 값 저장
+        String qnaType = request.getParameter("qna_type");
+        dto.setQna_type(qnaType);
+
+        // 사용일자 파싱
+        String usedayStr = request.getParameter("useday");
+        System.out.println(usedayStr);
+
         qnaBoardService.insertqna(dto);
 
-        return "redirect:/mypage/qnaboard";
+        return "redirect:/mypage/qnalist";
     }
 
    @GetMapping("/mypage/qnalist")
@@ -82,5 +110,28 @@ public class QnaboardController {
 
          return "/mypage/qnaboard/qnadetail";
      }
+
+     @GetMapping("/mypage/deleteqna")
+        public String deleteqna(int num, QnaBoardDto dto)
+     {
+         //db 삭제 전에 저장된 이미지 버켓에서 지운다
+         String filename = qnaBoardService.getQna(num).getQna_photo();
+         System.out.println(filename);
+         storageService.deleteFile(bucketName, "qnaboard",filename);
+
+         //db 삭제
+        qnaBoardService.deleteQna(num);
+
+         return "redirect:/mypage/qnalist";
+     }
+
+     @PostMapping("/answerupdate")
+        public String answerupdate(QnaBoardDto dto)
+         {
+             qnaBoardService.upateQnaAnswer(dto);
+             return "redirect:/mypage/qnadetail?num="+dto.getNum();
+
+         }
+
 
    }

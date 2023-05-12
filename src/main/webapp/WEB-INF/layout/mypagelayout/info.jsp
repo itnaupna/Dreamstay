@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="/css/mypage/info.css" />
 
+<%
+    String id= (String)session.getAttribute("userid");
+%>
+
 <div class="m_main">
     <div class="mtop_area">
         <div class="mtop_inner">
@@ -18,7 +22,7 @@
 
         <div class="m_myinfo">
             <div class="m_userid">
-                <p>${memberDto.id}님</p>
+                <p><%=id%>님</p>
             </div>
         </div>
 
