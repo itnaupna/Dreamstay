@@ -230,7 +230,8 @@ function fn_selectDate(date) {
             $(".date").css("background-color", "");
             $(".date").css("color", "");
             $(".today").css("background-color", "white");
-            $(".today").css("color", "black");
+            $(".today").css("color", "");
+            $(".date").removeClass("today");
             $("#date_" + date).css("background-color", "red");
             $("#date_" + date).css("color", "white");
 
@@ -284,7 +285,8 @@ function fn_selectDate02(date02) {
             $(".date02").css("background-color", "");
             $(".date02").css("color", "");
             $(".tomorrow").css("background-color", "white");
-            $(".tomorrow").css("color", "black");
+            $(".tomorrow").css("color", "");
+            $(".date02").removeClass("tomorrow");
             $("#date02_" + date02).css("background-color", "red");
             $("#date02_" + date02).css("color", "white");
 
