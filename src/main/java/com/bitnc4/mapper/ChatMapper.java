@@ -8,7 +8,6 @@ import java.util.Map;
 
 @Mapper
 public interface ChatMapper {
-    public ChatDto getLastChatByMemberName(String memberName);
     public List<ChatDto> getRecentChat(Map<String, Object> data);
     public void saveChat(ChatDto cdto);
 }

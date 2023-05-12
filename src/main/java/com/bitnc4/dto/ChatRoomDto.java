@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Slf4j
@@ -20,9 +21,9 @@ public class ChatRoomDto {
     private String memberName; //member.user_name
     private String memberLastchat; //member.user_name
 
+    private Timestamp lastTimeStamp;
 
     public static ChatRoomDto create(String memberName){
-        //TODO : session에 저장된 유저정보 갖고와서 ID,이름 생성토록 해야함
 
         ChatRoomDto cRoom = new ChatRoomDto();
         cRoom.memberName = memberName;

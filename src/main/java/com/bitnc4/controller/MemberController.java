@@ -3,6 +3,7 @@ package com.bitnc4.controller;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.service.MemberService;
 import com.sun.tools.jconsole.JConsoleContext;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
+import java.util.Enumeration;
 import java.util.HashMap;
 
+@Slf4j
 @Controller
 @RequestMapping("/signup")
 public class MemberController {
@@ -126,8 +129,17 @@ public class MemberController {
     // 로그아웃클릭 시 세션 지우고 홈으로
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("loginuser");
-       session.removeAttribute("userid");
+        //HttpSession에 저장했던 모든값 삭제.
+
+        Enumeration<String> em = session.getAttributeNames();
+        while(em.hasMoreElements()){
+            String k = em.nextElement();
+            //log.info(k);
+            session.removeAttribute(k);
+        }
+//       session.removeAttribute("loginuser");
+//       session.removeAttribute("userid");
+
        return "redirect:/";
     }
     

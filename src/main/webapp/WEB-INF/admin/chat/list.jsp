@@ -2,19 +2,22 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+${list}
 <div id="chatWrapper">
     <div id="chatList">
-        <c:forEach items="${list}" var="list">
+        <c:forEach items="${list}" var="item">
             <div class="chatlistWrapper">
                 <div class="chatBody">
                     <div class="chatlistName">
-                        방제
+                        ${fn:replace(item.memberName,"/","")}
                     </div>
                     <div class="chatlistContent">
-                        내용
+                        ${item.memberLastchat}
                     </div>
                 </div>
-                <div class="chatlistTimestamp">2222-22-22 22:22</div>
+                <div class="chatlistTimestamp">
+                        <fmt:formatDate value="${item.lastTimeStamp}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
             </div>
         </c:forEach>
 <%--        <div class="chatlistWrapper">--%>
@@ -103,6 +106,11 @@
         color:gray;
         justify-content: space-between;
     }
+    .chatlistWrapper:hover{
+        box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.4) !important;
+        transition: box-shadow 0.1s ease;
+        cursor:pointer;
+    }
     .chatlistName{
         margin-bottom: 10px;
         font-weight: bold;
@@ -122,13 +130,11 @@
         display:inline-flex;
         margin-bottom:10px;
         align-items: center;
-        font-size:0.9rem;
         color:gray;
         font-weight: bold;
         justify-content: space-between;
     }
     .chatMsgBody{
-        font-size:.7rem;
         color:#000000b8;
         font-weight: 700!important;
         text-transform: uppercase!important;
@@ -177,7 +183,7 @@
         padding-top: 20px;
     }
     .chatMsgTime{
-        font-size:.6rem;
+        font-size:.8rem;
         color:#000000b8;
         font-weight: 700!important;
         text-transform: uppercase!important;
@@ -222,26 +228,26 @@
 <script>
     SetAdminTitle('채팅관리페이지');
     $('#chatList').on('click','.chatlistWrapper',(e)=>{
-       $('#chatView').text($(e.target).text());
+        $('#chatView').text($(e.currentTarget).children()[0].children[0].innerText);
     });
     //getroomlist();
-    function getroomlist(){
-        $.ajax({
-            url:'/chat/rooms',
-            type:'get',
-            dataType:'json',
-            success:e=>{
-                $('#chatList').empty();
-                $.each(e,(i,e)=>{
-                    $('#chatList').append(
-                        `<div class="chatlistWrapper">
-                            <div class="chatlistName">\${e.roomId}</div>
-                            <div class="chatlistContent">\${e.roomName}</div>
-                            <div class="chatlistTimestamp">2323.23.23 23:23</div>
-                        </div>`
-                    );
-                });
-            }
-        });
-    }
+    // function getroomlist(){
+    //     $.ajax({
+    //         url:'/chat/rooms',
+    //         type:'get',
+    //         dataType:'json',
+    //         success:e=>{
+    //             $('#chatList').empty();
+    //             $.each(e,(i,e)=>{
+    //                 $('#chatList').append(
+    //                     `<div class="chatlistWrapper">
+    //                         <div class="chatlistName">\${e.roomId}</div>
+    //                         <div class="chatlistContent">\${e.roomName}</div>
+    //                         <div class="chatlistTimestamp">2323.23.23 23:23</div>
+    //                     </div>`
+    //                 );
+    //             });
+    //         }
+    //     });
+    // }
 </script>

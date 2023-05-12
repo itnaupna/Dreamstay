@@ -48,8 +48,9 @@
     .chatMsgBody{
         font-size:.9rem;
         color:#000000b8;
-        font-weight: 700!important;
+        /*font-weight: 700!important;*/
         margin-bottom: 0.25rem!important;
+        word-break: break-all;
     }
     .chatRight{
         float:right;
@@ -97,8 +98,8 @@
     .chatMsgTime{
         font-size:.7rem;
         color:#000000b8;
-        font-weight: 700!important;
-        text-transform: uppercase!important;
+        /*font-weight: 700!important;*/
+        /*text-transform: uppercase!important;*/
         margin-bottom: 0.25rem!important;
     }
 
@@ -163,44 +164,48 @@
 <script src="https://cdn.jsdelivr.net/npm/stomp-websocket@2.3.4-next/lib/stomp.min.js"></script>
 <script>
     CheckUsingChat();
+    GetRecent();
     function CheckUsingChat(){
         $.ajax({
             url:'/chat/chkconnect',
             type:'post',
             success:(e)=>{
                 if(e) {
-                    GetRecent();
+                    //GetRecent();
                     NewConnect();
                 }
             }
         });
     }
 
-    function NewConnect(){
+    function NewConnect(msg){
         $.ajax({
             url:'/chat/start',
             type:'post',
             dataType:'json',
             success:(e)=>{
                 if(e){
-                    GetRecent();
-                    connect();
-                    return e;
+                    connect(msg);
                 }
             }
         });
     }
     let ws;
     //connect();
-    function connect(){
+    function connect(msg){
         let sock=new SockJS("/ws-stomp");
         ws = Stomp.over(sock);
         let reconnect = 0;
         ws.connect({}, function(f){
-            ws.subscribe("/sub/chat/${loginuser.user_name}",function(msg){
-                console.log(msg);
-                //$('#txtChatViewPort').append(CreateChat('msg','time','R'));
+            ws.subscribe("/sub/chat/${loginuser.num}${loginuser.user_name}",function(msg){
+                let data = JSON.parse(msg.body);
+                let LR = data.recv==0?'L':'R';
+                $('#txtChatViewPort').append(
+                    CreateChat(data.msg,new Date().toLocaleString(),`\${data.recv ? 'R' : 'L'}`));
+                    $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
+
             });
+            if(msg !== undefined)ws.send("/pub/chat/message", {}, msg);
         },function(err){
             console.log("err");
         });
@@ -208,12 +213,9 @@
 
     function chat(msg){
         if(ws===undefined){
-            if(NewConnect()){
-                ws.send("/pub/chat/message", {}, JSON.stringify({msg: msg}));
-                $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
-            }
+            NewConnect(msg);
         }else{
-            ws.send("/pub/chat/message", {}, JSON.stringify({msg: msg}));
+            ws.send("/pub/chat/message", {}, msg);
             $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
         }
     }
@@ -230,8 +232,8 @@
                     $('#txtChatViewPort').append(
                         CreateChat(item.msg,new Date(item.date).toLocaleString(),`\${item.recv ? 'R' : 'L'}`)
                     );
-                    $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
                 });
+                $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
             },
             error:(e)=>{
 
@@ -250,6 +252,7 @@
             $('#chatInner').css({
                 'display':'flex'
             });
+            $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
         }
     });
     $('#chatTitle #btnCloseChat').on({
@@ -286,8 +289,10 @@
     $('#txtChat').on({
         'keyup':(e)=>{
             let msg = $(e.target).val().trim();
-            if(e.keyCode==13 && msg.length>0)
+            if(e.keyCode==13 && msg.length>0) {
                 chat(msg);
+                $(e.target).val('');
+            }
         }
     });
 </script>

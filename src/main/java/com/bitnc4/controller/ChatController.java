@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Member;
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -36,16 +38,7 @@ public class ChatController {
 
     @Autowired
     ChatRoomRepository crr;
-    @Autowired
-    HttpServletRequest request;
-    private HttpSession getHttpSession(){
-        String requestedSessionId = request.getRequestedSessionId();
 
-        HttpSession session = request.getSession(false);
-        if(session == null || !session.getId().equals(requestedSessionId))
-            throw new IllegalStateException("No Session");
-        return session;
-    }
     @PostMapping("/chkconnect")
     @ResponseBody
     public boolean chkConnect(HttpSession session){
@@ -63,7 +56,9 @@ public class ChatController {
         if(mdto==null)
             return null;
         else{
-            return cs.getRecentChat(mdto.getUser_name(),10);
+            List result = cs.getRecentChat(mdto.getNum(),mdto.getUser_name(),10);
+            Collections.reverse(result);
+            return result;
         }
     }
 
@@ -74,7 +69,7 @@ public class ChatController {
         if(mdto==null){
             return false;
         }else{
-            crr.createChatRoom(mdto.getUser_name());
+            crr.createChatRoom(mdto.getNum(),mdto.getUser_name());
             session.setAttribute("useChat",true);
             return true;
         }
@@ -82,13 +77,12 @@ public class ChatController {
     }
 
     @MessageMapping("/chat/message")
-    public void message(String msg){
-        HttpSession session = getHttpSession();
-        MemberDto mdto = (MemberDto) session.getAttribute("loginuser");
+    public void message(String msg, SimpMessageHeaderAccessor accessor){
+        //HttpSession session = getHttpSession();
+        //log.info("eong");
+        MemberDto mdto = (MemberDto) accessor.getSessionAttributes().get("loginuser");
         if(mdto != null){
-            log.info(mdto.toString());
-            //채팅 전송
-            //TODO : 채팅저장부분 추가해야함
+
             ChatDto cdto = new ChatDto();
             cdto.setMembernum(mdto.getNum());
             cdto.setMsg(msg);
@@ -101,25 +95,10 @@ public class ChatController {
                 cdto.setMemberview(1);
                 cdto.setAdminview(1);
             }
-
+            smso.convertAndSend("/sub/chat/" + mdto.getNum() + mdto.getUser_name(),cdto);
             cs.saveChat(cdto);
-            smso.convertAndSend("/sub/chat/" + mdto.getUser_name(),cdto);
+            crr.changeLastChat(mdto.getNum(), mdto.getUser_name());
         }
-
-        //log.info(msg.toString());
-//        switch (msg.getType()){
-//            case ENTER:
-//                //msg.setMsg(msg.getMemberNum() + "님이 입장!");
-//                break;
-//            case SAY:
-//                //채팅입력시 DB에 채팅내용을 저장토록 한다.
-//                //저장시 관리자가 말한건지, 유저가 말한건지 구분해야함.
-//                break;
-//            case EXIT:
-//                //소켓연결이 끊겼는지, 또는 방나감을 하는지 확인해야한다.
-//                break;
-//        }
-//        smso.convertAndSend("/sub/chat/room/"+ msg.getRoomId(),msg);
     }
 
 

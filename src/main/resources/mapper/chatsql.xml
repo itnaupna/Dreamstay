@@ -5,12 +5,9 @@
         select * from chat;
     </select>
     <insert id="saveChat" parameterType="ChatDto">
-        insert into chat (membernum,msg,recv,memberview,adminview) values (#{membernum},#{msg},#{recv},#{memberview},#{adminvew});
+        insert into chat (membernum,msg,recv,memberview,adminview) values (#{membernum},#{msg},#{recv},#{memberview},#{adminview});
     </insert>
-    <select id="getLastChatByMemberName" resultType="ChatDto">
-        select * from chat where membernum=(select member.num from member where member.user_name=#{name}) order by num desc limit 1
-    </select>
     <select id="getRecentChat" parameterType="Map" resultType="ChatDto">
-        select * from chat where membernum=(select member.num from member where member.user_name=#{name}) order by num asc limit #{count}
+        select * from chat where membernum=(select member.num from member where member.user_name=#{name} and member.num=#{num}) order by num desc limit #{count}
     </select>
 </mapper>

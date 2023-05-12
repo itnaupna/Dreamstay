@@ -37,10 +37,17 @@ public class ChatRoomRepository {
 
     }
 
-    public ChatRoomDto createChatRoom(String memberName){
-        ChatRoomDto cRoom = ChatRoomDto.create(memberName);
-        cRoom.setMemberLastchat(cs.getLastChatByMemberName(memberName).getMsg());
+    public ChatRoomDto createChatRoom(int memberNum,String memberName){
+        ChatRoomDto cRoom = ChatRoomDto.create(memberNum+memberName);
+        cRoom.setMemberLastchat(cs.getLastChat(memberNum, memberName).getMsg());
+        cRoom.setLastTimeStamp(cs.getLastChat(memberNum,memberName).getDate());
         chatRoomMap.put(cRoom.getMemberName(),cRoom);
         return cRoom;
+    }
+
+    public void changeLastChat(int memberNum,String memberName){
+        ChatRoomDto cRoom = chatRoomMap.get(memberNum+memberName);
+        cRoom.setMemberLastchat(cs.getLastChat(memberNum, memberName).getMsg());
+        cRoom.setLastTimeStamp(cs.getLastChat(memberNum,memberName).getDate());
     }
 }
