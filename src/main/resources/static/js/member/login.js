@@ -149,3 +149,11 @@ naver_id_login.init_naver_id_login();
 $("#naver_loginbox, #naver_logintext").click(function() {
     $("#naver_id_login").click();
 });
+
+$("#booksearch").click(function() {
+    if($("#login_book_searchnum").val() != "" && $("#login_book_pw").val() != "") {
+        $("#search_nomember_book").submit();
+    } else {
+        alert("예약 번호와 비밀번호를 입력해주세요");
+    }
+});

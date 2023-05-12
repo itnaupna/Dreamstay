@@ -32,14 +32,13 @@
     }
 
     #login_main {
-        border: 1px solid brown; /*영역*/
         margin: 180px auto 0 auto;
-        width: 1404px;
+        width: 1200px;
         height: 600px;
     }
 
     #login_title {
-        border: 1px solid orange; /*영역*/
+        margin-bottom: 10px;
     }
 
     #login_maintitle {
@@ -50,9 +49,8 @@
     }
 
     #login_select_barbox {
-        border: 1px solid purple; /*영역*/
         text-align: center;
-        margin-bottom: 70px;
+        margin-bottom: 100px;
     }
 
     #login_select_bar {
@@ -63,7 +61,7 @@
 
     .login_select {
         display: inline-block;
-        width: 700px;
+        width: 600px;
         padding: 15px 40px 15px 40px;
         cursor: pointer;
     }
@@ -82,16 +80,14 @@
     }
 
     #login_login_subject {
-        border: 1px solid green; /*영역*/
         display: flex;
         justify-content: center;
-        width: 1400px;
-        margin-bottom: 100px;
+        width: 1200px;
+        margin-bottom: 150px;
     }
 
     #login_member_login {
-        border: 1px solid gray; /*영역*/
-        width: 700px;
+        width: 600px;
     }
     #login_id {
         margin-bottom: 10px;
@@ -102,37 +98,42 @@
         border: none;
         background-color: #f9f9f9;
         margin-bottom: 15px;
-        width: 650px;
+        width: 550px;
         height: 60px;
+        padding-left: 10px;
     }
 
     #access {
         margin: 15px 0 15px 0;
         display: block;
-        width: 650px;
+        width: 550px;
         height: 60px;
         background-color: black;
+        border: 1px solid black;
         color: white;
     }
 
-    #login_subtext {
+    #access:hover {
+        background-color: white;
+        color: black;
+    }
+
+    .login_subtext {
         display: block;
         color: #444444;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
+        font-size: 15px;
+        text-align: left;
     }
 
     #login_joinlink {
         margin-right: 20px;
     }
 
-    #access:hover {
-
-    }
 
     #login_social_login {
-        border: 1px solid blue; /*영역*/
         text-align: right;
-        width: 700px;
+        width: 600px;
     }
 
     #kakao_login {
@@ -142,14 +143,14 @@
         background-size: 43px 43px;
         background-repeat: no-repeat;
         border: 1px solid black;
-        width: 650px;
+        width: 550px;
         height: 60px;
         margin-bottom: 10px;
     }
 
     #naver_loginbox {
         border: 1px solid black;
-        width: 650px;
+        width: 550px;
         height: 60px;
     }
 
@@ -163,11 +164,10 @@
 
 
     #naver_loginbox span {
-        width: 590px;
+        width: 490px;
     }
 
     #login_bottom_textbox {
-        border: 1px solid yellow; /*영역*/
     }
 
     #login_bottom_text {
@@ -176,8 +176,37 @@
     }
 
     #login_reservation {
-        border: 1px solid red; /*영역*/
         display: none;
+    }
+
+    #nomembersearchbox {
+        width: 700px;
+        margin: 0 auto 150px auto;
+        text-align: center;
+    }
+
+    #login_book_searchnum {
+        margin-bottom: 10px;
+    }
+
+    .login_booksearch_input {
+        width: 700px;
+        margin-bottom: 30px;
+
+    }
+
+    #booksearch{
+        background-color: black;
+        color: white;
+        border: 1px solid black;
+        width: 700px;
+        height: 60px;
+        margin: 15px 0 15px 0;
+    }
+
+    #booksearch:hover {
+        background-color: white;
+        color: black;
     }
 </style>
 
@@ -205,8 +234,8 @@
             </label>
             <button type="button" id="access">로그인</button>
 
-            <span id="login_subtext">회원이 되시면 더 많은 혜택이 있습니다.</span>
-
+            <span class="login_subtext">회원이 되시면 더 많은 혜택이 있습니다.</span>
+            <hr>
             <a href="/signup/signup" id="login_joinlink">회원가입</a>
             <a href="/signup/findidpw">아이디/비밀번호찾기/계정활성화</a>
         </div>
@@ -221,7 +250,14 @@
         </div>
     </div>
     <div id="login_reservation">
-        <span>비회원예약</span>
+        <form action="/signup/nomemberbooksearch" method="post" id="search_nomember_book">
+            <div id="nomembersearchbox">
+                <input type="text" class="login_input login_booksearch_input" id="login_book_searchnum" placeholder="예약 번호">
+                <input type="text" class="login_input login_booksearch_input" id="login_book_pw" placeholder="예약 비밀번호">
+                <button type="button" id="booksearch">비회원 예약 확인</button>
+                <span class="login_subtext">회원이 되시면 더 많은 혜택이 있습니다.</span>
+            </div>
+        </form>
     </div>
     <hr>
     <div id="login_bottom_textbox">
