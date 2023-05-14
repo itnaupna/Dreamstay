@@ -151,8 +151,22 @@ $("#naver_loginbox, #naver_logintext").click(function() {
 });
 
 $("#booksearch").click(function() {
-    if($("#login_book_searchnum").val() != "" && $("#login_book_pw").val() != "") {
-        $("#search_nomember_book").submit();
+    let searchnum = $("#login_book_searchnum").val();
+    let bookPw = $("#login_book_pw").val()
+    if(searchnum != "" && bookPw != "") {
+        $.ajax({
+            url: "/book/bookchk",
+            type: 'post',
+            data: {"searchnum": searchnum, "bookpw": bookPw},
+            success: function(data) {
+                if(data < 1) {
+                    alert("조회된 예약이 없습니다");
+                 } else {
+                    $("#search_nomember_book").submit();
+                }
+            }
+
+        });
     } else {
         alert("예약 번호와 비밀번호를 입력해주세요");
     }
