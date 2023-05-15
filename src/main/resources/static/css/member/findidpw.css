@@ -112,9 +112,9 @@ body{
     list-style-type: none;
     overflow-x: hidden;
     overflow-y: scroll;
-    position: relative;
+    position: absolute;
     display: none;
-    left: 30px;
+    background-color: white;
     text-align: left;
     padding-left: 0;
     border: 1px solid black;
@@ -145,12 +145,13 @@ body{
     height: 50px;
     background-color: black;
     color: white;
+    transition: all 0.5s;
 }
 
 #findidpw_sendmail:hover {
     background-color: white;
     color: black;
-    transition: all 1s;
+    transition: all 0.5s;
 }
 
 #findidpw_chkcode {
@@ -159,10 +160,11 @@ body{
     height: 50px;
     background-color: black;
     color: white;
+    transition: all 0.5s;
 }
 
 #findidpw_chkcode:hover {
-    background-color: white;
     color: black;
-    transition: all 1s;
+    background-color: white;
+    transition: all 0.5s;
 }

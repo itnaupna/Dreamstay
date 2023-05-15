@@ -28,6 +28,9 @@ public interface MemberServiceInter {
     // 회원가입
     public void joinMember(MemberDto dto);
 
+    // 사이트에서 가입한 아이디인지 확인
+    public int joinSiteMember(String id);
+
     // 로그인
     public MemberDto access(String id, String pw);
 
@@ -45,6 +48,14 @@ public interface MemberServiceInter {
 
     // 로그인 성공시 틀린 횟수 리셋
     public void resetLockCount(String id);
+
+    // 소셜 첫 로그인 시 db에 추가
+    public void socialJoin(MemberDto social);
+
+    // 소셜 로그인 시 기존에 해당소셜로 가입한 회원인지 확인
+    public MemberDto getSocialMember(String id, String issocial, String social);
+
+
 
     //멤버 num으로 DTO 얻기
     public MemberDto getMemberByNumber(int num);

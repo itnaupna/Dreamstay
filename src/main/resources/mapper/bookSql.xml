@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitnc4.mapper.BookMapper">
+    <select id="searchroomdto" parameterType="BookDto" resultType="RoomDto">
+        select *
+        from room
+        where hotelnum = #{hotelnum}
+          and (num NOT in (select room_num
+                           from book
+                           where room_num IN (SELECT num FROM room WHERE hotelnum = #{hotelnum}) and
+                                 (checkin &lt; #{checkin} and checkout &gt; #{checkout})
+                              or (checkin &lt; #{checkin} and checkout
+                               &gt; #{checkout})));
+    </select>
+
+    <select id="getNomemberBookData" parameterType="Map" resultType="Map">
+        select h.num, h.name, h.addr, h.phone, h.photo,
+               r.roomtype, r.roommemo, r.roomdetail, r.roomphoto,
+               date_format(b.checkin, "%Y-%m-%d %H:%i") checkin, date_format(b.checkout, "%Y-%m-%d %H:%i") checkout,
+               json_unquote(json_extract(b.peopleinfo, '$.adult')) adult, json_unquote(json_extract(b.peopleinfo, '$.kids')) kids, b.memo, b.total_price,m.user_name
+        from hotel h inner join room r on h.num = r.hotelnum
+            inner join book b on b.room_num = r.num
+            inner join member m on b.user_num = m.num
+        where b.num = #{num} and m.pw = sha2(#{pw}, 256);
+    </select>
+</mapper>

@@ -1,6 +1,8 @@
 package com.bitnc4.controller;
 
+import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.MemberDto;
+import com.bitnc4.service.HotelService;
 import com.bitnc4.service.MemberService;
 import com.sun.tools.jconsole.JConsoleContext;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -24,6 +27,9 @@ public class MemberController {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    HotelService hotelService;
 
     HashMap<String, String> auth = new HashMap<String, String>();
 
@@ -46,7 +52,6 @@ public class MemberController {
         String code = String.valueOf((int)(Math.random() * (999999 - 100000 + 1) + 100000));
         memberService.mailCode(email, code);
         auth.put(email, code);
-        System.out.println(auth.size());
     }
     
     // 시간 초과시 이메일에 해당하는 인증번호 삭제
@@ -68,7 +73,6 @@ public class MemberController {
     @ResponseBody
     public boolean chkemail(String email, String email_code) {
         boolean check = memberService.codeAuth(auth ,email, email_code);
-        System.out.println(auth.size());
         return check;
     }
 
@@ -95,7 +99,7 @@ public class MemberController {
     public int idpwChk(String id, String pw, String saveid, HttpSession session, HttpServletResponse response) {
         Cookie cookie;
         // 아이디만 맞을경우
-        if(memberService.overlapId(id) == 1) {
+        if(memberService.overlapId(id)== 1) {
             MemberDto loginuser = memberService.access(id,pw);
             // 아이디와 비밀번호가 모두 맞을경우
             if(loginuser != null) {
@@ -130,15 +134,12 @@ public class MemberController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         //HttpSession에 저장했던 모든값 삭제.
-
         Enumeration<String> em = session.getAttributeNames();
         while(em.hasMoreElements()){
             String k = em.nextElement();
             //log.info(k);
             session.removeAttribute(k);
         }
-//       session.removeAttribute("loginuser");
-//       session.removeAttribute("userid");
 
        return "redirect:/";
     }
@@ -149,12 +150,14 @@ public class MemberController {
         return "/main/signup/findidpw";
     }
     
+    // 아이디 비밀번호 찾기 페이지
     @PostMapping("/searchidpw")
     @ResponseBody
     public int chkIdPw(String email, String id) {
         return memberService.overlapEmail(email, id);
     }
 
+    // 아이디 찾기 페이지
     @PostMapping("/findid")
     public String findId(String email, Model model) {
         MemberDto mDto = memberService.searchInfoToEmail(email);
@@ -163,18 +166,22 @@ public class MemberController {
         return "/main/signup/findid";
     }
 
+    // 비밀번호 변경 페이지
     @PostMapping("/changepassword")
     public String findPw(String email, Model model) {
         model.addAttribute("mDto", memberService.searchInfoToEmail(email));
         return "/main/signup/changepassword";
     }
 
+
+    // 비밀번호 변경
     @PostMapping("/updatepassword")
     public String chgPass(String id, String pw){
         memberService.changePassword(id, pw);
         return "redirect:/signup/login";
     }
 
+    // 계정 잠금
     @PostMapping("/lockcount")
     @ResponseBody
     public int lockcount(String id) {
@@ -185,4 +192,45 @@ public class MemberController {
         return lockCount;
     }
 
+    // 카카오 로그인
+    @PostMapping("/kakaologin")
+    @ResponseBody
+    public String kakaoLogin(MemberDto socialLogin, HttpSession session) {
+        boolean memberChk = memberService.getSocialMember(socialLogin.getId(), String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial() ) != null;
+        System.out.println(memberChk);
+        if(memberChk) {
+            System.out.println("아이디 있음");
+            session.setAttribute("loginuser", socialLogin);
+            System.out.println(session.getAttribute("loginuser"));
+        } else {
+            System.out.println("아이디 없음");
+            memberService.socialJoin(socialLogin);
+            session.setAttribute("loginuser", socialLogin);
+        }
+        return "redirect:/";
+    }
+
+    // 네이버 팝업
+    @GetMapping("/callbacknaver")
+    public String callBackNaver() {
+        return "/main/signup/callbacknaver";
+    }
+
+    // 네이버 로그인
+    @PostMapping("/naverlogin")
+    @ResponseBody
+    public String naverLogin(MemberDto socialLogin, HttpSession session) {
+        boolean memberChk = memberService.getSocialMember(socialLogin.getId() , String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial()) != null;
+        System.out.println(memberChk);
+        if(memberChk) {
+            System.out.println("아이디 있음");
+            session.setAttribute("loginuser", socialLogin);
+            System.out.println(session.getAttribute("loginuser"));
+        } else {
+            System.out.println("아이디 없음");
+            memberService.socialJoin(socialLogin);
+            session.setAttribute("loginuser", socialLogin);
+        }
+        return "redirect:/";
+    }
 }

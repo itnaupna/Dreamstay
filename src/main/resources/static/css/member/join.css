@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    margin: 0;
+}
+
+#signup_main {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 180px auto 0 auto;
+    width: 1000px;
+    height: 1000px;
+}
+
+#signup_titlebox {
+    margin-bottom: 30px;
+}
+
+#signup_titlebox span {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+#signup_pwbox {
+    display: flex;
+    justify-content: center;
+
+}
+
+#signup_pwform {
+    width: 500px;
+}
+
+#signup_pwchk {
+    width: 500px;
+}
+
+#signup_email_send {
+    float: left;
+    margin-bottom: 10px;
+}
+
+#signup_full_email {
+    display: flex;
+    justify-content: center;
+}
+
+#join_domain {
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: left;
+    border-bottom: 1px solid black;
+    margin: 0 30px 0 30px;
+    background: #ffffff url("/photo/arrow_196221.png") no-repeat;
+    background-size: 10px 10px;
+    background-position: 96% center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#signup_custom_option {
+    width: 200px;
+    height: 150px;
+    list-style-type: none;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    display: none;
+    background-color: white;
+    text-align: left;
+    padding-left: 0;
+    border: 1px solid black;
+    border-top: none;
+}
+
+#signup_custom_option li {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+}
+
+#signup_custom_option li:hover {
+    background-color: #eeeeee;
+}
+
+#signup_searchaddr {
+    margin-bottom: 10px;
+}
+
+.signup_title {
+    display: block;
+    font-weight: bold;
+}
+.signup_subbox {
+    margin-bottom: 30px;
+}
+.signup_subtitle {
+    margin: 10px 0 30px 0;
+}
+
+.signup_notice {
+    display: block;
+}
+
+.signup_input {
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    padding-left: 10px;
+}
+
+#family_name, #user_name, #phone {
+    width: 300px;
+}
+
+#id, #pw, #pwchk, #addr, #addrdetail {
+    width: 450px;
+}
+
+#addr, #family_name {
+    margin-right: 15px;
+}
+
+#email, #email_domain, #email_code, #zipcode {
+    width: 250px;
+}
+
+.signup_input:focus {
+    outline: none;
+    border-bottom: 1px solid black;
+}
+
+#signup_btnbox {
+    text-align: center;
+}
+
+#signup_btnbox button {
+    margin: 30px 10px 30px 10px;
+    width: 250px;
+    height: 60px;
+}
+
+.signup_btn {
+    width: 150px;
+    height: 50px;
+    border: 1px solid black;
+    color: white;
+    margin-left: 20px;
+}
+
+.signup_btn:hover {
+    color: black;
+}
+
+#id_check, #SendEmailBtn, #CheckEmailBtn, #search_addr, #signup_back, #signupBtn {
+    background-color: black;
+}
+#id_check:hover, #SendEmailBtn:hover, #CheckEmailBtn:hover, #search_addr:hover, #signup_back:hover, #signupBtn:hover {
+    background-color: white;
+}
+#at {
+    margin: 0 8px 0 8px;
+}
+
+.signup_notice {
+    margin: 5px 0 5px 10px;
+}
