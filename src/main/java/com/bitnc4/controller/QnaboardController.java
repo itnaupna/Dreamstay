@@ -9,19 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
+
 
 @Controller
 public class QnaboardController {
@@ -85,7 +80,8 @@ public class QnaboardController {
     }
 
     @GetMapping("/mypage/qnalist")
-    public String qnalist(QnaBoardDto dto, HttpSession session, HttpServletResponse response, Model model){
+    public String qnalist(QnaBoardDto dto, HttpSession session, HttpServletResponse response,
+                          Model model, @RequestParam(defaultValue = "1") int currentPage){
         //세션에 저장된 id
         String writer=(String)session.getAttribute("userid");
 
@@ -96,8 +92,45 @@ public class QnaboardController {
         //dto에 id 저장
         dto.setWriter(writer);
 
-        List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(writer);
+       //
+
+        //게시판의 총 글갯수 얻기
+        int totalCount= qnaBoardService.getQnaCount(writer);
+        int totalPage;//총 페이지수
+        int perPage=10; //한 페이지당 보여질 글의 갯수
+        int perBlock=10;//한 블럭당 보여질 페이지의 갯수
+        int startNum;//각 페이지에서 보여질 글의 시작번호
+        int startPage;//각 블럭에서 보여질 시작 페이지번호
+        int endPage;//각 블럭에서 보여질 끝 페이지번호
+        int no;//글 출력시 출력할 시작번호
+
+        //총 페이지수
+        totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
+        //시작페이지
+        startPage=(currentPage-1)/perBlock*perBlock+1;
+        //끝페이지
+        endPage=startPage+perBlock-1;
+        //이때 문제점....endPage 가 totalpage 보다 크면 안된다
+        if(endPage>totalPage)
+            endPage=totalPage;
+
+        //각 페이지의 시작번호(1페이지 : 0, 2페이지:3,3페이지 :6...)
+        startNum=(currentPage-1)*perPage;
+        //각 글마다 출력할 글번호(예:10개일경우 1페이지:10, 2페이지: 7...
+        //no=totalCount-(currentPage-1)*perPage;
+        no=totalCount-startNum;
+
+        //각 페이지에 필요한 게스글 db 에서 가져오기
+        List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(startNum,perPage,writer);
+
+        //출력시 필요한 변수들을 model 에 몽땅 저장
+        model.addAttribute("totalCount", totalCount);
         model.addAttribute("qnaBoardList", qnaBoardList);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("no", no);
 
         return "/mypage/qnaboard/qnalist";
     }

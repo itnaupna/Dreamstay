@@ -24,13 +24,22 @@
     </c:if>
     <br>
     <div>
-        <button type="button" class="btn btn-outline-secondary" onclick="history.back()">목록</button>
+        <%--<button type="button" class="btn btn-outline-secondary" onclick="location.href = '/admin/qna'">목록</button>--%>
+            <button type="button" class="btn btn-outline-secondary" onclick="location.href = '/qna/list/${sessionScope.currentPage}">목록</button>
         <c:if test="${dto.answer== '답변대기'}">
             <button type="button" class="btn btn-outline-secondary" id="delQna">삭제</button>
             <button type="button" class="btn btn-outline-secondary">수정</button>
         </c:if>
     </div>
 </div>
+
+<c:if test="${dto.answer== '답변완료'}">
+    <div class="anserwqna" style="border: 1px solid gray; height: 200px;">
+
+        <span>관리자 답글</span>
+        <span>${dto.answer_text}</span>
+    </div>
+</c:if>
 
 <form action="./answerupdate" method="post">
     <input type="hidden" name="num" value="${dto.num}">
@@ -39,3 +48,5 @@
         <button type="submit" class="btn btn-outline-secondary">답변완료</button>
     </div>
 </form>
+
+

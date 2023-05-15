@@ -11,5 +11,6 @@ public interface AdminQnaServeiceInter {
     public QnaBoardDto getQna(int num);
     public void upateQnaAnswer(QnaBoardDto dto);
     public List<QnaBoardDto> searchQnaList(QnaBoardDto dto);
+    public int getUnanswerCount();
 
 }

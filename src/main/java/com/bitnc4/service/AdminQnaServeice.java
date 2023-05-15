@@ -17,16 +17,6 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
     @Autowired
     AdminQnaMapper AdminqnaMapper;
 
-    /*@Override
-    public List<QnaBoardDto> getQnaList(int page) {
-        Map<String,Integer> map = new HashMap<>();
-        final int PAGE_SIZE = 10;
-        map.put("start",(page-1)*PAGE_SIZE);
-        map.put("count",PAGE_SIZE);
-
-        return AdminqnaMapper.getQnaList(map);
-    }*/
-
     @Override
     public List<QnaBoardDto> getQnaList(int page, QnaBoardDto dto) {
         Map<String, Object> map = new HashMap<>();
@@ -38,35 +28,10 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
         map.put("qna_type", dto.getQna_type());
         map.put("category", dto.getCategory());
         map.put("answer", dto.getAnswer());
+        map.put("hotelname", dto.getHotelname());
 
         return AdminqnaMapper.getQnaList(map);
     }
-
-   /* @Override
-    public List<Integer> getQnaCount(int currPage) {
-        final int PPP = 10;
-        List<Integer> result = new ArrayList<>();
-        int startPage,lastPage;
-        if(currPage % PPP == 0){
-            startPage = currPage-PPP+1;
-            lastPage = currPage;
-        }else {
-            startPage = currPage / PPP * PPP + 1;
-            int iLastPage = AdminqnaMapper.getQnaCount()/10+1;
-            double dLastPage = AdminqnaMapper.getQnaCount()/10+1;
-            if(iLastPage<dLastPage)
-            lastPage = iLastPage+1;
-            else lastPage = iLastPage;
-       }
-        result.add(startPage);
-        result.add(currPage);
-        result.add(lastPage);
-        result.add(AdminqnaMapper.getQnaCount()/PPP + (AdminqnaMapper.getQnaCount() % PPP));
-
-        return result;
-    }*/
-
-
 
     @Override
     public QnaBoardDto getQna(int num) {
@@ -81,6 +46,12 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
     @Override
     public List<QnaBoardDto> searchQnaList(QnaBoardDto dto) {
         return AdminqnaMapper.searchQnaList(dto);
+    }
+
+    // 미답변 게시물 수
+    @Override
+    public int getUnanswerCount() {
+        return AdminqnaMapper.getUnanswerCount();
     }
 
     @Override
@@ -113,5 +84,6 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
         }
         return result;
     }
+
 
 }

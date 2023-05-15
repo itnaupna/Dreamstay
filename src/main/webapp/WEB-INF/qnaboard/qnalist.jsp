@@ -41,4 +41,31 @@
 
     </table>
 
+    <!-- 페이징 처리 -->
+    <div  style="width: 700px;text-align: center;font-size: 17px;">
+        <!-- 이전 -->
+        <c:if test="${startPage>1}">
+            <a style="color:black;text-decoration: none;cursor: pointer;"
+               href="/mypage/qnalist?currentPage=${startPage-1}">이전</a>
+        </c:if>
+        &nbsp;
+        <!-- 페이지번호 출력 -->
+        <c:forEach var="pp" begin="${startPage}" end="${endPage}">
+            <c:if test="${currentPage==pp}">
+                <a style="color:green;text-decoration: none;cursor: pointer;"
+                   href="/mypage/qnalist?currentPage=${pp}">${pp}</a>
+            </c:if>
+            <c:if test="${currentPage!=pp}">
+                <a style="color:black;text-decoration: none;cursor: pointer;"
+                   href="/mypage/qnalist?currentPage=${pp}">${pp}</a>
+            </c:if>
+            &nbsp;
+        </c:forEach>
+        <!-- 다음 -->
+        <c:if test="${endPage<totalPage}">
+            <a style="color:black;text-decoration: none;cursor: pointer;"
+               href="list?currentPage=${endPage+1}">다음</a>
+        </c:if>
+    </div>
+
 </div>

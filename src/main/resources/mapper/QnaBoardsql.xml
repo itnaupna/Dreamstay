@@ -12,7 +12,7 @@
         select user_name,email,phone from member where id=#{writer}
     </select>
 
-    <select id="qnaList" parameterType="String" resultType="QnaBoardDto">
+    <select id="qnaList" parameterType="Map" resultType="QnaBoardDto">
         select *, case category
                       when 1 then '[가입문의]'
                       when 2 then '[예약문의]'
@@ -20,7 +20,7 @@
                       when 4 then '[기타]'
             end as category_txt
         from board_qna
-        where writer=#{writer} order by num desc
+        where writer=#{writer} order by num desc limit #{start},#{perpage}
     </select>
 
     <select id="getQna" parameterType="int" resultType="QnaBoardDto">
@@ -30,5 +30,9 @@
     <delete id="deleteQna" parameterType="int">
         delete from board_qna where num = #{num}
     </delete>
+
+    <select id="getQnaCount" parameterType="String" resultType="int">
+        select count(*) from board_qna where writer = #{writer}
+    </select>
 
 </mapper>

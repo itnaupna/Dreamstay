@@ -12,6 +12,7 @@ public interface AdminQnaMapper {
     public int getQnaCount(QnaBoardDto dto);
     public QnaBoardDto getQna(int num);
     public void upateQnaAnswer(QnaBoardDto dto);
-
     public List<QnaBoardDto> searchQnaList(QnaBoardDto dto);
+    public int getUnanswerCount();
+
 }
