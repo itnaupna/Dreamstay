@@ -30,4 +30,10 @@
     <update id="deleteRoom" parameterType="int">
         delete from room where num=#{roomnum}
     </update>
+    <select id="getMemberCount" resultType="int">
+        select count(*) from member where user_level&lt;10
+    </select>
+    <select id="getHotelCount" resultType="int">
+        select count(*) from hotel
+    </select>
 </mapper>

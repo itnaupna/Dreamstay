@@ -58,4 +58,14 @@ public class AdminHnRService implements AdminHnRServiceInter{
     public int deleteRoom(int roomnum) {
         return m.deleteRoom(roomnum);
     }
+
+    @Override
+    public int getMemberCount(boolean containAdmin) {
+        return m.getMemberCount(containAdmin);
+    }
+
+    @Override
+    public int getHotelCount() {
+        return m.getHotelCount();
+    }
 }

@@ -49,11 +49,10 @@ public class MyPageController {
 
     @PostMapping("/changeinfo")
     @ResponseBody
-    public String changeinfo(HttpSession session,Model model,MemberDto dto)
+    public void changeinfo(HttpSession session,Model model,MemberDto dto)
     {
         dto.setId(String.valueOf(session.getAttribute("userid")));
         mypageService.updateUserInfo(dto);
-        return "/mypage/updateinfo";
     }
 
     @GetMapping("/updatepass")

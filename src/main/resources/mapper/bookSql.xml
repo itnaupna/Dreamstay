@@ -16,4 +16,5 @@
             from hotel
             where num = #{selectedHotel }
     </select>
+
 </mapper>

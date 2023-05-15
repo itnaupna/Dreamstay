@@ -54,7 +54,6 @@
         background-color: #F9F9F9;
         height: 50px;
         cursor: pointer;
-
     }
 
     .r_btn:hover {
@@ -64,7 +63,7 @@
 
     /* 메뉴바 아래 전체 */
     .res_main .res_sel {
-        margin-top: 20px;
+        margin-top: 50px;
         /*border: 1px solid green;*/
         width: 1000px;
         height: 1000px;
@@ -221,26 +220,6 @@
                     <p class="text_box" id="tb_1" data-value="${dto.num}">${dto.name}</p>
                 </c:forEach>
             </li>
-
-            <li>
-                <a href="#">WESTIN JOSUN</a>
-                <p class="text_box" onclick="saveValue(this)">
-                    웨스틴 조선 서울
-                </p>
-                <p class="text_box" onclick="saveValue(this)">
-                    웨스틴 조선 부산
-                </p>
-            </li>
-
-            <li>
-                <a href="#">FOUR POINTS</a>
-                <p class="text_box" onclick="saveValue(this)">
-                    포포인츠 바이 쉐라톤 조선 서울역
-                </p>
-                <p class="text_box" onclick="saveValue(this)">
-                    포포인츠 바이 쉐라톤 조선 명동
-                </p>
-            </li>
         </ul>
 
         <div class="datepicker">
@@ -257,8 +236,6 @@
         <%-- 호텔 값 가져오기 --%>
         <div class="res_select">
             <input type="text" id="hotel_name" name="hotel_name" placeholder="호텔을 선택해주세요" readonly="readonly">
-            <input type="text" id="checkin" name="checkin" placeholder="예약한 날짜를 선택해주세요" readonly="readonly"
-                   onclick="$('#seldate').click()">
         </div>
         <div class="res_btn">
             <button type="button" class="r_btn">기간 조회</button>
@@ -329,22 +306,21 @@
         });
     });
 
-
-    // 캘린더 벨류 값
-    const seldate = document.querySelector('#seldate');
-    const checkin = document.querySelector('#checkin');
-
-    seldate.addEventListener('input', () => {
-        checkin.value = seldate.value;
-    });
+    // // 캘린더 벨류 값
+    // const seldate = document.querySelector('#seldate');
+    // const checkin = document.querySelector('#checkin');
+    //
+    // seldate.addEventListener('input', () => {
+    //     checkin.value = seldate.value;
+    // });
 </script>
 
 <%-- 달력 테스트 --%>
-<script>
-    const config = {
-        enableTime: false,
-        dateFormat: "Y-m-d",
-    };
+<%--<script>--%>
+<%--    const config = {--%>
+<%--        enableTime: false,--%>
+<%--        dateFormat: "Y-m-d",--%>
+<%--    };--%>
 
-    flatpickr("input[type=datetime-local]", config);
-</script>
+<%--    flatpickr("input[type=datetime-local]", config);--%>
+<%--</script>--%>

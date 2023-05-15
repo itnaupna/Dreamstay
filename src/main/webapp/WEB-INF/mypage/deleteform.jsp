@@ -24,15 +24,15 @@
     <%--    </form>--%>
     <div class="del_info">
         <div class="info_title">
-            <p>신세계면세점 동시가입 고객 안내</p>
+            <p>DREAM STAY 동시가입 고객 안내</p>
         </div>
         <div class="info_ul">
             <ul>
                 <li>
-                    회원가입 동의철회 : <span>www.ssgdfm.com</span> 접속 > 로그인 회원탈퇴
+                    회원가입 동의철회 : <span>www.dreamstay.com</span> 접속 > 로그인 회원탈퇴
                 </li>
                 <li>
-                    광고 / 마케팅 동의철회 : <span>www.ssgdfm.com</span> 접속 > 로그인 > 회원정보수정 > 동의철회
+                    광고 / 마케팅 동의철회 : <span>www.dreamstay.com</span> 접속 > 로그인 > 회원정보수정 > 동의철회
                 </li>
                 <li>
                     문의번호: 1234-5678 (09:00~18:00 연중무휴)

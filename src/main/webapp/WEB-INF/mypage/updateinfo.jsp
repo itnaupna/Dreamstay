@@ -41,43 +41,43 @@
         <span class="last_name">LAST NAME *</span>
     </div>
 
-        <div class="u_name2">
-            <input type="text" id="ch_name" class="ch_name" value="${familyname}" placeholder="FIRST NAME">
-            <input type="text" id="ch_name2" class="ch_name2" value="${firstname}" placeholder="LAST NAME">
-        </div>
+    <div class="u_name2">
+        <input type="text" id="ch_name" class="ch_name" value="${familyname}" placeholder="FIRST NAME">
+        <input type="text" id="ch_name2" class="ch_name2" value="${firstname}" placeholder="LAST NAME">
+    </div>
 
-        <div class="u_phone">
-            <span>PHONE NUMBER *</span>
-        </div>
-        <div class="u_chphoe">
-            <input type="text" id="u_phone" class="u_phone" value="${memberDto.phone}">
-            <%--        <button type="button" class="ch_phbtn">번호 수정</button>--%>
-        </div>
+    <div class="u_phone">
+        <span>PHONE NUMBER *</span>
+    </div>
+    <div class="u_chphoe">
+        <input type="text" id="u_phone" class="u_phone" value="${memberDto.phone}">
+        <%--        <button type="button" class="ch_phbtn">번호 수정</button>--%>
+    </div>
 
-        <div class="u_addr">
-            <span>ADDRESS *</span>
-        </div>
+    <div class="u_addr">
+        <span>ADDRESS *</span>
+    </div>
 
-        <div class="u_addrdetail">
-            <input type="text" id="addr" name="addr" value="${memberDto.addr}"/>
-            <input type="text" name="addrdetail" id="addrdetail"/>
-        </div>
+    <div class="u_addrdetail">
+        <input type="text" id="addr" name="addr" value="${memberDto.addr}"/>
+        <input type="text" name="addrdetail" id="addrdetail"/>
+    </div>
 
-        <div class="u_email">
-            <span>E-MAIL *</span>
-        </div>
+    <div class="u_email">
+        <span>E-MAIL *</span>
+    </div>
 
-        <div class="u_emaildetail">
-            <input type="text" id="email" class="email" value="${memberDto.email}" readonly="readonly">
-        </div>
+    <div class="u_emaildetail">
+        <input type="text" id="email" class="email" value="${memberDto.email}" readonly="readonly">
+    </div>
 
-        <div class="up_btn">
-            <button type="button" class="update_btn" id="update_btn">저장</button>
-        </div>
+    <div class="up_btn">
+        <button type="button" class="update_btn" id="update_btn">저장</button>
+    </div>
 </div>
 
 <script>
-    $("#update_btn").click(function (){
+    $("#update_btn").click(function () {
         // 값 가져오기
         let form = new FormData();
 
@@ -86,25 +86,19 @@
         let phone = $("#u_phone").val(); // 휴대폰번호
         let addr = $("#addr").val();
 
-        form.append("user_name",familyname+ "/" +username);
-        form.append("phone",phone);
-        form.append("addr",addr);
+        form.append("user_name", familyname + "/" + username);
+        form.append("phone", phone);
+        form.append("addr", addr);
         $.ajax({
-            url:"/mypage/changeinfo",
+            url: "/mypage/changeinfo",
             data: form,
             type: "post",
-            dataType:"json",
-            processData:false,
-            contentType:false,
-            success: function(result) {
-                if(result){
-                    alert("정보가 수정되었습니다");
-                    location.href="/mypage";
-                }else {
-                    alert("다시 수정해주세요");
-                }
-
+            dataType: "text",
+            processData: false,
+            contentType: false,
+            success: function () {
+                alert("정보가 수정되었습니다");
             }
-        })
+        });
     });
 </script>

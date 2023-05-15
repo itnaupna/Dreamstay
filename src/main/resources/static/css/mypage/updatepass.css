@@ -74,17 +74,29 @@ input:focus {
     align-items: center;
     margin-top: 70px;
 }
-x
     /* 버튼 디자인 */
 .up_pass .upbtn .updatebtn {
-    font-size: 15px;
-    border-color: #000000;
-    border-width: thin;
     width: 200px;
-    background-color: black;
     height: 60px;
+    padding: 0 25px;
+    font-size: 15px;
+    letter-spacing: -.01em;
+    text-align: center;
+    vertical-align: middle;
+    background-color: black;
     color: white;
+    border: thin solid #000000;
+    border-radius: 0;
     cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
 }
+
+.up_pass .upbtn .updatebtn:hover {
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    background-color: white;
+    color: black;
+}
+
 
 /* asdf*/
