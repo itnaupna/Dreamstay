@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://js.tosspayments.com/v1/payment"></script>
 
 <style>
     <%-- first div --%>
@@ -172,18 +173,21 @@
     }
 
     #email_custom_option {
-        width: 200px;
-        height: 150px;
-        list-style-type: none;
-        overflow-x: hidden;
-        overflow-y: scroll;
         position: absolute;
-        display: none;
-        left: auto;
-        text-align: left;
-        padding-left: 0;
-        border: 1px solid black;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ddd;
         border-top: none;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: none;
+        overflow-y: scroll;
+        max-height: 150px;
+        width: 200px;
+        margin-top: 45px;
     }
 
     #email_select_domain {
@@ -341,7 +345,7 @@
         top: 100%;
         left: 0;
         right: 0;
-        background-color: white;
+        background-color: white !important;
         border: 1px solid #ddd;
         border-top: none;
         padding: 0;
@@ -368,15 +372,16 @@
     }
 
     .selected2 {
-        background-color: white;
+        background-color: white !important;
         border: none;
         border-bottom: 1px solid black;
         padding: 5px;
         cursor: pointer;
         font-size: 17px;
         background: #ffffff url("/photo/arrow_196221.png") no-repeat;
-        background-position: 96% center;
+        background-position: 99% center;
         background-size: 10px 10px;
+        width: 900px;
     }
 
     .options2 {
@@ -384,7 +389,7 @@
         top: 100%;
         left: 0;
         right: 0;
-        background-color: white;
+        background-color: white !important;
         border: 1px solid #ddd;
         border-top: none;
         padding: 0;
@@ -393,6 +398,7 @@
         display: none;
         overflow-y: scroll;
         max-height: 150px;
+        width: 900px;
     }
 
     .options2 li {
@@ -507,9 +513,11 @@
         font-weight: bolder;
     }
 
-    .gujung .guhr {
+    .gujung #myhr {
         width: 900px;
         background-color: black;
+        border-color: black;
+        background: black;
     }
 
     .gujung .open_ul .open_li {
@@ -533,7 +541,7 @@
         left: 0;
         line-height: 40px;
         font-size: 15px;
-        list-style: disc;
+        list-style: none;
     }
 
     .clickimg {
@@ -548,8 +556,8 @@
         width: 400px;
     }
 
-    .close_inul li{
-        list-style-type: disc;
+    .close_inul {
+        list-style-type: none;
     }
 </style>
 
@@ -602,6 +610,7 @@
     </div>
 
     <section class="pay">
+        <%-- 플로팅 메뉴 --%>
         <div class="sideBanner">
             <div class="txt-label">
                 <span>객실예약</span>
@@ -610,10 +619,12 @@
                 </div>
                 <hr class="sidehr">
                 <div class="divbtn">
-                    <button type="button" class="paybtn">예약완료</button>
+                    <button type="button" class="paybtn" onclick="payments();">예약완료</button>
                 </div>
             </div>
         </div>
+        <%-- 플로팅 메뉴 --%>
+
         <div class="pay_main">
             <div class="pay_choice">
                 <p>SMART CHOICE</p>
@@ -737,7 +748,7 @@
 
             <div class="gujung">
                 <span>취소 규정</span>
-                <hr class="guhr">
+                <hr id="myhr" class="myhr">
 
                 <ul class="open_ul">
                     <li class="open_li">
@@ -882,4 +893,20 @@
             closeToggle.style.display = 'none';
         }
     });
+
+    var clientKey = 'test_ck_d26DlbXAaV0xjj5gR9dVqY50Q9RB'
+    var tossPayments = TossPayments(clientKey) // 클라이언트 키로 초기화하기
+
+    function payments() {
+        tossPayments.requestPayment("카드", {
+            // 결제 수단 파라미터
+            // 결제 정보 파라미터
+            amount: ${roomprice},
+            orderId: "KuIxWHfdV2z1pAyOqO2Id",
+            orderName: "${roomtype}",
+            customerName: "${username}",
+            successUrl: "http://localhost:8080/",
+            failUrl: "http://localhost:8080/book/payment"
+        });
+    }
 </script>
