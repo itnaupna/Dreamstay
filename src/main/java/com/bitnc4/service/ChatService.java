@@ -29,7 +29,18 @@ public class ChatService implements ChatServiceInter {
             return cdto;
         }
     }
-
+    public ChatDto getLastChat(String roomName) {
+        log.info(roomName);
+        try {
+            int memberNum = Integer.parseInt(roomName.split("/")[0]);
+            String memberName = roomName.split("/")[1];
+            return getRecentChat(memberNum, memberName, 1).get(0);
+        }catch (Exception e) {
+            ChatDto cdto= new ChatDto();
+            cdto.setMsg("");
+            return cdto;
+        }
+    }
     @Override
     public List<ChatDto> getRecentChat(int memberNum,String memberName, int count) {
         Map<String, Object> map = new HashMap<>();

@@ -205,7 +205,8 @@
                     $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
 
             });
-            if(msg !== undefined)ws.send("/pub/chat/message", {}, msg);
+            if(msg !== undefined)
+                ws.send("/pub/chat/message", {}, JSON.stringify({msg:msg,room:'${loginuser.num}${loginuser.user_name}'}));
         },function(err){
             console.log("err");
         });
@@ -215,7 +216,7 @@
         if(ws===undefined){
             NewConnect(msg);
         }else{
-            ws.send("/pub/chat/message", {}, msg);
+            ws.send("/pub/chat/message", {}, JSON.stringify({msg:msg,room:'${loginuser.num}${loginuser.user_name}'}));
             $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
         }
     }

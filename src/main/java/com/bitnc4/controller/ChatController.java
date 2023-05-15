@@ -6,7 +6,9 @@ import com.bitnc4.dto.ChatMessage;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.repo.ChatRoomRepository;
 import com.bitnc4.service.ChatService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -77,15 +79,14 @@ public class ChatController {
     }
 
     @MessageMapping("/chat/message")
-    public void message(String msg, SimpMessageHeaderAccessor accessor){
-        //HttpSession session = getHttpSession();
-        //log.info("eong");
+    public void message(CM msg, SimpMessageHeaderAccessor accessor){
         MemberDto mdto = (MemberDto) accessor.getSessionAttributes().get("loginuser");
         if(mdto != null){
-
+            log.info(msg.getMsg());
+            log.info(msg.getRoom());
             ChatDto cdto = new ChatDto();
             cdto.setMembernum(mdto.getNum());
-            cdto.setMsg(msg);
+            cdto.setMsg(msg.getMsg());
             if(mdto.getUser_level() < 10){
                 cdto.setRecv(1);
                 cdto.setMemberview(1);
@@ -95,10 +96,19 @@ public class ChatController {
                 cdto.setMemberview(1);
                 cdto.setAdminview(1);
             }
-            smso.convertAndSend("/sub/chat/" + mdto.getNum() + mdto.getUser_name(),cdto);
+            smso.convertAndSend("/sub/chat/" + msg.getRoom(),cdto);
             cs.saveChat(cdto);
-            crr.changeLastChat(mdto.getNum(), mdto.getUser_name());
+            crr.changeLastChat(msg.getRoom());
+            //관리자면
+            //TODO : Code.
         }
+    }
+
+    @Data
+    @ToString
+    static class CM{
+        private String msg;
+        private String room;
     }
 
 

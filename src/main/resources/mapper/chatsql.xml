@@ -10,4 +10,8 @@
     <select id="getRecentChat" parameterType="Map" resultType="ChatDto">
         select * from chat where membernum=(select member.num from member where member.user_name=#{name} and member.num=#{num}) order by num desc limit #{count}
     </select>
+    <select id="getRecentChatByRoomName" parameterType="Map" resultType="ChatDto">
+        select * from chat where membernum=(select member.num from member where member.user_name=#{name} and member.num=#{num}) order by num desc limit #{count}
+    </select>
+
 </mapper>

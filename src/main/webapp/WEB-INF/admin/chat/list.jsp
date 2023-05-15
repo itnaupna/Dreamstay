@@ -3,12 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--${list}--%>
 <div id="chatWrapper">
     <div id="chatList">
         <c:forEach items="${list}" var="item">
             <div class="chatlistWrapper">
                 <div class="chatBody">
-                    <div class="chatlistName">
+                    <div class="chatlistName" room="${item.memberName}">
                         ${fn:replace(item.memberName,"/","")}
                     </div>
                     <div class="chatlistContent">
@@ -224,10 +225,66 @@
 
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stomp-websocket@2.3.4-next/lib/stomp.min.js"></script>
 <script>
     SetAdminTitle('채팅관리페이지');
     $('#chatList').on('click','.chatlistWrapper',(e)=>{
-        $('#chatView').text($(e.currentTarget).children()[0].children[0].innerText);
+        $('#chatViewTitle').text($(e.currentTarget).children()[0].children[0].innerText);
+        connect($(e.currentTarget).children()[0].children[0].attributes.room.value);
+    });
+    let ws;
+    function connect(room){
+        if(ws!==undefined){
+            //다른 채팅방에 접속중이였을경우 연결을 끊고 새로 연결한다.
+            ws.disconnect();
+        }
+        let sock=new SockJS("/ws-stomp");
+        ws = Stomp.over(sock);
+        let reconnect = 0;
+        ws.connect({}, function(f){
+            r=room;
+            // console.log(r,room);
+            ws.subscribe("/sub/chat/"+room,function(msg){
+                let data = JSON.parse(msg.body);
+                $('#txtChatViewPort').append(
+                    CreateChat(data.msg,new Date().toLocaleString(),`\${data.recv ? 'L' : 'R'}`));
+                $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
+
+            });
+            //if(msg !== undefined)ws.send("/pub/chat/message", {}, msg);
+        },function(err){
+            console.log("err");
+        });
+    }
+    let r="";
+    function CreateChat(msg,time,direction){
+        return $('<div>')
+            .addClass('chatMsgWrapper')
+            .addClass(`\${direction === 'L' ? 'chatLeft' : 'chatRight'}`)
+            .append(
+                $('<div>')
+                    .addClass('chatMsgBody')
+                    .text(msg)
+            )
+            .append(
+                $('<div>')
+                    .addClass('chatMsgBottom')
+                    .append(
+                        $('<span>')
+                            .addClass('chatMsgTime')
+                            .text(time)
+                    )
+            );
+    }
+    $('#txtChat').on({
+        'keyup':(e)=>{
+            let msg = $(e.target).val().trim();
+            if(e.keyCode==13 && msg.length>0) {
+                ws.send("/pub/chat/message",{},JSON.stringify({room:r,msg:msg}));
+                $(e.target).val('');
+            }
+        }
     });
     //getroomlist();
     // function getroomlist(){
