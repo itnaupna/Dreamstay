@@ -125,14 +125,47 @@
     #BookBtn {
         float: right;
         margin-top: -130px;
-        color: #ffffff;
-        font-weight: 700 !important;
-        background-color: #333333;
+        text-align: center;
+        font-size: 15px;
+        border-color: #000000;
+        border-width: thin;
+        width: 150px;
+        background-color: black;
+        height: 60px;
+        color: white;
+        cursor: pointer;
         margin-right: 350px;
+
     }
 
     .test3 {
         width: 2000px;
+    }
+    .RoomList p input{
+        border:none;
+        border-right: 0px;
+        border-top: 0px;
+        border-left: 0px;
+        border-bottom: 0px;
+    }
+    .RoomList p input:focus{
+        outline:none;
+    }
+    .RoomInfo{
+        margin: 10px;
+        width: 50%;
+        height: auto;
+        /*border:1px solid;*/
+        border-radius: 0.825rem;
+        border-left: 0.25rem solid #e7d1af7d !important;
+        box-shadow: 0 .15rem 1.0rem 0 rgba(58, 59, 69, .15) !important;
+        transition: box-shadow 0.1s ease;
+        font-weight: 900 !important;
+        font-size: .6rem;
+        padding-left: 30px;
+        padding-top:20px;
+        padding-bottom: 20px;
+
     }
 </style>
 
@@ -210,18 +243,20 @@
                 <img src="../photo/profile.png" style="display: flex;float: left;margin-left: 100px;margin-top: 20px;">
             </span>
             <div class="RoomList">
-                <input type="hidden" value="${totaldays}" name="totaldays" readonly>
-                <p>방번호 : <input value="${room.num}" type="number" name="roomnum" readonly></p>
-                <p>호텔번호 : <input value="${room.hotelnum}" type="number" name="hotelnum" readonly></p>
-                <p>방 타입 : <input value="${room.roomtype}" type="text" name="roomtype" readonly></p>
-            <c:if test="${totaldays >= 3}">
-                <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays)/10*9}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
-            </c:if>
-            <c:if test="${totaldays < 3}">
-                <p>방 가격 : <input value="${room.roomprice * totaldays}" type="number" name="roomprice" readonly></p>
-            </c:if>
-                <p>요청사항 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
-                <p>상세정보 : <input value="${room.roomdetail}" type="text" name="roomdetail" readonly></p>
+                <div class="RoomInfo">
+                    <input type="hidden" value="${totaldays}" name="totaldays" readonly>
+                    <p><input value="${room.num}" type="hidden" name="roomnum" readonly></p>
+                    <p><input value="${room.hotelnum}" type="hidden" name="hotelnum" readonly></p>
+                    <p>방 타입 : <input value="${room.roomtype}" type="text" name="roomtype" readonly></p>
+                <c:if test="${totaldays >= 3}">ㄴㄴ
+                    <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays)/10*9}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
+                </c:if>
+                <c:if test="${totaldays < 3}">
+                    <p>방 가격 : <input value="${room.roomprice * totaldays}" type="number" name="roomprice" readonly></p>
+                </c:if>
+                    <p>요청사항 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
+                    <p>상세정보 : <input value="${room.roomdetail}" type="text" name="roomdetail" readonly></p>
+                </div>
                 <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>
             <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
             </div>
