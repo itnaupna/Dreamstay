@@ -28,4 +28,9 @@ public class QnaBoardDto {
     private String qna_photo;
     private String answer;
     private String answer_text;
+
+    //admin에서 search할 변수
+    private String searchtype; // 검색타입
+    private String keyword; // 검색 내용
+
 }

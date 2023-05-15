@@ -2,10 +2,13 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<style>
+    .adminQnaTable{
+        width: 500px;
+    }
 
-<h1>detail</h1>
+</style>
 
 <div style="border: 1px solid gray">
 
@@ -16,8 +19,8 @@
     호텔 : ${dto.hotelname}<br>
     내용 : ${dto.content}<br>
     <c:if test="${dto.qna_photo != ''}">
-        <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/qnaboard/${dto.qna_photo}?type=f&w=160&h=160&faceopt=true"
-             onclick="location.href='https://kr.object.ncloudstorage.com/dreamsstaybucket/qnaboard/${dto.qna_photo}'">
+    <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/qnaboard/${dto.qna_photo}?type=f&w=160&h=160&faceopt=true"
+         onclick="location.href='https://kr.object.ncloudstorage.com/dreamsstaybucket/qnaboard/${dto.qna_photo}'">
     </c:if>
     <br>
     <div>
@@ -27,27 +30,12 @@
             <button type="button" class="btn btn-outline-secondary">수정</button>
         </c:if>
     </div>
-
 </div>
-<br>
-<c:if test="${dto.answer== '답변완료'}">
-    <div class="anserwqna" style="border: 1px solid gray; height: 200px;">
 
-        <span>관리자 답글 : ${dto.answer_text}</span>
-
+<form action="./answerupdate" method="post">
+    <input type="hidden" name="num" value="${dto.num}">
+    <div>
+        <textarea style="width: 700px; height: 200px;" name="answer_text"></textarea><br>
+        <button type="submit" class="btn btn-outline-secondary">답변완료</button>
     </div>
-</c:if>
-
-<br>
-
-
-
-<script type="text/javascript">
-    $("#delQna").click(function (){
-        let a = confirm("삭제하려면 확인을 누르세요");
-        if(a){
-            location.href="/mypage/deleteqna?num="+${dto.num}
-        }
-    });
-
-</script>
+</form>

@@ -20,7 +20,7 @@
                       when 4 then '[기타]'
             end as category_txt
         from board_qna
-        where writer=#{writer}
+        where writer=#{writer} order by num desc
     </select>
 
     <select id="getQna" parameterType="int" resultType="QnaBoardDto">
@@ -31,7 +31,4 @@
         delete from board_qna where num = #{num}
     </delete>
 
-    <update id="upateQnaAnswer" parameterType="QnaBoardDto">
-        update board_qna set answer='답변완료', answer_text=#{answer_text} where num=#{num}
-    </update>
 </mapper>

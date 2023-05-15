@@ -48,10 +48,4 @@ public class QnaBoardService implements QnaBoardServiceInter {
         qnaBoardMapper.deleteQna(num);
     }
 
-    @Override
-    public void upateQnaAnswer(QnaBoardDto dto) {
-        qnaBoardMapper.upateQnaAnswer(dto);
-    }
-
-
 }

@@ -12,5 +12,4 @@ public interface QnaBoardServiceInter {
     public List<QnaBoardDto> qnaList(String writer);
     public QnaBoardDto getQna (int num);
     public void deleteQna(int num);
-    public void upateQnaAnswer(QnaBoardDto dto);
 }

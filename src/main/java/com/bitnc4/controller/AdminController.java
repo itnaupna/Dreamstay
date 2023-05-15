@@ -1,7 +1,6 @@
 package com.bitnc4.controller;
 
 import com.bitnc4.dto.HotelDto;
-import com.bitnc4.dto.NoticeDto;
 import com.bitnc4.dto.QnaBoardDto;
 import com.bitnc4.dto.RoomDto;
 import com.bitnc4.service.AdminHnRService;
@@ -132,11 +131,7 @@ public class AdminController {
     }
 
 
-
-
     @GetMapping("/qna")
-    //    @GetMapping("/qna/list/{page}")
-    //    @ResponseBody
     public String qna(Model model)
     {
         model.addAttribute("qnaList",adminQnaServeice.getQnaList(1));
@@ -145,20 +140,51 @@ public class AdminController {
         return "/admin/qna/list";
     }
 
-    @GetMapping("/qna/content")
-    public String content(int num,int page,Model model)
+    @GetMapping("/qna/list/{page}")
+    @ResponseBody
+    public List<Object> getQnaList(@PathVariable int page)
     {
-        QnaBoardDto dto = adminQnaServeice.getQna(num);
+        List<Object> result = new ArrayList<>();
+        result.add(adminQnaServeice.getQnaList(page));
+        result.add(adminQnaServeice.getQnaCount(page));
+        return result;
+    }
 
-        model.addAttribute("dto",dto);
-        model.addAttribute("page",adminQnaServeice.getQnaCount(page));
+    @GetMapping("/qna/content")
+    public String content(int num, Model model) {
+        {
+            QnaBoardDto dto = adminQnaServeice.getQna(num);
 
-        return "/admin/qna/detail";
+            model.addAttribute("dto", dto);
+
+            return "/admin/qna/content";
+
+        }
 
     }
 
+    @PostMapping("/qna/answerupdate")
+    public String answerupdate(QnaBoardDto dto)
+    {
+        adminQnaServeice.upateQnaAnswer(dto);
+        return "redirect:/admin/qna/content?num="+dto.getNum();
 
+    }
 
+    @GetMapping("/getSearchQna")
+    @ResponseBody
+    private List<QnaBoardDto> searchQnaList(String searchtype,String keyword, Model model, String qna_type, int category, String answer)
+    {
+        QnaBoardDto dto = new QnaBoardDto();
+        dto.setAnswer(answer);
+        dto.setQna_type(qna_type);
+        dto.setCategory(category);
+        dto.setSearchtype(searchtype);
+        dto.setKeyword(keyword);
+
+        return adminQnaServeice.searchQnaList(dto);
+
+    }
 
 }
 

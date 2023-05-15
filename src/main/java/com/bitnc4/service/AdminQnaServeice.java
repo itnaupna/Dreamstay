@@ -4,6 +4,7 @@ import com.bitnc4.dto.QnaBoardDto;
 import com.bitnc4.mapper.AdminQnaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,8 +37,12 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
             lastPage = currPage;
         }else {
             startPage = currPage / PPP * PPP + 1;
-            lastPage = startPage + PPP - 1;
-        }
+            int iLastPage = AdminqnaMapper.getQnaCount()/10+1;
+            double dLastPage = AdminqnaMapper.getQnaCount()/10+1;
+            if(iLastPage<dLastPage)
+            lastPage = iLastPage+1;
+            else lastPage = iLastPage;
+       }
         result.add(startPage);
         result.add(currPage);
         result.add(lastPage);
@@ -49,5 +54,15 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
     @Override
     public QnaBoardDto getQna(int num) {
         return AdminqnaMapper.getQna(num);
+    }
+
+    @Override
+    public void upateQnaAnswer(QnaBoardDto dto) {
+        AdminqnaMapper.upateQnaAnswer(dto);
+    }
+
+    @Override
+    public List<QnaBoardDto> searchQnaList(QnaBoardDto dto) {
+        return AdminqnaMapper.searchQnaList(dto);
     }
 }

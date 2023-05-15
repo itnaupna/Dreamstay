@@ -116,22 +116,14 @@ public class QnaboardController {
      {
          //db 삭제 전에 저장된 이미지 버켓에서 지운다
          String filename = qnaBoardService.getQna(num).getQna_photo();
-         System.out.println(filename);
-         storageService.deleteFile(bucketName, "qnaboard",filename);
-
+         if (filename != null && !filename.equals("")) {
+             storageService.deleteFile(bucketName, "qnaboard", filename);
+         }
          //db 삭제
         qnaBoardService.deleteQna(num);
 
          return "redirect:/mypage/qnalist";
      }
-
-     @PostMapping("/answerupdate")
-        public String answerupdate(QnaBoardDto dto)
-         {
-             qnaBoardService.upateQnaAnswer(dto);
-             return "redirect:/mypage/qnadetail?num="+dto.getNum();
-
-         }
 
 
    }
