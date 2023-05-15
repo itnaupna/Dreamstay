@@ -55,23 +55,23 @@ public class QnaboardController {
         String filename="";
         //업로드를 한 경우만 버킷에 이미지 저장
         if(!photo.getOriginalFilename().equals("")){
-           filename = storageService.uploadFile(bucketName, "qnaboard", photo);
+            filename = storageService.uploadFile(bucketName, "qnaboard", photo);
         }
 
         // dto에 photo 저장\
         dto.setQna_photo(filename);
 
-       // 아이디 저장 세션에 저장된 id
+        // 아이디 저장 세션에 저장된 id
         String writer=(String)session.getAttribute("userid");
 
         // 비회원일시 nomember로 저장
-       if (writer == null || writer.isEmpty()) {
+        if (writer == null || writer.isEmpty()) {
             writer = "nomember";
-       }
+        }
         //dto에 id 저장
         dto.setWriter(writer);
 
-       //radio 값 저장
+        //radio 값 저장
         String qnaType = request.getParameter("qna_type");
         dto.setQna_type(qnaType);
 
@@ -84,46 +84,46 @@ public class QnaboardController {
         return "redirect:/mypage/qnalist";
     }
 
-   @GetMapping("/mypage/qnalist")
-   public String qnalist(QnaBoardDto dto, HttpSession session, HttpServletResponse response, Model model){
-       //세션에 저장된 id
-       String writer=(String)session.getAttribute("userid");
+    @GetMapping("/mypage/qnalist")
+    public String qnalist(QnaBoardDto dto, HttpSession session, HttpServletResponse response, Model model){
+        //세션에 저장된 id
+        String writer=(String)session.getAttribute("userid");
 
-       // 비회원으로 로그인 시 로그인 페이지로 이동
-       if (writer == null || writer.isEmpty()) {
+        // 비회원으로 로그인 시 로그인 페이지로 이동
+        if (writer == null || writer.isEmpty()) {
             return "/main/signup/login";
-       }
-       //dto에 id 저장
-       dto.setWriter(writer);
+        }
+        //dto에 id 저장
+        dto.setWriter(writer);
 
-      List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(writer);
-      model.addAttribute("qnaBoardList", qnaBoardList);
+        List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(writer);
+        model.addAttribute("qnaBoardList", qnaBoardList);
 
-         return "/mypage/qnaboard/qnalist";
-     }
+        return "/mypage/qnaboard/qnalist";
+    }
 
-     @GetMapping("/mypage/qnadetail")
-        public String detail(int num, Model model)
-     {
-         QnaBoardDto dto = qnaBoardService.getQna(num);
-         model.addAttribute("dto",dto);
+    @GetMapping("/mypage/qnadetail")
+    public String detail(int num, Model model)
+    {
+        QnaBoardDto dto = qnaBoardService.getQna(num);
+        model.addAttribute("dto",dto);
 
-         return "/mypage/qnaboard/qnadetail";
-     }
+        return "/mypage/qnaboard/qnadetail";
+    }
 
-     @GetMapping("/mypage/deleteqna")
-        public String deleteqna(int num, QnaBoardDto dto)
-     {
-         //db 삭제 전에 저장된 이미지 버켓에서 지운다
-         String filename = qnaBoardService.getQna(num).getQna_photo();
-         if (filename != null && !filename.equals("")) {
-             storageService.deleteFile(bucketName, "qnaboard", filename);
-         }
-         //db 삭제
+    @GetMapping("/mypage/deleteqna")
+    public String deleteqna(int num, QnaBoardDto dto)
+    {
+        //db 삭제 전에 저장된 이미지 버켓에서 지운다
+        String filename = qnaBoardService.getQna(num).getQna_photo();
+        if (filename != null && !filename.equals("")) {
+            storageService.deleteFile(bucketName, "qnaboard", filename);
+        }
+        //db 삭제
         qnaBoardService.deleteQna(num);
 
-         return "redirect:/mypage/qnalist";
-     }
+        return "redirect:/mypage/qnalist";
+    }
 
 
-   }
+}

@@ -17,7 +17,7 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
     @Autowired
     AdminQnaMapper AdminqnaMapper;
 
-    @Override
+    /*@Override
     public List<QnaBoardDto> getQnaList(int page) {
         Map<String,Integer> map = new HashMap<>();
         final int PAGE_SIZE = 10;
@@ -25,9 +25,24 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
         map.put("count",PAGE_SIZE);
 
         return AdminqnaMapper.getQnaList(map);
-    }
+    }*/
 
     @Override
+    public List<QnaBoardDto> getQnaList(int page, QnaBoardDto dto) {
+        Map<String, Object> map = new HashMap<>();
+        final int PAGE_SIZE = 10;
+        map.put("start", (page - 1) * PAGE_SIZE);
+        map.put("count", PAGE_SIZE);
+        map.put("searchtype", dto.getSearchtype());
+        map.put("keyword", dto.getKeyword());
+        map.put("qna_type", dto.getQna_type());
+        map.put("category", dto.getCategory());
+        map.put("answer", dto.getAnswer());
+
+        return AdminqnaMapper.getQnaList(map);
+    }
+
+   /* @Override
     public List<Integer> getQnaCount(int currPage) {
         final int PPP = 10;
         List<Integer> result = new ArrayList<>();
@@ -49,7 +64,9 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
         result.add(AdminqnaMapper.getQnaCount()/PPP + (AdminqnaMapper.getQnaCount() % PPP));
 
         return result;
-    }
+    }*/
+
+
 
     @Override
     public QnaBoardDto getQna(int num) {
@@ -65,4 +82,36 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
     public List<QnaBoardDto> searchQnaList(QnaBoardDto dto) {
         return AdminqnaMapper.searchQnaList(dto);
     }
+
+    @Override
+    public List<Integer> getQnaCount(int currPage, QnaBoardDto dto) {
+        final int PAGE_SIZE = 10;
+        List<Integer> result = new ArrayList<>();
+        int startPage, lastPage;
+
+        int totalCount = AdminqnaMapper.getQnaCount(dto);
+        if (totalCount == 0) {
+            result.add(1); // 시작 페이지
+            result.add(1); // 현재 페이지
+            result.add(1); // 마지막 페이지
+            result.add(1); // 전체 페이지 수
+        } else {
+            if (currPage % PAGE_SIZE == 0) {
+                startPage = currPage - PAGE_SIZE + 1;
+                lastPage = currPage;
+            } else {
+                startPage = currPage / PAGE_SIZE * PAGE_SIZE + 1;
+                lastPage = (int) Math.ceil(currPage / (double) PAGE_SIZE) * PAGE_SIZE;
+                if (lastPage > totalCount / PAGE_SIZE + 1) {
+                    lastPage = totalCount / PAGE_SIZE + 1;
+                }
+            }
+            result.add(startPage);
+            result.add(currPage);
+            result.add(lastPage);
+            result.add((int) Math.ceil(totalCount / (double) PAGE_SIZE));
+        }
+        return result;
+    }
+
 }

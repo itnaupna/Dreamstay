@@ -9,7 +9,7 @@ import java.util.Map;
 @Mapper
 public interface AdminQnaMapper {
     public List<QnaBoardDto> getQnaList(Map map);
-    public int getQnaCount();
+    public int getQnaCount(QnaBoardDto dto);
     public QnaBoardDto getQna(int num);
     public void upateQnaAnswer(QnaBoardDto dto);
 

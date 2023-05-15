@@ -137,21 +137,22 @@ public class AdminController {
     @GetMapping("/qna")
     public String qna(Model model)
     {
-        model.addAttribute("qnaList",adminQnaServeice.getQnaList(1));
-        model.addAttribute("page",adminQnaServeice.getQnaCount(1));
+        model.addAttribute("qnaList",adminQnaServeice.getQnaList(1,new QnaBoardDto()));
+        model.addAttribute("page",adminQnaServeice.getQnaCount(1,new QnaBoardDto()));
 
         return "/admin/qna/list";
     }
 
-    @GetMapping("/qna/list/{page}")
+   /* @GetMapping("/qna/list/{page}")
     @ResponseBody
     public List<Object> getQnaList(@PathVariable int page)
     {
         List<Object> result = new ArrayList<>();
         result.add(adminQnaServeice.getQnaList(page));
         result.add(adminQnaServeice.getQnaCount(page));
+
         return result;
-    }
+    }*/
 
     @GetMapping("/qna/content")
     public String content(int num, Model model) {
@@ -174,7 +175,28 @@ public class AdminController {
 
     }
 
-    @GetMapping("/getSearchQna")
+    @GetMapping("/qna/list/{page}")
+    @ResponseBody
+    public List<Object> getQnaList(@PathVariable int page,String searchtype,String keyword, Model model,
+                                   String qna_type, int category, String answer)
+    {
+        List<Object> result = new ArrayList<>();
+        QnaBoardDto dto = new QnaBoardDto();
+        dto.setAnswer(answer);
+        dto.setQna_type(qna_type);
+        dto.setCategory(category);
+        dto.setSearchtype(searchtype);
+        dto.setKeyword(keyword);
+
+        result.add(adminQnaServeice.getQnaList(page,dto));
+        result.add(adminQnaServeice.getQnaCount(page, dto));
+
+
+
+        return result;
+    }
+
+ /*   @GetMapping("/getSearchQna")
     @ResponseBody
     private List<QnaBoardDto> searchQnaList(String searchtype,String keyword, Model model, String qna_type, int category, String answer)
     {
@@ -185,14 +207,8 @@ public class AdminController {
         dto.setSearchtype(searchtype);
         dto.setKeyword(keyword);
 
-        System.out.println(answer);
-        System.out.println(qna_type);
-        System.out.println(category);
-        System.out.println(searchtype);
-        System.out.println(keyword);
-
         return adminQnaServeice.searchQnaList(dto);
-    }
+    }*/
 
 }
 

@@ -79,7 +79,7 @@
             </td>
 
             <td colspan="2">
-                <input type="button" class="btn btn-outline-secondary" onclick="getSearchQna()" value="검색">
+                <input type="button" class="btn btn-outline-secondary" onclick="getSearchQna(1)" value="검색">
             </td>
     </table>
 </form>
@@ -122,18 +122,18 @@
     <tr>
         <td colspan="5">
             <c:if test="${page[0]>10}">
-                <span class="pagenumber" onclick="Paging(${page[0]-1})">&lt;</span>
+                <span class="pagenumber" onclick="getSearchQna(${page[0]-1})">&lt;</span>
             </c:if>
             <c:forEach begin="${page[0]}" end="${page[2]}" var="i">
                 <c:if test="${i==page[1]}">
                     <span class="currpage pagenumber">${i}</span>
                 </c:if>
                 <c:if test="${i!=page[1]}">
-                    <span class="pagenumber" onclick="Paging(${i})">${i}</span>
+                    <span class="pagenumber" onclick="getSearchQna(${i})">${i}</span>
                 </c:if>
             </c:forEach>
             <c:if test="${page[2]<page[3]}">
-                <span class="pagenumber" onclick="Paging(${page[2]+1})">&gt;</span>
+                <span class="pagenumber" onclick="getSearchQna(${page[2]+1})">&gt;</span>
             </c:if>
         </td>
     </tr>
@@ -178,44 +178,21 @@
 
 <script>
 
-    // 검색함수
-    function getSearchQna(){
+    function getSearchQna(page) {
         $.ajax({
             type: 'GET',
-            url : "./getSearchQna",
-            data : $("form[name=search-form]").serialize(),
-            dataType: 'json',
-            success : function(result){
-                //테이블 초기화
-                $('#qnaTable > tbody').empty();
-                if(result.length>=1){
-                    result.forEach(function(item){
-                        str='<tr>'
-                        str += "<td>"+item.num+"</td>";
-                        str+="<td><a href = 'qna/content?num=" + item.num + "'>" + item.subject + "</a></td>";
-                        str+="<td>"+item.writer+"</td>";
-                        str+="<td>"+item.answer+"</td>";
-                        str+="<td>"+new Date(item.writeday).toLocaleString()+"</td>";
-                        str+="</tr>"
-                        $('#qnaTable').append(str);
-
-                    })
-                }
-            }
-        })
-    }
-
-    // 페이지 호출 함수
-    function Paging(page){
-
-        $.ajax({
             url:'./qna/list/' + page,
-            dataType:'json',
+            data: $("form[name=search-form]").serialize(),
+            dataType: 'json',
             success:(e)=>{
+                $('#qnaTable > tbody').empty();
                 $('#qnaTable tbody').empty();
-                $.each(e[0],(i,e)=>{
-                    $('#qnaTable tbody').append(
-                        `<tr>
+                if (e[0].length === 0) { // 검색 결과가 0인 경우
+                    $('#qnaTable tbody').append(`<tr><td colspan="5">조회된 게시글이 없습니다.</td></tr>`);
+                } else {
+                    $.each(e[0], (i, e) => {
+                        $('#qnaTable tbody').append(
+                            `<tr>
                             <td>\${e.num}</td>
                             <td>
                             <a href="qna/content?num=\${e.num}">\${e.subject}</a></td>
@@ -223,26 +200,26 @@
                             <td>\${e.answer}</td>
                             <td>\${new Date(e.writeday).toLocaleString()}</td>
                         </tr>`
-                    );
-                });
-
+                        );
+                    });
+                }
                 $('#qnaTable tfoot>tr>td').empty();
                 if(e[1][0]>10)
-                   $('#qnaTable tfoot>tr>td').append(`<span class='pagenumber' onclick='Paging(\${e[1][0]-1})'>&lt;</span> `);
+                    $('#qnaTable tfoot>tr>td').append(`<span class='pagenumber' onclick='getSearchQna(\${e[1][0]-1})'>&lt;</span> `);
 
-                    let pages = "";
-                    for(let idx=e[1][0];idx<=e[1][2];idx++){
+                let pages = "";
+                for(let idx=e[1][0];idx<=e[1][2];idx++){
 
-                        if(idx==e[1][1])
-                            pages+=`<span class="currpage pagenumber">\${idx}</span> `;
-                        else
-                            pages+=`<span class="pagenumber" onclick='Paging(\${idx})'>\${idx}</span> `;
-                        if(idx>=e[1][3]) break;
-                    }
+                    if(idx==e[1][1])
+                        pages+=`<span class="currpage pagenumber">\${idx}</span> `;
+                    else
+                        pages+=`<span class="pagenumber" onclick='getSearchQna(\${idx})'>\${idx}</span> `;
+                    if(idx>=e[1][3]) break;
+                }
                 $('#qnaTable tfoot>tr>td').append(pages);
 
                 if(e[1][2]<e[1][3])
-                    $('#qnaTable tfoot>tr>td').append(`<span class='pagenumber' onclick='Paging(\${e[1][2]+1})'>&gt;</span>`);
+                    $('#qnaTable tfoot>tr>td').append(`<span class='pagenumber' onclick='getSearchQna(\${e[1][2]+1})'>&gt;</span>`);
             }
         });
     }
