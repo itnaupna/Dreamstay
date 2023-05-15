@@ -210,7 +210,6 @@
 
         $.ajax({
             url:'./qna/list/' + page,
-            data:  $("form[name=search-form]").serialize(),
             dataType:'json',
             success:(e)=>{
                 $('#qnaTable tbody').empty();

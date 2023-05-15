@@ -185,6 +185,15 @@ public class AdminController {
         dto.setSearchtype(searchtype);
         dto.setKeyword(keyword);
 
+        System.out.println(answer);
+        System.out.println(qna_type);
+        System.out.println(category);
+        System.out.println(searchtype);
+        System.out.println(keyword);
+
+
+
+
         return adminQnaServeice.searchQnaList(dto);
 
     }
