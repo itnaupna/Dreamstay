@@ -2,35 +2,33 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--${list}--%>
 <div id="chatWrapper">
     <div id="chatList">
-        <div class="chatlistWrapper">
-            <div class="chatBody">
-                <div class="chatlistName">
-                    애옹이
+        <c:forEach items="${list}" var="item">
+            <div class="chatlistWrapper">
+                <div class="chatBody">
+                    <div class="chatlistName" room="${item.memberName}">
+                        ${fn:replace(item.memberName,"/","")}
+                    </div>
+                    <div class="chatlistContent">
+                        ${item.memberLastchat}
+                    </div>
                 </div>
-                <span class="chatlistContent">이 호텔은 고양이 말고 사람도 숙박이 가능한가요.알고 싶어요.</span>
+                <div class="chatlistTimestamp">
+                        <fmt:formatDate value="${item.lastTimeStamp}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
             </div>
-            <span class="chatlistTimestamp">2023-05-10 23:23</span>
-        </div>
-        <div class="chatlistWrapper">
-            <div class="chatBody">
-                <div class="chatlistName">
-                    김oo
-                </div>
-                <span class="chatlistContent">이 호텔은 사람 말고 고양이도 숙박이 가능한가요.알고 싶어요.</span>
-            </div>
-            <span class="chatlistTimestamp">2023-05-03 07:23</span>
-        </div>
-        <div class="chatlistWrapper">
-            <div class="chatBody">
-                <div class="chatlistName">
-                    강아지
-                </div>
-                <span class="chatlistContent">안녕하세요 칭찬드리고자 씁니다.</span>
-            </div>
-            <span class="chatlistTimestamp">2023-05-01 14:23</span>
-        </div>
+        </c:forEach>
+<%--        <div class="chatlistWrapper">--%>
+<%--            <div class="chatBody">--%>
+<%--                <div class="chatlistName">--%>
+<%--                    애옹이--%>
+<%--                </div>--%>
+<%--                <span class="chatlistContent">이 호텔은 고양이 말고 사람도 숙박이 가능한가요.알고 싶어요.</span>--%>
+<%--            </div>--%>
+<%--            <span class="chatlistTimestamp">2023-05-10 23:23</span>--%>
+<%--        </div>--%>
     </div>
     <div id="chatView">
         <div id="chatViewTitle">
@@ -108,6 +106,11 @@
         color:gray;
         justify-content: space-between;
     }
+    .chatlistWrapper:hover{
+        box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.4) !important;
+        transition: box-shadow 0.1s ease;
+        cursor:pointer;
+    }
     .chatlistName{
         margin-bottom: 10px;
         font-weight: bold;
@@ -127,13 +130,11 @@
         display:inline-flex;
         margin-bottom:10px;
         align-items: center;
-        font-size:0.9rem;
         color:gray;
         font-weight: bold;
         justify-content: space-between;
     }
     .chatMsgBody{
-        font-size:.7rem;
         color:#000000b8;
         font-weight: 700!important;
         text-transform: uppercase!important;
@@ -182,7 +183,7 @@
         padding-top: 20px;
     }
     .chatMsgTime{
-        font-size:.6rem;
+        font-size:.8rem;
         color:#000000b8;
         font-weight: 700!important;
         text-transform: uppercase!important;
@@ -224,31 +225,85 @@
 
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stomp-websocket@2.3.4-next/lib/stomp.min.js"></script>
 <script>
     SetAdminTitle('채팅관리페이지');
     $('#chatList').on('click','.chatlistWrapper',(e)=>{
-       $('#chatView').text($(e.target).text());
+        $('#chatViewTitle').text($(e.currentTarget).children()[0].children[0].innerText);
+        connect($(e.currentTarget).children()[0].children[0].attributes.room.value);
     });
-    //getroomlist();
-    function getroomlist(){
-        $.ajax({
-            url:'/chat/rooms',
-            type:'get',
-            dataType:'json',
-            success:e=>{
-                $('#chatList').empty();
-                // $('#res').empty();
-                $.each(e,(i,e)=>{
-                    $('#chatList').append(
-                        `<div class="chatlistWrapper">
-                            <div class="chatlistName">\${e.roomId}</div>
-                            <div class="chatlistContent">\${e.roomName}</div>
-                            <div class="chatlistTimestamp">2323.23.23 23:23</div>
-                        </div>`
-                    );
-                    //$('#res').append("<div onclick='enterRoom(\""+ e.roomId + "\");'>" + e.roomId + " " + e.roomName + "</div>");
-                });
-            }
+    let ws;
+    function connect(room){
+        if(ws!==undefined){
+            //다른 채팅방에 접속중이였을경우 연결을 끊고 새로 연결한다.
+            ws.disconnect();
+        }
+        let sock=new SockJS("/ws-stomp");
+        ws = Stomp.over(sock);
+        let reconnect = 0;
+        ws.connect({}, function(f){
+            r=room;
+            // console.log(r,room);
+            ws.subscribe("/sub/chat/"+room,function(msg){
+                let data = JSON.parse(msg.body);
+                $('#txtChatViewPort').append(
+                    CreateChat(data.msg,new Date().toLocaleString(),`\${data.recv ? 'L' : 'R'}`));
+                $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
+
+            });
+            //if(msg !== undefined)ws.send("/pub/chat/message", {}, msg);
+        },function(err){
+            console.log("err");
         });
     }
+    let r="";
+    function CreateChat(msg,time,direction){
+        return $('<div>')
+            .addClass('chatMsgWrapper')
+            .addClass(`\${direction === 'L' ? 'chatLeft' : 'chatRight'}`)
+            .append(
+                $('<div>')
+                    .addClass('chatMsgBody')
+                    .text(msg)
+            )
+            .append(
+                $('<div>')
+                    .addClass('chatMsgBottom')
+                    .append(
+                        $('<span>')
+                            .addClass('chatMsgTime')
+                            .text(time)
+                    )
+            );
+    }
+    $('#txtChat').on({
+        'keyup':(e)=>{
+            let msg = $(e.target).val().trim();
+            if(e.keyCode==13 && msg.length>0) {
+                ws.send("/pub/chat/message",{},JSON.stringify({room:r,msg:msg}));
+                $(e.target).val('');
+            }
+        }
+    });
+    //getroomlist();
+    // function getroomlist(){
+    //     $.ajax({
+    //         url:'/chat/rooms',
+    //         type:'get',
+    //         dataType:'json',
+    //         success:e=>{
+    //             $('#chatList').empty();
+    //             $.each(e,(i,e)=>{
+    //                 $('#chatList').append(
+    //                     `<div class="chatlistWrapper">
+    //                         <div class="chatlistName">\${e.roomId}</div>
+    //                         <div class="chatlistContent">\${e.roomName}</div>
+    //                         <div class="chatlistTimestamp">2323.23.23 23:23</div>
+    //                     </div>`
+    //                 );
+    //             });
+    //         }
+    //     });
+    // }
 </script>

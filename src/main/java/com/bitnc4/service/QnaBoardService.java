@@ -43,5 +43,9 @@ public class QnaBoardService implements QnaBoardServiceInter {
         return qnaBoardMapper.getQna(num);
     }
 
+    @Override
+    public void deleteQna(int num) {
+        qnaBoardMapper.deleteQna(num);
+    }
 
 }

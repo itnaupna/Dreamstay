@@ -1,165 +1,196 @@
-/* 메인 틀 */
-.L_main {
-    position: absolute;
-    /*border: 2px solid pink;*/
-    /*display: flex;*/
-    width: 1400px;
-    height: 800px;
-    padding: 1rem;
-    /*top: 200px;*/
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* 상단 문구 div*/
-.L_main .L_title {
-    /*border: 2px solid darkviolet;*/
-    width: 1400px;
-    height: 800px;
-    margin: 0 auto;
-    padding-bottom: 100px;
+hr {
+    margin: 0;
 }
 
-/* 상단 문구*/
-.L_main .L_title .L_signin {
-    display: flex;
-    /*border: 1px solid red;*/
-    font-family: 'Playfair Display SC', serif;
-    font-size: 65px;
-    height: 100px;
-    padding: 90px 0 90px;
-}
-
-/* 상단 문구*/
-.L_main .L_title .L_stay {
-    display: inline-block;
-    /*border: 1px solid red;*/
-    font-family: 'Nanum Myeongjo', serif;
-    font-size: 23px;
-}
-
-/* 로그인 타이틀 div */
-.L_main .L_title .L_Login {
-    /*border: 2px solid aqua;*/
-    display: flex;
-    width: 1400px;
-    height: 160px;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-}
-
-/* 로그인 타이틀 1 */
-.L_main .L_title .L_Login .L_Logintitle1 {
-    text-align: center;
-    text-transform: uppercase;
-    width: 700px;
-    height: 60px;
-    border-left: 1px solid black;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-}
-
-/* 로그인 타이틀 2 */
-.L_main .L_title .L_Login .L_Logintitle2 {
-    text-align: center;
-    letter-spacing: -1px;
-    text-transform: uppercase;
-    width: 700px;
-    height: 60px;
-    border-right: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid black;
-}
-
-.L_main .L_title .L_Logintext {
-    display: flex;
-    /*border: 3px dotted black;*/
-    height: 450px;
-    /*justify-content: center;*/
-    /*align-items: center;*/
-}
-
-.L_main .L_title .L_Logintext1 {
-    border: 2px solid darkorange;
-    width: 680px;
-    height: 400px;
-    float: left;
-    /*text-align: center;*/
-}
-
-.L_main .L_title .L_Logintext2 {
-    border: 2px solid blue;
-    width: 680px;
-    height: 400px;
-    float: left;
-}
-
-
-.L_main a {
+a {
     text-decoration: none;
-    color: black;
+    color: #444444;
 }
 
+a:hover {
+    color: #444444;
+}
 
-.L_main .L_title .L_Logintext input[type=text] {
+#login_main {
+    margin: 180px auto 0 auto;
+    width: 1200px;
+    height: 600px;
+}
+
+#login_title {
+    margin-bottom: 10px;
+}
+
+#login_maintitle {
+    font-family: 'Nanum Myeongjo', serif;
+    display: block;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#login_select_barbox {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+#login_select_bar {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.login_select {
+    display: inline-block;
     width: 600px;
-    height: 50px;
-    font-size: 15px;
-    border: 0;
-    outline: none;
+    padding: 15px 40px 15px 40px;
+    cursor: pointer;
+}
+
+#login_login_select {
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
+#login_nomember_select {
+    border-top: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid black;
+    color: #cccccc;
+}
+
+#login_login_subject {
+    display: flex;
+    justify-content: center;
+    width: 1200px;
+    margin-bottom: 150px;
+}
+
+#login_member_login {
+    width: 600px;
+}
+#login_id {
+    margin-bottom: 10px;
+}
+
+.login_input {
+    display: block;
+    border: none;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    width: 550px;
+    height: 60px;
     padding-left: 10px;
-    background-color: #F9F9F9;
-    margin: 15px auto;
 }
 
-
-.L_main .L_title .L_Logintext input[type=password] {
-    width: 600px;
-    height: 50px;
-    font-size: 15px;
-    border: 0;
-    outline: none;
-    padding-left: 10px;
-    background-color: #F9F9F9;
-}
-
-
-.L_main .L_title .L_Logintext button[type=button] {
-    margin-top: 20px;
-    width: 600px;
-    height: 50px;
-    border: 0;
+#access {
+    margin: 15px 0 15px 0;
+    display: block;
+    width: 550px;
+    height: 60px;
     background-color: black;
+    border: 1px solid black;
     color: white;
-    align-items: center;
 }
 
-.L_main .L_title .L_Logintext .L_Link {
-    border: 1px solid red;
-    padding-left: 10px;
-}
-
-.L_bttext ul {
-    color: #888;
-}
-
-.L_main .L_title .L_Logintext .btn-lg:hover {
+#access:hover {
     background-color: white;
     color: black;
 }
 
-input[type=checkbox] {
-    border-radius: 50%;
-    border: 1px solid #999;
-    appearance: none;
-    cursor: pointer;
-    width: 1rem;
-    height: 1rem;
+.login_subtext {
+    display: block;
+    color: #444444;
+    margin-bottom: 5px;
+    font-size: 15px;
+    text-align: left;
 }
 
-input[type=checkbox]:checked {
-    background: #000;
-    border: none;
+#login_joinlink {
+    margin-right: 20px;
+}
+
+
+#login_social_login {
+    text-align: right;
+    width: 600px;
+}
+
+#kakao_login {
+    background-image: url("/photo/kakaoicon.png");
+    background-color: #F7DE10;
+    background-position: 1.5%;
+    background-size: 43px 43px;
+    background-repeat: no-repeat;
+    border: 1px solid black;
+    width: 550px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+#naver_loginbox {
+    border: 1px solid black;
+    width: 550px;
+    height: 60px;
+}
+
+#naver_loginwrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+#naver_loginbox span {
+    width: 490px;
+}
+
+#login_bottom_textbox {
+}
+
+#login_bottom_text {
+    list-style-type: circle;
+    color: #aaaaaa;
+}
+
+#login_reservation {
+    display: none;
+}
+
+#nomembersearchbox {
+    width: 700px;
+    margin: 0 auto 150px auto;
+    text-align: center;
+}
+
+#login_book_searchnum {
+    margin-bottom: 10px;
+}
+
+.login_booksearch_input {
+    width: 700px;
+    margin-bottom: 30px;
+
+}
+
+#booksearch{
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    width: 700px;
+    height: 60px;
+    margin: 15px 0 15px 0;
+}
+
+#booksearch:hover {
+    background-color: white;
+    color: black;
 }

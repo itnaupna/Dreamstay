@@ -5,6 +5,7 @@ import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.RoomDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BookServiceInter {
 
@@ -14,4 +15,7 @@ public interface BookServiceInter {
     public String hotelname(int selectedHotel);
 
     /* public List<RoomDto> getroomlist();*/
+
+    // 비회원 예약 출력
+    public Map<String, String> getNomemberBookData(String searchnum, String bookpw);
 }

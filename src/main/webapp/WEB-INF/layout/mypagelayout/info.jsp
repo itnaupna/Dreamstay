@@ -18,7 +18,7 @@
 
         <div class="m_myinfo">
             <div class="m_userid">
-                <p>${memberDto.id}님</p>
+                <p>${loginuser.user_name}님</p>
             </div>
         </div>
 

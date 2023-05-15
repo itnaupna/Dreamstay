@@ -7,10 +7,10 @@ import lombok.ToString;
 @ToString
 public class HotelDto {
 
-    int num;
-    String name;
-    String addr;
-    String phone;
-    String photo;
-    String memo;
+   private int num;
+   private String name;
+   private  String addr;
+   private String phone;
+   private String photo;
+   private String memo;
 }

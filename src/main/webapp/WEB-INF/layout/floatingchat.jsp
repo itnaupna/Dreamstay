@@ -10,102 +10,22 @@
         <span id="btnCloseChat">X</span>
     </div>
     <div id="txtChatViewPort">
-        <div class="chatMsgWrapper chatLeft">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatRight">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatLeft">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatLeft">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatRight">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatLeft">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatLeft">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatRight">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatLeft">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatRight">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatRight">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
-        <div class="chatMsgWrapper chatRight">
-            <div class="chatMsgBody">
-                안녕하세요, 채팅메세지 css뷰 테스트입니다.
-            </div>
-            <div class="chatMsgBottom">
-                <span class="chatMsgTime">오전 00:00</span>
-            </div>
-        </div>
+        <%--        <div class="chatMsgWrapper chatLeft">--%>
+        <%--            <div class="chatMsgBody">--%>
+        <%--                안녕하세요, 채팅메세지 css뷰 테스트입니다.--%>
+        <%--            </div>--%>
+        <%--            <div class="chatMsgBottom">--%>
+        <%--                <span class="chatMsgTime">오전 00:00</span>--%>
+        <%--            </div>--%>
+        <%--        </div>--%>
+        <%--        <div class="chatMsgWrapper chatRight">--%>
+        <%--            <div class="chatMsgBody">--%>
+        <%--                안녕하세요, 채팅메세지 css뷰 테스트입니다.--%>
+        <%--            </div>--%>
+        <%--            <div class="chatMsgBottom">--%>
+        <%--                <span class="chatMsgTime">오전 00:00</span>--%>
+        <%--            </div>--%>
+        <%--        </div>--%>
     </div>
 
     <div id="txtChatBottom" class="form-floating">
@@ -126,11 +46,11 @@
 
     }
     .chatMsgBody{
-        font-size:.7rem;
+        font-size:.9rem;
         color:#000000b8;
-        font-weight: 700!important;
-        text-transform: uppercase!important;
+        /*font-weight: 700!important;*/
         margin-bottom: 0.25rem!important;
+        word-break: break-all;
     }
     .chatRight{
         float:right;
@@ -173,13 +93,13 @@
     }
     .chatMsgBottom{
         margin-bottom:-5px;
-        padding-top: 20px;
+        padding-top: 10px;
     }
     .chatMsgTime{
-        font-size:.6rem;
+        font-size:.7rem;
         color:#000000b8;
-        font-weight: 700!important;
-        text-transform: uppercase!important;
+        /*font-weight: 700!important;*/
+        /*text-transform: uppercase!important;*/
         margin-bottom: 0.25rem!important;
     }
 
@@ -240,8 +160,87 @@
         cursor:pointer;
     }
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stomp-websocket@2.3.4-next/lib/stomp.min.js"></script>
 <script>
+    CheckUsingChat();
+    GetRecent();
+    function CheckUsingChat(){
+        $.ajax({
+            url:'/chat/chkconnect',
+            type:'post',
+            success:(e)=>{
+                if(e) {
+                    //GetRecent();
+                    NewConnect();
+                }
+            }
+        });
+    }
+
+    function NewConnect(msg){
+        $.ajax({
+            url:'/chat/start',
+            type:'post',
+            dataType:'json',
+            success:(e)=>{
+                if(e){
+                    connect(msg);
+                }
+            }
+        });
+    }
+    let ws;
+    //connect();
+    function connect(msg){
+        let sock=new SockJS("/ws-stomp");
+        ws = Stomp.over(sock);
+        let reconnect = 0;
+        ws.connect({}, function(f){
+            ws.subscribe("/sub/chat/${loginuser.num}${loginuser.user_name}",function(msg){
+                let data = JSON.parse(msg.body);
+                let LR = data.recv==0?'L':'R';
+                $('#txtChatViewPort').append(
+                    CreateChat(data.msg,new Date().toLocaleString(),`\${data.recv ? 'R' : 'L'}`));
+                    $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
+
+            });
+            if(msg !== undefined)
+                ws.send("/pub/chat/message", {}, JSON.stringify({msg:msg,room:'${loginuser.num}${loginuser.user_name}'}));
+        },function(err){
+            console.log("err");
+        });
+    }
+
+    function chat(msg){
+        if(ws===undefined){
+            NewConnect(msg);
+        }else{
+            ws.send("/pub/chat/message", {}, JSON.stringify({msg:msg,room:'${loginuser.num}${loginuser.user_name}'}));
+            $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
+        }
+    }
+
+
+    function GetRecent(){
+        $.ajax({
+            url:'/chat/recent',
+            type:'post',
+            dataType:'json',
+            success:(e)=>{
+                $('#txtChatViewPort').empty();
+                $.each(e,(i,item)=>{
+                    $('#txtChatViewPort').append(
+                        CreateChat(item.msg,new Date(item.date).toLocaleString(),`\${item.recv ? 'R' : 'L'}`)
+                    );
+                });
+                $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
+            },
+            error:(e)=>{
+
+            }
+        })
+    }
     $('#btnChat').on({
         'click':(e)=>{
             $('aside.floatingchat').css({
@@ -254,6 +253,7 @@
             $('#chatInner').css({
                 'display':'flex'
             });
+            $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
         }
     });
     $('#chatTitle #btnCloseChat').on({
@@ -266,6 +266,34 @@
                 'transition':'all ease 0.2s 0s'
             });
             $('#chatInner').hide();
+        }
+    });
+    function CreateChat(msg,time,direction){
+        return $('<div>')
+            .addClass('chatMsgWrapper')
+            .addClass(`\${direction === 'L' ? 'chatLeft' : 'chatRight'}`)
+            .append(
+                $('<div>')
+                    .addClass('chatMsgBody')
+                    .text(msg)
+            )
+            .append(
+                $('<div>')
+                    .addClass('chatMsgBottom')
+                    .append(
+                        $('<span>')
+                            .addClass('chatMsgTime')
+                            .text(time)
+                    )
+            );
+    }
+    $('#txtChat').on({
+        'keyup':(e)=>{
+            let msg = $(e.target).val().trim();
+            if(e.keyCode==13 && msg.length>0) {
+                chat(msg);
+                $(e.target).val('');
+            }
         }
     });
 </script>

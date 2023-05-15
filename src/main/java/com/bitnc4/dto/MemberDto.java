@@ -17,4 +17,9 @@ public class MemberDto {
     private int account_lock;
     private int email_code;
     private int point;
+    private int issocial;
+
+    // 소셜 로그인 개수가 많아져서 아이디나 이메일이 중복될경우가 발생,
+    // 가입한 소셜의 이름을 id와 email에 붙혀주는 용도 ex) 네이버 가입 -> id = naver-****, email = naver-******@naver.com
+    private String social;
 }

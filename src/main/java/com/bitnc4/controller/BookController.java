@@ -14,14 +14,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BookController {
@@ -119,4 +124,28 @@ public class BookController {
         return "/main/book/payment";
     }
 
+
+    // 비회원 예약 체크
+    Map<String, String> bookSearch;
+    @PostMapping("/book/bookchk")
+    @ResponseBody
+    public int bookChk(String searchnum, String bookpw) {
+        bookSearch = bookService.getNomemberBookData(searchnum, bookpw);
+        if(bookSearch == null) {
+            return 0;
+        } else {
+            return bookSearch.size();
+        }
+    }
+
+    // 비회원 예약 페이지 이동
+    @PostMapping("/book/nomemberbooksearch")
+    public String nomemberBookSearch(Model model) {
+        bookSearch.put("user_name", bookSearch.get("user_name").replaceAll("/", ""));
+        for(String key : bookSearch.keySet()) {
+            System.out.println("key: " + key + "  /  value: " + String.valueOf(bookSearch.get(key)));
+        }
+        model.addAttribute("booksearch", bookSearch);
+        return "/main/book/nomemberbooksearch";
+    }
 }
