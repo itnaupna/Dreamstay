@@ -191,11 +191,7 @@ public class AdminController {
         System.out.println(searchtype);
         System.out.println(keyword);
 
-
-
-
         return adminQnaServeice.searchQnaList(dto);
-
     }
 
 }

@@ -79,7 +79,7 @@
             </td>
 
             <td colspan="2">
-                <input type="button" class="btn btn-outline-secondary" onclick="Paging()" value="검색">
+                <input type="button" class="btn btn-outline-secondary" onclick="getSearchQna()" value="검색">
             </td>
     </table>
 </form>
