@@ -72,7 +72,7 @@ public class AdminController {
         lst.add(adminHnRService.getHotelByHotelNum(hotelnum));
         lst.add(adminHnRService.getRoomsByHotelNum(hotelnum));
         return lst;
-    }
+    }//
 
     @PostMapping("/hotel/update")
     @ResponseBody
