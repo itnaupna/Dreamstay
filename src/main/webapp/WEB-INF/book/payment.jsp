@@ -615,7 +615,7 @@
             <div class="txt-label">
                 <span>객실예약</span>
                 <div class="for_num">
-                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${roomprice}"/>
+                    <fmt:formatNumber type="number" value="${roomprice }" pattern="#,##0원"/>
                 </div>
                 <hr class="sidehr">
                 <div class="divbtn">

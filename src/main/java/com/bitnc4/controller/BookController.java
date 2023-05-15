@@ -107,7 +107,7 @@ public class BookController {
         String roomnum = request.getParameter("roomnum");
         String hotelnum = request.getParameter("hotelnum");
         String roomtype = request.getParameter("roomtype");
-        String roomprice = request.getParameter("roomprice");
+        String roomprice = request.getParameter("roomprice").replaceAll("원","").replaceAll(",","");
         String roommemo = request.getParameter("roommemo");
         String roomdetail = request.getParameter("roomdetail");
         String totaldays = request.getParameter("totaldays");
