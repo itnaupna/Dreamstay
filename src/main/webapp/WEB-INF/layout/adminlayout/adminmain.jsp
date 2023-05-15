@@ -326,7 +326,8 @@
     </div>
     <div id="box2">
         <div class="boxtitle2">
-            <h6>제목 000</h6>
+            <span style="font-size:1.25rem;color:#5a5c69;font-weight: 700!important;"><i class="bi bi-megaphone" style="margin-right: 10px;">
+            </i>문의게시판</span>
         </div>
     </div>
     <div id="box3">

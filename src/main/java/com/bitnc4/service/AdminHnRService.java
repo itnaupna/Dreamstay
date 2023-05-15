@@ -1,6 +1,7 @@
 package com.bitnc4.service;
 
 import com.bitnc4.dto.HotelDto;
+import com.bitnc4.dto.QnaBoardDto;
 import com.bitnc4.dto.RoomDto;
 import com.bitnc4.mapper.AdminHnRMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -68,4 +69,5 @@ public class AdminHnRService implements AdminHnRServiceInter{
     public int getHotelCount() {
         return m.getHotelCount();
     }
+
 }

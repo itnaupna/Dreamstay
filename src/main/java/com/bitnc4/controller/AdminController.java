@@ -1,11 +1,12 @@
 package com.bitnc4.controller;
 
 import com.bitnc4.dto.HotelDto;
-import com.bitnc4.dto.NoticeDto;
+import com.bitnc4.dto.QnaBoardDto;
 import com.bitnc4.dto.RoomDto;
 import com.bitnc4.repo.ChatRoomRepository;
 import com.bitnc4.service.AdminHnRService;
 import com.bitnc4.service.AdminNoticeService;
+import com.bitnc4.service.AdminQnaServeice;
 import lombok.extern.slf4j.Slf4j;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class AdminController {
     AdminHnRService adminHnRService;
     @Autowired
     AdminNoticeService adminNoticeService;
+    @Autowired
+    AdminQnaServeice adminQnaServeice;
     String bucketName="dreamsstaybucket";
     @Autowired
     NcpObjectStorageService ncp;
@@ -131,17 +134,60 @@ public class AdminController {
     }
 
 
-
-
     @GetMapping("/qna")
-    public String qna(){
+    public String qna(Model model)
+    {
+        model.addAttribute("qnaList",adminQnaServeice.getQnaList(1));
+        model.addAttribute("page",adminQnaServeice.getQnaCount(1));
+
         return "/admin/qna/list";
     }
-//    @GetMapping("/qna/list/{page}")
-//    @ResponseBody
 
+    @GetMapping("/qna/list/{page}")
+    @ResponseBody
+    public List<Object> getQnaList(@PathVariable int page)
+    {
+        List<Object> result = new ArrayList<>();
+        result.add(adminQnaServeice.getQnaList(page));
+        result.add(adminQnaServeice.getQnaCount(page));
+        return result;
+    }
 
+    @GetMapping("/qna/content")
+    public String content(int num, Model model) {
+        {
+            QnaBoardDto dto = adminQnaServeice.getQna(num);
 
+            model.addAttribute("dto", dto);
+
+            return "/admin/qna/content";
+
+        }
+
+    }
+
+    @PostMapping("/qna/answerupdate")
+    public String answerupdate(QnaBoardDto dto)
+    {
+        adminQnaServeice.upateQnaAnswer(dto);
+        return "redirect:/admin/qna/content?num="+dto.getNum();
+
+    }
+
+    @GetMapping("/getSearchQna")
+    @ResponseBody
+    private List<QnaBoardDto> searchQnaList(String searchtype,String keyword, Model model, String qna_type, int category, String answer)
+    {
+        QnaBoardDto dto = new QnaBoardDto();
+        dto.setAnswer(answer);
+        dto.setQna_type(qna_type);
+        dto.setCategory(category);
+        dto.setSearchtype(searchtype);
+        dto.setKeyword(keyword);
+
+        return adminQnaServeice.searchQnaList(dto);
+
+    }
 
 }
 

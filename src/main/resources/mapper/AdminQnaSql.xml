@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitnc4.mapper.AdminQnaMapper">
+    <select id="getQnaList" parameterType="Map" resultType="QnaBoardDto">
+        select * from board_qna order by num desc LIMIT #{start},#{count};
+    </select>
+
+    <select id="getQnaCount" parameterType="int" resultType="int">
+        select count(*) from board_qna;
+    </select>
+
+    <select id="getQna" parameterType="int" resultType="QnaBoardDto">
+        select * from board_qna  where num = #{num}
+    </select>
+
+    <update id="upateQnaAnswer" parameterType="QnaBoardDto">
+        update board_qna set answer='답변완료', answer_text=#{answer_text} where num=#{num}
+    </update>
+
+    <select id="searchQnaList" parameterType="QnaBoardDto" resultType="QnaBoardDto">
+        select * from board_qna where 1 = 1
+        <if test="category != null and category != 0">
+            and category = #{category}
+        </if>
+
+        <if test="searchtype != null and keyword != null">
+        <choose>
+            <when test="searchtype !=null and searchtype.equals('title')">
+                and subject like concat ('%', #{keyword},'%')
+            </when>
+            <when test="searchtype !=null and searchtype.equals('content')">
+                and content like concat ('%', #{keyword},'%')
+            </when>
+            <when test="searchtype !=null and searchtype.equals('writer')">
+                and writer like concat ('%', #{keyword},'%')
+            </when>
+        </choose>
+        </if>
+
+        <if test="qna_type != null and !qna_type.equals('전체')">
+            and qna_type = #{qna_type}
+        </if>
+
+        <if test="answer != null and !answer.equals('전체')">
+            and answer = #{answer}
+        </if>
+
+        <if test="hotelname != null and !hotelname.equals('전체')">
+            and hotelname = #{hotelname}
+        </if>
+
+    </select>
+
+    <select id="getUnanswerCount" parameterType="int" resultType="int">
+        select count(*) from board_qna where answer='답변대기'
+    </select>
+
+    <select id="getUnanswerList" parameterType="QnaBoardDto" resultType="QnaBoardDto">
+        select * from board_qna where answer='답변대기' order by num
+    </select>
+</mapper>

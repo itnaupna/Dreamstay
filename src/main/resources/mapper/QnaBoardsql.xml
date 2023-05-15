@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitnc4.mapper.QnaBoardMapper">
     <insert id="insertqna" parameterType="QnaBoardDto">
-        insert into board_qna(category,subject,content,writer,qna_name,qna_email,qna_phone,hotelname)
-        values (#{category},#{subject},#{content},#{writer},#{qna_name},#{qna_email},#{qna_phone},#{hotelname});
+        insert into board_qna(category,subject,content,writer,qna_name,qna_email,
+        qna_phone,hotelname,reservenum,qna_type,qna_photo<if test="qna_type == '의견'">,useday</if>)
+        values (#{category},#{subject},#{content},#{writer},#{qna_name},#{qna_email},#{qna_phone},#{hotelname},
+        #{reservenum},#{qna_type},#{qna_photo}<if test="qna_type == '의견'">,#{useday}</if>)
     </insert>
 
     <select id="searchIdOfinfo" parameterType="String" resultType="MemberDto">
@@ -12,16 +14,21 @@
 
     <select id="qnaList" parameterType="String" resultType="QnaBoardDto">
         select *, case category
-         when 1 then '[가입문의]'
-         when 2 then '[예약문의]'
-         when 3 then '[객실/패키지문의]'
-         when 4 then '[기타]'
-        end as category_txt
+                      when 1 then '[가입문의]'
+                      when 2 then '[예약문의]'
+                      when 3 then '[객실/패키지문의]'
+                      when 4 then '[기타]'
+            end as category_txt
         from board_qna
-        where writer=#{writer}
+        where writer=#{writer} order by num desc
     </select>
 
     <select id="getQna" parameterType="int" resultType="QnaBoardDto">
         select * from board_qna where num = #{num}
     </select>
+
+    <delete id="deleteQna" parameterType="int">
+        delete from board_qna where num = #{num}
+    </delete>
+
 </mapper>

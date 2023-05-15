@@ -11,3 +11,4 @@ public interface AdminNoticeMapper {
     public List<NoticeDto> getList(Map m);
     public int getCount();
 }
+

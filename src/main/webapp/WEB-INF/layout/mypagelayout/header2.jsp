@@ -418,15 +418,15 @@
                             <a href="/signup/logout" id="header_logout">로그아웃</a>
                         </li>
                         <li>
-                            <a href="/mypage" id="header_mypage">마이페이지</a>
+                            <a href="/mypage/" id="header_mypage">마이페이지</a>
                         </li>
                     </c:if>
                     <c:if test="${userid == null}">
                         <li>
-                            <a href="/login" id="login">로그인</a>
+                            <a href="/signup/login" id="login">로그인</a>
                         </li>
                         <li>
-                            <a href="/signup" id="join">회원가입</a>
+                            <a href="/signup/signup" id="join">회원가입</a>
                         </li>
                     </c:if>
                     <li>
