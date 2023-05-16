@@ -32,6 +32,10 @@
         select MAX(num) from member
     </select>
 
+    <insert id="insert_nomember" parameterType="MemberDto">
+        insert into member (num, id, pw, user_name, email, phone, user_level, addr, account_lock, email_code, point, issocial)
+        values (null, #{id }, #{phone },#{user_name }, #{email }, #{phone }, 0, #{addr }, 0, 0, null, 0);
+    </insert>
 
 
 </mapper>

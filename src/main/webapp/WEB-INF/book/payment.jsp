@@ -637,10 +637,10 @@
             <div class="pay_name">
                 <p>RESERVATION NAME *</p>
                 <c:if  test="${memberDto.user_name == null}">
-                    <span><input type="text" value="" name="nomember_name" id="nomember_name"></span>
+                    <span><input type="text" value="" name="nomember_name" class="nomember_name"></span>
                 </c:if>
                 <c:if  test="${memberDto.user_name != null}">
-                    <span>${memberDto.user_name}</span>
+                    <span><input type="text" value="${memberDto.user_name}" name="nomember_name" class="nomember_name"></span>
                 </c:if>
             </div>
 

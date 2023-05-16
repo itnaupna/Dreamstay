@@ -100,7 +100,7 @@ public class BookController {
 
         MemberDto dto = mypageService.selectInfoToId(String.valueOf(session.getAttribute("userid")));
        /* String email = dto.getEmail();*/
-        String email = "1234@1234.com";/*작업용*/
+        String email = "1234@12345.com";/*작업용*/
 ;       String[] emailSplit = email.split("@");
         String username = emailSplit[0];
         String domain = emailSplit[1];
@@ -155,12 +155,29 @@ public class BookController {
     }
 
     @PostMapping("/insertbook")
-    public String insertBook() {
+    public String insertBook(MemberDto mdto, HttpServletRequest request) {
+        int maxMemberNum = bookService.maxMemberNum() + 1;
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        String nomemberId = formatter.format(date) + maxMemberNum;
 
+        var pass = request.getParameter("pay_phone");
+        var nomember_name = request.getParameter("nomember_name");
+        var username = request.getParameter("email");
+        var domain = request.getParameter("input_domain");
+        var email = username + "@" + domain;
+        var phone = request.getParameter("pay_phone");
+        var addr = "비회원 예약 입니다.";
 
+        mdto.setId(nomemberId);
+        mdto.setPw(pass);
+        mdto.setUser_name(username);
+        mdto.setUser_name(nomember_name);
+        mdto.setEmail(email);
+        mdto.setPhone(phone);
+        mdto.setAddr(addr);
 
-
-
+        bookService.insert_nomember(mdto);
 
 
         return "redirect:/";
