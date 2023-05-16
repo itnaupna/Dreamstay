@@ -25,8 +25,9 @@
     <br>
     <div>
         <%--<button type="button" class="btn btn-outline-secondary" onclick="location.href = '/admin/qna'">목록</button>--%>
-            <button type="button" class="btn btn-outline-secondary" onclick="location.href = '/qna/list/${sessionScope.currentPage}">목록</button>
-        <c:if test="${dto.answer== '답변대기'}">
+            <button type="button" class="btn btn-outline-secondary" onclick="history.back()">목록</button>
+            <c:if test="${dto.answer== '답변대기'}">
+
             <button type="button" class="btn btn-outline-secondary" id="delQna">삭제</button>
             <button type="button" class="btn btn-outline-secondary">수정</button>
         </c:if>
@@ -36,17 +37,34 @@
 <c:if test="${dto.answer== '답변완료'}">
     <div class="anserwqna" style="border: 1px solid gray; height: 200px;">
 
-        <span>관리자 답글</span>
-        <span>${dto.answer_text}</span>
+        <span>관리자 답글</span> <br><br>
+        <span id="answer-admin">${dto.answer_text}</span>
     </div>
 </c:if>
 
-<form action="./answerupdate" method="post">
+<form name="answer-form" method="post">
     <input type="hidden" name="num" value="${dto.num}">
     <div>
         <textarea style="width: 700px; height: 200px;" name="answer_text"></textarea><br>
-        <button type="submit" class="btn btn-outline-secondary">답변완료</button>
+        <button type="button" class="btn btn-outline-secondary" id="answer-btn">답변완료</button>
     </div>
 </form>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#answer-btn").click(function() {
+            $.ajax({
+                type: 'POST',
+                url: './answerupdate',
+                data: $("form[name=answer-form]").serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    $("#answer-admin").html(`<span>${response.answer_text}</span>`);
+                    $("form[name=answer-form]")[0].reset(); // 폼 리셋
+                }
+            });
+        });
+    });
+</script>
 
+</script>
