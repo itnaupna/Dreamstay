@@ -1,6 +1,7 @@
 package com.bitnc4.service;
 
 import com.bitnc4.dto.BookDto;
+import com.bitnc4.dto.CardDto;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.dto.RoomDto;
 import com.bitnc4.mapper.BookMapper;
@@ -43,6 +44,11 @@ public class BookService implements BookServiceInter{
     @Override
     public void insert_nomember(MemberDto dto){
         bookMapper.insert_nomember(dto);
+    }
+
+    @Override
+    public int insert_card(CardDto dto){
+        return bookMapper.insert_card(dto);
     }
 
 }

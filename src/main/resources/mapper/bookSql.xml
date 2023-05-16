@@ -37,5 +37,9 @@
         values (null, #{id }, #{phone },#{user_name }, #{email }, #{phone }, 0, #{addr }, 0, 0, null, 0);
     </insert>
 
+    <insert id="insert_card" parameterType="CardDto">
+        insert into card (num, company, cardmonth, cardyear, membernum) values (null, #{company }, #{cardmonth }, #{cardyear }, #{membernum });
+    </insert>
+
 
 </mapper>
