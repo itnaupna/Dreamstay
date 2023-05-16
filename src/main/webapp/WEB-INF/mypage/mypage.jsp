@@ -4,7 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<%--<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>--%>
+
 <style>
+    @import url('https://static.toss.im/tps/main.css');
+    @import url('https://static.toss.im/tps/others.css');
+
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+    }
+
     /* 타이틀 */
     .res_main .res_title {
         font-size: 25px;
@@ -37,49 +51,20 @@
         padding: 0 20px;
     }
 
-    /* 버튼 div */
-    .res_main .res_sel .res_btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 170px;
-    }
-
-    /* 버튼 */
-    .res_main .res_sel .res_btn .r_btn {
-        font-size: 15px;
-        border-color: #000000;
-        border-width: thin;
-        width: 180px;
-        background-color: #F9F9F9;
-        height: 50px;
-        cursor: pointer;
-    }
-
-    .r_btn:hover {
-        border-image: linear-gradient(#12c2e9, #c471ed, #f64f59) 5;
-        background-color: white !important;
-    }
-
     /* 메뉴바 아래 전체 */
     .res_main .res_sel {
         margin-top: 30px;
         /*border: 1px solid green;*/
         width: 1000px;
-        height: 1000px;
-        background-color: #F9F9F9;
+        height: 730px;
+        /*background-color: #F9F9F9;*/
+        font-family: 'Toss Product Sans', sans-serif;
     }
 
     /* 맨 아래 문구 */
     .res_main .res_bottom {
         /*border: 1px solid blue;*/
         margin-top: 70px;
-    }
-
-    /* 맨 아래 문구 간격 */
-    .res_main .res_bottom .bt_ul li {
-        color: #ccc;
-        margin-top: 10px;
     }
 
     /* 사이 줄 조절 */
@@ -95,13 +80,138 @@
         color: #ccc;
     }
 
-    .res_main .res_sel span {
-        color: #ccc;
+    /*.res_main .res_sel span {*/
+    /*    !*color: #ccc;*!*/
+    /*    margin-top: 20px;*/
+    /*}*/
+
+    .nobook {
+        /*border: 1px solid red;*/
+        height: 300px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        flex-direction: column;
+    }
+
+    .bookbtn {
+        width: 300px;
+        height: 60px;
+        line-height: 60px;
+        border: 1px solid #ccc;
+        transition: transform .6s .6s ease-in,
+        box-shadow .6s .6s ease-in,
+        background .6s ease-out,
+        color .6s ease-out;
+        background-color: white;
+        color: black;
+        font-size: 17px;
         margin-top: 20px;
     }
 
-    #login_id:focus{
-        outline: none;
+    .bookbtn:hover {
+        transform: rotateY(25deg);
+        box-shadow: -7px 7px 40px 0px rgba(0, 0, 0, 0.55);
+        background: black;
+        color: white;
+    }
+
+    /* 예약한 호텔 한 줄에 2개씩 */
+    .book_list {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .book_list .for_list {
+        flex-basis: calc(33.33% - 20px);
+        width: 100%;
+    }
+
+    .for_list {
+        border: none;
+        border-radius: 5px;
+        width: 600px;
+        height: 400px;
+        box-shadow: -4px 4px 7px 7px #dddddd;
+        margin-top: 30px;
+        background-color: white;
+    }
+
+    .for_list span {
+        font-family: 'GmarketSansMedium';
+    }
+
+    .for_list {
+        /*font-weight: lighter;*/
+    }
+
+    .list_img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .book_name {
+        color: #ccc;
+    }
+
+    .list1 {
+        border: none;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font-family: 'GmarketSansMedium';
+        font-weight: 700;
+
+    }
+
+    .list2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .list3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .list4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .list5 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .nobooktitle {
+        font-size: 20px;
+    }
+
+    .list_img img {
+        width: 100%;
+        height: 200px;
+        border-radius: 5px;
     }
 </style>
 
@@ -128,86 +238,59 @@
     </div>
 
     <div class="res_sel">
-            <c:choose>
-                <c:when test="${data == null}">
-                    조회된 예약 x
-                </c:when>
-                <c:otherwise>
-                    <div class="book_info">
-                        <span>${data.user_name}님 예약 정보</span>
-                        <table>
-                            <tr>
-                                <td colspan="3"><span>호텔 정보</span></td>
-                            </tr>
-                            <tr>
-                                <td>호텔명</td>
-                                <td>주소</td>
-                                <td>전화번호</td>
-                            </tr>
-                            <tr>
-                                <td>
-                <span><img
-                        src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${data.photo}?type=f&w=160&h=160&faceopt=true"></span>
-                                    <span>${data.name}</span>
-                                </td>
-                                <td>
-                                    <span>${data.addr}</span>
-                                </td>
-                                <td>
-                                    <span>${data.phone}</span>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <table>
-                            <tr>
-                                <td colspan="6"><span>객실 정보</span></td>
-                            </tr>
-                            <tr>
-                                <td>객실 타입</td>
-                                <td>체크 인</td>
-                                <td>체크 아웃</td>
-                                <td>인원 수</td>
-                                <td>요청 사항</td>
-                                <td>이용 요금</td>
-                            </tr>
-                            <tr>
-                                <td>${data.roomtype}</td>
-                                <td>${data.checkin}</td>
-                                <td>${data.checkout}</td>
-                                <td>성인: ${data.adult}, 어린이: ${data.kids} </td>
-                                <td>${data.memo}</td>
-                                <td>${data.total_price}</td>
-                            </tr>
-
-                        </table>
+        <c:choose>
+            <c:when test="${size == 0}">
+                <div class="nobook">
+                    <p>${familyname}${firstname}님의 예약내역이 없습니다.</p>
+                    <p class="nobooktitle">다양한 Dream Stay의 상품을 예약해보세요</p>
+                    <button type="button" onclick="location.href='/'" class="bookbtn">예약하기</button>
+                    <hr>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="book_info">
+                    <span class="book_name">${familyname}${firstname}님 예약 정보</span>
+                    <div class="book_list">
+                        <c:forEach var="list" items="${data}" varStatus="i">
+                            <div class="for_list">
+                                <div class="wrapper">
+                                    <div class="list_img">
+                                        <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${list.photo}?type=f&w=160&h=160&faceopt=true">
+                                    </div>
+                                    <div class="list_data">
+                                        <div class="list1">
+                                            <span>객실 :</span> ${list.roomtype}<br>
+                                        </div>
+                                        <div class="list2">
+                                            <span>체크인 :</span>
+                                            <fmt:parseDate value='${list.checkin}' var='checkin' pattern='yyyy-mm-dd'/>
+                                            <fmt:formatDate value="${checkin}" pattern="yyyy-mm-dd"/>
+                                            <span>체크아웃 :</span>
+                                            <fmt:parseDate value='${list.checkout}' var='checkout'
+                                                           pattern='yyyy-mm-dd'/>
+                                            <fmt:formatDate value="${checkout}" pattern="yyyy-mm-dd"/>
+                                            <br>
+                                        </div>
+                                        <div class="list3">
+                                            <span>성인 :</span> ${list.adult}명
+                                            <span>어린이 :</span> ${list.kids}명<br>
+                                        </div>
+                                        <div class="list4">
+                                            <span>요구사항 :</span> ${list.memo}<br>
+                                        </div>
+                                        <div class="list5">
+                                            <span>가격 :</span><fmt:formatNumber value="${list.total_price}" type="currency"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <c:if test="${i.count%3==0}">
+                                <br>
+                            </c:if>
+                        </c:forEach>
                     </div>
-                </c:otherwise>
-            </c:choose>
-
-        <div class="res_bottom">
-            <hr>
-            <ul class="bt_ul">
-                <li>
-                    온라인 예약 건에 한하여 조회가 가능하며, 현재일 기준 1년까지 제공됩니다.
-                </li>
-
-                <li>
-                    예약날짜 기준으로 현재부터 3개월 이후의 예약 내역이 우선 조회됩니다.
-                </li>
-
-                <li>
-                    과거 또는 미래의 예약내역을 조회하시려면 상단의 날짜를 변경해주십시오.
-                </li>
-
-                <li>
-                    레스케이프는 레스케이프 홈페이지에서 예약 확인이 가능합니다.
-                </li>
-
-                <li>
-                    메리어트 브랜드의 예약 내역은 해당 사이트에서 조회하실 수 있습니다.
-                </li>
-            </ul>
-        </div>
+                </div>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
