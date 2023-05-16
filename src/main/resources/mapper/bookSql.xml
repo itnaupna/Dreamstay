@@ -28,4 +28,10 @@
         where b.num = #{num} and m.pw = sha2(#{pw}, 256);
     </select>
 
+    <select id="maxMemberNum" resultType="int">
+        select MAX(num) from member
+    </select>
+
+
+
 </mapper>

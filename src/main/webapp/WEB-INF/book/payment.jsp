@@ -574,7 +574,7 @@
             </div>
         </div>
     </div>
-
+<form method="post" id="bookform" name="bookform" action="insertbook">
     <div class="book_select">
         <div class="book_inner">
 
@@ -619,7 +619,7 @@
                 </div>
                 <hr class="sidehr">
                 <div class="divbtn">
-                    <button type="button" class="paybtn" onclick="payments();">예약완료</button>
+                    <button type="submit" class="paybtn" onclick="payments();">예약완료</button>
                 </div>
             </div>
         </div>
@@ -636,7 +636,12 @@
 
             <div class="pay_name">
                 <p>RESERVATION NAME *</p>
-                <span>${memberDto.user_name}</span>
+                <c:if  test="${memberDto.user_name == null}">
+                    <span><input type="text" value="" name="nomember_name" id="nomember_name"></span>
+                </c:if>
+                <c:if  test="${memberDto.user_name != null}">
+                    <span>${memberDto.user_name}</span>
+                </c:if>
             </div>
 
             <div class="pay_phone">
@@ -679,23 +684,24 @@
             <span class="ex_card">CREDIT CARD COMPANY*</span>
             <div class="selectli2">
                 <div class="custom-select2">
+                    <input type="hidden" value="" name="company" id="company">
                     <div class="selected2">카드선택</div>
                     <ul class="options2">
-                        <li>비씨</li>
-                        <li>국민</li>
-                        <li>하나</li>
-                        <li>삼성</li>
-                        <li>신한</li>
-                        <li>현대</li>
-                        <li>롯데</li>
-                        <li>시티</li>
-                        <li>농협</li>
-                        <li>수협</li>
-                        <li>우리</li>
-                        <li>카카오뱅크</li>
-                        <li>광주</li>
-                        <li>전북</li>
-                        <li>제주</li>
+                        <li class="options2_list">비씨</li>
+                        <li class="options2_list">국민</li>
+                        <li class="options2_list">하나</li>
+                        <li class="options2_list">삼성</li>
+                        <li class="options2_list">신한</li>
+                        <li class="options2_list">현대</li>
+                        <li class="options2_list">롯데</li>
+                        <li class="options2_list">시티</li>
+                        <li class="options2_list">농협</li>
+                        <li class="options2_list">수협</li>
+                        <li class="options2_list">우리</li>
+                        <li class="options2_list">카카오뱅크</li>
+                        <li class="options2_list">광주</li>
+                        <li class="options2_list">전북</li>
+                        <li class="options2_list">제주</li>
                     </ul>
                 </div>
             </div>
@@ -711,37 +717,39 @@
             <span class="ex_date">EXPIRY DATE *</span>
             <div class="selectli">
                 <div class="custom-select">
+                    <input type="hidden" value="" name="card_month" id="card_month">
                     <div class="selected">월</div>
                     <ul class="options">
-                        <li>1월</li>
-                        <li>2월</li>
-                        <li>3월</li>
-                        <li>4월</li>
-                        <li>5월</li>
-                        <li>6월</li>
-                        <li>7월</li>
-                        <li>8월</li>
-                        <li>9월</li>
-                        <li>10월</li>
-                        <li>11월</li>
-                        <li>12월</li>
+                        <li class="options_list">1월</li>
+                        <li class="options_list">2월</li>
+                        <li class="options_list">3월</li>
+                        <li class="options_list">4월</li>
+                        <li class="options_list">5월</li>
+                        <li class="options_list">6월</li>
+                        <li class="options_list">7월</li>
+                        <li class="options_list">8월</li>
+                        <li class="options_list">9월</li>
+                        <li class="options_list">10월</li>
+                        <li class="options_list">11월</li>
+                        <li class="options_list">12월</li>
                     </ul>
                 </div>
 
                 <div class="custom-select1">
+                    <input type="hidden" value="" name="card_year" id="card_year">
                     <div class="selected1">년도</div>
                     <ul class="options1">
-                        <li>2023년</li>
-                        <li>2024년</li>
-                        <li>2025년</li>
-                        <li>2026년</li>
-                        <li>2027년</li>
-                        <li>2028년</li>
-                        <li>2029년</li>
-                        <li>2030년</li>
-                        <li>2031년</li>
-                        <li>2032년</li>
-                        <li>2033년</li>
+                        <li class="options1_list">2023년</li>
+                        <li class="options1_list">2024년</li>
+                        <li class="options1_list">2025년</li>
+                        <li class="options1_list">2026년</li>
+                        <li class="options1_list">2027년</li>
+                        <li class="options1_list">2028년</li>
+                        <li class="options1_list">2029년</li>
+                        <li class="options1_list">2030년</li>
+                        <li class="options1_list">2031년</li>
+                        <li class="options1_list">2032년</li>
+                        <li class="options1_list">2033년</li>
                     </ul>
                 </div>
             </div>
@@ -786,6 +794,7 @@
             </div>
         </div>
     </section>
+</form>
 </div>
 
 <script>
@@ -909,4 +918,18 @@
             failUrl: "http://localhost:8080/book/payment"
         });
     }
+
+    $(".options2_list").click(function (){
+        var selected2 = $(this).text();
+        $("#company").val(selected2);
+    });
+    $(".options_list").click(function (){
+        var selected = $(this).text();
+        $("#card_month").val(selected);
+    });
+    $(".options1_list").click(function (){
+        var selected1 = $(this).text();
+        $("#card_year").val(selected1);
+    });
+
 </script>

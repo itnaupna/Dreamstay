@@ -75,6 +75,9 @@ public class BookController {
         dto.setCheckout((String)checkOut);
         dto.setSelectedHotel((String) selectedHotel);
 
+       /* System.out.println(checkIn);
+        System.out.println(checkOut);*/
+
         List<RoomDto> roomList = bookService.searchroom(dto);
         model.addAttribute("roomList", roomList);
 
@@ -96,10 +99,12 @@ public class BookController {
     public String payment(HttpServletRequest request, Model model,HttpSession session) {
 
         MemberDto dto = mypageService.selectInfoToId(String.valueOf(session.getAttribute("userid")));
-        String email = dto.getEmail();
-        String[] emailSplit = email.split("@");
+       /* String email = dto.getEmail();*/
+        String email = "1234@1234.com";/*작업용*/
+;       String[] emailSplit = email.split("@");
         String username = emailSplit[0];
         String domain = emailSplit[1];
+        /*String email = "1234@1234.1234"*/
         model.addAttribute("memberDto", dto);
         model.addAttribute("username", username);
         model.addAttribute("domain", domain);
@@ -148,4 +153,18 @@ public class BookController {
         model.addAttribute("booksearch", bookSearch);
         return "/main/book/nomemberbooksearch";
     }
+
+    @PostMapping("/insertbook")
+    public String insertBook() {
+
+
+
+
+
+
+
+        return "redirect:/";
+    }
 }
+
+
