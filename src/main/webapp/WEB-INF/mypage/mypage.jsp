@@ -112,7 +112,7 @@
     }
 
     .bookbtn:hover {
-        transform: rotateY(25deg);
+        transform: rotateY(10deg);
         box-shadow: -7px 7px 40px 0px rgba(0, 0, 0, 0.55);
         background: black;
         color: white;
@@ -213,6 +213,22 @@
         height: 200px;
         border-radius: 5px;
     }
+
+    .nomemberbook {
+        height: 1200px;
+    }
+
+    .r_a2 a {
+        color: #000;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom-color 0.3s ease-in-out;
+    }
+
+    .r_a2 a:hover {
+        border-bottom-color: #000;
+    }
+
 </style>
 
 <div class="res_main">
@@ -227,7 +243,7 @@
             <a href="#">객실/패키지</a>
         </div>
         <div class="r_a2">
-            <a href="#">다이닝</a>
+            <a href="/mypage/dining">다이닝</a>
         </div>
         <div class="r_a3">
             <a href="#">액티비티</a>
@@ -241,10 +257,12 @@
         <c:choose>
             <c:when test="${size == 0}">
                 <div class="nobook">
-                    <p>${familyname}${firstname}님의 예약내역이 없습니다.</p>
-                    <p class="nobooktitle">다양한 Dream Stay의 상품을 예약해보세요</p>
-                    <button type="button" onclick="location.href='/'" class="bookbtn">예약하기</button>
-                    <hr>
+                    <div class="nomemberbook">
+                        <p>${familyname}${firstname}님의 예약내역이 없습니다.</p>
+                        <p class="nobooktitle">다양한 Dream Stay의 상품을 예약해보세요</p>
+                        <button type="button" onclick="location.href='/'" class="bookbtn">예약하기</button>
+                        <hr>
+                    </div>
                 </div>
             </c:when>
             <c:otherwise>

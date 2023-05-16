@@ -6,7 +6,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <style>
     .footer2 {
-        /*display: none;*/
+        display: none;
         position:absolute;
         bottom: -900px;
         left: 0;
