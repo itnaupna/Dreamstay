@@ -218,14 +218,20 @@
         height: 1200px;
     }
 
-    .r_a2 a {
+    .r_a1 a,
+    .r_a2 a,
+    .r_a3 a,
+    .r_a4 a{
         color: #000;
         text-decoration: none;
         border-bottom: 2px solid transparent;
         transition: border-bottom-color 0.3s ease-in-out;
     }
 
-    .r_a2 a:hover {
+    .r_a1 a:hover,
+    .r_a2 a:hover,
+    .r_a3 a:hover,
+    .r_a4 a:hover{
         border-bottom-color: #000;
     }
 

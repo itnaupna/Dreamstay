@@ -23,6 +23,10 @@
         align-items: center;
     }
 
+    .dining_ul li{
+        cursor: pointer;
+    }
+
     .dining_ul li p {
         display: inline-block;
         padding: 20px 0;
