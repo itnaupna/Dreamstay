@@ -25,6 +25,10 @@
 		<put-attribute name="footer2" value="/WEB-INF/layout/mypagelayout/footer2.jsp"/>
 	</definition>
 
+	<!-- 아무 레이아웃 없는것 -->
+	<definition name="noLayout" template="/WEB-INF/layout/nolayout/nolayout.jsp">
+		<put-attribute name="main" value="/WEB-INF/layout/nolayout/main.jsp"/>
+	</definition>
 
 
 
@@ -52,5 +56,8 @@
 	</definition>
 	<definition name="/mypage/*/*" extends="myPageLayout">
 		<put-attribute name="mypagecontent" value="/WEB-INF/{1}/{2}.jsp"/>
+	</definition>
+	<definition name="/nolayout/*" extends="noLayout">
+		<put-attribute name="main" value="/WEB-INF/{1}.jsp"/>
 	</definition>
 </tiles-definitions>

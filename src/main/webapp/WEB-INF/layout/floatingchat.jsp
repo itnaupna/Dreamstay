@@ -197,7 +197,7 @@
         ws = Stomp.over(sock);
         let reconnect = 0;
         ws.connect({}, function(f){
-            ws.subscribe("/sub/chat/${loginuser.num}${loginuser.user_name}",function(msg){
+            ws.subscribe("/sub/chat/${loginuser.num}",function(msg){
                 let data = JSON.parse(msg.body);
                 let LR = data.recv==0?'L':'R';
                 $('#txtChatViewPort').append(
@@ -206,7 +206,7 @@
 
             });
             if(msg !== undefined)
-                ws.send("/pub/chat/message", {}, JSON.stringify({msg:msg,room:'${loginuser.num}${loginuser.user_name}'}));
+                ws.send("/pub/chat/message", {}, JSON.stringify({msg:msg,room:'${loginuser.num}'}));
         },function(err){
             console.log("err");
         });
@@ -216,7 +216,7 @@
         if(ws===undefined){
             NewConnect(msg);
         }else{
-            ws.send("/pub/chat/message", {}, JSON.stringify({msg:msg,room:'${loginuser.num}${loginuser.user_name}'}));
+            ws.send("/pub/chat/message", {}, JSON.stringify({msg:msg,room:'${loginuser.num}'}));
             $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
         }
     }
@@ -239,7 +239,7 @@
             error:(e)=>{
 
             }
-        })
+        });
     }
     $('#btnChat').on({
         'click':(e)=>{

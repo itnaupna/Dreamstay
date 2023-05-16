@@ -9,8 +9,8 @@
         <c:forEach items="${list}" var="item">
             <div class="chatlistWrapper">
                 <div class="chatBody">
-                    <div class="chatlistName" room="${item.memberName}">
-                        ${fn:replace(item.memberName,"/","")}
+                    <div class="chatlistName" room="${item.memberNum}">
+                        ${item.memberName}
                     </div>
                     <div class="chatlistContent">
                         ${item.memberLastchat}
@@ -35,22 +35,22 @@
             <span>애옹이</span>
         </div>
         <div id="txtChatViewPort">
-            <div class="chatMsgWrapper chatLeft">
-                <div class="chatMsgBody">
-                    채팅내용
-                </div>
-                <div class="chatMsgBottom">
-                    <span class="chatMsgTime">2023-05-10 23:23</span>
-                </div>
-            </div>
-            <div class="chatMsgWrapper chatRight">
-                <div class="chatMsgBody">
-                    안녕하세요, 채팅메세지 css뷰 테스트입니다.
-                </div>
-                <div class="chatMsgBottom">
-                    <span class="chatMsgTime">오전 00:00</span>
-                </div>
-            </div>
+<%--            <div class="chatMsgWrapper chatLeft">--%>
+<%--                <div class="chatMsgBody">--%>
+<%--                    채팅내용--%>
+<%--                </div>--%>
+<%--                <div class="chatMsgBottom">--%>
+<%--                    <span class="chatMsgTime">2023-05-10 23:23</span>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="chatMsgWrapper chatRight">--%>
+<%--                <div class="chatMsgBody">--%>
+<%--                    안녕하세요, 채팅메세지 css뷰 테스트입니다.--%>
+<%--                </div>--%>
+<%--                <div class="chatMsgBottom">--%>
+<%--                    <span class="chatMsgTime">오전 00:00</span>--%>
+<%--                </div>--%>
+<%--            </div>--%>
         </div>
         <div id="txtChatBottom" class="form-floating">
             <input type="text" id="txtChat" placeholder="_" class="form-control">
@@ -120,19 +120,23 @@
 
     }
     #chatViewTitle{
-        border-radius: 0.825rem;
-        border-left: 0.25rem solid rgba(106,184,193,0.33) !important;
-        box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.15) !important;
-        transition: box-shadow 0.1s ease;
-        padding:10px;
-        width:100%;
-        height:10px;
-        display:inline-flex;
-        margin-bottom:10px;
+        /* border-radius: 0.825rem; */
+        /* border-left: 0.25rem solid rgba(106,184,193,0.33) !important; */
+        /* box-shadow: 0 0.15rem 1rem 0 rgba(58,59,69,.15) !important; */
+        /* transition: box-shadow 0.1s ease; */
+        padding: 10px;
+        width: 100%;
+        /* height: 10px; */
+        display: inline-flex;
+        margin-bottom: 10px;
         align-items: center;
-        color:gray;
+        /* color: gray; */
         font-weight: bold;
         justify-content: space-between;
+        background: #ecd2a9;
+        top: 0;
+        position: absolute;
+        left: 0;
     }
     .chatMsgBody{
         color:#000000b8;
@@ -190,16 +194,22 @@
         margin-bottom: 0.25rem!important;
     }
     #txtChatViewPort{
-        order:2;
-        flex-grow: 98;
-        padding: 10px 0px;
-        /*background:gray;*/
+        padding: 10px 10px;
+        /*background: gray;*/
         overflow-x: hidden;
         overflow-y: auto;
+        height: calc(100% - 140px);
+        top: 50px;
+        position: absolute;
+        left: 0px;
+        width: 100%;
     }
     #txtChatBottom{
         order:3;
         flex-grow:1;
+        position: absolute;
+        bottom:15px;
+        width:calc(100% - 30px);
         /*display:flex;*/
         /*justify-content: space-between;*/
     }
@@ -235,6 +245,7 @@
     });
     let ws;
     function connect(room){
+
         if(ws!==undefined){
             //다른 채팅방에 접속중이였을경우 연결을 끊고 새로 연결한다.
             ws.disconnect();
@@ -252,9 +263,30 @@
                 $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
 
             });
+            GetRecent(room);
             //if(msg !== undefined)ws.send("/pub/chat/message", {}, msg);
         },function(err){
             console.log("err");
+        });
+    }
+    function GetRecent(room){
+        $.ajax({
+            url:'/chat/recent/admin',
+            type:'post',
+            data:{room:room},
+            dataType:'json',
+            success:(e)=>{
+                $('#txtChatViewPort').empty();
+                $.each(e,(i,item)=>{
+                    $('#txtChatViewPort').append(
+                        CreateChat(item.msg,new Date(item.date).toLocaleString(),`\${item.recv ? 'L' : 'R'}`)
+                    );
+                });
+                $('#txtChatViewPort').scrollTop($('#txtChatViewPort')[0].scrollHeight);
+            },
+            error:(e)=>{
+
+            }
         });
     }
     let r="";

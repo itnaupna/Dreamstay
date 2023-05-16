@@ -17,6 +17,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,15 +55,32 @@ public class ChatController {
     @PostMapping("/recent")
     @ResponseBody
     public List<ChatDto> getRecentChatList(HttpSession session){
-        MemberDto mdto = (MemberDto) session.getAttribute("loginuser");
-        if(mdto==null)
-            return null;
-        else{
-            List result = cs.getRecentChat(mdto.getNum(),mdto.getUser_name(),10);
-            Collections.reverse(result);
-            return result;
-        }
+
+            MemberDto mdto = (MemberDto) session.getAttribute("loginuser");
+            if (mdto == null)
+                return null;
+            else {
+                List result = cs.getRecentChat(mdto.getNum(), 10);
+                Collections.reverse(result);
+                return result;
+            }
+
     }
+@PostMapping("/recent/admin")
+@ResponseBody
+public List<ChatDto> getRecentChatAdmin(HttpSession session, int room){
+    MemberDto mdto = (MemberDto) session.getAttribute("loginuser");
+    if (mdto == null)
+        return null;
+    else {
+        if(mdto.getUser_level()<10) return null;
+        System.out.println(room);
+        List result = cs.getRecentChat(room, 100);
+        Collections.reverse(result);
+        return result;
+    }
+}
+
 
     @PostMapping("/start")
     @ResponseBody
@@ -71,7 +89,7 @@ public class ChatController {
         if(mdto==null){
             return false;
         }else{
-            crr.createChatRoom(mdto.getNum(),mdto.getUser_name());
+            crr.createChatRoom(mdto.getNum());
             session.setAttribute("useChat",true);
             return true;
         }
@@ -82,10 +100,8 @@ public class ChatController {
     public void message(CM msg, SimpMessageHeaderAccessor accessor){
         MemberDto mdto = (MemberDto) accessor.getSessionAttributes().get("loginuser");
         if(mdto != null){
-            log.info(msg.getMsg());
-            log.info(msg.getRoom());
             ChatDto cdto = new ChatDto();
-            cdto.setMembernum(mdto.getNum());
+            cdto.setMembernum(msg.getRoom());
             cdto.setMsg(msg.getMsg());
             if(mdto.getUser_level() < 10){
                 cdto.setRecv(1);
@@ -93,7 +109,7 @@ public class ChatController {
                 cdto.setAdminview(0);
             }else{
                 cdto.setRecv(0);
-                cdto.setMemberview(1);
+                cdto.setMemberview(0);
                 cdto.setAdminview(1);
             }
             smso.convertAndSend("/sub/chat/" + msg.getRoom(),cdto);
@@ -108,7 +124,7 @@ public class ChatController {
     @ToString
     static class CM{
         private String msg;
-        private String room;
+        private int room;
     }
 
 

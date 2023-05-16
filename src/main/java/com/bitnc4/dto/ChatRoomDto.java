@@ -3,6 +3,7 @@ package com.bitnc4.dto;
 
 
 import com.bitnc4.service.ChatService;
+import com.bitnc4.service.MemberService;
 import lombok.Data;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -17,18 +18,18 @@ import java.util.UUID;
 @ToString
 public class ChatRoomDto {
 
-    //방 ID
-    private String memberName; //member.user_name
-    private String memberLastchat; //member.user_name
 
+    //방 ID
+    private int memberNum; //member.user_name
+    private String memberLastchat; //member.user_name
+    private String memberName;
     private Timestamp lastTimeStamp;
 
-    public static ChatRoomDto create(String memberName){
+    public static ChatRoomDto create(int memberNum){
 
         ChatRoomDto cRoom = new ChatRoomDto();
-        cRoom.memberName = memberName;
+        cRoom.memberNum = memberNum;
         cRoom.memberLastchat = "";
         return cRoom;
     }
-
 }

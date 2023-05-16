@@ -36,4 +36,13 @@
     <select id="getHotelCount" resultType="int">
         select count(*) from hotel
     </select>
+    <update id="updateRoomDetail" parameterType="RoomDto">
+        <if test="roomphoto == null">
+            update room set roomdetail=#{roomdetail} where num=#{num} and hotelnum=#{hotelnum}
+        </if>
+        <if test="roomphoto != null">
+            update room set roomdetail=#{roomdetail},roomphoto=#{roomphoto} where num=#{num} and hotelnum=#{hotelnum}
+        </if>
+
+    </update>
 </mapper>

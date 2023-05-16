@@ -2,7 +2,9 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-${mycustom.value1}
+<script type="text/javascript" src="/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+
+<%--<script type="text/javascript" src="/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>--%>
 <div id="partHotel">
   <div id="toolbarHotel">
     <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_add.png" onclick="if(confirm('신규 호텔을 등록하시겠습니까?'))ClickAddHotelBtn();">
@@ -11,14 +13,14 @@ ${mycustom.value1}
   <c:forEach items="${hDto}" var="dto">
     <div class="itemHotel" onclick="loadHotel(${dto.num})">
       <div class="thumbsHotel">
-        img
+        <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${dto.photo}?type=f&w=80&h=80">
       </div>
       <div class="summaryHotel">
         <div class="minititleHotel">
-            호텔명: ${dto.name}
+          호텔명: ${dto.name}
         </div>
         <div class="miniaddressHotel">
-            주소: ${dto.addr}
+          주소: ${dto.addr}
         </div>
       </div>
     </div>
@@ -147,22 +149,169 @@ ${mycustom.value1}
           </thead>
           <tbody>
 
-          <tr>
-            <td>TypeEong</td>
-            <td>1,500,000</td>
-            <td>애옹이들이 애옹하는 객실입니다. 정말 편안하고 즐거운 객실이죠.</td>
-            <td>상세정보 삭제</td>
-          </tr>
+          <%--          <tr>--%>
+          <%--            <td>TypeEong</td>--%>
+          <%--            <td>1,500,000</td>--%>
+          <%--            <td>애옹이들이 애옹하는 객실입니다. 정말 편안하고 즐거운 객실이죠.</td>--%>
+          <%--            <td>상세정보 삭제</td>--%>
+          <%--          </tr>--%>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
+<div id="mdlBackground" style="display:none;">
+  <div id="mdlContent">
+    <form action="writeroom" method="post">
+      <div id="mdlTitle">
+        아기다리고기다리던 888번 객실 상세정보
+      </div>
+      <div id="mdlBtnToolbar">
+        <span onclick="submitContents();">
+          💾
+        </span>
+        &nbsp;&nbsp;
+        <span onclick="dismissMdl();">
+          ✖
+        </span>
+      </div>
+      <textarea name="roomdetail" id="mdltextarea" required="required" style="width: 100%; height: 700px; visibility: hidden;"></textarea>
+      <input type="hidden" id="frmNum" name="num">
+      <input type="hidden" id="frmHotelNum" name="hotelnum">
+      <input type="hidden" id="frmRoomPhoto" name="roomphoto">
+    </form>
+    <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
+    <script type="text/javascript">
+      let oEditors;
+      function showMdl(num,hotelnum,roomdetail,roomphoto){
+
+        $('#frmNum').val(num);
+        $('#frmHotelNum').val(hotelnum);
+        $('#frmRoomPhoto').val(roomphoto);
+        initEditor(roomdetail,roomphoto);
+        $('#mdlTitle').text(num+"번 객실 상세정보");
+        $('#mdlBackground').fadeIn(0.3);
+
+      }
+      function dismissMdl(istrue){
+        if(istrue || confirm('저장하지 않은 내용은 모두 사라집니다. 창을 닫으시겠습니까?')){
+          $('#mdlBackground').fadeOut(0.3);
+          $('iframe').remove();
+          $('#mdltextarea').val('');
+        }
+      }
+      function initEditor(roomdetail,roomphoto){
+        $('#mdltextarea').val(roomdetail);
+        oEditors = [];
+        nhn.husky.EZCreator.createInIFrame({
+
+          oAppRef: oEditors,
+
+          elPlaceHolder: "mdltextarea",
+
+          sSkinURI: "<%=request.getContextPath()%>/se2/SmartEditor2Skin.html",
+          fOnAppLoad : function(){
+            //로드가 완료되면?
+            //roomphoto가 null이 아니면 값을 넣어준다.
+            console.log("로딩완료?");
+            console.log(roomphoto);
+
+            if(roomphoto!==undefined)
+              $.each(roomphoto.split(","),(i,e)=>{
+                $('iframe').contents().find('#lst_img').append(
+                        $('<option>').text(e)
+                );
+              });
+          },
+          fCreator: "createSEditor2"
+
+        });
+      }
+      //‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
+      function submitContents() {
+        oEditors.getById["mdltextarea"].exec("UPDATE_CONTENTS_FIELD", [ ]);
+        $('#frmRoomPhoto').val($('iframe').contents().find('#lst_img option').map(function(){return $(this).text();}).get().join(','));
+        let data = $('#mdlContent form').serialize();
+        try {
+          $.ajax({
+            url:'writeroom',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:(e)=>{
+              if(e){
+                alert('객실 상세정보를 저장하였습니다.');
+                dismissMdl(true);
+              } else{
+                alert('객실 상세정보 작성을 실패하였습니다.');
+              }
+            }
+          });
+          //$('#mdlContent form')[0].submit();
+          // console.log(save);
+        } catch(e) {
+          console.log("err",e);
+        }
+
+      }
+    </script>
+  </div>
+</div>
+
 <style>
+  #mdlTitle{
+    position:absolute;
+    background-color:#ecd2a9;
+    font-size:1.5rem;
+    top:0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    padding-left:25px;
+    display: flex;
+    align-items: center;
+  }
+
+  #mdltextarea{
+    height:100%;
+  }
+  #mdlBtnToolbar{
+    position:absolute;
+    margin:5px;
+    top:5px;
+    right:5px;
+  }
+  #mdlBtnToolbar span{
+    cursor:pointer;
+  }
+
+  #mdlBackground{
+    position:absolute;
+    background-color:rgba(0,0,0,0.5);
+    left:0;
+    top:0;
+    width:100vw;
+    height:100vh;
+    z-index:100;
+    display:flex;
+    /*visibility: hidden;*/
+    justify-content: center;
+    align-items: center;
+  }
+  #mdlContent{
+    position:relative;
+    background-color:white;
+    border: 2px solid;
+    border-radius: 0.875rem;
+    width:50vw;
+    height:90vh;
+    padding:50px 25px 0px 25px;
+    overflow-y: auto;
+  }
   #lstRoomItems > table > tbody > tr:hover{
     background-color: rgba(243, 219, 190, 0.74);
-    cursor:pointer;
+    /*cursor:pointer;*/
   }
   #lstRoomItems>table td{
     text-overflow: ellipsis;
@@ -214,6 +363,11 @@ ${mycustom.value1}
     border-radius: 0.825rem;
     margin-right:10px;
   }
+  .thumbsHotel>img{
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+  }
   .adminmain{
     display:inline-flex;
     justify-content: left;
@@ -248,17 +402,17 @@ ${mycustom.value1}
   #partHotel{
     margin-right:10px;
   }
-  table input, table textarea{
+  #partRoom table input,#partRoom table textarea{
     border:none !important;
     outline:none !important;
     padding:0px;
     resize:none;
   }
-  table input:focus:read-only, table textarea:focus:read-only{
+  #partRoom table input:focus:read-only, #partRoom table textarea:focus:read-only{
     box-shadow: none !important;
 
   }
-  table input:focus:not(:read-only), table textarea:focus:not(:read-only){
+  #partRoom table input:focus:not(:read-only),#partRoom table textarea:focus:not(:read-only){
     box-shadow: 0 0 5px rgb(152,129,34) !important;
 
   }
@@ -288,29 +442,30 @@ ${mycustom.value1}
     font-weight: bolder;
   }
   #partRoom marquee{
-    font-size:.7rem;
+    background-color:transparent !important;
+    /*font-size:.7rem;*/
   }
   .summaryHotel, #partRoom{
-    font-size:.7rem;
-    color:gray;
-    font-weight: 700 !important;
+    /*font-size:.7rem;*/
+    /*color:gray;*/
+    /*font-weight: 700 !important;*/
   }
 </style>
 <script>
   $('#lstRoomItems tbody')
           .on('mouseenter','tr',(e)=>{
-    let dest = $($($(e.target).parent()).children()[2]);
-    let tmp = dest.text();
-    let c = dest.clone().css({display:'inline',width:'auto',visibility:'hidden',position:'absolute'}).appendTo('body');
-    if(c.width() > dest.width())
-      dest.html('<marquee behavior="alternate" scrollamount="5" class="form-control" style="border:none;margin:0px;padding:0px;">'+tmp+'</marquee>');
-    c.remove();
-  })
+            let dest = $($($(e.target).parent()).children()[2]);
+            let tmp = dest.text();
+            let c = dest.clone().css({display:'inline',width:'auto',visibility:'hidden',position:'absolute'}).appendTo('body');
+            if(c.width() > dest.width())
+              dest.html('<marquee behavior="alternate" scrollamount="5" class="form-control" style="border:none;margin:0px;padding:0px;">'+tmp+'</marquee>');
+            c.remove();
+          })
           .on('mouseleave','tr',(e)=>{
-    let dest = $($($(e.target).parent()).children()[2]);
-    let tmp = dest.text();
-    dest.html(tmp);
-  });
+            let dest = $($($(e.target).parent()).children()[2]);
+            let tmp = dest.text();
+            dest.html(tmp);
+          });
   $('#roomtype').on({
     'dblclick':(e)=>{
       $('#roomtypedatalist').empty().append($('<option/>').text('기존 객실 타입 검색 중...'));
@@ -331,7 +486,7 @@ ${mycustom.value1}
       })
     }
   });
-  $('table input,table textarea').on({
+  $('#partRoom table input,#partRoom table textarea').on({
     'dblclick':(e)=>{
       $(e.target).removeAttr('readonly').css({
         'resize':'vertical',
@@ -455,7 +610,12 @@ ${mycustom.value1}
                             $('<td>').text(e.roommemo == null ? '내용없음' : e.roommemo),
                             $('<td>').append(
                                     $('<div>').append(
-                                            $('<span>').text('상세정보').addClass('spanbtn'),
+                                            $('<span>').text('상세정보').addClass('spanbtn')
+                                                    .on({
+                                                      'click':(f)=>{
+                                                        showMdl(e.num,e.hotelnum,e.roomdetail,e.roomphoto);
+                                                      }
+                                                    }),
                                             $('<span>').text('삭제').addClass('spanbtn')
                                                     .on({
                                                       'click':(f)=>{
@@ -464,7 +624,7 @@ ${mycustom.value1}
                                                     })
                                     ).css({
                                       'display':'flex',
-                                      'justify-content':'space-between'
+                                      'justify-content':'space-around'
                                     })
                             )
                     )

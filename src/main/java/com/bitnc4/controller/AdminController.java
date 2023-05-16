@@ -37,6 +37,7 @@ public class AdminController {
     @Autowired
     ChatRoomRepository chatRoomRepository;
 
+
     @GetMapping("/chat")
     public String chatList(Model m){
         m.addAttribute("list",chatRoomRepository.getAll());
@@ -90,6 +91,40 @@ public class AdminController {
             data.setPhoto(ncp.uploadFile(bucketName, "hotel", file));
         }
         return data.getNum()==0 ? adminHnRService.insertHotel(data) : adminHnRService.updateHotelDetail(data);
+    }
+
+    @PostMapping("/uploadp")
+    @ResponseBody
+    public List<String> uploadp(List<MultipartFile> file){
+        List<String> result = new ArrayList<>();
+        if(!file.get(0).getOriginalFilename().equals("")){
+            file.forEach(f-> result.add(ncp.uploadFile(bucketName,"room",f)));
+            return result;
+        }
+
+        //System.out.println(file.getOriginalFilename());
+        //return file.getOriginalFilename();
+        return null;
+    }
+    @PostMapping("/deletep")
+    @ResponseBody
+    public boolean deletep(String name){
+        log.info("name : {}",name);
+        return ncp.deleteFile(bucketName,"room",name);
+    }
+
+    @PostMapping("/writeroom")
+    @ResponseBody
+    public boolean WriteRoom(RoomDto data){
+        //log.info(data.toString());
+        try {
+            adminHnRService.updateRoomDetail(data);
+            return true;
+        }catch (Exception e) {
+            log.info(data.toString());
+            log.info(e.getMessage());
+            return false;
+        }
     }
 
     @GetMapping("/hotel/getroomtype/{hotelnum}")

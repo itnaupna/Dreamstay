@@ -60,7 +60,7 @@
         select * from member where id = concat(#{social}, #{id}) and issocial = #{issocial}
     </select>
 
-    <select id="getMemberByNum" parameterType="int" resultType="MemberDto">
+    <select id="getMemberByNumber" parameterType="int" resultType="MemberDto">
         select * from member where num=#{num}
     </select>
 </mapper>
