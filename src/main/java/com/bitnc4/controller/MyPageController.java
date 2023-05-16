@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/mypage")
@@ -30,9 +31,10 @@ public class MyPageController {
     {
         String id = ((MemberDto)session.getAttribute("loginuser")).getId();
         model.addAttribute("memberDto",mypageService.selectInfoToId(id));
-        List<HotelDto> list = adminHnRService.getHotels();
-        model.addAttribute("list",list);
-
+        MemberDto dto = (MemberDto)session.getAttribute("loginuser");
+        Map<String, String> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
+        model.addAttribute("data",map);
+        System.out.println(map);
         return "/mypage/mypage";
     }
 
@@ -104,4 +106,23 @@ public class MyPageController {
         model.addAttribute("memberDto",mypageService.selectInfoToId(id));
         return "/mypage/membership";
     }
+
+    @PostMapping("/selectbook")
+    public String selectbook(HttpSession session,Model model)
+    {
+        MemberDto dto = (MemberDto)session.getAttribute("loginuser");
+        Map<String, String> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
+        for(String key : map.keySet()) {
+            System.out.println("key: " + key + ", value: " + String.valueOf(map.get(key)));
+        }
+        if(map == null){
+            model.addAttribute("msg", "조회된 예약이 없습니다");
+            return "/mypage";
+        } else {
+        }
+        model.addAttribute("data",map);
+
+        return "/mypage/searchbook";
+    }
+
 }

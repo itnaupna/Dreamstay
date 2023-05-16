@@ -18,5 +18,7 @@ public interface MypageMapper {
 
     public void updateUserInfo(MemberDto dto);
 
+    public Map<String, String> getmemberBookData(Map<String, String> data);
+
 
 }

@@ -63,7 +63,7 @@
 
     /* 메뉴바 아래 전체 */
     .res_main .res_sel {
-        margin-top: 50px;
+        margin-top: 30px;
         /*border: 1px solid green;*/
         width: 1000px;
         height: 1000px;
@@ -90,58 +90,9 @@
         width: 950px;
     }
 
-    /* 아코디언 형식 설정 */
-    .aco_list {
-        list-style: none;
-        padding: 0;
-    }
-
-    /* ~ */
-    .aco_list li {
-        border-bottom: 1px solid #ddd;
-    }
-
-    /* ~ */
-    .aco_list li a {
-        display: block;
-        height: 50px;
-        padding-left: 20px;
-        line-height: 50px;
-        text-decoration: none;
-        transition: .2s;
-        color: black;
-    }
-
-    /* ~ */
-    .aco_list li a:hover {
-        background-color: #222;
-        color: #fff;
-    }
-
-    /* ~ */
-    .aco_list li .text_box {
-        display: none;
-        padding: 10px 40px;
-        color: #555;
-        cursor: pointer;
-    }
-
     /* 서브 문구 */
     .res_main .r_sub span {
         color: #ccc;
-    }
-
-    #hotel_name, #checkin {
-        flex: 1;
-        border: none;
-        border-bottom: solid #aaaaaa 1px;
-        background: none;
-        padding-bottom: 10px;
-        padding-left: 10px;
-        position: relative;
-        font-size: 14px;
-        width: 400px;
-        margin-top: 30px;
     }
 
     .res_main .res_sel span {
@@ -149,43 +100,9 @@
         margin-top: 20px;
     }
 
-    .res_main .datepicker {
-        /*margin-top: 10px;*/
-        margin-left: 50%;
-        position: absolute;
-        visibility: hidden;
+    #login_id:focus{
+        outline: none;
     }
-
-    .res_main .datepicker .seldate {
-        width: 300px;
-    }
-
-    .res_main .date_sub {
-        /*border: 1px solid orangered;*/
-        margin-top: 20px;
-        font-size: 12px;
-    }
-
-    .res_main .res_sel .res_select #checkin {
-        margin-left: 20px;
-    }
-
-    .res_main .res_sel .res_select {
-        justify-content: space-between;
-        display: flex;
-    }
-
-    #tb_1:focus {
-        background-color: white;
-    }
-
-    .chtitle {
-        /*border: 1px solid aqua;*/
-        margin-top: 60px;
-        font-size: 13px;
-        color: #ccc;
-    }
-
 </style>
 
 <div class="res_main">
@@ -211,35 +128,62 @@
     </div>
 
     <div class="res_sel">
-        <%-- 호텔 아코디언 --%>
-        <span>예약한 호텔을 선택해주세요 *</span>
-        <ul class="aco_list">
-            <li>
-                <a href="#">GRAND JOSUN</a>
-                <c:forEach var="dto" items="${list}">
-                    <p class="text_box" id="tb_1" data-value="${dto.num}">${dto.name}</p>
-                </c:forEach>
-            </li>
-        </ul>
+            <c:choose>
+                <c:when test="${data == null}">
+                    조회된 예약 x
+                </c:when>
+                <c:otherwise>
+                    <div class="book_info">
+                        <span>${data.user_name}님 예약 정보</span>
+                        <table>
+                            <tr>
+                                <td colspan="3"><span>호텔 정보</span></td>
+                            </tr>
+                            <tr>
+                                <td>호텔명</td>
+                                <td>주소</td>
+                                <td>전화번호</td>
+                            </tr>
+                            <tr>
+                                <td>
+                <span><img
+                        src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${data.photo}?type=f&w=160&h=160&faceopt=true"></span>
+                                    <span>${data.name}</span>
+                                </td>
+                                <td>
+                                    <span>${data.addr}</span>
+                                </td>
+                                <td>
+                                    <span>${data.phone}</span>
+                                </td>
+                            </tr>
+                        </table>
 
-        <div class="datepicker">
-            <form>
-                <input class="form-control seldate flatpickr flatpickr-input" id="seldate" type="datetime-local"
-                       placeholder="select check in">
-            </form>
-        </div>
+                        <table>
+                            <tr>
+                                <td colspan="6"><span>객실 정보</span></td>
+                            </tr>
+                            <tr>
+                                <td>객실 타입</td>
+                                <td>체크 인</td>
+                                <td>체크 아웃</td>
+                                <td>인원 수</td>
+                                <td>요청 사항</td>
+                                <td>이용 요금</td>
+                            </tr>
+                            <tr>
+                                <td>${data.roomtype}</td>
+                                <td>${data.checkin}</td>
+                                <td>${data.checkout}</td>
+                                <td>성인: ${data.adult}, 어린이: ${data.kids} </td>
+                                <td>${data.memo}</td>
+                                <td>${data.total_price}</td>
+                            </tr>
 
-        <div class="chtitle">
-            <span>호텔과 날짜를 확인해주세요 *</span>
-        </div>
-
-        <%-- 호텔 값 가져오기 --%>
-        <div class="res_select">
-            <input type="text" id="hotel_name" name="hotel_name" placeholder="호텔을 선택해주세요" readonly="readonly">
-        </div>
-        <div class="res_btn">
-            <button type="button" class="r_btn">기간 조회</button>
-        </div>
+                        </table>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
         <div class="res_bottom">
             <hr>
@@ -267,60 +211,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    // 호텔 리스트 아코디언
-    $(function () {
-        const acoAco = $(".aco_list li a");
-
-        acoAco.on('click', function () {
-            const item = $(this);
-
-            acoAco.parent().find('.text_box').slideUp();
-
-            if (item.hasClass('active')) {
-                item.find('.text_box').slideUp();
-                item.removeClass('active');
-            } else {
-                item.parent().find('.text_box').slideDown();
-                acoAco.removeClass('active');
-                item.addClass('active');
-            }
-
-            item.parent().find('.text_box').slideDown();
-        });
-    });
-
-    // 호텔 벨류값 가져오기 //
-    function saveValue(element) {
-        document.getElementById("selected_value").value = element.innerHTML.trim();
-    }
-
-    function saveHotelName(hotelName) {
-        document.getElementById("hotel_name").value = hotelName;
-    }
-
-    document.querySelectorAll(".text_box").forEach(function (textBox) {
-        textBox.addEventListener("click", function () {
-            saveHotelName(this.textContent.trim());
-        });
-    });
-
-    // // 캘린더 벨류 값
-    // const seldate = document.querySelector('#seldate');
-    // const checkin = document.querySelector('#checkin');
-    //
-    // seldate.addEventListener('input', () => {
-    //     checkin.value = seldate.value;
-    // });
-</script>
-
-<%-- 달력 테스트 --%>
-<%--<script>--%>
-<%--    const config = {--%>
-<%--        enableTime: false,--%>
-<%--        dateFormat: "Y-m-d",--%>
-<%--    };--%>
-
-<%--    flatpickr("input[type=datetime-local]", config);--%>
-<%--</script>--%>

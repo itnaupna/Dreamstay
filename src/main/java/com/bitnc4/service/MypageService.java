@@ -46,6 +46,11 @@ public class MypageService implements MypageServiceInter{
         mypageMapper.updateUserInfo(dto);
     }
 
-
+    @Override
+    public Map<String, String> getmemberBookData(String searchnum) {
+        Map<String, String> data = new HashMap<>();
+        data.put("num", searchnum);
+        return mypageMapper.getmemberBookData(data);
+    }
 
 }

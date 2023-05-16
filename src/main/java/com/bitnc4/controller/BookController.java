@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class BookController {
@@ -96,10 +97,10 @@ public class BookController {
     public String payment(HttpServletRequest request, Model model,HttpSession session) {
 
         MemberDto dto = mypageService.selectInfoToId(String.valueOf(session.getAttribute("userid")));
-        String email = dto.getEmail();
+        String email = Objects.requireNonNullElse(dto.getEmail(), "");
         String[] emailSplit = email.split("@");
-        String username = emailSplit[0];
-        String domain = emailSplit[1];
+        String username = emailSplit.length > 0 ? emailSplit[0] : "";
+        String domain = emailSplit.length > 1 ? emailSplit[1] : "";
         model.addAttribute("memberDto", dto);
         model.addAttribute("username", username);
         model.addAttribute("domain", domain);
