@@ -29,20 +29,25 @@ public class MyPageController {
     @GetMapping("")
     public String mypage(HttpSession session, Model model)
     {
-        String id = ((MemberDto)session.getAttribute("loginuser")).getId();
-        model.addAttribute("memberDto",mypageService.selectInfoToId(id));
         MemberDto dto = (MemberDto)session.getAttribute("loginuser");
-        Map<String, String> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
+        List<Map<String, String>> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
         model.addAttribute("data",map);
-        System.out.println(map);
+        model.addAttribute("size", map.size());
+        System.out.println(map == null);
+        System.out.println(map.size());
+        String[] fnFn = dto.getUser_name().split("/");
+        model.addAttribute("familyname", fnFn[0]);
+        model.addAttribute("firstname", fnFn[1]);
+        session.setAttribute("loginuser", dto);
         return "/mypage/mypage";
     }
 
     @GetMapping("/updateinfo")
     public String updateinfo(HttpSession session,Model model)
     {
-        MemberDto dto = (MemberDto)(session.getAttribute("loginuser"));
-
+        String id = ((MemberDto)(session.getAttribute("loginuser"))).getId();
+        MemberDto dto = mypageService.selectInfoToId(id);
+        System.out.println(dto.getUser_name());
         String[] fnFn = dto.getUser_name().split("/");
 
         model.addAttribute("memberDto", dto);
@@ -57,13 +62,22 @@ public class MyPageController {
     public void changeinfo(HttpSession session,Model model,MemberDto dto)
     {
         dto.setId(((MemberDto)session.getAttribute("loginuser")).getId());
+
         mypageService.updateUserInfo(dto);
+
+        session.setAttribute("loginuser", dto);
+
+
     }
 
     @GetMapping("/updatepass")
     public String updatepass(HttpSession session,Model model)
     {
         String id = ((MemberDto)session.getAttribute("loginuser")).getId();
+        MemberDto dto = (MemberDto)session.getAttribute("loginuser");
+        String[] fnFn = dto.getUser_name().split("/");
+        model.addAttribute("familyname", fnFn[0]);
+        model.addAttribute("firstname", fnFn[1]);
         model.addAttribute("memberDto",mypageService.selectInfoToId(id));
         return "/mypage/updatepass";
     }
@@ -79,6 +93,9 @@ public class MyPageController {
     @GetMapping("/deleteform")
     public String deleteform(HttpSession session, Model model) {
         MemberDto dto = (MemberDto)session.getAttribute("loginuser");
+        String[] fnFn = dto.getUser_name().split("/");
+        model.addAttribute("familyname", fnFn[0]);
+        model.addAttribute("firstname", fnFn[1]);
         model.addAttribute("memberDto", dto);
     return "/mypage/deleteform";
     }
@@ -104,25 +121,18 @@ public class MyPageController {
     {
         String id = ((MemberDto)session.getAttribute("loginuser")).getId();
         model.addAttribute("memberDto",mypageService.selectInfoToId(id));
+        MemberDto dto = (MemberDto)session.getAttribute("loginuser");
+        String[] fnFn = dto.getUser_name().split("/");
+        model.addAttribute("familyname", fnFn[0]);
+        model.addAttribute("firstname", fnFn[1]);
+        model.addAttribute("memberDto",mypageService.selectInfoToId(id));
         return "/mypage/membership";
     }
 
-    @PostMapping("/selectbook")
-    public String selectbook(HttpSession session,Model model)
+    @GetMapping("/test")
+    public String test()
     {
-        MemberDto dto = (MemberDto)session.getAttribute("loginuser");
-        Map<String, String> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
-        for(String key : map.keySet()) {
-            System.out.println("key: " + key + ", value: " + String.valueOf(map.get(key)));
-        }
-        if(map == null){
-            model.addAttribute("msg", "조회된 예약이 없습니다");
-            return "/mypage";
-        } else {
-        }
-        model.addAttribute("data",map);
-
-        return "/mypage/searchbook";
+        return "/mypage/test";
     }
 
 }

@@ -17,7 +17,7 @@
         /*border: 1px solid aqua;*/
         width: 1000px;
         height: 1200px;
-        top: 32%;
+        top: 28%;
         position: absolute;
         padding: 30px;
         margin-left: 500px;

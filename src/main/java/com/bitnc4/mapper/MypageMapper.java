@@ -4,6 +4,7 @@ import com.bitnc4.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -18,7 +19,7 @@ public interface MypageMapper {
 
     public void updateUserInfo(MemberDto dto);
 
-    public Map<String, String> getmemberBookData(Map<String, String> data);
+    public List<Map<String, String>> getmemberBookData(Map<String, String> data);
 
 
 }

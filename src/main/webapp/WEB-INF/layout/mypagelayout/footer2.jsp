@@ -21,7 +21,6 @@
 
     .f_footer .f_top2 .f_banner .f_info2{
         border: 1px solid yellow;
-        float: left;
     }
 </style>
 
@@ -44,7 +43,7 @@
     <div class="f_top2">
         <div class="f_logo">
             <a href="#">
-                <img src="../photo/josunresort.png">
+                <img src="../photo/josunresort.png" class="mainphoto">
             </a>
         </div>
 

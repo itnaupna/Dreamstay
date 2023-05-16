@@ -62,10 +62,15 @@
     top: 10px;
     left: 0;
     padding-left: 40px;
+    padding-top: 20px;
 }
 
 .m_main .m_myinfo p {
     font-size: 40px;
+}
+
+.m_userid{
+    width: 260px;
 }
 
 .m_main .m_info {
