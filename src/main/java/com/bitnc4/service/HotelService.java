@@ -5,9 +5,7 @@ import com.bitnc4.mapper.HotelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class HotelService implements HotelServiceInter{
@@ -27,18 +25,24 @@ public class HotelService implements HotelServiceInter{
     }
 
     @Override
-    public List<String> dividePhoto(List<Map<String, String>> list) {
-        List<String> roomphoto = new ArrayList<>();
+    public String[][] dividePhoto(List<Map<String, String>> list) {
 
+
+        int cnt = 0;
         for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).get("roomphoto") != null) {
-                String[] arr = list.get(i).get("roomphoto").split(",");
-                for (int j = 0; j < arr.length; j++) {
-                    roomphoto.add(arr[j]);
-                }
+            if(list.get(i).get("roomphoto") != null && !list.get(i).get("roomphoto").equals("")) {
+                cnt++;
             }
+        }
 
+        String[][] roomphoto = new String[cnt][];
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i).get("roomphoto") != null && !list.get(i).get("roomphoto").equals("")) {
+                roomphoto[i] = list.get(i).get("roomphoto").split(",");
+            }
         }
         return roomphoto;
     }
+
+
 }

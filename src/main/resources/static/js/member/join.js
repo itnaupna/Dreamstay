@@ -225,11 +225,22 @@ $("#signupBtn").click(function(){
 
 });
 
-
+//특수문자, 괄호, 공백 모두 제거 - 점은 제거 안함
+let nameReg = /[ \{\}\[\]\/?,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
 $("#family_name, #user_name").on("input", function() {
-    if($("family_name").val() != "" && $("#user_name").val() != "") {
+    let name = $(this).val();
+
+    if(name.match(nameReg) != null) {
+        name = name.replaceAll(nameReg, "");
+        $(this).val(name);
+    }
+
+    if($("#family_name").val() != "" && $("#user_name").val() != "") {
         $("#join_null_check_name").html("");
         joinConfirm.c_name = true;
+        console.log(joinConfirm.c_name);
+    } else {
+        joinConfirm.c_name = false;
         console.log(joinConfirm.c_name);
     }
 });

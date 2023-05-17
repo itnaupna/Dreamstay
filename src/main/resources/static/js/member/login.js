@@ -97,8 +97,17 @@ $("#login_nomember_select").click(function() {
 
 // 카카오 로그인
 $("#kakao_login").click(function() {
-
-    Kakao.init("09e7bd588320e6991f62d894f6a723a6");
+    let code;
+    $.ajax({
+        url: "/signup/kcode",
+        type: "post",
+        dataType: "text",
+        success: function(data)  {
+            console.log(typeof (data));
+            code = data;
+        }
+    });
+    Kakao.init(code);
     // location.href = 'https://kauth.kakao.com/oauth/authorize?client_id=f3d379546c1b36b64b38a67e6b3b2e27&redirect_uri=http://localhost:8080/signup/login&response_type=code';
 
     // var kakaoCode = window.location.href;

@@ -2,185 +2,200 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
 <style>
     body {
+
         margin: 0;
         padding: 0;
     }
 
-    .hoteldetail_slidebox ul {
-        padding: 0;
-        position: relative;
-        left: 0;
-        transition: 0.5s;
-    }
-
-    .hoteldetail_slidebox li {
-        list-style: none;
+    #hoteldetail_box {
+        font-family: 'Noto Sans KR', sans-serif;
+        width: 1200px;
+        margin: 180px auto 0 auto;
     }
 
     .hoteldetail_slidebox {
-        margin-left: 50px;
-        width: 800px;
-        height: 500px;
-        overflow: hidden;
-    }
-
-    #hoteldetail_photos {
-        display: flex;
+        width: 1200px;
+        height: 700px;
+        margin-bottom: 20px;
     }
 
     .hoteldetail_photo {
-        width: 800px;
-        height: 500px;
-    }
-
-    .hoteldetail_slidebtn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 100px;
-        position: absolute;
-        border: none;
-        color: #aaaaaa;
-        padding: 0;
+        width: 1200px;
+        height: 700px;
     }
 
     #hoteldetail_selectbox {
-        margin-left: 50px;
-        width: 400px;
-        overflow: hidden;
-        /*overflow-x: scroll;*/
-        /*overflow-y: hidden;*/
+        width: 1200px;
         height: 100px;
-        /*ms-overflow-style: none; !* 인터넷 익스플로러 *!*/
-        /*scrollbar-width: none; !* 파이어폭스 *!*/
-    }
-
-    #hoteldetail_selectbox::-webkit-scrollbar {
-        display: none;
-    }
-
-    #hoteldetail_selectPhotos {
-        position: relative;
-        padding: 0;
-        display: flex;
-        left: 160px;
-        transition: 0.5s;
-    }
-
-    #hoteldetail_selectbox li {
-        list-style: none;
     }
 
     .hoteldetail_selectPhoto {
         margin: 0 5px 0 5px;
     }
 
+    .detail_span{
+        display: block;
+    }
+
+    #detail_room_subjectbox {
+        width: 1200px;
+        margin: 0 auto 0 auto;
+    }
+
+    #hoteldetail_title {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 80px 0 10px 0;
+
+    }
+
+    #hoteldetail_subtitle {
+        margin-bottom: 40px;
+        color: #333333;
+    }
+
+    .detail_room_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .detail_room_photo {
+        width: 500px;
+        height: 300px;
+    }
+
+    .detail_room_slickSlider{
+        width: 500px;
+        height: 300px;
+        margin: 25px 50px 25px 50px;
+    }
+
+    .detail_room_info {
+        width: 500px;
+        height: 300px;
+        margin: 50px 50px 50px 50px;
+    }
+
+    .hoteldetail_room_type{
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    .hoteldetail_roomdetail {
+        color: #333333;
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .hoteldetail_roommemo {
+        color: #333333;
+    }
+
 </style>
 
-<br><br><br><br><br><br>
-호텔 상세페이지
-
-${detail[0].name}
-<div class="hoteldetail_slidebox">
-    <ul id="hoteldetail_photos">
-        <li><img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/hotel/${detail[0].photo}" class="hoteldetail_photo" value="1"></li>
-        <c:forEach var="photo" items="${roomphoto}" varStatus="idx">
-            <li><img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${photo}" class="hoteldetail_photo" value="${idx.count + 1}"></li>
+<div id="hoteldetail_box">
+    <div class="hoteldetail_slidebox">
+        <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/hotel/${detail[0].photo}" class="hoteldetail_photo">
+        <c:forEach var="photos" items="${roomphoto}" >
+            <c:forEach var="photo" items="${photos}" varStatus="idx">
+                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${photo}" class="hoteldetail_photo">
+            </c:forEach>
         </c:forEach>
-    </ul>
-    <button type="button" class="hoteldetail_slidebtn" id="hoteldetail_prevbtn"><</button>
-    <button type="button" class="hoteldetail_slidebtn" id="hoteldetail_nextbtn">></button>
-</div>
 
-<div id="hoteldetail_selectbox">
-    <ul id="hoteldetail_selectPhotos">
-        <li><img src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${detail[0].photo}?type=f&w=80&h=80" class="hoteldetail_selectPhoto" leftIdx="${leftIndex[0]}" value="0"></li>
-        <c:forEach var="photo" items="${roomphoto}" varStatus="idx">
-            <li><img src="https://ukkzyijeexki17078490.cdn.ntruss.com/room/${photo}?type=f&w=80&h=80" class="hoteldetail_selectPhoto" leftIdx="${leftIndex[idx.count]}" value="${idx.count}"></li>
+    </div>
+
+    <div id="hoteldetail_selectbox">
+        <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${detail[0].photo}?type=f&w=80&h=80" class="hoteldetail_selectPhoto">
+        <c:forEach var="photos" items="${roomphoto}" >
+            <c:forEach var="photo" items="${photos}" varStatus="idx">
+                <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/room/${photo}?type=f&w=80&h=80" class="hoteldetail_selectPhoto">
+            </c:forEach>
         </c:forEach>
-    </ul>
-</div>
+    </div>
 
+    <span class="detail_span" id="hoteldetail_title">${detail[0].name}</span>
+    <span class="detail_span" id="hoteldetail_subtitle">${detail[0].memo}</span>
+    <div id="detail_room_subjectbox">
+        <c:forEach var="roomdetail" items="${detail}" varStatus="i" step="2">
+            <div class="detail_room_box">
+                <div class="detail_room_slickSlider">
+                    <c:if test="${roomdetail.roomphoto != null}">
+                        <c:forEach var="photo" items="${roomphoto[i.index]}">
+                            <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${photo}" class="detail_room_photo">
+                        </c:forEach>
+                    </c:if>
+                </div>
+                <div class="detail_room_info">
+                    <span class="detail_span hoteldetail_room_type" >${roomdetail.roomtype}</span>
+                    <span class="detail_span hoteldetail_roomdetail">${roomdetail.roomdetail}</span>
+                    <span class="detail_span hoteldetail_roommemo">${roomdetail.roommemo}</span>
+                </div>
+            </div>
+            <div class="detail_room_box">
+                <div class="detail_room_info">
+                    <span class="detail_span hoteldetail_room_type">${detail[i.index + 1].roomtype}</span>
+                    <span class="detail_span hoteldetail_roomdetail">${detail[i.index + 1].roomdetail}</span>
+                    <span class="detail_span hoteldetail_roommemo">${detail[i.index + 1].roommemo}</span>
+                </div>
+                <div class="detail_room_slickSlider">
+                <c:if test="${detail[i.index + 1].roomphoto != null}">
+                    <c:forEach var="photo" items="${roomphoto[i.index + 1]}">
+                        <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${photo}" class="detail_room_photo">
+                    </c:forEach>
+                </c:if>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
 
 <script>
-    let photoList = $("#hoteldetail_photos");
-    let slideBox = $(".hoteldetail_slidebox");
-    const slideSize = $(".hoteldetail_slidebox").width(); // 슬라이드 컨테이너의 넓이값
-    let slideBoxMargin = slideBox.outerWidth(true) - slideBox.outerWidth(); // 슬라이드 컨테이너의 마진값
-    let photoLength = slideSize * $(".hoteldetail_photo").length; // 슬라이드 컨테이너에 들어있는 사진의 넓이 합
-    let lastPhoto = ""; // 버튼 클릭 시 ul의 left 좌표
-    let isTransition = true; // 트랜지션 작동 여부
-    // 트랜지션 동작이 끝날때 이벤트
-    var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd otransitionend';
-
-    let subPhotoList = $("#hoteldetail_selectPhotos");
-    let subSlideBox = $("#hoteldetail_selectbox");
-    let subSlideBoxMargin = subSlideBox.outerWidth(true) - subSlideBox.outerWidth();
-
     $(function() {
-        $(".hoteldetail_slidebtn").css("top", slideBox.position().top * 2);
-        // div의 top * 2 = 요소의 중앙 배치
-        $("#hoteldetail_prevbtn").css("left", slideBox.position().left + 50);
-        //   div의 left + width - absolute 할 요소의 width = div의 left의 끝 지점
-        $("#hoteldetail_nextbtn").css("left", slideBox.position().left + slideBox.outerWidth(true) - $("#hoteldetail_nextbtn").outerWidth());
 
-        $("#hoteldetail_nextbtn").click(next);
-        $("#hoteldetail_prevbtn").click(prev);
+        $('.hoteldetail_slidebox').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '#hoteldetail_selectbox',
+            autoplay: true,            // 자동 스크롤 사용 여부
+            autoplaySpeed: 1000
+        });
+        $('#hoteldetail_selectbox').slick({
+            slidesToShow: 8,
+            slidesToScroll: 1,
+            asNavFor: '.hoteldetail_slidebox',
+            dots: true,
+            centerMode: true,
+            focusOnSelect: true,
+        });
 
-        $("#hoteldetail_photos").on(transitionEnd, function() {isTransition = true;});
-
-        $(".hoteldetail_selectPhoto").click(clickSlideView);
+        $('.detail_room_slickSlider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.detail_room_photo',
+            autoplay: true,            // 자동 스크롤 사용 여부
+            autoplaySpeed: 1000
+        });
+        $('.detail_room_photo').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: '.detail_room_slickSlider',
+            dots: true,
+            centerMode: true,
+            focusOnSelect: true,
+        });
     });
-
-    // 다음
-    function next() {
-        if(isTransition) {
-            lastPhoto = photoList.position().left - (slideBoxMargin);
-            if(Math.abs(lastPhoto) >= (photoLength - slideSize)) {
-                photoList.css("left", 0);
-                lastPhoto = Math.abs(photoList.position().left) + (slideBoxMargin);
-                return;
-            }
-            photoList.css("left", photoList.position().left - (slideSize + (slideBoxMargin)));
-            // subPhotoList.css("left", subPhotoList.position().left + 90);
-            console.log(subPhotoList.position().left);
-            console.log(photoList.position().left);
-            console.log("마지막 사진 위치 : " + lastPhoto);
-            console.log("범위 : " + photoLength);
-            isTransition = false;
-        }
-    }
-
-    // 이전
-    function prev() {
-        if(isTransition) {
-            lastPhoto = photoList.position().left - (slideBoxMargin);
-            if(lastPhoto >= 0) {
-                console.log(1);
-                photoList.css("left", 0);
-                lastPhoto = Math.abs(photoList.position().left) + (slideBoxMargin);
-                return
-            }
-            photoList.css("left", photoList.position().left + (slideSize - (slideBoxMargin)));
-
-            console.log("마지막 사진 위치 : " + lastPhoto);
-            console.log("범위 : " + photoLength);
-
-            isTransition = false;
-        }
-    }
-
-    // 클릭 시 해당 사진으로 바로 슬라이드
-    function clickSlideView() {
-        let photoValue = $(this).attr("value");
-        let leftValue = $(this).attr("leftIdx");
-
-        subPhotoList.css("left", leftValue + "px");
-        photoList.css("left", -(photoValue * slideSize));
-
-        console.log("leftvalue: " + leftValue);
-        console.log(photoValue);
-    }
 </script>

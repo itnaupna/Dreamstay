@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,22 +34,8 @@ public class HotelController {
     @GetMapping("/hoteldetail")
     public String hotelDetail(int num, Model model) {
         List<Map<String, String>> detail = hotelService.getHotelData(num);
-        List<String> roomphoto = hotelService.dividePhoto(detail);
-        for(int i = 0; i < detail.size(); i++) {
-            for(String key : detail.get(i).keySet()) {
-                System.out.println("key: " + key + ", value: " + String.valueOf(detail.get(i).get(key)));
-            }
-        }
-        List<Integer> leftIndex = new ArrayList<>();
-        // 시작값 구하기
-        int a = 160;
-        for(int i = 0; i < roomphoto.size() + 1; i++) {
+        String[][] roomphoto = hotelService.dividePhoto(detail);
 
-            leftIndex.add(a);
-            a -= 90;
-            System.out.println(leftIndex.get(i));
-        }
-        model.addAttribute("leftIndex", leftIndex);
         model.addAttribute("detail", detail);
         model.addAttribute("roomphoto", roomphoto);
         return "/main/hotel/hoteldetail";
