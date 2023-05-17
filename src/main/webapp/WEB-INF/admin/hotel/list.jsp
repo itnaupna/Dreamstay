@@ -8,7 +8,7 @@
 <div id="partHotel">
   <div id="toolbarHotel">
     <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_add.png" onclick="if(confirm('신규 호텔을 등록하시겠습니까?'))ClickAddHotelBtn();">
-    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_detail.png" onclick="$('#detailHotel').toggle(200);loadHotel(-1);">
+    <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/icon_detail.png" onclick="$('#detailHotel').toggle(200);">
   </div>
   <c:forEach items="${hDto}" var="dto">
     <div class="itemHotel" onclick="loadHotel(${dto.num})">
@@ -37,7 +37,7 @@
         <table class="table table-bordered">
           <caption style="font-size:0.8rem;caption-side: top;">
             <span style="float:left;">
-              <span class="spanbtn"  onclick="if(confirm('Save the modify value?'))updateHotel();">저장</span>
+              <span class="spanbtn"  onclick="if(confirm('변경사항을 저장하시겠습니까?'))updateHotel();">저장</span>
               <span class="spanbtn" onclick="$('#detailHotel').hide(200);">취소</span>
             </span>
             <span style="float:right;">값을 수정하려면 더블클릭하세요.</span>
@@ -89,9 +89,9 @@
         추가 할수도 있는것들 : 오늘날짜에 사용중인 방, 예약잡힌 방, 예약이 잡히지 않은 방 등등...
          --%>
         <span>등록된 객실 : <span id="summaryRoomTotal">999</span></span>
-        <span>가용 객실 : <span id="summaryRoomCurrent">999</span></span>
-        <span>미사용 객실 : <span id="summaryRoomReservation">999</span></span>
-        <span  class="spanbtn" id="addRoom" onclick="$('#formRoom').show(200);$('#detailHotel').hide(200);">추가</span>
+        <%--        <span>가용 객실 : <span id="summaryRoomCurrent">999</span></span>--%>
+        <%--        <span>미사용 객실 : <span id="summaryRoomReservation">999</span></span>--%>
+        <span  class="spanbtn" id="addRoom" onclick="initRoomInfo();$('#formRoom').show(200);$('#detailHotel').hide(200);">추가</span>
         <!--Remain : <span id="summaryRoomRemain"></span>-->
       </div>
       <form id="formRoom" style="display:none;">
@@ -129,12 +129,14 @@
             </td>
             <td style="width:25%;vertical-align: middle">
               <div style="display:flex;justify-content: space-around">
-                <span class="spanbtn" onclick="UploadRoom();">저장</span>
+                <span class="spanbtn" id="btnUploadRoom" onclick="UploadRoom();">저장</span>
+                <span class="spanbtn" id="btnEditRoom" style="display:none;">수정</span>
                 <span  class="spanbtn" onclick="$('#formRoom').hide(200);">취소</span>
               </div>
             </td>
           </tr>
         </table>
+        <input type="hidden" name="num">
       </form>
 
       <div id="lstRoomItems" style="margin:5px 0px;">
@@ -414,7 +416,6 @@
   }
   #partRoom table input:focus:not(:read-only),#partRoom table textarea:focus:not(:read-only){
     box-shadow: 0 0 5px rgb(152,129,34) !important;
-
   }
   #lstRoomItems tr{
     /*max-height:41px;*/
@@ -450,6 +451,9 @@
     /*color:gray;*/
     /*font-weight: 700 !important;*/
   }
+  #lstRoomItems tbody tr td:not(:last-child){
+    cursor:pointer;
+  }
 </style>
 <script>
   $('#lstRoomItems tbody')
@@ -465,7 +469,8 @@
             let dest = $($($(e.target).parent()).children()[2]);
             let tmp = dest.text();
             dest.html(tmp);
-          });
+          })
+
   $('#roomtype').on({
     'dblclick':(e)=>{
       $('#roomtypedatalist').empty().append($('<option/>').text('기존 객실 타입 검색 중...'));
@@ -475,7 +480,7 @@
         success:(e)=>{
           $('#roomtypedatalist').empty();
           $.each(e,(i,e)=>{
-            console.log(e);
+            // console.log(e);
             $('#roomtypedatalist').append($('<option/>').text(e));
           });
         },
@@ -511,6 +516,7 @@
     }
   }); //FIXME : Textarea 높이 자동조절. 이유는 모르겠는데 갑자기 동작안함.
   function UploadRoom() {
+    if(!confirm("저장하시겠습니까?")) return;
     let data = new FormData($('#formRoom')[0]);
     data.set('islock',data.get('islock') === 'on' ? 1 : 0);
     $.ajax({
@@ -523,6 +529,7 @@
       success:(e)=>{
         if(e>0){
           loadHotel($('#detailHotelNum').val());
+
         }else{
           alert('객실추가에 실패하였습니다. 다시 시도해주세요.');
         }
@@ -581,14 +588,22 @@
       }
     })
   }
+  function initRoomInfo(){
+    $('#btnUploadRoom').show();
+    $('#btnEditRoom').hide();
+    $('#formRoom input:not([name="islock"])').val('');
+    $('#formRoom input[name="num"]').val('0');
+    $('input[name="islock"]').prop('checked',false);
+  }
   function loadHotel(hotelnum){
     $('#lstRoomTitle').text("Loading Hotel info...");
+    $('#formRoom').hide();
     $('#lstRoomWrapper').hide(100,()=>{
       $.ajax({
         url:'./hotel/' + hotelnum,
         dataType:'json',
         success:(e)=>{
-          console.log(e[0].memo);
+          // console.log(e[0].memo);
 
           $('input[type="file "]').val(null);
           $('#lstRoomTitle').text('hotel\'s room');
@@ -627,7 +642,29 @@
                                       'justify-content':'space-around'
                                     })
                             )
-                    )
+                    ).on({
+                      'click':(ef)=>{
+                        if($(ef.target).parentsUntil(10,'td')[0] !== $(ef.currentTarget).children(1,'td')[3]) {
+                          //TODO : 객실 기본설명 수정하도록 해야함
+                          $.ajax({
+                            url:'./hotel/roomsimple/' + e.num,
+                            success:(res)=>{
+                                $('input[name="islock"]').attr('checked',res.islock==true)
+                                $('input[name="roomprice"]').val(res.roomprice);
+                                $('input[name="roomtype"]').val(res.roomtype);
+                                $('input[name="roommemo"]').val(res.roommemo);
+                                $('#formRoom input[name="num"]').val(res.num);
+                                $('#btnUploadRoom').hide();
+                                $('#btnEditRoom').show().off('click')
+                                        .on({
+                                          'click':()=>{UploadRoom();}
+                                        });
+                                $('#formRoom').show(200);$('#detailHotel').hide(200);
+                            }
+                          });
+                        }
+                      }
+                    })
             );
             //$('#lstRoomItems').append('<br/>');
           });

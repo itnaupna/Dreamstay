@@ -21,4 +21,6 @@ public interface AdminHnRMapper {
     public int getMemberCount(boolean containAdmin);
     public int getHotelCount();
     public void updateRoomDetail(RoomDto dto);
+    public RoomDto getRoomSimpleInfo(int num);
+    public void updateRoomSimpleInfo(RoomDto dto);
 }

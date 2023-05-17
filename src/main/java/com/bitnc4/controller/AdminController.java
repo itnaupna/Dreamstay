@@ -95,7 +95,7 @@ public class AdminController {
         }
         return data.getNum()==0 ? adminHnRService.insertHotel(data) : adminHnRService.updateHotelDetail(data);
     }
-//
+    //
     @PostMapping("/uploadp")
     @ResponseBody
     public List<String> uploadp(List<MultipartFile> file){
@@ -147,13 +147,36 @@ public class AdminController {
         객실 추가
         Return : 추가된 객실의 RoomDto.getNum()
          */
-        return adminHnRService.insertRoom(roomDto);
+        log.info(roomDto.toString());
+        if(roomDto.getNum() == 0)
+            return adminHnRService.insertRoom(roomDto);
+        else {
+            adminHnRService.updateRoomSimpleInfo(roomDto);
+            return roomDto.getNum();
+        }
     }
 
     @PostMapping("/hotel/deleteroom/{roomnum}")
     @ResponseBody
     public int deleteRoom(@PathVariable int roomnum){
         return adminHnRService.deleteRoom(roomnum);
+    }
+
+    @GetMapping("/hotel/roomsimple/{roomnum}")
+    @ResponseBody
+    public RoomDto getSimpleInfo(@PathVariable int roomnum){
+        return adminHnRService.getRoomSimpleInfo(roomnum);
+    }
+
+    @PostMapping("/hotel/roomsimple")
+    @ResponseBody
+    public boolean updateSimpleInfo(RoomDto dto){
+        try{
+            adminHnRService.updateRoomSimpleInfo(dto);
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
     }
 
     @GetMapping("/notice")
