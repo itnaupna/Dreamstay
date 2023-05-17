@@ -64,7 +64,7 @@
 
     }
     .text-area1{
-        font-size:.7rem;
+        /*font-size:.7rem;*/
         color:#0000ffaa;
         font-weight: 700!important;
         text-transform: uppercase!important;
@@ -74,7 +74,7 @@
         color:#5a5c69!important;
         font-weight: 700!important;
         margin-bottom: 0!important;
-        font-size: 1.25rem;
+        /*font-size: 1.25rem;*/
         line-height: 1.2;
     }
     .icon-area1{
@@ -242,26 +242,29 @@
     }
     .boxlist1{
         margin: 10px;
-        width:100%;
         height:30px;
-        border-bottom:0.25rem solid rgba(246, 242, 201, 0.67) !important;
-        box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.15)!important;
-        transition: box-shadow 0.1s ease;
+        border-bottom:1px solid rgba(211, 211, 211, 0.49) !important;
         list-style-type: none;
-        float: left;
-
-
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
+    .boxlist1:hover{
+        /*background-color: rgba(211, 211, 211, 0.49);*/
+        /*outline:1px solid;*/
+        font-weight: bolder;
+        border-bottom:1px solid rgb(127,127,127) !important;
+    }
+
     .test2, .test3{
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x:hidden;
+
     }
     .test2 ul, .test3 ul{
         padding-left: 0px;
-        font-size:.7rem;
-        color:#5a5c69!important;
-        font-weight: 700!important;
-        text-transform: uppercase!important;
-        margin-bottom: 0.25rem!important;
+        /*color:#5a5c69!important;*/
+        /*margin-bottom: 0.25rem!important;*/
     }
 
     .test3 a{
@@ -300,7 +303,7 @@
             </div>
         </div>
     </div>
-    <div id="card3">
+    <div id="card3" style="display:none;">
         <div class="info0">
             <div class="info1">
                 <div class="text-area1">예약현황</div>
@@ -311,7 +314,7 @@
             </div>
         </div>
     </div>
-    <div id="card4">
+    <div id="card4" style="display:none;">
         <div class="info0">
             <div class="info1">
                 <div class="text-area1">신규문의</div>
@@ -339,8 +342,8 @@
     </div>
     <div id="box2">
         <div class="boxtitle2">
-            <span style="font-size:1.25rem;color:#5a5c69;font-weight: 700!important;"><i class="bi bi-megaphone" style="margin-right: 10px;">
-            </i>문의게시판</span> <span>미답변수 ${data.QnaAnanwer}건</span>
+            <span style="font-size:1.25rem;color:#5a5c69;font-weight: 700!important;"><i class="bi bi-question-square" style="margin-right: 10px;">
+            </i>미답변 문의 ${data.QnaAnanwer}건</span>
         </div>
 
         <div class="test3">

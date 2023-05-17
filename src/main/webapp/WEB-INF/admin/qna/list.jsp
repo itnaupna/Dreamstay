@@ -8,24 +8,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<style>
-    .answer_before{
-        background-color: #fff;
-        border: 1px solid #73685D;
-        padding: 6px;
-    }
-
-    .answer_after{
-        background-color: #73685D;
-        border: 1px solid #73685D;
-        color: #fff;
-        padding: 6px;
-    }
-
-
-
-</style>
 <form name="search-form" autocomplete="off">
     <table class="table table-bordered searchQnas">
         <tr>
@@ -54,28 +36,33 @@
 
             <td>게시글찾기</td>
             <td>
-                <select name="searchtype">
-                    <option value="title" selected >제목</option>
-                    <option value="writer">작성자</option>
-                    <option value="content">내용</option>
-                </select>
-
-                <input type="text" name="keyword" value="">
-
+                <div id="findarticlediv" class="input-group">
+                    <select name="searchtype" class="form-select" style="width:100px;">
+                        <option value="title" selected >제목</option>
+                        <option value="writer">작성자</option>
+                        <option value="content">내용</option>
+                    </select>
+                    <style>
+                        #findarticlediv .form-select{
+                            flex:initial !important;
+                        }
+                    </style>
+                    <input type="text" name="keyword" value="" class="form-control">
+                </div>
             </td>
 
             <td>답변상태</td>
             <td>
-                <input class="form-check-input" type="radio"  name="answer" value="전체" checked>전체
-                <input class="form-check-input" type="radio"  name="answer" value="답변대기">답변대기
-                <input class="form-check-input" type="radio"  name="answer" value="답변완료">답변완료
+                <label><input class="form-check-input" type="radio"  name="answer" value="전체" checked>전체</label>
+                <label><input class="form-check-input" type="radio"  name="answer" value="답변대기">답변대기</label>
+                <label><input class="form-check-input" type="radio"  name="answer" value="답변완료">답변완료</label>
             </td>
 
             <td>카테고리</td>
             <td>
-                <input class="form-check-input" type="radio"  name="qna_type" value="전체" checked>전체
-                <input class="form-check-input" type="radio"  name="qna_type" value="의견">의견
-                <input class="form-check-input" type="radio"  name="qna_type" value="문의">문의
+                <label><input class="form-check-input" type="radio"  name="qna_type" value="전체" checked>전체</label>
+                <label><input class="form-check-input" type="radio"  name="qna_type" value="의견">의견</label>
+                <label><input class="form-check-input" type="radio"  name="qna_type" value="문의">문의</label>
             </td>
 
             <td colspan="2">
@@ -83,29 +70,27 @@
             </td>
     </table>
 </form>
-
-
-<table id="qnaTable" class="table-bordered">
+<table id="qnaTable" class="table">
     <caption>
-        <button type="button" class="btn btn-secondary"><i class="bi bi-pencil-square" style="padding-right:8px;"></i>Write</button>
+        <%--        <button type="button" class="btn btn-secondary"><i class="bi bi-pencil-square" style="padding-right:8px;"></i>Write</button>--%>
     </caption>
     <thead>
     <tr>
-        <th>num</th>
-        <th>subject</th>
-        <th>writer</th>
-        <th>answer</th>
-        <th>writeday</th>
+        <th>번호</th>
+        <th>제목</th>
+        <th>글쓴이</th>
+        <th>답변여부</th>
+        <th>작성일</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${qnaList}" var="dto">
-        <tr>
+        <tr onclick="location.href='qna/content?num=${dto.num}';">
             <td>${dto.num}</td>
             <td>
-                <a href="qna/content?num=${dto.num}">
+<%--                <a href="qna/content?num=${dto.num}">--%>
                     <span class="qna_sub">${dto.subject}</span>
-                </a>
+<%--                </a>--%>
             </td>
             <td>${dto.writer}</td>
             <c:if test="${dto.answer=='답변대기'}">
@@ -139,8 +124,26 @@
     </tr>
     </tfoot>
 </table>
-
 <style>
+    .pagenumber:hover{
+        text-decoration: underline;
+        cursor:pointer;
+    }
+    .pagenumber{
+        padding:5px;
+    }
+    .answer_before{
+        background-color: #fff;
+        border: 1px solid #73685D;
+        padding: 6px;
+    }
+
+    .answer_after{
+        background-color: #73685D;
+        border: 1px solid #73685D;
+        color: #fff;
+        padding: 6px;
+    }
     .currpage{
         font-weight:bolder;
     }
@@ -159,9 +162,13 @@
         text-align: center;
     }
     td, th tr{
-        font-size:.7rem;
-        color:#5a5c69!important;
-        font-weight: 700!important;
+        /*font-size:.7rem;*/
+        /*color:#5a5c69!important;*/
+        /*font-weight: 700!important;*/
+    }
+    #qnaTable tbody tr:hover{
+        background-color: rgba(136, 93, 54, 0.26);
+        cursor:pointer;
     }
     #qnaTable{
         width: 100%;
@@ -174,8 +181,6 @@
     }
 
 </style>
-
-
 <script>
 
     function getSearchQna(page) {
@@ -197,7 +202,7 @@
                             <td>
                             <a href="qna/content?num=\${e.num}">\${e.subject}</a></td>
                             <td>\${e.writer}</td>
-                            <td>\${e.answer}</td>
+                            <td>\${e.answer=="답변완료"?"<span class='answer_after'>답변완료</span>":"<span class='answer_before'>답변대기</span>"}</td>
                             <td>\${new Date(e.writeday).toLocaleString()}</td>
                         </tr>`
                         );

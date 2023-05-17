@@ -21,8 +21,12 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
     public List<QnaBoardDto> getQnaList(int page, QnaBoardDto dto) {
         Map<String, Object> map = new HashMap<>();
         final int PAGE_SIZE = 10;
-        map.put("start", (page - 1) * PAGE_SIZE);
-        map.put("count", PAGE_SIZE);
+        if(page!=-1) {
+            map.put("start", (page - 1) * PAGE_SIZE);
+            map.put("count", PAGE_SIZE);
+        }else{
+            map.put("start",-1);
+        }
         map.put("searchtype", dto.getSearchtype());
         map.put("keyword", dto.getKeyword());
         map.put("qna_type", dto.getQna_type());

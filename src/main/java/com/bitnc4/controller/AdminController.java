@@ -1,6 +1,7 @@
 package com.bitnc4.controller;
 
 import com.bitnc4.dto.HotelDto;
+import com.bitnc4.dto.NoticeDto;
 import com.bitnc4.dto.QnaBoardDto;
 import com.bitnc4.dto.RoomDto;
 import com.bitnc4.repo.ChatRoomRepository;
@@ -51,7 +52,9 @@ public class AdminController {
         data.put("MemberCount",adminHnRService.getMemberCount(false));
         data.put("HotelCount",adminHnRService.getHotelCount());
         data.put("Notice",adminNoticeService.getList(1));
-        data.put("Qna",adminQnaServeice.getQnaList(1,new QnaBoardDto()));
+        QnaBoardDto d = new QnaBoardDto();
+        d.setAnswer("답변대기");
+        data.put("Qna",adminQnaServeice.getQnaList(-1,d));
         data.put("QnaAnanwer",adminQnaServeice.getUnanswerCount());
         m.addAttribute("data",data);
 
@@ -98,22 +101,20 @@ public class AdminController {
     //
     @PostMapping("/uploadp")
     @ResponseBody
-    public List<String> uploadp(List<MultipartFile> file){
+    public List<String> uploadp(List<MultipartFile> file,String folder){
+//        System.out.println(folder);
         List<String> result = new ArrayList<>();
         if(!file.get(0).getOriginalFilename().equals("")){
-            file.forEach(f-> result.add(ncp.uploadFile(bucketName,"room",f)));
+            file.forEach(f-> result.add(ncp.uploadFile(bucketName,folder,f)));
             return result;
         }
-
-        //System.out.println(file.getOriginalFilename());
-        //return file.getOriginalFilename();
         return null;
     }
     @PostMapping("/deletep")
     @ResponseBody
-    public boolean deletep(String name){
-        log.info("name : {}",name);
-        return ncp.deleteFile(bucketName,"room",name);
+    public boolean deletep(String name,String folder){
+//        log.info("name : {}",name);
+        return ncp.deleteFile(bucketName,folder,name);
     }
 
     @PostMapping("/writeroom")
@@ -192,6 +193,21 @@ public class AdminController {
         result.add(adminNoticeService.getList(page));
         result.add(adminNoticeService.getCount(page));
         return result;
+    }
+
+    @PostMapping("/notice/write")
+    @ResponseBody
+    public int writeNotice(NoticeDto dto){
+        dto.setWriter("관리자");
+        if(dto.getNum()==0)
+            return adminNoticeService.writeNotice(dto);
+        else
+            return adminNoticeService.modifyNotice(dto);
+    }
+    @GetMapping("/notice/detail")
+    @ResponseBody
+    public NoticeDto readNotice(int num){
+        return adminNoticeService.readNotice(num);
     }
 
 

@@ -226,7 +226,8 @@
                 );
               });
           },
-          fCreator: "createSEditor2"
+          fCreator: "createSEditor2",
+          customParams:{folder:"room"}
 
         });
       }
@@ -469,7 +470,7 @@
             let dest = $($($(e.target).parent()).children()[2]);
             let tmp = dest.text();
             dest.html(tmp);
-          })
+          });
 
   $('#roomtype').on({
     'dblclick':(e)=>{

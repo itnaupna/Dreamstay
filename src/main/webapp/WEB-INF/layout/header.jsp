@@ -93,11 +93,11 @@
     <div class="header">
         <div class="headArea">
             <a href="/">
-            <strong class="logo">
-                JOSUN HOTELS & RESORTS
-            </strong>
+                <strong class="logo">
+                    JOSUN HOTELS & RESORTS
+                </strong>
             </a>
-<%--            <button type="button" class="btnMenu">메뉴 열기</button>--%>
+            <%--            <button type="button" class="btnMenu">메뉴 열기</button>--%>
             <button type="button" id="header_menu" class="btnMenu">메뉴 열기</button>
             <div class="btnMenulist">
                 <img class="btnMenuClose" src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_white_25x25.png">
@@ -105,7 +105,7 @@
                 <div class="btnMenuText">
                     <div class="header_btntitle">
                         <div class="btntitlebox">
-                        <span>ABOUT US</span><br><br>
+                            <span>ABOUT US</span><br><br>
                             <ul>
                                 <li>JOSUN HOTELS & <br>RESORTS</li>
                                 <li>기업소개</li>
@@ -170,12 +170,12 @@
                             <span>JOSUN LOUNGE</span><br><br>
                             <ul>
                                 <a>
-                                <li>
-                                    <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539858&sysCode=JOSUNHOTEL">
-                                    <h6 style="margin-top: 10px;"> Hotel Dining</h6>
-                                </li>
+                                    <li>
+                                        <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539858&sysCode=JOSUNHOTEL">
+                                        <h6 style="margin-top: 10px;"> Hotel Dining</h6>
+                                    </li>
 
-                               </a>
+                                </a>
 
                                 <a>
                                     <li>
@@ -201,9 +201,9 @@
             <div class="topUtil">
                 <ul>
                     <li>
-                         <a href="" class="hotelFind" style="font-size: 14px;">
+                        <a href="" class="hotelFind" style="font-size: 14px;">
                             상품찾기
-                         </a>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -217,6 +217,11 @@
                         <li>
                             <a href="/mypage/" id="header_mypage">마이페이지</a>
                         </li>
+                        <c:if test="${loginuser.user_level>=10}">
+                            <li>
+                                <a href="/admin" id="header_admin"><b>관리 대시보드</b></a>
+                            </li>
+                        </c:if>
                     </c:if>
                     <c:if test="${loginuser == null}">
                         <li>

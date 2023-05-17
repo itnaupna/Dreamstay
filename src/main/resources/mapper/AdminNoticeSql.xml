@@ -7,4 +7,18 @@
     <select id="getCount" parameterType="int" resultType="int">
         select count(*) from board_notice;
     </select>
+    <select id="readNotice" parameterType="int" resultType="NoticeDto">
+        select * from board_notice where num=#{num}
+    </select>
+
+    <insert id="writeNotice" parameterType="NoticeDto" useGeneratedKeys="true" keyProperty="num">
+        insert into board_notice (subject, content, writer,photo) values (#{subject},#{content},#{writer},#{photo});
+    </insert>
+    <update id="modifyNotice" parameterType="NoticeDto" useGeneratedKeys="true" keyProperty="num">
+            update board_notice set subject=#{subject}, content=#{content}, writer=#{writer},photo=#{photo} where num=#{num}
+    </update>
+    <delete id="deleteNotice" parameterType="int">
+        delete from board_notice where num=#{num}
+    </delete>
+
 </mapper>
