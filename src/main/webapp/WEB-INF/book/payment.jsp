@@ -399,6 +399,7 @@
         overflow-y: scroll;
         max-height: 150px;
         width: 900px;
+        z-index: 11;
     }
 
     .options2 li {

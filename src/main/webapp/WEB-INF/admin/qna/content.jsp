@@ -24,18 +24,48 @@
     </c:if>
     <br>
     <div>
-        <button type="button" class="btn btn-outline-secondary" onclick="history.back()">목록</button>
-        <c:if test="${dto.answer== '답변대기'}">
+        <%--<button type="button" class="btn btn-outline-secondary" onclick="location.href = '/admin/qna'">목록</button>--%>
+            <button type="button" class="btn btn-outline-secondary" onclick="history.back()">목록</button>
+            <c:if test="${dto.answer== '답변대기'}">
+
             <button type="button" class="btn btn-outline-secondary" id="delQna">삭제</button>
             <button type="button" class="btn btn-outline-secondary">수정</button>
         </c:if>
     </div>
 </div>
 
-<form action="./answerupdate" method="post">
+<c:if test="${dto.answer== '답변완료'}">
+    <div class="anserwqna" style="border: 1px solid gray; height: 200px;">
+        <span>관리자 답글</span> <br><br>
+        <span id="answer-admin">${dto.answer_text}</span>
+    </div>
+</c:if>
+
+
+<form name="answer-form" method="post">
     <input type="hidden" name="num" value="${dto.num}">
     <div>
         <textarea style="width: 700px; height: 200px;" name="answer_text"></textarea><br>
-        <button type="submit" class="btn btn-outline-secondary">답변완료</button>
+        <button type="button" class="btn btn-outline-secondary" id="answer-btn">답변완료</button>
     </div>
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#answer-btn").click(function() {
+            $.ajax({
+                type: 'POST',
+                url: './answerupdate',
+                data: $("form[name=answer-form]").serialize(),
+                dataType: 'text',
+                success: function(e) {
+
+                    $("#answer-admin").html(e.answer_text);
+                    $("form[name=answer-form]")[0].reset(); // 폼 리셋
+                    alert("답변 작성 완료되었습니다");
+                    location.reload(); // 새로고침
+                }
+            });
+        });
+    });
+</script>

@@ -1,5 +1,3 @@
-mycustom:
-  value1:"Eong"
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -10,7 +8,6 @@ spring:
     multipart:
       max-file-size:
         4MB
-
   mail:
     host: smtp.naver.com
     port: 465

@@ -70,4 +70,8 @@ public class AdminHnRService implements AdminHnRServiceInter{
         return m.getHotelCount();
     }
 
+    @Override
+    public void updateRoomDetail(RoomDto dto) {
+        m.updateRoomDetail(dto);
+    }
 }

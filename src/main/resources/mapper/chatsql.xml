@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitnc4.mapper.ChatMapper">
-    <select id="test" resultType="ChatDto">
-        select * from chat;
-    </select>
     <insert id="saveChat" parameterType="ChatDto">
         insert into chat (membernum,msg,recv,memberview,adminview) values (#{membernum},#{msg},#{recv},#{memberview},#{adminview});
     </insert>
     <select id="getRecentChat" parameterType="Map" resultType="ChatDto">
-        select * from chat where membernum=(select member.num from member where member.user_name=#{name} and member.num=#{num}) order by num desc limit #{count}
+        select * from chat where membernum=#{num} order by num desc limit #{count}
     </select>
-    <select id="getRecentChatByRoomName" parameterType="Map" resultType="ChatDto">
-        select * from chat where membernum=(select member.num from member where member.user_name=#{name} and member.num=#{num}) order by num desc limit #{count}
-    </select>
-
 </mapper>

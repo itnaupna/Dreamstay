@@ -13,5 +13,5 @@ public class RoomDto {
     String roommemo;
     String roomdetail;
     int islock;
-
+    String roomphoto;
 }

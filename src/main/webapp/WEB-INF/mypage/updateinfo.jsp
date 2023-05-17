@@ -33,7 +33,7 @@
         <span>MY INFORMATION</span>
     </div>
     <div class="u_username">
-        <span>${memberDto.user_name} / ${memberDto.email}</span>
+        <span>${memberDto.id} / ${memberDto.email}</span>
     </div>
 
     <div class="u_name1">
@@ -51,7 +51,6 @@
     </div>
     <div class="u_chphoe">
         <input type="text" id="u_phone" class="u_phone" value="${memberDto.phone}">
-        <%--        <button type="button" class="ch_phbtn">번호 수정</button>--%>
     </div>
 
     <div class="u_addr">
@@ -60,7 +59,6 @@
 
     <div class="u_addrdetail">
         <input type="text" id="addr" name="addr" value="${memberDto.addr}"/>
-        <input type="text" name="addrdetail" id="addrdetail"/>
     </div>
 
     <div class="u_email">

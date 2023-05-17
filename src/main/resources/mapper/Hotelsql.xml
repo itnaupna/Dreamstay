@@ -4,4 +4,8 @@
     <select id="getAllHotelData" resultType="HotelDto">
         select * from hotel;
     </select>
+
+    <select id="getHotelData" parameterType="int" resultType="Map">
+        select * from hotel h inner join room r on h.num = r.hotelnum where h.num = #{num};
+    </select>
 </mapper>

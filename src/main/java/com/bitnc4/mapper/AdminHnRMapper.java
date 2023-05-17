@@ -20,4 +20,5 @@ public interface AdminHnRMapper {
     public int deleteRoom(int roomnum);
     public int getMemberCount(boolean containAdmin);
     public int getHotelCount();
+    public void updateRoomDetail(RoomDto dto);
 }

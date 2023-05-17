@@ -6,7 +6,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <style>
     .footer2 {
-        /*display: none;*/
+        display: none;
         position:absolute;
         bottom: -900px;
         left: 0;
@@ -17,7 +17,7 @@
         /*border: 1px solid aqua;*/
         width: 1000px;
         height: 1200px;
-        top: 32%;
+        top: 28%;
         position: absolute;
         padding: 30px;
         margin-left: 500px;
