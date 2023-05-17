@@ -1,5 +1,6 @@
 package com.bitnc4.controller;
 
+import com.bitnc4.dto.BookDto;
 import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.service.AdminHnRService;
@@ -32,11 +33,20 @@ public class MyPageController {
         MemberDto dto = (MemberDto)session.getAttribute("loginuser");
         List<Map<String, String>> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
         model.addAttribute("data",map);
+        System.out.println("data");
         model.addAttribute("size", map.size());
         String[] fnFn = dto.getUser_name().split("/");
         model.addAttribute("familyname", fnFn[0]);
         model.addAttribute("firstname", fnFn[1]);
-        session.setAttribute("loginuser", dto);
+        List<BookDto> list = mypageService.selectForBookNum();
+        model.addAttribute("list", list);
+        return "/mypage/mypage";
+    }
+
+    @GetMapping("/deletebook")
+    public String deletebook(int num)
+    {
+        mypageService.deleteMemberBook(num);
         return "/mypage/mypage";
     }
 
