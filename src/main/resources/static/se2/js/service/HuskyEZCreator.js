@@ -34,6 +34,7 @@ nhn.husky.EZCreator = new (function(){
 			var fOnAppLoad = htOptions.fOnAppLoad;
 			var bUseBlocker = htOptions.bUseBlocker;
 			var htParams = htOptions.htParams || null;
+			var customParams = htOptions.customParams || null;
 		}else{
 			// for backward compatibility only
 			oAppRef = arguments[0];
@@ -43,6 +44,7 @@ nhn.husky.EZCreator = new (function(){
 			fOnAppLoad = arguments[4];
 			bUseBlocker = arguments[5];
 			htParams = arguments[6];
+			customParams = arguments[7];
 		}
 
 		if(bUseBlocker) nhn.husky.EZCreator.showBlocker();
@@ -103,6 +105,7 @@ nhn.husky.EZCreator = new (function(){
 			oApp.elPlaceHolder = elPlaceHolder;
 
 			oAppRef[oAppRef.length] = oApp;
+			oApp.customParams = customParams;
 			if(!oAppRef.getById) oAppRef.getById = {};
 			
 			if(elPlaceHolder.id) oAppRef.getById[elPlaceHolder.id] = oApp;
@@ -111,6 +114,7 @@ nhn.husky.EZCreator = new (function(){
 			
 //			top.document.title += ", "+((new Date())-window.STime);
 			nhn.husky.EZCreator.hideBlocker();
+			console.log(oApp);
 		});
 //		window.STime = new Date();
 		elIFrame.src = sSkinURI;

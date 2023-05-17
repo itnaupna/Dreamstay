@@ -29,7 +29,7 @@ nhn.husky.SE_Custom = jindo.$Class({
     },
     $ON_CHANGE_LIST : function(){
         //https://ukkzyijeexki17078490.cdn.ntruss.com/room/42b1598b-9441-40e4-a590-eb75c1075ee9?type=f&w=120&h=90
-        let thumbpre = 'https://ukkzyijeexki17078490.cdn.ntruss.com/room/';
+        let thumbpre = `https://ukkzyijeexki17078490.cdn.ntruss.com/${this.oApp.customParams.folder}/`;
         let thumbsuf = '?type=f&w=120&h=90';
         if($('#lst_img')[0].selectedIndex===-1){
             $('#imgupload_preview').attr('src',"https://kr.object.ncloudstorage.com/dreamsstaybucket/noimg.jpg");
@@ -38,7 +38,7 @@ nhn.husky.SE_Custom = jindo.$Class({
     },
 
     $ON_INSERT_IMAGE : function(){ //본문에 업로드된 이미지 다시한번 삽입
-        let imgPathPre='<img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/';
+        let imgPathPre=`<img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/${this.oApp.customParams.folder}/`;
         let imgPathSuf='"><br/>';
         let sel = $('#lst_img :selected');
         if(sel.length === 0)
@@ -55,7 +55,7 @@ nhn.husky.SE_Custom = jindo.$Class({
 
         $.ajax({
             url:'/admin/deletep',
-            data:{name:sel.text()},
+            data:{name:sel.text(),folder:this.oApp.customParams.folder},
             type:'post',
             dataType:'json',
             success:(e)=>{
@@ -83,7 +83,8 @@ nhn.husky.SE_Custom = jindo.$Class({
             return;
 
         let formData = new FormData(document.getElementById('frmImg'));
-        let imgPathPre='<img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/';
+        formData.set("folder",this.oApp.customParams.folder);
+        let imgPathPre=`<img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/${this.oApp.customParams.folder}/`;
         let imgPathSuf='"><br/>';
 
         $.ajax({
@@ -112,6 +113,8 @@ nhn.husky.SE_Custom = jindo.$Class({
         });
     },
     $ON_PASTE_IMGURL : function(){//업로드 버튼 클릭시 file불러오기 창 열기.
+        //console.log(this.oApp.customParams, this.oApp.customParams.data, this.oApp.customParams.wtf);
+
         $('#frmImg input').click();
     }
 })

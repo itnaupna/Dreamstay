@@ -10,5 +10,9 @@ import java.util.Map;
 public interface AdminNoticeMapper {
     public List<NoticeDto> getList(Map m);
     public int getCount();
+    public int writeNotice(NoticeDto dto);
+    public int modifyNotice(NoticeDto dto);
+    public void deleteNotice(int num);
+    public NoticeDto readNotice(int num);
 }
 

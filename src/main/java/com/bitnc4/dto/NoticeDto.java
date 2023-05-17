@@ -15,5 +15,6 @@ public class NoticeDto {
     int count;
     Timestamp writeday;
 
+    String photo;
 
 }

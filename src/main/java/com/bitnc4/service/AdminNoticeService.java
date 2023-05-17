@@ -2,6 +2,7 @@ package com.bitnc4.service;
 
 import com.bitnc4.dto.NoticeDto;
 import com.bitnc4.mapper.AdminNoticeMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class AdminNoticeService implements AdminNoticeServiceInter{
 
@@ -48,5 +50,34 @@ public class AdminNoticeService implements AdminNoticeServiceInter{
 
 
         return result;
+    }
+
+    @Override
+    public int writeNotice(NoticeDto dto) {
+
+        m.writeNotice(dto);
+        return dto.getNum();
+    }
+
+    @Override
+    public int modifyNotice(NoticeDto dto) {
+        m.modifyNotice(dto);
+        return dto.getNum();
+    }
+
+    @Override
+    public boolean deleteNotice(int num) {
+        try{
+            m.deleteNotice(num);
+            return true;
+        }catch (Exception e) {
+            log.info("err : {}",e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public NoticeDto readNotice(int num) {
+        return m.readNotice(num);
     }
 }

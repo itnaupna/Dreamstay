@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitnc4.mapper.AdminQnaMapper">
-<!--    <select id="getQnaList" parameterType="Map" resultType="QnaBoardDto">
-        select * from board_qna order by num desc LIMIT #{start},#{count};
-    </select>-->
+    <!--    <select id="getQnaList" parameterType="Map" resultType="QnaBoardDto">
+            select * from board_qna order by num desc LIMIT #{start},#{count};
+        </select>-->
 
-   <!-- <select id="getQnaCount" parameterType="int" resultType="int">
-        select count(*) from board_qna
-    </select>-->
+    <!-- <select id="getQnaCount" parameterType="int" resultType="int">
+         select count(*) from board_qna
+     </select>-->
 
     <select id="getQna" parameterType="int" resultType="QnaBoardDto">
         select * from board_qna  where num = #{num}
@@ -55,7 +55,12 @@
         <if test="hotelname != null and !hotelname.equals('전체')">
             and hotelname = #{hotelname}
         </if>
-        order by num desc LIMIT #{start},#{count};
+
+        order by num desc
+
+        <if test="start != -1">
+            LIMIT #{start},#{count}
+        </if>
     </select>
 
     <select id="getQnaCount" parameterType="int" resultType="int">
