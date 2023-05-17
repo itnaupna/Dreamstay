@@ -560,6 +560,24 @@
     .close_inul {
         list-style-type: none;
     }
+
+    .book_memo {
+        margin-top: 50px;
+    }
+
+    .book_memo input[type=text] {
+        width: 900px;
+        height: 100px;
+        text-align: left;
+    }
+
+    .book_memo input[type=text]:focus {
+        outline: none;
+    }
+
+    .book_memo_input{
+        margin-top: 20px;
+    }
 </style>
 
 <div class="book_main">
@@ -646,7 +664,7 @@
                         <span><input type="text" value="" name="nomember_name" class="nomember_name" required></span>
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
-                        <span><input type="text" value="${memberDto.user_name}" name="nomember_name" class="nomember_name" readonly></span>
+                        <span><input type="text" value="${familyname}${firstname}" name="nomember_name" class="nomember_name" readonly></span>
                     </c:if>
                 </div>
 
@@ -774,8 +792,13 @@
                         </ul>
                     </div>
                 </div>
-                <div>
-                    <input type="text" value="" placeholder="요구사항을 적어주세요." name="memo">
+
+
+                <div class="book_memo">
+                    <span>REQUESTS *</span>
+                    <div class="book_memo_input">
+                        <input type="text" name="memo" class="memo" placeholder="추가 요구사항을 적어주세요">
+                    </div>
                 </div>
 
                 <div class="gujung">
