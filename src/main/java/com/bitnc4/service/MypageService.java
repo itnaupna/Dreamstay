@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -46,6 +47,11 @@ public class MypageService implements MypageServiceInter{
         mypageMapper.updateUserInfo(dto);
     }
 
-
+    @Override
+    public List<Map<String, String>> getmemberBookData(String searchnum) {
+        Map<String, String> data = new HashMap<>();
+        data.put("num", searchnum);
+        return mypageMapper.getmemberBookData(data);
+    }
 
 }

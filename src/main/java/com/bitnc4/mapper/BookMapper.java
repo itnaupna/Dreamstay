@@ -2,7 +2,6 @@ package com.bitnc4.mapper;
 
 
 import com.bitnc4.dto.BookDto;
-import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.RoomDto;
 import org.apache.ibatis.annotations.Mapper;
 

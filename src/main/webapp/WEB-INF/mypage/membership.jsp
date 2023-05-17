@@ -2,14 +2,152 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
-    .membership {
-        border: 1px solid red;
+    img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .slider-wrap {
+        /*border: 1px solid red;*/
+        width: 1400px;
+        height: 1500px;
+    }
+    .tac1,
+    .tac2,
+    .tac3,
+    .tac4,
+    .tac5,
+    .tac6,
+    .tac7{
+        position: relative;
+        color: white;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        border-radius: 15px;
+        width: 170px;
+        height: 170px;
+    }
+
+    .tac1 {
+        background-color: #ffcb00;
+    }
+
+    .tac2 {
+        background-color: #8E63DA;
+        flex-wrap: wrap;
+    }
+
+    .tac3 {
+        background-color: #629AF9;
+    }
+
+    .tac4 {
+        background-color: #EB7F53;
+    }
+
+    .tac5 {
+        background-color: #60BDB6;
+    }
+
+    .tac6 {
+        background-color: #3D74D4;
+    }
+
+    .tac7 {
+        background-color: #3D74D4;
+    }
+
+    .tac1:hover .tac1-img,
+    .tac2:hover .tac2-img,
+    .tac3:hover .tac3-img,
+    .tac4:hover .tac4-img,
+    .tac5:hover .tac5-img,
+    .tac6:hover .tac6-img,
+    .tac7:hover .tac7-img {
+        opacity: 1;
+    }
+
+    .tac1-img,
+    .tac2-img,
+    .tac3-img,
+    .tac4-img,
+    .tac5-img,
+    .tac6-img,
+    .tac7-img {
+        position: absolute;
+        /*margin-left: 50px;*/
+        left: 10px;
+        top: 200px;
+        width: 1300px;
         height: 700px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
     }
 </style>
 
-
-<div class="membership">
-
+<div class="slider-wrap">
+    <div class="cont">
+        <div class="tac1">더 많은 혜택, 더 즐거운 여행
+            <img class="tac1-img" src="/photo/tac1.png">
+        </div>
+    </div>
+    <div class="cont">
+        <div class="tac2">
+            <img class="tac1img" src="/photo/test.png">
+            <span>"멤버십으로 더 많은 할인 혜택을 누리세요"</span>
+            <img class="tac2-img" src="/photo/tac2.png">
+        </div>
+    </div>
+    <div class="cont">
+        <div class="tac3">"특별한 혜택과 함께하는 특별한 여행"
+            <img class="tac3-img" src="/photo/tac3.png">
+        </div>
+    </div>
+    <div class="cont">
+        <div class="tac4">"멤버십으로 여행을 더욱 풍요롭게 즐겨보세요"
+            <img class="tac4-img" src="/photo/tac4.png">
+        </div>
+    </div>
+    <div class="cont">
+        <div class="tac5">"더 많은 여행, 더 많은 혜택을"
+            <img class="tac5-img" src="/photo/tac5.png">
+        </div>
+    </div>
+    <div class="cont">
+        <div class="tac6">"여행의 즐거움을 멤버십으로 더 높이세요"
+            <img class="tac6-img" src="/photo/tac6.png">
+        </div>
+    </div>
+    <div class="cont">
+        <div class="tac7">당신의 여행을 더욱 특별하게 만들어드립니다.
+            <img class="tac7-img" src="/photo/tac7.png">
+        </div>
+    </div>
 </div>
+
+<script>
+    $(function () {
+        $('.slider-wrap').slick({
+            slide: 'div',        //슬라이드 되어야 할 태그
+            infinite: true,     //무한 반복 옵션
+            slidesToShow: 4,        // 한 화면에 보여질 컨텐츠 개수
+            slidesToScroll: 1,        //스크롤 한번에 움직일 컨텐츠 개수
+            speed: 500,     // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+            arrows: false,         // 옆으로 이동하는 화살표 표시 여부
+            // dots : true,         // 스크롤바 아래 점으로 페이지네이션 여부
+            autoplay: true,            // 자동 스크롤 사용 여부
+            autoplaySpeed: 1500,         // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+            pauseOnHover: true,        // 슬라이드 이동    시 마우스 호버하면 슬라이더 멈추게 설정
+            vertical: false,        // 세로 방향 슬라이드 옵션
+            // prevArrow : "<button type='button' class='slick-prev'>Previous</button>",
+            // nextArrow : "<button type='button' class='slick-next'>Next</button>",
+            draggable: true,     //드래그 가능 여부
+        });
+    })
+</script>
