@@ -14,4 +14,5 @@ public interface QnaBoardServiceInter {
     public QnaBoardDto getQna (int num);
     public void deleteQna(int num);
     public int getQnaCount(String witer);
+   /* public void updateQnaBoard(QnaBoardDto dto);*/
 }

@@ -109,7 +109,7 @@
             <tr class="qnaupload">
                 <td>파일첨부</td>
                 <td>
-                    <input type="file" name="photo" class="form-control">
+                    <input type="file" name="photo" class="form-control" multiple>
                 </td>
             </tr>
 

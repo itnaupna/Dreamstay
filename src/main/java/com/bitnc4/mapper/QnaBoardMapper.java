@@ -19,8 +19,9 @@ public interface QnaBoardMapper {
     public List<QnaBoardDto> qnaList(Map<String, Object> map);
     public QnaBoardDto getQna (int num);
     public void deleteQna(int num);
-    public void upateQnaAnswer(QnaBoardDto dto);
+    //관리자가 답변
+   /* public void upateQnaAnswer(QnaBoardDto dto);*/
     public int getQnaCount(String witer);
-
+    public void insertQnaPhoto(QnaBoardDto dto);
 
 }

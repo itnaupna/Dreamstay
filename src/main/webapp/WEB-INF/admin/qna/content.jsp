@@ -36,11 +36,11 @@
 
 <c:if test="${dto.answer== '답변완료'}">
     <div class="anserwqna" style="border: 1px solid gray; height: 200px;">
-
         <span>관리자 답글</span> <br><br>
         <span id="answer-admin">${dto.answer_text}</span>
     </div>
 </c:if>
+
 
 <form name="answer-form" method="post">
     <input type="hidden" name="num" value="${dto.num}">
@@ -57,14 +57,15 @@
                 type: 'POST',
                 url: './answerupdate',
                 data: $("form[name=answer-form]").serialize(),
-                dataType: 'json',
-                success: function(response) {
-                    $("#answer-admin").html(`<span>${response.answer_text}</span>`);
+                dataType: 'text',
+                success: function(e) {
+
+                    $("#answer-admin").html(e.answer_text);
                     $("form[name=answer-form]")[0].reset(); // 폼 리셋
+                    alert("답변 작성 완료되었습니다");
+                    location.reload(); // 새로고침
                 }
             });
         });
     });
-</script>
-
 </script>

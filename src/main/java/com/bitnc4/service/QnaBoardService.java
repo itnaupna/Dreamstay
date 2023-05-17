@@ -60,4 +60,5 @@ public class QnaBoardService implements QnaBoardServiceInter {
         return qnaBoardMapper.getQnaCount(witer);
     }
 
+
 }

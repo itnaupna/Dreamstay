@@ -146,30 +146,17 @@ public class AdminController {
         return "/admin/qna/list";
     }
 
-   /* @GetMapping("/qna/list/{page}")
-    @ResponseBody
-    public List<Object> getQnaList(@PathVariable int page)
-    {
-        List<Object> result = new ArrayList<>();
-        result.add(adminQnaServeice.getQnaList(page));
-        result.add(adminQnaServeice.getQnaCount(page));
-
-        return result;
-    }*/
-
     @GetMapping("/qna/content")
     public String content(int num, Model model)
     {
 
-            QnaBoardDto dto = adminQnaServeice.getQna(num);
-            model.addAttribute("dto", dto);
+        QnaBoardDto dto = adminQnaServeice.getQna(num);
+        model.addAttribute("dto", dto);
 
 
-            return "/admin/qna/content";
+        return "/admin/qna/content";
 
     }
-
-
 
     @PostMapping("/qna/answerupdate")
     public String answerupdate(QnaBoardDto dto)
@@ -205,19 +192,5 @@ public class AdminController {
         return result;
     }
 
- /*   @GetMapping("/getSearchQna")
-    @ResponseBody
-    private List<QnaBoardDto> searchQnaList(String searchtype,String keyword, Model model, String qna_type, int category, String answer)
-    {
-        QnaBoardDto dto = new QnaBoardDto();
-        dto.setAnswer(answer);
-        dto.setQna_type(qna_type);
-        dto.setCategory(category);
-        dto.setSearchtype(searchtype);
-        dto.setKeyword(keyword);
-
-        return adminQnaServeice.searchQnaList(dto);
-    }*/
 
 }
-

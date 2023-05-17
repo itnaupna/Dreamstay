@@ -45,6 +45,7 @@ public class QnaboardController {
                             HttpServletRequest request,
                             HttpSession session,
                             MultipartFile photo)
+                            //List<MultipartFile> photo)
     {
 
         String filename="";
@@ -53,8 +54,25 @@ public class QnaboardController {
             filename = storageService.uploadFile(bucketName, "qnaboard", photo);
         }
 
+
+
         // dto에 photo 저장\
         dto.setQna_photo(filename);
+
+
+   /*     if(photo!=null) {
+            System.out.println("size:"+photo.size());
+
+            for(MultipartFile file:photo)
+            {
+                //List<String> photoNames=new ArrayList<>();
+                //스토리지에 업로드하기
+                String photoname=storageService.uploadFile(bucketName, "qnaboard", file);
+                //업로드한 파일명을 db 에 저장
+                dto.setQna_photo(photoname);
+
+            }
+        }*/
 
         // 아이디 저장 세션에 저장된 id
         String writer=(String)session.getAttribute("userid");
@@ -73,6 +91,9 @@ public class QnaboardController {
         // 사용일자 파싱
         String usedayStr = request.getParameter("useday");
         System.out.println(usedayStr);
+
+        String resrevenum = request.getParameter("resrevenum");
+        dto.setReservenum(resrevenum);
 
         qnaBoardService.insertqna(dto);
 
@@ -97,7 +118,7 @@ public class QnaboardController {
         //게시판의 총 글갯수 얻기
         int totalCount= qnaBoardService.getQnaCount(writer);
         int totalPage;//총 페이지수
-        int perPage=10; //한 페이지당 보여질 글의 갯수
+        int perPage=5; //한 페이지당 보여질 글의 갯수
         int perBlock=10;//한 블럭당 보여질 페이지의 갯수
         int startNum;//각 페이지에서 보여질 글의 시작번호
         int startPage;//각 블럭에서 보여질 시작 페이지번호
@@ -157,6 +178,39 @@ public class QnaboardController {
 
         return "redirect:/mypage/qnalist";
     }
+
+ /*   @PostMapping("/updateQnaBoard")
+    public String updateQnaBoard(QnaBoardDto dto,MultipartFile photo,int currentPage){
+
+        String filename="";
+        if(!photo.getOriginalFilename().equals("")) {
+            //기존 파일명 알아내기
+            filename=qnaBoardService.getQna(dto.getNum()).getQna_photo();
+            //버켓에서 삭제
+            storageService.deleteFile(bucketName, "qnaboard", filename);
+
+            //다시 업로드후 업로드한 파일명 얻기
+            filename=storageService.uploadFile(bucketName, "qnaboard", photo);
+        }
+        dto.setQna_photo(filename);
+
+        qnaBoardService.updateQnaBoard(dto);
+
+        return "/mypage/qnadetail?num="+dto.getNum()+"&currentPage="+currentPage;
+
+    }
+
+    @GetMapping("/mypage/updateqna")
+    public String updateqna(int num,int currentPage,Model model)
+    {
+        QnaBoardDto dto=qnaBoardService.getQna(num);
+
+        model.addAttribute("dto", dto);
+        model.addAttribute("currentPage", currentPage);
+
+        return "/mypage/qnaboard/qnaupdateform";
+    }
+*/
 
 
 }
