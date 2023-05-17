@@ -619,12 +619,12 @@
                     <span>객실예약</span>
                     <div class="for_num">
                         <fmt:formatNumber type="number" value="${roomprice }" pattern="#,##0원"/>
-                        <input type="hidden" name="roomprice" value="${roomprice }">
+                        <input type="hidden" name="roomprice" value="${roomprice }" required>
                     </div>
                     <hr class="sidehr">
                     <div class="divbtn">
                         <input type="hidden" name="peopleinfo">
-                        <button type="submit" class="paybtn" onclick="payments();peopleinfo();">예약완료</button>
+                        <button type="submit" class="paybtn" onclick="payments();">예약완료</button>
                     </div>
                 </div>
             </div>
@@ -643,7 +643,7 @@
                 <div class="pay_name">
                     <p>RESERVATION NAME *</p>
                     <c:if  test="${memberDto.user_name == null}">
-                        <span><input type="text" value="" name="nomember_name" class="nomember_name"></span>
+                        <span><input type="text" value="" name="nomember_name" class="nomember_name" required></span>
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
                         <span><input type="text" value="${memberDto.user_name}" name="nomember_name" class="nomember_name" readonly></span>
@@ -653,7 +653,7 @@
                 <div class="pay_phone">
                     <span>PHONE NUMBER *</span>
                     <c:if  test="${memberDto.user_name == null}">
-                        <input type="text" id="pay_phone" name="pay_phone" value="">
+                        <input type="text" id="pay_phone" name="pay_phone" value="" required>
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
                         <input type="text" id="pay_phone" name="pay_phone" value="${memberDto.phone}" readonly>
@@ -664,7 +664,7 @@
                     <span class="sp_email">EMAIL *</span>
                     <c:if  test="${memberDto.user_name == null}">
                         <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
-                               value="">
+                               value="" required>
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
                         <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
@@ -672,7 +672,7 @@
                     </c:if>
                     <span id="at">@</span>
                     <c:if  test="${memberDto.user_name == null}">
-                        <input type="text" name="input_domain" class="input_domain" id="input_domain" value="">
+                        <input type="text" name="input_domain" class="input_domain" id="input_domain" value="" required>
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
                         <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}" readonly>
@@ -680,7 +680,6 @@
                     <div class="email_selectbox">
                         <div id="email_select_domain">직접 입력</div>
                         <ul id="email_custom_option">
-                            <li class="email_select_option">직접 입력</li>
                             <li class="email_select_option">naver.com</li>
                             <li class="email_select_option">gmail.com</li>
                             <li class="email_select_option">hanmail.net</li>
@@ -693,7 +692,7 @@
                 <div class="pay_card">
                     <p>CREDIT CARD *</p>
                     <label>
-                        <input type="checkbox" class="chcard" id="chcard" name="gaein">
+                        <input type="checkbox" class="chcard" id="chcard" name="gaein" checked>
                         <span>개인</span>
                     </label>
 
@@ -706,7 +705,7 @@
                 <span class="ex_card">CREDIT CARD COMPANY*</span>
                 <div class="selectli2">
                     <div class="custom-select2">
-                        <input type="hidden" value="" name="company" id="company">
+                        <input type="hidden" value="" name="company" id="company" required>
                         <div class="selected2">카드선택</div>
                         <ul class="options2">
                             <li class="options2_list">비씨</li>
@@ -739,7 +738,7 @@
                 <span class="ex_date">EXPIRY DATE *</span>
                 <div class="selectli">
                     <div class="custom-select">
-                        <input type="hidden" value="" name="card_month" id="card_month">
+                        <input type="hidden" value="" name="card_month" id="card_month" required>
                         <div class="selected">월</div>
                         <ul class="options">
                             <li class="options_list">1월</li>
@@ -758,7 +757,7 @@
                     </div>
 
                     <div class="custom-select1">
-                        <input type="hidden" value="" name="card_year" id="card_year">
+                        <input type="hidden" value="" name="card_year" id="card_year" required>
                         <div class="selected1">년도</div>
                         <ul class="options1">
                             <li class="options1_list">2023년</li>
@@ -785,7 +784,7 @@
 
                     <ul class="open_ul">
                         <li class="open_li">
-                            <input type="checkbox">
+                            <input type="checkbox" required>
                             <label class="clickimg">
                                 [필수] 취소 및 노쇼(No - Show) 규정에 동의합니다
                             </label>
@@ -957,5 +956,6 @@
         var selected1 = $(this).text();
         $("#card_year").val(selected1);
     });
+
 
 </script>

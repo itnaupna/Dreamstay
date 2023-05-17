@@ -170,7 +170,8 @@ public class BookController {
         var email = username + "@" + domain;
         var phone = request.getParameter("pay_phone");
         var addr = "비회원 예약 입니다.";
-        
+
+
         int user_num;
         try {//회원이면 그냥 회원번호 받아오기
             user_num = ((MemberDto)session.getAttribute("loginuser")).getNum();
@@ -183,8 +184,10 @@ public class BookController {
             mdto.setEmail(email);
             mdto.setPhone(phone);
             mdto.setAddr(addr);
+            session.setAttribute("nomemberId",nomemberId);
+            session.setAttribute("nomemberusername", username);
 
-           bookService.insert_nomember(mdto);
+            bookService.insert_nomember(mdto);
 
             user_num = bookService.maxMemberNum();
 
@@ -239,7 +242,20 @@ public class BookController {
 
 
 
-        return "redirect:/";
+        return "redirect:/booksuccess";
+    }
+
+    @RequestMapping("/booksuccess")
+    public String pop(BookDto bdto, MemberDto mdto, HttpSession session, Model model){
+        MemberDto dto = (MemberDto) session.getAttribute("loginuser");
+        model.addAttribute("memberDto", dto);
+        String nomemberId = (String) session.getAttribute("nomemberId");
+        String nomemberusername = (String) session.getAttribute("nomemberusername");
+        model.addAttribute("nomemberId",nomemberId);
+        model.addAttribute("nomemberusername",nomemberusername);
+        System.out.println(nomemberId);
+
+        return "/main/book/booksuccess";
     }
 }
 

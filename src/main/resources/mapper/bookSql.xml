@@ -34,7 +34,7 @@
 
     <insert id="insert_nomember" parameterType="MemberDto">
         insert into member (num, id, pw, user_name, email, phone, user_level, addr, account_lock, email_code, point, issocial)
-        values (null, #{id }, sha2(#{phone}, 256),#{user_name }, #{email }, #{phone }, 0, #{addr }, 0, 0, null, 0);
+        values (null, #{id }, sha2(#{phone}, 256),#{user_name }, #{email }, #{phone }, 0, #{addr }, 0, 0, null, 9);
     </insert>
 
     <select id="select_card" parameterType="CardDto" resultType="String">
