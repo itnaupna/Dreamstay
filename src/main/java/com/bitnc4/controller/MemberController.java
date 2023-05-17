@@ -20,6 +20,8 @@ import java.util.HashMap;
 @RequestMapping("/signup")
 public class MemberController {
 
+    private final String kCode = "09e7bd588320e6991f62d894f6a723a6";
+
     @Autowired
     MemberService memberService;
 
@@ -186,13 +188,22 @@ public class MemberController {
         }
         return lockCount;
     }
+    
+    // 카카오 키 가져오기
+    @PostMapping("/kcode")
+    @ResponseBody
+    public String kCode() {
+        System.out.println(kCode);
+        return kCode;
+    }
 
     // 카카오 로그인
     @PostMapping("/kakaologin")
     @ResponseBody
-    public String kakaoLogin(MemberDto socialLogin, HttpSession session) {
-        boolean memberChk = memberService.getSocialMember(socialLogin.getId(), String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial() ) != null;
+    public String kakaoLogin(MemberDto socialLogin, String social, HttpSession session) {
+        boolean memberChk = memberService.getSocialMember(socialLogin.getId(), String.valueOf(socialLogin.getIssocial()), social ) != null;
         System.out.println(memberChk);
+        System.out.println(socialLogin.getUser_name());
         if(memberChk) {
             System.out.println("아이디 있음");
             session.setAttribute("loginuser", socialLogin);
@@ -214,8 +225,8 @@ public class MemberController {
     // 네이버 로그인
     @PostMapping("/naverlogin")
     @ResponseBody
-    public String naverLogin(MemberDto socialLogin, HttpSession session) {
-        boolean memberChk = memberService.getSocialMember(socialLogin.getId() , String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial()) != null;
+    public String naverLogin(MemberDto socialLogin, String social, HttpSession session) {
+        boolean memberChk = memberService.getSocialMember(socialLogin.getId() , String.valueOf(socialLogin.getIssocial()), social) != null;
         System.out.println(memberChk);
         if(memberChk) {
             System.out.println("아이디 있음");
