@@ -1,12 +1,9 @@
 package com.bitnc4.controller;
 
-import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.service.HotelService;
 import com.bitnc4.service.MemberService;
-import com.sun.tools.jconsole.JConsoleContext;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.security.NoSuchAlgorithmException;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 
 @Slf4j
 @Controller

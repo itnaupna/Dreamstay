@@ -96,3 +96,22 @@ $(function(){
 
     });
 });
+
+// 호텔 디테일로 이동
+$(document).on("click", ".header_hotel_list",function(){
+    location.href="/hotel/hoteldetail?num="+$(this).val();
+});
+
+$(function() {
+    $.ajax({
+        url: "/hotel/hotellist",
+        type: "get",
+        success: function(data){
+            let hotelList = "";
+            $.each(data, function(i, d) {
+                hotelList += `<li class="header_hotel_list" value="${d.num}">${d.name}</li>`;
+            });
+            $("#hotel_list").html(hotelList);
+        }
+    });
+});
