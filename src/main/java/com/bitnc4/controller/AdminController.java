@@ -95,7 +95,7 @@ public class AdminController {
         }
         return data.getNum()==0 ? adminHnRService.insertHotel(data) : adminHnRService.updateHotelDetail(data);
     }
-
+//
     @PostMapping("/uploadp")
     @ResponseBody
     public List<String> uploadp(List<MultipartFile> file){

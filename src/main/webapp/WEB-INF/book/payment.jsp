@@ -560,35 +560,6 @@
     .close_inul {
         list-style-type: none;
     }
-
-    .pay_name input[type=text] {
-        border: none;
-        border-bottom: 1px solid #aaa;
-        width: 300px;
-        height: 40px;
-    }
-
-    .pay_name input[type=text]:focus {
-        outline: none;
-    }
-
-    .book_memo {
-        margin-top: 50px;
-    }
-
-    .book_memo input[type=text] {
-        width: 900px;
-        height: 100px;
-        text-align: left;
-    }
-
-    .book_memo input[type=text]:focus {
-        outline: none;
-    }
-
-    .book_memo_input{
-        margin-top: 20px;
-    }
 </style>
 
 <div class="book_main">
@@ -614,6 +585,8 @@
                     <dd><input type="text" value="${hotelname }" readonly="readonly"></dd>
                 </dl>
 
+                <input type="hidden" value="${sessionScope.checkIn}" name="checkIn">
+                <input type="hidden" value="${sessionScope.checkOut}" name="checkOut">
                 <dl class="dl02">
                     <dt>DATE</dt>
                     <dd><input type="text" value="${sessionScope.checkInShow}" readonly="readonly">
@@ -627,12 +600,12 @@
 
                 <dl class="dl04">
                     <dt>ADULT</dt>
-                    <dd><input type="text" value="${sessionScope.adultCount}" readonly="readonly"></dd>
+                    <dd><input type="text" value="${sessionScope.adultCount}" readonly="readonly" name="adultCount"></dd>
                 </dl>
 
                 <dl class="dl05">
                     <dt>CHILDREN</dt>
-                    <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly"></dd>
+                    <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly" name="childrenCount"></dd>
                 </dl>
 
                 <button type="button" onclick="location.href='/'" class="mainbtn">MAIN PAGE</button>
@@ -646,9 +619,11 @@
                     <span>객실예약</span>
                     <div class="for_num">
                         <fmt:formatNumber type="number" value="${roomprice }" pattern="#,##0원"/>
+                        <input type="hidden" name="roomprice" value="${roomprice }" required>
                     </div>
                     <hr class="sidehr">
                     <div class="divbtn">
+                        <input type="hidden" name="peopleinfo">
                         <button type="submit" class="paybtn" onclick="payments();">예약완료</button>
                     </div>
                 </div>
@@ -661,35 +636,50 @@
                 </div>
 
                 <div class="pay_room">
+                    <input type="hidden" name="roomnum" value="${roomnum }">
                     <p>TYPE : ${roomtype}</p>
                 </div>
 
                 <div class="pay_name">
                     <p>RESERVATION NAME *</p>
-                    <c:if test="${memberDto.user_name == null}">
-                        <span><input type="text" value="" name="nomember_name" class="nomember_name"></span>
+                    <c:if  test="${memberDto.user_name == null}">
+                        <span><input type="text" value="" name="nomember_name" class="nomember_name" required></span>
                     </c:if>
-                    <c:if test="${memberDto.user_name != null}">
-                        <span><input type="text" value="${familyname}${firstname}" name="nomember_name"
-                                     class="nomember_name"></span>
+                    <c:if  test="${memberDto.user_name != null}">
+                        <span><input type="text" value="${memberDto.user_name}" name="nomember_name" class="nomember_name" readonly></span>
                     </c:if>
                 </div>
 
                 <div class="pay_phone">
                     <span>PHONE NUMBER *</span>
-                    <input type="text" id="pay_phone" name="pay_phone" value="${memberDto.phone}">
+                    <c:if  test="${memberDto.user_name == null}">
+                        <input type="text" id="pay_phone" name="pay_phone" value="" required>
+                    </c:if>
+                    <c:if  test="${memberDto.user_name != null}">
+                        <input type="text" id="pay_phone" name="pay_phone" value="${memberDto.phone}" readonly>
+                    </c:if>
                 </div>
 
                 <div class="pay_email">
                     <span class="sp_email">EMAIL *</span>
-                    <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
-                           value="${username}">
+                    <c:if  test="${memberDto.user_name == null}">
+                        <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
+                               value="" required>
+                    </c:if>
+                    <c:if  test="${memberDto.user_name != null}">
+                        <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
+                               value="${username}" readonly>
+                    </c:if>
                     <span id="at">@</span>
-                    <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}">
+                    <c:if  test="${memberDto.user_name == null}">
+                        <input type="text" name="input_domain" class="input_domain" id="input_domain" value="" required>
+                    </c:if>
+                    <c:if  test="${memberDto.user_name != null}">
+                        <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}" readonly>
+                    </c:if>
                     <div class="email_selectbox">
                         <div id="email_select_domain">직접 입력</div>
                         <ul id="email_custom_option">
-                            <li class="email_select_option">직접 입력</li>
                             <li class="email_select_option">naver.com</li>
                             <li class="email_select_option">gmail.com</li>
                             <li class="email_select_option">hanmail.net</li>
@@ -702,7 +692,7 @@
                 <div class="pay_card">
                     <p>CREDIT CARD *</p>
                     <label>
-                        <input type="checkbox" class="chcard" id="chcard" name="gaein">
+                        <input type="checkbox" class="chcard" id="chcard" name="gaein" checked>
                         <span>개인</span>
                     </label>
 
@@ -715,7 +705,7 @@
                 <span class="ex_card">CREDIT CARD COMPANY*</span>
                 <div class="selectli2">
                     <div class="custom-select2">
-                        <input type="hidden" value="" name="company" id="company">
+                        <input type="hidden" value="" name="company" id="company" required>
                         <div class="selected2">카드선택</div>
                         <ul class="options2">
                             <li class="options2_list">비씨</li>
@@ -739,16 +729,16 @@
 
                 <div class="cardnumber">
                     <p>CARD NUMBER *</p>
-                    <input type="text" class="c_num" id="c_num1" placeholder="CARD NUMBER">
-                    <input type="text" class="c_num" id="c_num2">
-                    <input type="text" class="c_num" id="c_num3">
-                    <input type="text" class="c_num" id="c_num4">
+                    <input type="text" class="c_num" id="c_num1" placeholder="CARD NUMBER" name="c_num1" maxlength="4">
+                    <input type="text" class="c_num" id="c_num2" name="c_num2" maxlength="4">
+                    <input type="text" class="c_num" id="c_num3" name="c_num3" maxlength="4">
+                    <input type="text" class="c_num" id="c_num4" name="c_num4" maxlength="4">
                 </div>
 
                 <span class="ex_date">EXPIRY DATE *</span>
                 <div class="selectli">
                     <div class="custom-select">
-                        <input type="hidden" value="" name="card_month" id="card_month">
+                        <input type="hidden" value="" name="card_month" id="card_month" required>
                         <div class="selected">월</div>
                         <ul class="options">
                             <li class="options_list">1월</li>
@@ -767,7 +757,7 @@
                     </div>
 
                     <div class="custom-select1">
-                        <input type="hidden" value="" name="card_year" id="card_year">
+                        <input type="hidden" value="" name="card_year" id="card_year" required>
                         <div class="selected1">년도</div>
                         <ul class="options1">
                             <li class="options1_list">2023년</li>
@@ -784,12 +774,8 @@
                         </ul>
                     </div>
                 </div>
-
-                <div class="book_memo">
-                    <span>REQUESTS *</span>
-                    <div class="book_memo_input">
-                        <input type="text" name="memo" class="memo" placeholder="추가 요구사항을 적어주세요">
-                    </div>
+                <div>
+                    <input type="text" value="" placeholder="요구사항을 적어주세요." name="memo">
                 </div>
 
                 <div class="gujung">
@@ -798,7 +784,7 @@
 
                     <ul class="open_ul">
                         <li class="open_li">
-                            <input type="checkbox">
+                            <input type="checkbox" required>
                             <label class="clickimg">
                                 [필수] 취소 및 노쇼(No - Show) 규정에 동의합니다
                             </label>
@@ -957,17 +943,19 @@
         });
     }
 
-    $(".options2_list").click(function () {
+
+    $(".options2_list").click(function (){
         var selected2 = $(this).text();
         $("#company").val(selected2);
     });
-    $(".options_list").click(function () {
+    $(".options_list").click(function (){
         var selected = $(this).text();
         $("#card_month").val(selected);
     });
-    $(".options1_list").click(function () {
+    $(".options1_list").click(function (){
         var selected1 = $(this).text();
         $("#card_year").val(selected1);
     });
+
 
 </script>

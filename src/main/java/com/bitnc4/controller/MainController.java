@@ -43,6 +43,8 @@ public class MainController {
     public String main(Model m){
         List<HotelDto> list = adminHnRService.getHotels();
         m.addAttribute("list",list);
+        /*session.setAttribute("nomemberId",null);
+        session.setAttribute("nomemberusername", null);*/
         return "/main";
     }
 
