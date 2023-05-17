@@ -175,7 +175,7 @@ public class BookController {
         var addr = "비회원 예약 입니다.";
         int num = ((MemberDto)session.getAttribute("loginuser")).getNum();
 
-   /* if(session.getAttribute()){*/
+    if(num == null){
        mdto.setId(nomemberId);
        mdto.setPw(pass);
        mdto.setUser_name(username);
@@ -186,7 +186,7 @@ public class BookController {
 
 
        bookService.insert_nomember(mdto);
-   /*}*/
+   }
 
 
 
