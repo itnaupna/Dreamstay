@@ -60,12 +60,8 @@ public class MyPageController {
     public void changeinfo(HttpSession session,Model model,MemberDto dto)
     {
         dto.setId(((MemberDto)session.getAttribute("loginuser")).getId());
-
         mypageService.updateUserInfo(dto);
-
         session.setAttribute("loginuser", dto);
-
-
     }
 
     @GetMapping("/updatepass")
@@ -137,4 +133,9 @@ public class MyPageController {
         return "/mypage/dining";
     }
 
+    @GetMapping("/test")
+    public String test()
+    {
+        return "/mypage/test";
+    }
 }
