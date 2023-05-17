@@ -2,15 +2,64 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <style>
-    .qnaboard table{
-        position: absolute;
-        top: 150px;
+
+    .qnaform .qnahotel, .qnaform .qnacategory{
+        background-color: white;
+        border: none;
+        border-bottom: 1px solid black;
+        padding: 5px;
+        cursor: pointer;
+        font-size: 17px;
+        background: #ffffff url("/photo/arrow_196221.png") no-repeat;
+        background-position: 96% center;
+        background-size: 10px 10px;
     }
+
+    .qnaform .property{
+        /*border: 1px solid red;*/
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 926px;
+    }
+
+    .qnaform .hotelselect, .qnaform .categoryselect {
+        position: relative;
+        width: 400px;
+        margin-top: 30px;
+    }
+
+    .qnaform .qnahotellist, .qnaform .categoryllist {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-top: none;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: none;
+        overflow-y: scroll;
+        max-height: 150px;
+        z-index: 10;
+    }
+
+    .qnaform .qnahotellist li, .qnaform .categorylist li {
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .qnaform .qnahotellist li:hover, .qnaform .categorylist li:hover {
+        background-color: white;
+    }
+
+
 </style>
 
 <script type="text/javascript">
@@ -47,97 +96,129 @@
         });
     });
 
+
+
 </script>
 
 
-<div class="qnaboard">
+<div class="qnaform">
     <form action="/insertqna" method="post" name="qnaboard" enctype="multipart/form-data">
-        <table class="table table qnatable" style="width: 700px;">
-            <tr>
-                <td style="width: 250px;"><span>*</span>호텔</td>
-                <td style="width: 350px;">
-                    <div class="hotelselect">
-                        <select name="hotelname" class="form-control">
-                            <option value="그랜드조선 서울">그랜드조선 서울</option>
-                            <option value="그랜드조선 부산">그랜드조선 부산</option>
-                            <option value="그랜드조선 제주">그랜드조선 제주</option>
-                            <option value="그랜드조선 여수">그랜드조선 여수</option>
-                            <option value="그랜드조선 속초">그랜드조선 속초</option>
-                        </select>
 
-                        <input type="radio" name="qna_type"  value="문의" checked>문의
-                        <input type="radio" name="qna_type"  value="의견">의견
+       <%--의견 문의 선택--%>
+        <div class="typeselect">
+            <span>TYPE *</span>
+            <input type="radio" name="qna_type" value="문의" checked>문의
+            <input type="radio" name="qna_type" value="의견">의견
 
-                    </div>
-                </td>
-            </tr>
+        </div>
 
-            <tr>
-                <td style="width: 250px;"><span>*</span>관련문의</td>
-                <td style="width: 350px;">
-                    <select name="category" style="width: 200px; " class="form-control">
-                        <option value="1">가입문의</option>
-                        <option value="2">예약문의</option>
-                        <option value="3">객실/패키지문의</option>
-                        <option value="4">기타</option>
-                    </select>
-                </td>
-            </tr>
+        <%--호텔 선택--%>
+        <div class="property">
+            <div class="hotelselect">
+                <span>PROPERTY *</span>
+                <div class="qnahotel">호텔 선택</div>
+                    <input type="hidden" value="" name="hotelname" id="hotelname">
+                        <ul class="qnahotellist">
+                            <li class="hotel_list" value="그랜드조선 서울">그랜드조선 서울</li>
+                            <li class="hotel_list" value="그랜드조선 부산">그랜드조선 부산</li>
+                            <li class="hotel_list" value="그랜드조선 제주">그랜드조선 제주</li>
+                            <li class="hotel_list" value="그랜드조선 여수">그랜드조선 여수</li>
+                            <li class="hotel_list" value="그랜드조선 속초">그랜드조선 속초</li>
+                        </ul>
+            </div>
+        </div>
 
-            <tr class="reserveno">
-                <td>예약번호</td>
-                <td><input type="text" name="resrevenum" class="form-control"></td>
-            </tr>
+           <%--관련 문의--%>
+           <div class="category">
+               <div class="categoryselect">
+                   <span>CATEGORY *</span>
+                   <div class="qnacategory">카테고리 선택</div>
+                   <input type="hidden" value="" name="category" id="category">
+                   <ul class="categoryllist">
+                       <li class="category_list" value="1">가입문의</li>
+                       <li class="category_list" value="2">예약문의</li>
+                       <li class="category_list" value="3">객실/패키지문의</li>
+                       <li class="category_list" value="4">기타</li>
+                   </ul>
+               </div>
+           </div>
 
-            <tr class="useday">
-                <td>이용한 날짜</td>
-                <td><input class="form-control flatpickr flatpickr-input" type="date" name="useday"></td>
-            </tr>
 
-            <tr class="qnasubject" >
-                <td><span>*</span>제목</td>
-                <td><input type="text" name="subject" class="form-control"></td>
-            </tr>
+        <div>
+                예약번호
+               <input type="text" name="resrevenum" class="form-control">
+        </div>
 
-            <tr>
-                <td>내용</td>
-                <td>
+            <div class="useday">
+               이용한 날짜
+               <input class="flatpickr flatpickr-input" type="date" name="useday">
+            </div>
+
+            <div class="qnasubject" >
+                <span>*</span>제목
+                <input type="text" name="subject" class="form-control">
+            </div>
+
+            <div>
+                내용
+
                     <textarea name="content" class="form-control"></textarea>
-                </td>
-            </tr>
+            </div>
 
-            <tr class="qnaupload">
-                <td>파일첨부</td>
-                <td>
+            <div class="qnaupload">
+                파일첨부
                     <input type="file" name="photo" class="form-control" multiple>
-                </td>
-            </tr>
+            </div>
 
-            <tr>
-                <td><span>*</span>성명</td>
-                <td>
-                    <input type="text" name="qna_name" value="${memberDto.user_name}" class="form-control">
-                </td>
-            </tr>
+            <div>
+                <span>*</span>성명
 
-            <tr>
-                <td><span>*</span>이메일</td>
-                <td><input type="text" name="qna_email" value="${memberDto.email}" class="form-control"> </td>
-            </tr>
+                <input type="text" name="qna_name" value="${memberDto.user_name}" class="form-control">
+            </div>
 
-            <tr>
-                <td><span>*</span>핸드폰번호</td>
-                <td><input type="text" name="qna_phone" value="${memberDto.phone}" class="form-control"></td>
-            </tr>
+            <div>
+                <span>*</span>이메일
+                <input type="text" name="qna_email" value="${memberDto.email}" class="form-control">
+            </div>
 
-            <tr>
-                <td colspan="2" style="text-align: center">
-                    <button type="submit" class="btn btn-outline-secondary">등록</button>
-                </td>
-            </tr>
+            <div>
+                <span>*</span>핸드폰번호
+                <input type="text" name="qna_phone" value="${memberDto.phone}" class="form-control">
+            </div>
 
-
-        </table>
+            <div>
+                    <button type="submit" class="">등록</button>
+            </div>
 
     </form>
 </div>
+
+<script type="text/javascript">
+
+    //호텔선택
+    const select = document.querySelector('.hotelselect');
+    const selected = select.querySelector('.qnahotel');
+    const options = select.querySelector('.qnahotellist');
+
+    selected.addEventListener('click', () => {
+        if (options.style.display === 'none') {
+            options.style.display = 'block';
+        } else {
+            options.style.display = 'none';
+        }
+    });
+
+    options.addEventListener('click', (event) => {
+        selected.textContent = event.target.textContent;
+        options.style.display = 'none';
+    });
+
+    $(".hotel_list").click(function () {
+        var selectedText = $(this).text();
+        $("#hotelname").val(selectedText);
+        options.style.display = 'none';
+    });
+
+
+
+</script>

@@ -2,10 +2,6 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-<%--<h1>detail</h1>--%>
 
 <style>
 
@@ -16,17 +12,18 @@
         border-radius: 40px;
         color: #fff;
         font-size: 27px;
-        margin-top: 20px;
+        margin-top: -6px;
 
     }
 
     #qnapage{
         border-top: 2px solid #ccc;
+        margin-top: 32px;
     }
 
     #qnapage .Q>span{
-        position: absolute;
-        top: 32px;
+        position: relative;
+       top: 10px;
     }
 
     .qnatitle{
@@ -37,9 +34,10 @@
         margin-left: 20px;
         font-size: 30px;
         font-weight: bold;
-       /* border: 1px solid black;*/
+/*        border: 1px solid black;*/
         width: 1000px;
-        height: 65px;
+        height: 40px;
+        margin-top: 5px;
     }
 
     .daegi{
@@ -74,6 +72,22 @@
 
     .answerinfo span{
         margin-right: 8px;
+    }
+
+    #qnapage{
+        border-collapse: collapse;
+    }
+
+    #qnapage tr{
+        border-bottom: 1px solid #ccc;
+    }
+
+    #aswertable {
+        border-collapse: collapse;
+    }
+
+    #aswertable tr{
+        border-bottom: 1px solid #ccc;
     }
 
     #aswertable .A {
@@ -131,22 +145,17 @@
 
     }
 
-
-
-
-
-
 </style>
 
-<table class="table table" id="qnapage">
+<table id="qnapage">
 
     <tr>
-        <td style="height: 140px; line-height: 80px;">
+        <td style="height: 140px; line-height: 20px;">
 
             <div class="qnatitle">
                 <%--Q모양--%>
                 <div class="Q">
-                    <span style="margin-left: 13px; margin-top: 8px;">Q</span>
+                    <span style="margin-left: 13px; margin-top: 5px;">Q</span>
                 </div>
 
                 <%--제목--%>
@@ -165,7 +174,7 @@
                     </div>
                 </div>
 
-                <div class="qnainfo" style="border: 1px; position: absolute; top: 96px;">
+                <div class="qnainfo" style="border: 1px; position: absolute; top: 160px;">
                     <span style="color: #968a8b;">문의구분 : </span><span>${dto.qna_type} / </span>
                     <c:if test="${dto.category==1}">
                         <span>가입문의</span>
@@ -226,37 +235,20 @@
         </c:if>
 
         <tr style="height: 100px;">
-            <td>${dto.content}</td>
+            <td style="font-size: 18px;">${dto.content}</td>
         </tr>
 </table>
 
-
-
-<%--<div>
-    제목 : ${dto.subject} <br>
-    작성일 : <fmt:formatDate value="${dto.writeday}" pattern="yyyy-MM-dd HH:mm" /><br>
-    작성자 : ${dto.qna_name}<br>
-    email : ${dto.qna_email}<br>
-    호텔 : ${dto.hotelname}<br>
-    내용 : ${dto.content}<br>
-    <c:if test="${dto.qna_photo != ''}">
-        <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/qnaboard/${dto.qna_photo}?type=f&w=160&h=160&faceopt=true"
-             onclick="location.href='https://kr.object.ncloudstorage.com/dreamsstaybucket/qnaboard/${dto.qna_photo}'">
-    </c:if>
-</div>--%>
+<br>
+<%--답변 table--%>
 <c:if test="${dto.answer== '답변완료'}">
-    <%--<div class="anserwqna" style="height: 200px;">
 
-        <span style="border-radius: 20px; border:1px solid black; padding: 3px;">Hotel</span><br>
-        <span>${dto.answer_text}</span>
-    </div>--%>
-
-    <table class="tabele table" id="aswertable">
-        <tr style="height: 60px; line-height: 5px;">
+    <table id="aswertable" style="margin-bottom: 30px; width: 1167px;">
+        <tr style="height: 60px; line-height: 6px;">
             <td>
                 <div class="hotelqna">
                     <div class="A" >
-                        <span style="margin-left: 13px; margin-top: 8px;">A</span>
+                        <span style="margin-left: 15px; margin-top: 6px;">A</span>
                     </div>
 
                     <span class="answerhotel">DreamStay</span>
@@ -265,10 +257,11 @@
         </tr>
 
         <tr style="height: 100px;">
-            <td>${dto.answer_text}</td>
+            <td style="font-size: 18px;">${dto.answer_text}</td>
         </tr>
     </table>
 </c:if>
+
 
 <div>
     <button type="button" class="qnabtnlist" onclick="history.back()">목록</button>
@@ -277,10 +270,9 @@
     </c:if>
 </div>
 
-
-
+<%--삭제 버튼--%>
 <script type="text/javascript">
-    $("#delQna").click(function (){
+    $(".delQna").click(function (){
         let a = confirm("삭제하려면 확인을 누르세요");
         if(a){
             location.href="/mypage/deleteqna?num="+${dto.num}
