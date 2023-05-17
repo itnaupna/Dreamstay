@@ -25,7 +25,7 @@
         from hotel h inner join room r on h.num = r.hotelnum
             inner join book b on b.room_num = r.num
             inner join member m on b.user_num = m.num
-        where b.num = #{num} and m.pw = sha2(#{pw}, 256);
+        where m.id = #{num} and m.pw = sha2(#{pw}, 256);
     </select>
 
     <select id="maxMemberNum" resultType="int">
@@ -34,11 +34,20 @@
 
     <insert id="insert_nomember" parameterType="MemberDto">
         insert into member (num, id, pw, user_name, email, phone, user_level, addr, account_lock, email_code, point, issocial)
-        values (null, #{id }, #{phone },#{user_name }, #{email }, #{phone }, 0, #{addr }, 0, 0, null, 0);
+        values (null, #{id }, sha2(#{phone}, 256),#{user_name }, #{email }, #{phone }, 0, #{addr }, 0, 0, null, 0);
     </insert>
 
+    <select id="select_card" parameterType="CardDto" resultType="String">
+        select num from card where company = #{company } and cardnum = #{cardnum } and cardmonth = #{cardmonth } and cardyear = #{cardyear } and membernum = #{membernum }
+    </select>
+
     <insert id="insert_card" parameterType="CardDto">
-        insert into card (num, company, cardmonth, cardyear, membernum) values (null, #{company }, #{cardmonth }, #{cardyear }, #{membernum });
+        insert into card (num, company, cardnum, cardmonth, cardyear, membernum) values (null, #{company },#{cardnum } ,#{cardmonth }, #{cardyear }, #{membernum });
+    </insert>
+
+    <insert id="insert_book" parameterType="BookDto">
+        insert into book (num, user_num, checkin, checkout, room_num, peopleinfo, memo, total_price, cardnum)
+        values (null, #{insert_member_num }, #{checkin }, #{checkout }, #{insert_roomnum },#{peopleinfo }, #{memo }, #{total_price }, #{cardnum }) ;
     </insert>
 
 

@@ -51,4 +51,14 @@ public class BookService implements BookServiceInter{
         return bookMapper.insert_card(dto);
     }
 
+    @Override
+    public String select_card(CardDto dto){
+        return bookMapper.select_card(dto);
+    }
+
+    @Override
+    public void insert_book(BookDto dto){
+        bookMapper.insert_book(dto);
+    }
+
 }

@@ -575,227 +575,251 @@
             </div>
         </div>
     </div>
-<form method="post" id="bookform" name="bookform" action="insertbook">
-    <div class="book_select">
-        <div class="book_inner">
+    <form method="post" id="bookform" name="bookform" action="insertbook">
+        <div class="book_select">
+            <div class="book_inner">
 
-            <dl class="dl01">
-                <dt>HOTEL</dt>
-                <dd><input type="hidden" value="${selectedHotel}" readonly="readonly"></dd>
-                <dd><input type="text" value="${hotelname }" readonly="readonly"></dd>
-            </dl>
+                <dl class="dl01">
+                    <dt>HOTEL</dt>
+                    <dd><input type="hidden" value="${selectedHotel}" readonly="readonly"></dd>
+                    <dd><input type="text" value="${hotelname }" readonly="readonly"></dd>
+                </dl>
 
-            <dl class="dl02">
-                <dt>DATE</dt>
-                <dd><input type="text" value="${sessionScope.checkInShow}" readonly="readonly">
-                    <input type="text" value="${sessionScope.checkOutShow}" readonly="readonly"></dd>
-            </dl>
+                <input type="hidden" value="${sessionScope.checkIn}" name="checkIn">
+                <input type="hidden" value="${sessionScope.checkOut}" name="checkOut">
+                <dl class="dl02">
+                    <dt>DATE</dt>
+                    <dd><input type="text" value="${sessionScope.checkInShow}" readonly="readonly">
+                        <input type="text" value="${sessionScope.checkOutShow}" readonly="readonly"></dd>
+                </dl>
 
-            <dl class="dl03">
-                <dt>ROOMS</dt>
-                <dd><input type="text" value="${sessionScope.roomCount}" readonly="readonly"></dd>
-            </dl>
+                <dl class="dl03">
+                    <dt>ROOMS</dt>
+                    <dd><input type="text" value="${sessionScope.roomCount}" readonly="readonly"></dd>
+                </dl>
 
-            <dl class="dl04">
-                <dt>ADULT</dt>
-                <dd><input type="text" value="${sessionScope.adultCount}" readonly="readonly"></dd>
-            </dl>
+                <dl class="dl04">
+                    <dt>ADULT</dt>
+                    <dd><input type="text" value="${sessionScope.adultCount}" readonly="readonly" name="adultCount"></dd>
+                </dl>
 
-            <dl class="dl05">
-                <dt>CHILDREN</dt>
-                <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly"></dd>
-            </dl>
+                <dl class="dl05">
+                    <dt>CHILDREN</dt>
+                    <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly" name="childrenCount"></dd>
+                </dl>
 
-            <button type="button" onclick="location.href='/'" class="mainbtn">MAIN PAGE</button>
-        </div>
-    </div>
-
-    <section class="pay">
-        <%-- 플로팅 메뉴 --%>
-        <div class="sideBanner">
-            <div class="txt-label">
-                <span>객실예약</span>
-                <div class="for_num">
-                    <fmt:formatNumber type="number" value="${roomprice }" pattern="#,##0원"/>
-                </div>
-                <hr class="sidehr">
-                <div class="divbtn">
-                    <button type="submit" class="paybtn" onclick="payments();">예약완료</button>
-                </div>
+                <button type="button" onclick="location.href='/'" class="mainbtn">MAIN PAGE</button>
             </div>
         </div>
-        <%-- 플로팅 메뉴 --%>
 
-        <div class="pay_main">
-            <div class="pay_choice">
-                <p>SMART CHOICE</p>
-            </div>
-
-            <div class="pay_room">
-                <p>TYPE : ${roomtype}</p>
-            </div>
-
-            <div class="pay_name">
-                <p>RESERVATION NAME *</p>
-                <c:if  test="${memberDto.user_name == null}">
-                    <span><input type="text" value="" name="nomember_name" class="nomember_name"></span>
-                </c:if>
-                <c:if  test="${memberDto.user_name != null}">
-                    <span><input type="text" value="${memberDto.user_name}" name="nomember_name" class="nomember_name"></span>
-                </c:if>
-            </div>
-
-            <div class="pay_phone">
-                <span>PHONE NUMBER *</span>
-                <input type="text" id="pay_phone" name="pay_phone" value="${memberDto.phone}">
-            </div>
-
-            <div class="pay_email">
-                <span class="sp_email">EMAIL *</span>
-                <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
-                       value="${username}">
-                <span id="at">@</span>
-                <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}">
-                <div class="email_selectbox">
-                    <div id="email_select_domain">직접 입력</div>
-                    <ul id="email_custom_option">
-                        <li class="email_select_option">직접 입력</li>
-                        <li class="email_select_option">naver.com</li>
-                        <li class="email_select_option">gmail.com</li>
-                        <li class="email_select_option">hanmail.net</li>
-                        <li class="email_select_option">hotmail.com</li>
-                        <li class="email_select_option">nate.com</li>
-                    </ul>
+        <section class="pay">
+            <%-- 플로팅 메뉴 --%>
+            <div class="sideBanner">
+                <div class="txt-label">
+                    <span>객실예약</span>
+                    <div class="for_num">
+                        <fmt:formatNumber type="number" value="${roomprice }" pattern="#,##0원"/>
+                        <input type="hidden" name="roomprice" value="${roomprice }">
+                    </div>
+                    <hr class="sidehr">
+                    <div class="divbtn">
+                        <input type="hidden" name="peopleinfo">
+                        <button type="submit" class="paybtn" onclick="payments();peopleinfo();">예약완료</button>
+                    </div>
                 </div>
             </div>
+            <%-- 플로팅 메뉴 --%>
 
-            <div class="pay_card">
-                <p>CREDIT CARD *</p>
-                <label>
-                    <input type="checkbox" class="chcard" id="chcard" name="gaein">
-                    <span>개인</span>
-                </label>
-
-                <label>
-                    <input type="checkbox" class="bupin" id="bupin" name="bupin">
-                    <span>법인</span>
-                </label>
-            </div>
-
-            <span class="ex_card">CREDIT CARD COMPANY*</span>
-            <div class="selectli2">
-                <div class="custom-select2">
-                    <input type="hidden" value="" name="company" id="company">
-                    <div class="selected2">카드선택</div>
-                    <ul class="options2">
-                        <li class="options2_list">비씨</li>
-                        <li class="options2_list">국민</li>
-                        <li class="options2_list">하나</li>
-                        <li class="options2_list">삼성</li>
-                        <li class="options2_list">신한</li>
-                        <li class="options2_list">현대</li>
-                        <li class="options2_list">롯데</li>
-                        <li class="options2_list">시티</li>
-                        <li class="options2_list">농협</li>
-                        <li class="options2_list">수협</li>
-                        <li class="options2_list">우리</li>
-                        <li class="options2_list">카카오뱅크</li>
-                        <li class="options2_list">광주</li>
-                        <li class="options2_list">전북</li>
-                        <li class="options2_list">제주</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="cardnumber">
-                <p>CARD NUMBER *</p>
-                <input type="text" class="c_num" id="c_num1" placeholder="CARD NUMBER">
-                <input type="text" class="c_num" id="c_num2">
-                <input type="text" class="c_num" id="c_num3">
-                <input type="text" class="c_num" id="c_num4">
-            </div>
-
-            <span class="ex_date">EXPIRY DATE *</span>
-            <div class="selectli">
-                <div class="custom-select">
-                    <input type="hidden" value="" name="card_month" id="card_month">
-                    <div class="selected">월</div>
-                    <ul class="options">
-                        <li class="options_list">1월</li>
-                        <li class="options_list">2월</li>
-                        <li class="options_list">3월</li>
-                        <li class="options_list">4월</li>
-                        <li class="options_list">5월</li>
-                        <li class="options_list">6월</li>
-                        <li class="options_list">7월</li>
-                        <li class="options_list">8월</li>
-                        <li class="options_list">9월</li>
-                        <li class="options_list">10월</li>
-                        <li class="options_list">11월</li>
-                        <li class="options_list">12월</li>
-                    </ul>
+            <div class="pay_main">
+                <div class="pay_choice">
+                    <p>SMART CHOICE</p>
                 </div>
 
-                <div class="custom-select1">
-                    <input type="hidden" value="" name="card_year" id="card_year">
-                    <div class="selected1">년도</div>
-                    <ul class="options1">
-                        <li class="options1_list">2023년</li>
-                        <li class="options1_list">2024년</li>
-                        <li class="options1_list">2025년</li>
-                        <li class="options1_list">2026년</li>
-                        <li class="options1_list">2027년</li>
-                        <li class="options1_list">2028년</li>
-                        <li class="options1_list">2029년</li>
-                        <li class="options1_list">2030년</li>
-                        <li class="options1_list">2031년</li>
-                        <li class="options1_list">2032년</li>
-                        <li class="options1_list">2033년</li>
-                    </ul>
+                <div class="pay_room">
+                    <input type="hidden" name="roomnum" value="${roomnum }">
+                    <p>TYPE : ${roomtype}</p>
                 </div>
-            </div>
 
-            <div class="gujung">
-                <span>취소 규정</span>
-                <hr id="myhr" class="myhr">
+                <div class="pay_name">
+                    <p>RESERVATION NAME *</p>
+                    <c:if  test="${memberDto.user_name == null}">
+                        <span><input type="text" value="" name="nomember_name" class="nomember_name"></span>
+                    </c:if>
+                    <c:if  test="${memberDto.user_name != null}">
+                        <span><input type="text" value="${memberDto.user_name}" name="nomember_name" class="nomember_name" readonly></span>
+                    </c:if>
+                </div>
 
-                <ul class="open_ul">
-                    <li class="open_li">
-                        <input type="checkbox">
-                        <label class="clickimg">
-                            [필수] 취소 및 노쇼(No - Show) 규정에 동의합니다
-                        </label>
-                    </li>
+                <div class="pay_phone">
+                    <span>PHONE NUMBER *</span>
+                    <c:if  test="${memberDto.user_name == null}">
+                        <input type="text" id="pay_phone" name="pay_phone" value="">
+                    </c:if>
+                    <c:if  test="${memberDto.user_name != null}">
+                        <input type="text" id="pay_phone" name="pay_phone" value="${memberDto.phone}" readonly>
+                    </c:if>
+                </div>
 
-                    <div class="close_toggle">
-                        <ul class="close_ul">
-                            <li class="close_li">
-                                " 체크인 7일 전 오후 6시 이전 : 위약금 없이 변경 및 취소 가능 "
-                            </li>
-
-                            <li>
-                                " 체크인 7일 전 오후 6시 이후 ~ 1일 전 오후 6시 이전 : 최초 1박 요금의 20% 부과 "
-                            </li>
-
-                            <li>
-                                " 체크인 1일 전 오후 6시 이후 : 취소 및 No - Show 위약금 발생 "
-                                <ul class="close_inul">
-                                    <li>
-                                        " 1박 투숙 : 객실료의 80% 위약금 부과 "
-                                    </li>
-
-                                    <li>
-                                        " 2박 이상 투숙 : 최초 1박 요금의 100% 부과 "
-                                    </li>
-                                </ul>
-                            </li>
+                <div class="pay_email">
+                    <span class="sp_email">EMAIL *</span>
+                    <c:if  test="${memberDto.user_name == null}">
+                        <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
+                               value="">
+                    </c:if>
+                    <c:if  test="${memberDto.user_name != null}">
+                        <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
+                               value="${username}" readonly>
+                    </c:if>
+                    <span id="at">@</span>
+                    <c:if  test="${memberDto.user_name == null}">
+                        <input type="text" name="input_domain" class="input_domain" id="input_domain" value="">
+                    </c:if>
+                    <c:if  test="${memberDto.user_name != null}">
+                        <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}" readonly>
+                    </c:if>
+                    <div class="email_selectbox">
+                        <div id="email_select_domain">직접 입력</div>
+                        <ul id="email_custom_option">
+                            <li class="email_select_option">직접 입력</li>
+                            <li class="email_select_option">naver.com</li>
+                            <li class="email_select_option">gmail.com</li>
+                            <li class="email_select_option">hanmail.net</li>
+                            <li class="email_select_option">hotmail.com</li>
+                            <li class="email_select_option">nate.com</li>
                         </ul>
                     </div>
-                </ul>
+                </div>
+
+                <div class="pay_card">
+                    <p>CREDIT CARD *</p>
+                    <label>
+                        <input type="checkbox" class="chcard" id="chcard" name="gaein">
+                        <span>개인</span>
+                    </label>
+
+                    <label>
+                        <input type="checkbox" class="bupin" id="bupin" name="bupin">
+                        <span>법인</span>
+                    </label>
+                </div>
+
+                <span class="ex_card">CREDIT CARD COMPANY*</span>
+                <div class="selectli2">
+                    <div class="custom-select2">
+                        <input type="hidden" value="" name="company" id="company">
+                        <div class="selected2">카드선택</div>
+                        <ul class="options2">
+                            <li class="options2_list">비씨</li>
+                            <li class="options2_list">국민</li>
+                            <li class="options2_list">하나</li>
+                            <li class="options2_list">삼성</li>
+                            <li class="options2_list">신한</li>
+                            <li class="options2_list">현대</li>
+                            <li class="options2_list">롯데</li>
+                            <li class="options2_list">시티</li>
+                            <li class="options2_list">농협</li>
+                            <li class="options2_list">수협</li>
+                            <li class="options2_list">우리</li>
+                            <li class="options2_list">카카오뱅크</li>
+                            <li class="options2_list">광주</li>
+                            <li class="options2_list">전북</li>
+                            <li class="options2_list">제주</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cardnumber">
+                    <p>CARD NUMBER *</p>
+                    <input type="text" class="c_num" id="c_num1" placeholder="CARD NUMBER" name="c_num1" maxlength="4">
+                    <input type="text" class="c_num" id="c_num2" name="c_num2" maxlength="4">
+                    <input type="text" class="c_num" id="c_num3" name="c_num3" maxlength="4">
+                    <input type="text" class="c_num" id="c_num4" name="c_num4" maxlength="4">
+                </div>
+
+                <span class="ex_date">EXPIRY DATE *</span>
+                <div class="selectli">
+                    <div class="custom-select">
+                        <input type="hidden" value="" name="card_month" id="card_month">
+                        <div class="selected">월</div>
+                        <ul class="options">
+                            <li class="options_list">1월</li>
+                            <li class="options_list">2월</li>
+                            <li class="options_list">3월</li>
+                            <li class="options_list">4월</li>
+                            <li class="options_list">5월</li>
+                            <li class="options_list">6월</li>
+                            <li class="options_list">7월</li>
+                            <li class="options_list">8월</li>
+                            <li class="options_list">9월</li>
+                            <li class="options_list">10월</li>
+                            <li class="options_list">11월</li>
+                            <li class="options_list">12월</li>
+                        </ul>
+                    </div>
+
+                    <div class="custom-select1">
+                        <input type="hidden" value="" name="card_year" id="card_year">
+                        <div class="selected1">년도</div>
+                        <ul class="options1">
+                            <li class="options1_list">2023년</li>
+                            <li class="options1_list">2024년</li>
+                            <li class="options1_list">2025년</li>
+                            <li class="options1_list">2026년</li>
+                            <li class="options1_list">2027년</li>
+                            <li class="options1_list">2028년</li>
+                            <li class="options1_list">2029년</li>
+                            <li class="options1_list">2030년</li>
+                            <li class="options1_list">2031년</li>
+                            <li class="options1_list">2032년</li>
+                            <li class="options1_list">2033년</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <input type="text" value="" placeholder="요구사항을 적어주세요." name="memo">
+                </div>
+
+                <div class="gujung">
+                    <span>취소 규정</span>
+                    <hr id="myhr" class="myhr">
+
+                    <ul class="open_ul">
+                        <li class="open_li">
+                            <input type="checkbox">
+                            <label class="clickimg">
+                                [필수] 취소 및 노쇼(No - Show) 규정에 동의합니다
+                            </label>
+                        </li>
+
+                        <div class="close_toggle">
+                            <ul class="close_ul">
+                                <li class="close_li">
+                                    " 체크인 7일 전 오후 6시 이전 : 위약금 없이 변경 및 취소 가능 "
+                                </li>
+
+                                <li>
+                                    " 체크인 7일 전 오후 6시 이후 ~ 1일 전 오후 6시 이전 : 최초 1박 요금의 20% 부과 "
+                                </li>
+
+                                <li>
+                                    " 체크인 1일 전 오후 6시 이후 : 취소 및 No - Show 위약금 발생 "
+                                    <ul class="close_inul">
+                                        <li>
+                                            " 1박 투숙 : 객실료의 80% 위약금 부과 "
+                                        </li>
+
+                                        <li>
+                                            " 2박 이상 투숙 : 최초 1박 요금의 100% 부과 "
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </section>
-</form>
+        </section>
+    </form>
 </div>
 
 <script>
@@ -919,6 +943,7 @@
             failUrl: "http://localhost:8080/book/payment"
         });
     }
+
 
     $(".options2_list").click(function (){
         var selected2 = $(this).text();
