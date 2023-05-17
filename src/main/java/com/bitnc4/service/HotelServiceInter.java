@@ -14,5 +14,9 @@ public interface HotelServiceInter {
     public List<Map<String, String>> getHotelData(int num);
 
     // 객실 사진별로 배열에 담아서 리턴
-    public List<String> dividePhoto(List<Map<String, String>> list);
+    public String[][] dividePhoto(List<Map<String, String>> list);
+
+
 }
+
+

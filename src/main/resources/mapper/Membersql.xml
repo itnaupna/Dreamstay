@@ -27,7 +27,7 @@
     </select>
 
     <select id="access" parameterType="Map" resultType="MemberDto">
-        select * from member where id = #{id} and pw = sha2(#{pw}, 256) and not account_lock = 5
+        select * from member where id = #{id} and pw = sha2(#{pw}, 256) and not account_lock = 5 and issocial = 0 and user_level > 0
     </select>
 
 
