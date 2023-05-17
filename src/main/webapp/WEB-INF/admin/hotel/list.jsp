@@ -191,12 +191,12 @@
         $('#frmRoomPhoto').val(roomphoto);
         initEditor(roomdetail,roomphoto);
         $('#mdlTitle').text(num+"번 객실 상세정보");
-        $('#mdlBackground').fadeIn(0.3);
+        $('#mdlBackground').fadeIn();
 
       }
       function dismissMdl(istrue){
         if(istrue || confirm('저장하지 않은 내용은 모두 사라집니다. 창을 닫으시겠습니까?')){
-          $('#mdlBackground').fadeOut(0.3);
+          $('#mdlBackground').fadeOut();
           $('iframe').remove();
           $('#mdltextarea').val('');
         }
