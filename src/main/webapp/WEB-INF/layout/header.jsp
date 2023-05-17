@@ -80,6 +80,10 @@
         https://kr.object.ncloudstorage.com/dreamsstaybucket/ico_search_white.png) no-repeat 0 0;
     }
 
+    .header_hotel_list {
+        cursor: pointer;
+    }
+
 
 
 </style>
@@ -92,7 +96,7 @@
                 <a href="/">JOSUN HOTELS & RESORTS
                 </a>
             </strong>
-            <button type="button" class="btnMenu">메뉴 열기</button>
+            <button type="button" id="header_menu" class="btnMenu">메뉴 열기</button>
             <div class="btnMenulist">
                 <img class="btnMenuClose" src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_white_25x25.png">
 
@@ -107,19 +111,12 @@
                                 <li>수상내역</li>
                                 <li>ESG경영</li>
                                 <li>결산공고</li>
-
                             </ul>
-
                         </div>
 
                         <div class="btntitlebox">
                             <span>HOTELS</span><br><br>
-                            <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
-                                <li>수상내역</li>
-                                <li>ESG경영</li>
-                                <li>결산공고</li>
+                            <ul id="hotel_list">
                             </ul>
                         </div>
 

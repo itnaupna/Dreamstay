@@ -10,7 +10,7 @@
     </update>
 
     <delete id="deleteUser" parameterType="String">
-        delete from member where id=#{id}d
+        delete from member where id=#{id}
     </delete>
 
     <select id="matchForIdPw" parameterType="Map" resultType="int">
