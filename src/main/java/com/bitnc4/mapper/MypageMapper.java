@@ -1,5 +1,6 @@
 package com.bitnc4.mapper;
 
+import com.bitnc4.dto.BookDto;
 import com.bitnc4.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,5 +22,8 @@ public interface MypageMapper {
 
     public List<Map<String, String>> getmemberBookData(Map<String, String> data);
 
+    public void deleteMemberBook(int num);
+
+    public List<BookDto> selectForBookNum();
 
 }
