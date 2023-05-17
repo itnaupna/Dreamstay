@@ -162,37 +162,6 @@
         color: black;
         box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.55);
     }
-
-    /* imaged preview */
-    .filebox .upload-display {  /* 이미지가 표시될 지역 */
-        margin-bottom: 5px;
-    }
-
-    @media(min-width: 768px) {
-        .filebox .upload-display {
-            display: inline-block;
-            margin-right: 5px;
-            margin-bottom: 0;
-        }
-    }
-
-    .filebox .upload-thumb-wrap {  /* 추가될 이미지를 감싸는 요소 */
-        display: inline-block;
-        width: 54px;
-        padding: 2px;
-        vertical-align: middle;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #fff;
-    }
-
-    .filebox .upload-display img {  /* 추가될 이미지 */
-        display: block;
-        max-width: 100%;
-        width: 100% \9;
-        height: auto;
-    }
-
 </style>
 
 <script type="text/javascript">
@@ -226,70 +195,6 @@
             }
         });
     });
-
-    // 호텔 선택
-    const select1 = document.querySelector('.custom-select1');
-    const selected1 = select1.querySelector('.selected1');
-    const options1 = select1.querySelector('.options1');
-
-    selected1.addEventListener('click', () => {
-        options1.classList.toggle('show');
-    });
-
-    options1.addEventListener('click', (event) => {
-        selected1.textContent = event.target.textContent;
-        options1.classList.remove('show');
-    });
-
-    // 문의 선택
-    const select2 = document.querySelector('.custom-select2');
-    const selected2 = select2.querySelector('.selected2');
-    const options2 = select2.querySelector('.options2');
-
-    selected2.addEventListener('click', () => {
-        options2.classList.toggle('show');
-    });
-
-    options2.addEventListener('click', (event) => {
-        selected2.textContent = event.target.textContent;
-        options2.classList.remove('show');
-    });
-
-    // 파일 선택 값 input에 넣기
-    $("#file").on('change',function(){
-        var fileName = $("#file").val();
-        $(".upload-name").val(fileName);
-    });
-
-    var imgTarget = $('.preview-image .upload-hidden');
-
-    imgTarget.on('change', function(){
-        var parent = $(this).parent();
-        parent.children('.upload-display').remove();
-
-        if(window.FileReader){
-            //image 파일만
-            if (!$(this)[0].files[0].type.match(/image\//)) return;
-
-            var reader = new FileReader();
-            reader.onload = function(e){
-                var src = e.target.result;
-                parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
-            }
-            reader.readAsDataURL($(this)[0].files[0]);
-        }
-
-        else {
-            $(this)[0].select();
-            $(this)[0].blur();
-            var imgSrc = document.selection.createRange().text;
-            parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
-
-            var img = $(this).siblings('.upload-display').find('img');
-            img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";
-        }
-    });
-
 </script>
 
 
@@ -303,6 +208,7 @@
                     <span>Q & A</span>
                 </div>
             </div>
+
             <div class="selectli1">
                 <div class="custom-select1">
                     <span>* 호텔</span>
@@ -341,13 +247,6 @@
                 <input type="date" name="useday" class="flatpickr flatpickr-input">
             </div>
 
-            <div class="filebox preview-image" id="qnaboard_sub_content2">
-                <input class="upload-name" value="파일선택" disabled="disabled" >
-
-                <label for="input-file">업로드</label>
-                <input type="file" id="input-file" class="upload-hidden">
-            </div>
-
             <div class="qnaboard_main_content2">
                 <span>CONTENT *</span>
                 <div class="qnaboard_main_content2_subject">
@@ -382,3 +281,33 @@
         </form>
     </div>
 </div>
+
+<script>
+    // 호텔 선택
+    const select1 = document.querySelector('.custom-select1');
+    const selected1 = select1.querySelector('.selected1');
+    const options1 = select1.querySelector('.options1');
+
+    selected1.addEventListener('click', () => {
+        options1.classList.toggle('show');
+    });
+
+    options1.addEventListener('click', (event) => {
+        selected1.textContent = event.target.textContent;
+        options1.classList.remove('show');
+    });
+
+    // 문의 선택
+    const select2 = document.querySelector('.custom-select2');
+    const selected2 = select2.querySelector('.selected2');
+    const options2 = select2.querySelector('.options2');
+
+    selected2.addEventListener('click', () => {
+        options2.classList.toggle('show');
+    });
+
+    options2.addEventListener('click', (event) => {
+        selected2.textContent = event.target.textContent;
+        options2.classList.remove('show');
+    });
+</script>

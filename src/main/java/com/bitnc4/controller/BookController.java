@@ -130,6 +130,11 @@ public class BookController {
         model.addAttribute("roomdetail", roomdetail);
         model.addAttribute("totaldays", totaldays);
 
+        MemberDto dto1 = (MemberDto) session.getAttribute("loginuser");
+        String[] fnFn = dto1.getUser_name().split("/");
+        model.addAttribute("familyname", fnFn[0]);
+        model.addAttribute("firstname", fnFn[1]);
+
 
         return "/main/book/payment";
     }
