@@ -74,4 +74,14 @@ public class AdminHnRService implements AdminHnRServiceInter{
     public void updateRoomDetail(RoomDto dto) {
         m.updateRoomDetail(dto);
     }
+
+    @Override
+    public RoomDto getRoomSimpleInfo(int num) {
+        return m.getRoomSimpleInfo(num);
+    }
+
+    @Override
+    public void updateRoomSimpleInfo(RoomDto dto) {
+        m.updateRoomSimpleInfo(dto);
+    }
 }

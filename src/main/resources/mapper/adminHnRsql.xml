@@ -45,4 +45,10 @@
         </if>
 
     </update>
+    <select id="getRoomSimpleInfo" parameterType="int" resultType="RoomDto">
+        select num, roomtype, roomprice, roommemo, islock from room where num=#{num}
+    </select>
+    <update id="updateRoomSimpleInfo" parameterType="RoomDto">
+        update room set roomtype=#{roomtype},roomprice=#{roomprice},roommemo=#{roommemo},islock=#{islock} where num=#{num}
+    </update>
 </mapper>
