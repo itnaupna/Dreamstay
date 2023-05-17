@@ -8,12 +8,14 @@
     margin-top: 10px;
 }
 
+.u_info span{
+    font-family: 'Carlito', sans-serif;
+    font-weight: bold;
+}
+
 /* 부제목 */
 .u_info .u_information {
-    font-family: 'Carlito', sans-serif;
-    /*border: 1px solid pink;*/
     margin-top: 10px;
-    font-weight: bold;
 }
 
 /* 로그인한 회원 */
@@ -42,18 +44,7 @@
     width: 300px;
     height: 50px;
     margin-top: 20px;
-}
-
-/* 번호 수정 버튼 */
-.u_info .ch_phbtn {
-    width: 200px;
-    height: 50px;
-    font-size: 15px;
-    border-color: #000000;
-    border-width: thin;
-    background-color: white;
-    margin-left: 20px;
-    cursor: pointer;
+    font-weight: lighter;
 }
 
 /* 이름 수정 타이틀 */
@@ -79,7 +70,15 @@
 /* 이름 수정 text 따로 설정 */
 .u_info .u_name2 input[type=text]{
     width: 400px;
+}
+
+input[type=text]{
     font-size: 17px;
+    font-weight: lighter !important;
+}
+
+input[type=email]{
+    font-weight: lighter;
 }
 
 /* 텍스트타입 디자인 */
@@ -92,6 +91,7 @@
     border-bottom: solid #aaaaaa 1px;
     background: none;
     position: relative;
+    font-weight: lighter;
 }
 
 /* input */

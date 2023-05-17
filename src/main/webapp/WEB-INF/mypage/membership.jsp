@@ -32,35 +32,7 @@
         border-radius: 15px;
         width: 170px;
         height: 170px;
-    }
-
-    .tac1 {
-        background-color: #ffcb00;
-    }
-
-    .tac2 {
-        background-color: #8E63DA;
-        flex-wrap: wrap;
-    }
-
-    .tac3 {
-        background-color: #629AF9;
-    }
-
-    .tac4 {
-        background-color: #EB7F53;
-    }
-
-    .tac5 {
-        background-color: #60BDB6;
-    }
-
-    .tac6 {
-        background-color: #3D74D4;
-    }
-
-    .tac7 {
-        background-color: #3D74D4;
+        background-color: black;
     }
 
     .tac1:hover .tac1-img,
@@ -99,7 +71,6 @@
     </div>
     <div class="cont">
         <div class="tac2">
-            <img class="tac1img" src="/photo/test.png">
             <span>"멤버십으로 더 많은 할인 혜택을 누리세요"</span>
             <img class="tac2-img" src="/photo/tac2.png">
         </div>
@@ -136,7 +107,7 @@
         $('.slider-wrap').slick({
             slide: 'div',        //슬라이드 되어야 할 태그
             infinite: true,     //무한 반복 옵션
-            slidesToShow: 4,        // 한 화면에 보여질 컨텐츠 개수
+            slidesToShow: 6,        // 한 화면에 보여질 컨텐츠 개수
             slidesToScroll: 1,        //스크롤 한번에 움직일 컨텐츠 개수
             speed: 500,     // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
             arrows: false,         // 옆으로 이동하는 화살표 표시 여부

@@ -23,6 +23,27 @@
 </script>
 <!-- 다음 맵 api script 끝 -->
 
+<style>
+    #addr{
+        font-weight: lighter;
+    }
+
+    .u_username span,
+    .u_emaildetail span{
+        font-weight: lighter;
+    }
+
+    .u_emaildetail span{
+        margin-left: 20px;
+    }
+
+    .u_chphoe input[type=text],
+    .u_addrdetail input[type=text],
+    .u_emaildetail input[type=text]{
+        width: 400px;
+    }
+</style>
+
 <div class="u_info">
 
     <div class="u_title">
@@ -33,7 +54,7 @@
         <span>MY INFORMATION</span>
     </div>
     <div class="u_username">
-        <span>${memberDto.id} / ${memberDto.email}</span>
+        <span>${familyname}${firstname}님의 아이디는 ${memberDto.id} 입니다</span>
     </div>
 
     <div class="u_name1">
@@ -67,6 +88,7 @@
 
     <div class="u_emaildetail">
         <input type="text" id="email" class="email" value="${memberDto.email}" readonly="readonly">
+        <span>이메일은 변경할 수 없습니다</span>
     </div>
 
     <div class="up_btn">
