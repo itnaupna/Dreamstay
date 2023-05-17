@@ -624,7 +624,7 @@
                     <hr class="sidehr">
                     <div class="divbtn">
                         <input type="hidden" name="peopleinfo">
-                        <button type="submit" class="paybtn" onclick="payments();">예약완료</button>
+                        <button type="submit" id="paybtn" class="paybtn" onclick=""disabled='disabled'>예약완료</button>
                     </div>
                 </div>
             </div>
@@ -707,7 +707,7 @@
                     <div class="custom-select2">
                         <input type="hidden" value="" name="company" id="company" required>
                         <div class="selected2">카드선택</div>
-                        <ul class="options2">
+                        <ul class="options2" >
                             <li class="options2_list">비씨</li>
                             <li class="options2_list">국민</li>
                             <li class="options2_list">하나</li>
@@ -729,10 +729,10 @@
 
                 <div class="cardnumber">
                     <p>CARD NUMBER *</p>
-                    <input type="text" class="c_num" id="c_num1" placeholder="CARD NUMBER" name="c_num1" maxlength="4">
-                    <input type="text" class="c_num" id="c_num2" name="c_num2" maxlength="4">
-                    <input type="text" class="c_num" id="c_num3" name="c_num3" maxlength="4">
-                    <input type="text" class="c_num" id="c_num4" name="c_num4" maxlength="4">
+                    <input type="text" class="c_num" id="c_num1" placeholder="CARD NUMBER" name="c_num1" maxlength="4" required>
+                    <input type="text" class="c_num" id="c_num2" name="c_num2" maxlength="4" required>
+                    <input type="text" class="c_num" id="c_num3" name="c_num3" maxlength="4" required>
+                    <input type="text" class="c_num" id="c_num4" name="c_num4" maxlength="4" required>
                 </div>
 
                 <span class="ex_date">EXPIRY DATE *</span>
@@ -943,19 +943,37 @@
         });
     }
 
-
+    var company = $("#company").val();
+    var card_month = $("#card_month").val();
+    var card_year = $("#card_year").val();
     $(".options2_list").click(function (){
         var selected2 = $(this).text();
         $("#company").val(selected2);
+        company = $("#company").val(selected2);
+        if(company != "" && card_month != "" && card_year != ""){
+            const target = document.getElementById('paybtn');
+            target.disabled = false;
+        }
     });
     $(".options_list").click(function (){
         var selected = $(this).text();
         $("#card_month").val(selected);
+        card_month = $("#card_month").val(selected);
+        if(company != "" && card_month != "" && card_year != ""){
+            const target = document.getElementById('paybtn');
+            target.disabled = false;
+        }
     });
     $(".options1_list").click(function (){
         var selected1 = $(this).text();
         $("#card_year").val(selected1);
+        card_year = $("#card_year").val(selected1);
+        if(company != "" && card_month != "" && card_year != ""){
+            const target = document.getElementById('paybtn');
+            target.disabled = false;
+        }
     });
+
 
 
 </script>
