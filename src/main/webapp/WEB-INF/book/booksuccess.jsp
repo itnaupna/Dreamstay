@@ -168,7 +168,7 @@
     <c:if  test="${memberDto.user_name != null}">
         <span><input type="text" value="${memberDto.user_name }" name="user_name" class="user_name" readonly></span>
         <div>예약되엇습니다.</div>
-        <button type="button" class="mainbtn" onclick="location.href='/'">메인으로</button>
+        <button type="button" class="mainbtn" onclick="location.href='/'">MAIN PAGE</button>
     </c:if>
 </div>
 

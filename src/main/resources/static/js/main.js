@@ -60,19 +60,6 @@ $(function (){
     });
     $("#search_box").prop("disabled", false);
 });
-//////////////////////////////////////
-
-
-
-
-//룸 옵션 자바스크립트
-
-
-
-
-//////////////////////////////////////
-// window.onload = function(){
-// }
 
 /*check in*/
 document.body.style.overflow = "hidden";
