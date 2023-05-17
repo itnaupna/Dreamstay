@@ -44,9 +44,15 @@ public class MyPageController {
     }
 
     @GetMapping("/deletebook")
-    public String deletebook(int num)
+    public String deletebook(int num,HttpSession session,Model model)
     {
         mypageService.deleteMemberBook(num);
+        MemberDto dto = (MemberDto)session.getAttribute("loginuser");
+        List<Map<String, String>> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
+        model.addAttribute("data",map);
+        String[] fnFn = dto.getUser_name().split("/");
+        model.addAttribute("familyname", fnFn[0]);
+        model.addAttribute("firstname", fnFn[1]);
         return "/mypage/mypage";
     }
 

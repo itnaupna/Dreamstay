@@ -103,25 +103,134 @@
         font-weight: 700 !important;
 
     }
-    .book_num{
-        width: 350px;
-        margin-left: 300px;
+
+    .nomemberdiv,
+    .memberdiv {
+        height: 500px;
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 60px;
+        border: 1px solid #ccc;
     }
 
+    .no_name,
+    .yes_name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 30px 30px;
+    }
+
+    .no_name h2,
+    .yes_name h2 {
+        font-size: 25px;
+        font-weight: normal;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        padding: 0 0 20px 0;
+        flex: 1;
+    }
+
+    .no_name input[type=text],
+    .yes_name input[type=text] {
+        border: none;
+        width: 80px;
+    }
+
+    .no_name input[type=text]:focus,
+    .yes_name input[type=text]:focus {
+        outline: none;
+    }
+
+    .no_booknum {
+        display: flex;
+        justify-content: center;
+        /*align-items: center;*/
+        /*height: 200px;*/
+        margin-top: 30px;
+    }
+
+    .no_booknum #book_copy_btn {
+        width: 90px;
+        height: 50px;
+        border: none;
+        background-color: black;
+        color: white;
+        margin-left: 20px;
+        transition: transform .6s .6s ease-in,
+        box-shadow .6s .6s ease-in,
+        background .6s ease-out,
+        color .6s ease-out;
+    }
+
+    #book_copy_btn:hover {
+        transform: rotateY(10deg);
+        box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.55);
+        background-color: white;
+        color: black;
+    }
+
+    #book_num:focus {
+        outline: none;
+    }
+
+    #book_num {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+        box-shadow: -3px 2px 5px 5px #ddd;
+    }
+
+    .book_number_title {
+        text-align: center;
+    }
+
+    .book_number_title p {
+        color: #dddddd;
+        margin-top: 10px;
+    }
+
+    .go_to_main {
+        margin-top: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .go_to_main .mainbtn1,
+    .go_to_home .mainbtn{
+        background-color: black;
+        color: white;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        font-size: 15px;
+        width: 200px;
+        height: 60px;
+        text-align: center;
+    }
+
+    .go_to_home{
+        margin-top: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 <div class="book_main">
-    <div class="book_top">
-        <div class="book_title">
-            <span class="booking">BOOKING</span>
-            <div class="book_ol">
-                <ol>
-                    <li>
-                        <em>예약 정보 확인</em>
-                    </li>
-                </ol>
-            </div>
+<div class="book_top">
+    <div class="book_title">
+        <span class="booking">BOOKING</span>
+        <div class="book_ol">
+            <ol>
+                <li>
+                    <em>예약 정보 확인</em>
+                </li>
+            </ol>
         </div>
     </div>
+</div>
 <div class="book_select">
     <div class="book_inner">
 
@@ -157,18 +266,47 @@
 </div>
 
 
+<c:if test="${memberDto.user_name == null}">
+    <div class="nomemberdiv">
+        <div class="no_name">
+            <h2>Dream Stay Reservation Check</h2>
+            <span><input type="text" value="${nomemberusername }" name="user_name" class="user_name" required
+                         readonly="readonly">님 예약되었습니다.</span>
+        </div>
 
-    <c:if  test="${memberDto.user_name == null}">
-        <span><input type="text" value="${nomemberusername }" name="user_name" class="user_name" required></span>
-        <div>예약되엇습니다.</div>
-        <div>예약 번호는</div>
-        <input type="text" value="${nomemberId }" class="book_num" readonly>
+        <div class="book_number_title">
+            <span><b>예약 번호</b></span><br>
+            <p>예약 번호가 없을경우 예약확인이 불가능합니다.</p>
+        </div>
+        <div class="no_booknum">
+            <input type="text" value="${nomemberId }" class="book_num" readonly id="book_num">
+            <button onclick="copy_to_clipboard()" id="book_copy_btn">copy</button>
+        </div>
+        <div class="go_to_main">
+            <button type="button" class="mainbtn1" onclick="location.href='/'">MAIN PAGE</button>
+        </div>
+    </div>
+    </div>
 
-    </c:if>
-    <c:if  test="${memberDto.user_name != null}">
-        <span><input type="text" value="${memberDto.user_name }" name="user_name" class="user_name" readonly></span>
-        <div>예약되엇습니다.</div>
-        <button type="button" class="mainbtn" onclick="location.href='/'">MAIN PAGE</button>
-    </c:if>
-</div>
+</c:if>
+<c:if test="${memberDto.user_name != null}">
+    <div class="memberdiv">
+        <div class="yes_name">
+            <h2>Dream Stay Reservation Check</h2>
+            <span><input type="text" value="${familyname}${firstname}" name="user_name" class="user_name" readonly>님 예약되었습니다.</span>
+        </div>
+
+        <div class="go_to_home">
+            <button type="button" class="mainbtn" onclick="location.href='/'">MAIN PAGE</button>
+        </div>
+    </div>
+</c:if>
+
+<script>
+    function copy_to_clipboard() {
+        var copyText = document.getElementById("book_num");
+        copyText.select();
+        document.execCommand("Copy");
+    }
+</script>
 
