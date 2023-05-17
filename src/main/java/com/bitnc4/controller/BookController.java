@@ -175,18 +175,19 @@ public class BookController {
         var addr = "비회원 예약 입니다.";
         int num = ((MemberDto)session.getAttribute("loginuser")).getNum();
 
-    if(session.getAttribute()){
-       mdto.setId(nomemberId);
-       mdto.setPw(pass);
-       mdto.setUser_name(username);
-       mdto.setUser_name(nomember_name);
-       mdto.setEmail(email);
-       mdto.setPhone(phone);
-      mdto.setAddr(addr);
-
-
-       bookService.insert_nomember(mdto);
-   }
+        //TODO : 유찬민 일해~~
+//    if(session.getAttribute()){
+//       mdto.setId(nomemberId);
+//       mdto.setPw(pass);
+//       mdto.setUser_name(username);
+//       mdto.setUser_name(nomember_name);
+//       mdto.setEmail(email);
+//       mdto.setPhone(phone);
+//      mdto.setAddr(addr);
+//
+//
+//       bookService.insert_nomember(mdto);
+//   }
 
 
 

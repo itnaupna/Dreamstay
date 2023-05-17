@@ -405,7 +405,7 @@
   #partRoom table input,#partRoom table textarea{
     border:none !important;
     outline:none !important;
-    padding:0px;
+    /*padding:0px;*/
     resize:none;
   }
   #partRoom table input:focus:read-only, #partRoom table textarea:focus:read-only{
