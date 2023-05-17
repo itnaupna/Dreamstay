@@ -307,6 +307,7 @@
         var copyText = document.getElementById("book_num");
         copyText.select();
         document.execCommand("Copy");
+        alert("복사되었습니다");
     }
 </script>
 
