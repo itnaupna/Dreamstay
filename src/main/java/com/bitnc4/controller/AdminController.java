@@ -204,6 +204,28 @@ public class AdminController {
         else
             return adminNoticeService.modifyNotice(dto);
     }
+    @PostMapping("/notice/delete")
+    @ResponseBody
+    public boolean deleteNotice(int num){
+        NoticeDto dto = adminNoticeService.readNotice(num);
+        if(dto.getPhoto()!=null){
+            log.info("1");
+            if(!dto.getPhoto().equals("")){
+                log.info("2");
+                if(dto.getPhoto().contains(",")){
+                    log.info("3-1");
+                    for (String s : dto.getPhoto().split(",")) {
+                        deletep(s,"notice");
+                    }
+                }else{
+                    log.info("3-2");
+                    deletep(dto.getPhoto(),"notice");
+                }
+            }
+        }
+        return adminNoticeService.deleteNotice(dto.getNum());
+    }
+
     @GetMapping("/notice/detail")
     @ResponseBody
     public NoticeDto readNotice(int num){

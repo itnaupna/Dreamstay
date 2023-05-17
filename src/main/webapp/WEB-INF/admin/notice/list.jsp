@@ -62,7 +62,13 @@
                 <label class="form-label">제목</label>
             </div>
             <div id="mdlBtnToolbar">
-                <span id="btnModify">📝</span>&nbsp;&nbsp;<span id="btnSave" onclick="submitContents();">💾</span>&nbsp;&nbsp;<span onclick="dismissMdl();">✖</span>
+                <span id="btnModify">📝</span>
+                &nbsp;&nbsp;
+                <span id="btnSave" onclick="submitContents();">💾</span>
+                &nbsp;&nbsp;
+                <span id="btnDelete">🗑</span>
+                &nbsp;&nbsp;
+                <span onclick="dismissMdl();">✖</span>
             </div>
             <textarea name="content" id="mdltextarea" required="required" style="width: 100%; height: 700px; visibility: hidden;"></textarea>
             <div id="mdlViewPart"></div>
@@ -93,6 +99,7 @@
             data:{num:num},
             dataType:'json',
             success:(e)=>{
+                $('#btnSave').hide();
                 $('iframe').remove();
                 $('#frmNum').val(e.num);
                 $('#mdlTitle input').val(e.subject).prop('readonly',true);
@@ -104,9 +111,35 @@
                 $('#btnModify').off('click').on({
                     'click':()=>{modifyNotice(e.num);}
                 }).show();
+                $('#btnDelete').off('click').on({
+                    'click':()=>{deleteNotice(e.num);}
+                }).show();
             }
         });
         $('#mdlBackground').fadeIn();
+    }
+    function deleteNotice(num){
+        if(!confirm('삭제하시겠습니까? 되돌릴 수 없습니다.'))
+            return;
+
+        $.ajax({
+            url:'/admin/notice/delete',
+            type:'post',
+            data:{num:num},
+            dataType:'json',
+            success:(e)=>{
+                if(e){
+                    alert('공지사항을 삭제하였습니다.');
+                    Paging($($('.currpage')[0]).text());
+                    dismissMdl(true);
+                } else{
+                    alert('삭제를 실패하였습니다.');
+                }
+            },
+            error:(e)=>{
+                alert(e);
+            }
+        });
     }
     function modifyNotice(num){
         $.ajax({
@@ -116,6 +149,7 @@
             success:(e)=>{
                 $('#mdlViewPart').hide().html('');
                 $('#btnModify').hide();
+                $('#btnSave').show();
                 $('iframe').remove();
                 $('#frmNum').val(e.num);
                 $('#mdlTitle input').val(e.subject).prop('readonly',false);
