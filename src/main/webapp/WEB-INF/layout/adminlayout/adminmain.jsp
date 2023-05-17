@@ -252,16 +252,29 @@
 
 
     }
-    .test2{
+    .test2, .test3{
         overflow: auto;
     }
-    .test2 ul{
+    .test2 ul, .test3 ul{
         padding-left: 0px;
         font-size:.7rem;
         color:#5a5c69!important;
         font-weight: 700!important;
         text-transform: uppercase!important;
         margin-bottom: 0.25rem!important;
+    }
+
+    .test3 a{
+        text-decoration: none;
+        color: #5a5c69;
+    }
+
+    .test3 li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding-right: 15px;
     }
 </style>
 <div class="card0">
@@ -327,12 +340,23 @@
     <div id="box2">
         <div class="boxtitle2">
             <span style="font-size:1.25rem;color:#5a5c69;font-weight: 700!important;"><i class="bi bi-megaphone" style="margin-right: 10px;">
-            </i>문의게시판</span>
+            </i>문의게시판</span> <span>미답변수 ${data.QnaAnanwer}건</span>
+        </div>
+
+        <div class="test3">
+            <ul>
+                <c:forEach items="${data.Qna}" var="item">
+                    <li class="boxlist1">
+                        <a href="admin/qna/content?num=${item.num}">${item.subject}</a>
+                        <span>${item.answer}</span>
+                   </li>
+                </c:forEach>
+            </ul>
         </div>
     </div>
     <div id="box3">
         <div class="boxtitle3">
-            <h6>제목 000</h6>
+
         </div>
     </div>
     <div id="box4">

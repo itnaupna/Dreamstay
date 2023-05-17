@@ -6,7 +6,9 @@ import com.bitnc4.mapper.QnaBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class QnaBoardService implements QnaBoardServiceInter {
@@ -31,11 +33,16 @@ public class QnaBoardService implements QnaBoardServiceInter {
         return qnaBoardMapper.searchIdOfinfo(writer);
     }
 
-
     @Override
-   public List<QnaBoardDto> qnaList(String writer) {
+   public List<QnaBoardDto> qnaList(int start, int perpage, String writer) {
 
-        return qnaBoardMapper.qnaList(writer);
+        Map<String, Object> map = new HashMap<>();
+        map.put("start", start);
+        map.put("perpage", perpage);
+        map.put("writer", writer);
+
+
+        return qnaBoardMapper.qnaList(map);
    }
 
     @Override
@@ -47,5 +54,11 @@ public class QnaBoardService implements QnaBoardServiceInter {
     public void deleteQna(int num) {
         qnaBoardMapper.deleteQna(num);
     }
+
+    @Override
+    public int getQnaCount(String witer) {
+        return qnaBoardMapper.getQnaCount(witer);
+    }
+
 
 }

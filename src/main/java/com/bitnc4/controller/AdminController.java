@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +51,8 @@ public class AdminController {
         data.put("MemberCount",adminHnRService.getMemberCount(false));
         data.put("HotelCount",adminHnRService.getHotelCount());
         data.put("Notice",adminNoticeService.getList(1));
+        data.put("Qna",adminQnaServeice.getQnaList(1,new QnaBoardDto()));
+        data.put("QnaAnanwer",adminQnaServeice.getUnanswerCount());
         m.addAttribute("data",data);
 
         return "/admin";
@@ -172,32 +175,21 @@ public class AdminController {
     @GetMapping("/qna")
     public String qna(Model model)
     {
-        model.addAttribute("qnaList",adminQnaServeice.getQnaList(1));
-        model.addAttribute("page",adminQnaServeice.getQnaCount(1));
+        model.addAttribute("qnaList",adminQnaServeice.getQnaList(1,new QnaBoardDto()));
+        model.addAttribute("page",adminQnaServeice.getQnaCount(1,new QnaBoardDto()));
 
         return "/admin/qna/list";
     }
 
-    @GetMapping("/qna/list/{page}")
-    @ResponseBody
-    public List<Object> getQnaList(@PathVariable int page)
-    {
-        List<Object> result = new ArrayList<>();
-        result.add(adminQnaServeice.getQnaList(page));
-        result.add(adminQnaServeice.getQnaCount(page));
-        return result;
-    }
-
     @GetMapping("/qna/content")
-    public String content(int num, Model model) {
-        {
-            QnaBoardDto dto = adminQnaServeice.getQna(num);
+    public String content(int num, Model model)
+    {
 
-            model.addAttribute("dto", dto);
+        QnaBoardDto dto = adminQnaServeice.getQna(num);
+        model.addAttribute("dto", dto);
 
-            return "/admin/qna/content";
 
-        }
+        return "/admin/qna/content";
 
     }
 
@@ -209,20 +201,31 @@ public class AdminController {
 
     }
 
-    @GetMapping("/getSearchQna")
+    @GetMapping("/qna/list/{page}")
     @ResponseBody
-    private List<QnaBoardDto> searchQnaList(String searchtype,String keyword, Model model, String qna_type, int category, String answer)
+    public List<Object> getQnaList(@PathVariable int page, String searchtype, String keyword, Model model,
+                                   String qna_type, int category, String answer, String hotelname, HttpSession session)
     {
+        List<Object> result = new ArrayList<>();
         QnaBoardDto dto = new QnaBoardDto();
         dto.setAnswer(answer);
         dto.setQna_type(qna_type);
         dto.setCategory(category);
+        dto.setHotelname(hotelname);
         dto.setSearchtype(searchtype);
         dto.setKeyword(keyword);
 
-        return adminQnaServeice.searchQnaList(dto);
+        session.setAttribute("currentPage", page);
 
+        System.out.println("page="+page);
+
+        result.add(adminQnaServeice.getQnaList(page,dto));
+        result.add(adminQnaServeice.getQnaCount(page, dto));
+
+
+
+        return result;
     }
 
-}
 
+}

@@ -88,10 +88,11 @@
 <div class="wrapper mainWrapper">
     <div class="header">
         <div class="headArea">
+            <a href="/">
             <strong class="logo">
-                <a href="/">JOSUN HOTELS & RESORTS
-                </a>
+                JOSUN HOTELS & RESORTS
             </strong>
+            </a>
             <button type="button" class="btnMenu">메뉴 열기</button>
             <div class="btnMenulist">
                 <img class="btnMenuClose" src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_white_25x25.png">
