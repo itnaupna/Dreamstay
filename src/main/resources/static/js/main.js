@@ -40,7 +40,15 @@ $('#fullpage').fullpage({
 
 });
 
-
+var room_options_body = document.getElementById("room_options_body");
+var room_options = document.getElementById("room_options");
+var select_hotel_body = document.getElementById("select_hotel_body");
+var select_hotels = document.getElementById("select_hotels");
+var calendars_body = document.getElementById("calendars_body");
+var calendars = document.getElementById("calendars");
+var mainResveForm = document.getElementById("mainResveForm");
+var icon_scroll = document.getElementById("icon_scroll");
+var main_txt = document.getElementById("main_txt");
 $(function (){
     $(".page4_box_logo").mouseenter(function () {
         const src = $(this).find(".page4_box_logo_inputs").val();
@@ -50,11 +58,21 @@ $(function (){
 
         });
     });
-});
-
-window.onload = function(){
     $("#search_box").prop("disabled", false);
-}
+});
+//////////////////////////////////////
+
+
+
+
+//룸 옵션 자바스크립트
+
+
+
+
+//////////////////////////////////////
+// window.onload = function(){
+// }
 
 /*check in*/
 document.body.style.overflow = "hidden";
@@ -311,7 +329,7 @@ function fn_selectDate02(date02) {
 buildcalendar();
 buildcalendar02();
 const target = document.getElementById('btnS');
-target.disabled = true;
+$(target).attr('disabled',true);
 $("#btnF").click(function(){
     const target = document.getElementById('btnS');
     target.disabled = true;
@@ -330,26 +348,31 @@ function numberMaxLength(e){
 
 // 체크인 및 체크아웃 달력 보이기/숨기기 함수
 function toggleCalendars() {
-    var calendars_body = document.getElementById("calendars_body");
-    var calendars = document.getElementById("calendars");
-    var room_options_body = document.getElementById("room_options_body");
-    var room_options = document.getElementById("room_options");
-    var mainResveForm = document.getElementById("mainResveForm");
-    var icon_scroll = document.getElementById("icon_scroll");
-    var main_txt = document.getElementById("main_txt");
 
+    select_hotels.classList.remove("animate__fadeInUp");
+    select_hotels.classList.add("animate__fadeOutDown");
     room_options.classList.remove("animate__fadeInUp");
     room_options.classList.add("animate__fadeOutDown");
 
     if (calendars_body.classList.contains("hidden")) {
+        //스크롤 막기
+        $('body').on('scroll touchmove mousewheel', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        });
+
         // 달력을 나타내기 전에 숨겨진 상태일 때
         main_txt.classList.add("animate__fadeOut");
         setTimeout(function(){
+
 
         calendars_body.classList.remove("hidden");
         calendars.style.display = "block";
         room_options_body.classList.add("hidden");
         room_options.style.display = "none";
+        select_hotel_body.classList.add("hidden");
+        select_hotels.style.display = "none";
 
         calendars.classList.remove("animate__fadeOutDown");
         calendars.classList.add("animate__fadeInUp");
@@ -357,6 +380,13 @@ function toggleCalendars() {
         icon_scroll.classList.add("icon_scroll_show");
         },300);
     } else {
+        //스크롤 막기 풀기
+        $('body').off('scroll touchmove mousewheel');
+
+        select_hotel_body.classList.add("hidden");
+        select_hotels.style.display = "none";
+        select_hotels.classList.remove("animate__fadeOutDown");
+
         room_options_body.classList.add("hidden");
         room_options.style.display = "none";
         room_options.classList.remove("animate__fadeOutDown");
@@ -382,11 +412,9 @@ function toggleCalendars() {
 
 // CHECK IN 및 CHECK OUT 달력 숨김 처리 함수
 function hideCalendars() {
-    var calendars_body = document.getElementById("calendars_body");
-    var calendars = document.getElementById("calendars");
-    var mainResveForm = document.getElementById("mainResveForm");
-    var icon_scroll = document.getElementById("icon_scroll");
-    var main_txt = document.getElementById("main_txt");
+
+    //스크롤 막기 풀기
+    $('body').off('scroll touchmove mousewheel');
 
     // 달력을 숨길 때
     calendars.classList.remove("animate__fadeInUp");
@@ -404,3 +432,283 @@ function hideCalendars() {
         main_txt.classList.add("animate__fadeIn");
     }, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
 }
+
+function toggleop_select() {
+
+    select_hotels.classList.remove("animate__fadeInUp");
+    select_hotels.classList.add("animate__fadeOutDown");
+    calendars.classList.remove("animate__fadeInUp");
+    calendars.classList.add("animate__fadeOutDown");
+
+    if (room_options_body.classList.contains("hidden")) {
+        //스크롤 막기
+        $('body').on('scroll touchmove mousewheel', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        });
+
+        // 방옵션을 나타내기 전에 숨겨진 상태일 때
+        main_txt.classList.add("animate__fadeOut");
+        setTimeout(function(){
+
+            room_options_body.classList.remove("hidden");
+            room_options.style.display = "block";
+
+            select_hotel_body.classList.add("hidden");
+            select_hotels.style.display = "none";
+            calendars_body.classList.add("hidden");
+            calendars.style.display = "none";
+
+            room_options.classList.remove("animate__fadeOutDown");
+            room_options.classList.add("animate__fadeInUp");
+            mainResveForm.classList.add("calendars_show");
+            icon_scroll.classList.add("icon_scroll_show");
+        },300);
+    } else {
+        //스크롤 막기 풀기
+        $('body').off('scroll touchmove mousewheel');
+
+        select_hotel_body.classList.add("hidden");
+        select_hotels.style.display = "none";
+        select_hotels.classList.remove("animate__fadeOutDown");
+
+        calendars_body.classList.add("hidden");
+        calendars.style.display = "none";
+        calendars.classList.remove("animate__fadeOutDown");
+        // 방옵션을 숨길 때
+        room_options.classList.remove("animate__fadeInUp");
+        room_options.classList.add("animate__fadeOutDown");
+
+
+
+        // 애니메이션 완료 후 방옵션 숨김 처리
+        setTimeout(function() {
+            room_options_body.classList.add("hidden");
+            room_options.style.display = "none";
+            room_options.classList.remove("animate__fadeOutDown");
+            mainResveForm.classList.remove("calendars_show");
+            icon_scroll.classList.remove("icon_scroll_show");
+            main_txt.classList.remove("animate__fadeOut");
+            main_txt.classList.add("animate__fadeIn");
+        }, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
+    }
+}
+
+
+// CHECK IN 및 CHECK OUT 방옵션 숨김 처리 함수
+function hideroom_option() {
+    //스크롤 막기 풀기
+    $('body').off('scroll touchmove mousewheel');
+
+    // 방옵션을 숨길 때
+    room_options.classList.remove("animate__fadeInUp");
+    room_options.classList.add("animate__fadeOutDown");
+
+    // 애니메이션 완료 후 달력 숨김 처리
+    setTimeout(function() {
+        room_options_body.classList.add("hidden");
+        room_options.style.display = "none";
+
+        room_options.classList.remove("animate__fadeOutDown");
+        mainResveForm.classList.remove("calendars_show");
+        icon_scroll.classList.remove("icon_scroll_show");
+        main_txt.classList.remove("animate__fadeOut");
+        main_txt.classList.add("animate__fadeIn");
+    }, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
+}
+
+$(".btnDown").click(function (){
+    var numPeople = $(this).parent().children("input").val();
+    $(this).parent().children("input").val(parseInt(numPeople)-1);
+    var numPeople_m = $(this).parent().children("input").val();
+    if(numPeople_m < 0){
+        alert("0보다 작을 수 없습니다.");
+        $(this).parent().children("input").val(0);
+        $(this).parent().children("span").children("em").text(0);
+    }else {
+        $(this).parent().children("span").children("em").text(numPeople_m);
+    }
+    var child_num =  $(this).parent().next().find("input").val();
+    if(child_num > 0 && numPeople_m <= 0){
+        $(this).parent().next().find("input").val(0);
+        $(this).parent().next().find("span").children("em").text(0);
+    }
+
+    var adltCntArr01 = $("#adltCntArr01").val();
+    var adltCntArr02 = $("#adltCntArr02").val();
+    var adltCntArr03 = $("#adltCntArr03").val();
+    var chldCntArr01 = $("#chldCntArr01").val();
+    var chldCntArr02 = $("#chldCntArr02").val();
+    var chldCntArr03 = $("#chldCntArr03").val();
+
+    if(adltCntArr02 > 0 && adltCntArr03 > 0){
+        $("#room_cnt").val(3);
+    } else if(adltCntArr02 > 0 || adltCntArr03 > 0){
+        $("#room_cnt").val(2);
+    } else{
+        $("#room_cnt").val(1);
+    }
+
+    $("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
+    $("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
+
+});
+$("#btnDown_01").click(function (){
+    var numPeople = $(this).parent().children("input").val();
+    $(this).parent().children("input").val(parseInt(numPeople)-1);
+    var numPeople_m = $(this).parent().children("input").val();
+    if(numPeople_m < 1){
+        alert("최소 한명은 필요합니다.");
+        $(this).parent().children("input").val(1);
+        $(this).parent().children("span").children("em").text(1);
+    }else {
+        $(this).parent().children("span").children("em").text(numPeople_m);
+    }
+    var adltCntArr01 = $("#adltCntArr01").val();
+    var adltCntArr02 = $("#adltCntArr02").val();
+    var adltCntArr03 = $("#adltCntArr03").val();
+    var chldCntArr01 = $("#chldCntArr01").val();
+    var chldCntArr02 = $("#chldCntArr02").val();
+    var chldCntArr03 = $("#chldCntArr03").val();
+
+    if(adltCntArr02 > 0 && adltCntArr03 > 0){
+        $("#room_cnt").val(3);
+    } else if(adltCntArr02 > 0 || adltCntArr03 > 0){
+        $("#room_cnt").val(2);
+    } else{
+        $("#room_cnt").val(1);
+    }
+
+    $("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
+    $("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
+});
+$(".btnUp").click(function (){
+    var numPeople = $(this).parent().children("input").val();
+    $(this).parent().children("input").val(parseInt(numPeople)+1);
+    var numPeople_s = $(this).parent().children("input").val();
+    if(numPeople_s > 4){
+        alert("최대 4명이 이용 가능합니다.");
+        $(this).parent().children("input").val(4);
+        $(this).parent().children("span").children("em").text(4);
+    }else {
+        $(this).parent().children("span").children("em").text(numPeople_s);
+    }
+
+    var adult_num =  $(this).parent().prev().find("input").val();
+    if(adult_num == 0){
+        alert("성인 없이 어린이만 예약 할 수 없습니다.");
+        $(this).parent().children("input").val(0);
+        $(this).parent().children("span").children("em").text(0);
+    }
+    var adltCntArr01 = $("#adltCntArr01").val();
+    var adltCntArr02 = $("#adltCntArr02").val();
+    var adltCntArr03 = $("#adltCntArr03").val();
+    var chldCntArr01 = $("#chldCntArr01").val();
+    var chldCntArr02 = $("#chldCntArr02").val();
+    var chldCntArr03 = $("#chldCntArr03").val();
+
+    if(adltCntArr02 > 0 && adltCntArr03 > 0){
+        $("#room_cnt").val(3);
+    } else if(adltCntArr02 > 0 || adltCntArr03 > 0){
+        $("#room_cnt").val(2);
+    } else{
+        $("#room_cnt").val(1);
+    }
+
+    $("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
+    $("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
+});
+
+function toggleHotels() {
+
+    room_options.classList.remove("animate__fadeInUp");
+    room_options.classList.add("animate__fadeOutDown");
+    calendars.classList.remove("animate__fadeInUp");
+    calendars.classList.add("animate__fadeOutDown");
+
+    if (select_hotel_body.classList.contains("hidden")) {
+        $('body').on('scroll touchmove mousewheel', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        });
+
+        // 방옵션을 나타내기 전에 숨겨진 상태일 때
+        main_txt.classList.add("animate__fadeOut");
+        setTimeout(function(){
+
+            select_hotel_body.classList.remove("hidden");
+            select_hotels.style.display = "block";
+
+            room_options_body.classList.add("hidden");
+            room_options.style.display = "none";
+            calendars_body.classList.add("hidden");
+            calendars.style.display = "none";
+
+            select_hotels.classList.remove("animate__fadeOutDown");
+            select_hotels.classList.add("animate__fadeInUp");
+            mainResveForm.classList.add("calendars_show");
+            icon_scroll.classList.add("icon_scroll_show");
+        },300);
+    } else {
+        calendars_body.classList.add("hidden");
+        calendars.style.display = "none";
+        calendars.classList.remove("animate__fadeOutDown");
+
+        room_options_body.classList.remove("hidden");
+        room_options.style.display = "none";
+        room_options.classList.remove("animate__fadeOutDown");
+        // 방옵션을 숨길 때
+
+        select_hotels.classList.remove("animate__fadeInUp");
+        select_hotels.classList.add("animate__fadeOutDown");
+
+        $('body').off('scroll touchmove mousewheel');
+
+
+        // 애니메이션 완료 후 방옵션 숨김 처리
+        setTimeout(function() {
+            select_hotel_body.classList.add("hidden");
+            select_hotels.style.display = "none";
+            select_hotels.classList.remove("animate__fadeOutDown");
+            mainResveForm.classList.remove("calendars_show");
+            icon_scroll.classList.remove("icon_scroll_show");
+            main_txt.classList.remove("animate__fadeOut");
+            main_txt.classList.add("animate__fadeIn");
+        }, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
+    }
+}
+
+// CHECK IN 및 CHECK OUT 방옵션 숨김 처리 함수
+function hideHotels() {
+
+    // 방옵션을 숨길 때
+    select_hotels.classList.remove("animate__fadeInUp");
+    select_hotels.classList.add("animate__fadeOutDown");
+
+    // 애니메이션 완료 후 달력 숨김 처리
+    setTimeout(function() {
+        select_hotel_body.classList.add("hidden");
+        select_hotels.style.display = "none";
+
+        $('body').off('scroll touchmove mousewheel');
+
+        select_hotels.classList.remove("animate__fadeOutDown");
+        mainResveForm.classList.remove("calendars_show");
+        icon_scroll.classList.remove("icon_scroll_show");
+        main_txt.classList.remove("animate__fadeOut");
+        main_txt.classList.add("animate__fadeIn");
+    }, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
+}
+
+$(document).on("click","#select_hotel_list",function (){
+
+    var select_hotel_val = $(this).find("input").val();
+    var select_hotel_list_name = $(this).find("#select_hotel_list_name").text();
+
+    document.querySelector("#main_mini_dl_02_hotel").innerHTML = select_hotel_list_name;
+    $("#select_hotel_hidden").val(select_hotel_val);
+
+
+});

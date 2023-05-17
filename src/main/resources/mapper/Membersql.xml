@@ -63,4 +63,5 @@
     <select id="getMemberByNumber" parameterType="int" resultType="MemberDto">
         select * from member where num=#{num}
     </select>
+
 </mapper>

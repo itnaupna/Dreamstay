@@ -40,15 +40,15 @@ public class BookController {
     @GetMapping("/book/search_room")
     public String book(HttpSession session,Model model,BookDto dto) {
 
-     var checkIn = session.getAttribute("checkIn");
-     var checkOut = session.getAttribute("checkOut");
-     var selectedHotel = session.getAttribute("selectedHotel");
-     var roomCount = session.getAttribute("roomCount");
-     var adultCount = session.getAttribute("adultCount");
-     var childrenCount = session.getAttribute("childrenCount");
+        var checkIn = session.getAttribute("checkIn");
+        var checkOut = session.getAttribute("checkOut");
+        var selectedHotel = session.getAttribute("selectedHotel");
+        var roomCount = session.getAttribute("roomCount");
+        var adultCount = session.getAttribute("adultCount");
+        var childrenCount = session.getAttribute("childrenCount");
 
-     /*차이날짜 계산*/
-     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        /*차이날짜 계산*/
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date endday = null;
         Date startday = null;
         try {
@@ -75,6 +75,9 @@ public class BookController {
         dto.setCheckout((String)checkOut);
         dto.setSelectedHotel((String) selectedHotel);
 
+       /* System.out.println(checkIn);
+        System.out.println(checkOut);*/
+
         List<RoomDto> roomList = bookService.searchroom(dto);
         model.addAttribute("roomList", roomList);
 
@@ -94,20 +97,27 @@ public class BookController {
 
     @PostMapping("/payment")
     public String payment(HttpServletRequest request, Model model,HttpSession session) {
+        MemberDto dto = (MemberDto) session.getAttribute("loginuser");
 
-        MemberDto dto = mypageService.selectInfoToId(String.valueOf(session.getAttribute("userid")));
-        String email = dto.getEmail();
-        String[] emailSplit = email.split("@");
-        String username = emailSplit[0];
-        String domain = emailSplit[1];
-        model.addAttribute("memberDto", dto);
-        model.addAttribute("username", username);
-        model.addAttribute("domain", domain);
+        String email;
+        try{
+            email  = dto.getEmail();
+            String[] emailSplit = email.split("@");
+            String username = emailSplit[0];
+            String domain = emailSplit[1];
+            /*String email = "1234@1234.1234"*/
+            model.addAttribute("memberDto", dto);
+            model.addAttribute("username", username);
+            model.addAttribute("domain", domain);
+        }catch(Exception e){
+            model.addAttribute("username", "");
+            model.addAttribute("domain", "");
+        }
 
         String roomnum = request.getParameter("roomnum");
         String hotelnum = request.getParameter("hotelnum");
         String roomtype = request.getParameter("roomtype");
-        String roomprice = request.getParameter("roomprice");
+        String roomprice = request.getParameter("roomprice").replaceAll("원","").replaceAll(",","");
         String roommemo = request.getParameter("roommemo");
         String roomdetail = request.getParameter("roomdetail");
         String totaldays = request.getParameter("totaldays");
@@ -148,4 +158,42 @@ public class BookController {
         model.addAttribute("booksearch", bookSearch);
         return "/main/book/nomemberbooksearch";
     }
+
+    @PostMapping("/insertbook")
+    public String insertBook(MemberDto mdto, HttpServletRequest request, HttpSession session) {
+        int maxMemberNum = bookService.maxMemberNum() + 1;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        String nomemberId = formatter.format(date) + maxMemberNum;
+
+        var nomember_name = request.getParameter("nomember_name");
+        var pass = request.getParameter("pay_phone");
+        var username = request.getParameter("email");
+        var domain = request.getParameter("input_domain");
+        var email = username + "@" + domain;
+        var phone = request.getParameter("pay_phone");
+        var addr = "비회원 예약 입니다.";
+        int num = ((MemberDto)session.getAttribute("loginuser")).getNum();
+
+    if(session.getAttribute()){
+       mdto.setId(nomemberId);
+       mdto.setPw(pass);
+       mdto.setUser_name(username);
+       mdto.setUser_name(nomember_name);
+       mdto.setEmail(email);
+       mdto.setPhone(phone);
+      mdto.setAddr(addr);
+
+
+       bookService.insert_nomember(mdto);
+   }
+
+
+
+
+
+        return "redirect:/";
+    }
 }
+
+

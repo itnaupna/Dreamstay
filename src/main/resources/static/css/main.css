@@ -510,3 +510,207 @@
     margin-left: 25px;
     display: inline-block;
 }
+#select_hotel{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    width: 280px;
+    font-weight: bold;
+    padding-left: 0;
+    display: inline-block;
+    position: relative;
+}
+#select_hotel:focus {
+    outline: none;
+
+}
+
+#select_hotels {
+    position: absolute;
+    top: -117%;
+    left: 0%;
+    right: 0%;
+    height: 480px;
+    width: 1408px;
+    background-color: #ffffff;
+}
+#select_hotel_body{
+    position: absolute;
+    height: 480px;
+    width: 1408px;
+    left: 0;
+}
+
+#room_options {
+    position: absolute;
+    top: -117%;
+    left: 0%;
+    right: 0%;
+    height: 480px;
+    width: 1408px;
+    background-color: #ffffff;
+}
+#room_options_body{
+    position: absolute;
+    height: 480px;
+    width: 1408px;
+}
+.room_option {
+    font-size: 20px;
+    width: 1408px;
+    height: 160px;
+    padding: 20px 20px 20px 20px;
+    box-sizing: border-box;
+    /*border: 1px solid #000000;*/
+    position: absolute;
+    background-color: #ffffff;
+    color:  #000000;
+    left: 0;
+    line-height: 120px;
+}
+#room_option01_select{
+}
+#room_option02_select{
+    top: 160px;
+}
+#room_option03_select{
+    top: 320px;
+}
+.roomContainer{
+    color: black;
+    list-style: none;
+}
+.mainRoom{
+    left:-965px;padding:90px 220px;
+    height: 480px;
+}
+.mainRoom .roomContainer{
+    padding:0;
+}
+.mainRoom .roomContainer .txtGuide{
+    position:absolute;
+    right:200px;
+    bottom:180px;
+}
+.mainRoom .roomContainer .txtGuide.gjb{
+    right:40px
+}
+.mainRoom .roomContainer .txtGuide li{
+    display:block
+}
+.mainRoom .roomInner{
+    position:relative;
+    padding-left:130px
+}
+.mainRoom .roomSel{
+    width:700px;
+    margin:30px 0 0;
+}
+.mainRoom .roomSel+.roomSel{
+    margin:80px 0 0;
+}
+.mainRoom .roomTit{
+    position:absolute;
+    left:0;
+    top:50%;
+    margin-top:-18px;
+    width:130px;
+    text-align:left;
+    font-size:24px;
+    font-weight:500;
+}
+.mainRoom .numPeople{
+    width: 200px;
+    border-bottom: 1px solid #000000;
+    text-align: center;
+    padding: 0 20px 10px 20px;
+}
+.mainRoom .numPeople+.numPeople{
+    margin-left:40px
+}
+#toggleop_select{
+    display: inline-block;
+}
+.numWrap {
+    display: flex;
+    align-items: center;
+}
+
+.numPeople {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.btnDown,.btnUp{
+    border: none;
+}
+#btnDown_01{
+    border: none;
+}
+#room_cnt,#adult_cnt,#children_cnt{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    width: 70px;
+    font-weight: bold;
+    padding-left: 0;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+#room_cnt:focus, #adult_cnt:focus, #children_cnt:focus{
+    outline: none;
+}
+#select_hotels{
+    overflow:auto;
+}
+#select_hotels::-webkit-scrollbar {
+    display: none;
+}
+#select_hotels_container{
+    position: relative;
+    top: 75px;
+    width: 100%;
+    height: 405px;
+    text-align: center;
+}
+#select_hotel_list_name{
+    text-align: center;
+    border: 1px solid rgba(200,200,200,1);
+    display: inline-block;
+    width: 25%;
+    height: 150px;
+    line-height: 150px;
+    margin-top: 5px;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    background-size: 348px 148px;
+    text-shadow: 0px 0px 5px black;
+    font-weight: bold;
+    color: white;
+    background-position: center;
+}
+#select_hotel_list_name::before{
+    content: "";
+    opacity: 0.5;
+    position: absolute;
+    background-color: #000;
+    background-position: center;
+}
+#select_hotel_list_name:hover{
+    background-size: 417.6px 177.6px;
+    background-position: center;
+    transition: .5s;
+}
+/*신동휘 작품*/
+#select_hotel_list_name:not(:hover){
+    background-size: 348px 148px;
+    transition: .5s;
+    background-position: center;
+}

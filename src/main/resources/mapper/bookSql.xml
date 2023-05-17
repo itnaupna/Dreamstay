@@ -28,6 +28,18 @@
         where b.num = #{num} and m.pw = sha2(#{pw}, 256);
     </select>
 
+    <select id="maxMemberNum" resultType="int">
+        select MAX(num) from member
+    </select>
+
+    <insert id="insert_nomember" parameterType="MemberDto">
+        insert into member (num, id, pw, user_name, email, phone, user_level, addr, account_lock, email_code, point, issocial)
+        values (null, #{id }, #{phone },#{user_name }, #{email }, #{phone }, 0, #{addr }, 0, 0, null, 0);
+    </insert>
+
+    <insert id="insert_card" parameterType="CardDto">
+        insert into card (num, company, cardmonth, cardyear, membernum) values (null, #{company }, #{cardmonth }, #{cardyear }, #{membernum });
+    </insert>
 
 
 </mapper>

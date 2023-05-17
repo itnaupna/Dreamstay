@@ -3,161 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!-- animate.css 라이브러리 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <link rel="stylesheet" href="/css/main.css" />
 
-<style>
-	#select_hotel{
-		background-color: transparent;
-		border: none;
-		cursor: pointer;
-		color: #ffffff;
-		width: 280px;
-		font-weight: bold;
-		padding-left: 0;
-		display: inline-block;
-		position: relative;
-	}
-	#select_hotel option{
-		margin: 0;
-		padding: 0;
-		background-color: rgba(173,158,135,.9);
-		cursor: pointer;
-		border: 1px solid blue;
-		color: #ffffff;
-	}
-	#select_hotel:focus {
-		outline: none;
-
-	}
-
-	#room_options {
-		position: absolute;
-		top: -117%;
-		left: 0%;
-		right: 0%;
-		height: 480px;
-		width: 1408px;
-		background-color: #ffffff;
-	}
-	#room_options_body{
-		position: absolute;
-		height: 480px;
-		width: 1408px;
-	}
-	.room_option {
-		font-size: 20px;
-		width: 1408px;
-		height: 160px;
-		padding: 20px 20px 20px 20px;
-		box-sizing: border-box;
-		/*border: 1px solid #000000;*/
-		position: absolute;
-		background-color: #ffffff;
-		color:  #000000;
-		left: 0;
-		line-height: 120px;
-	}
-	#room_option01_select{
-	}
-	#room_option02_select{
-		top: 160px;
-	}
-	#room_option03_select{
-		top: 320px;
-	}
-	.roomContainer{
-		color: black;
-		list-style: none;
-	}
-	.mainRoom{
-		left:-965px;padding:90px 220px;
-		height: 480px;
-	}
-	.mainRoom .roomContainer{
-		padding:0;
-	}
-	.mainRoom .roomContainer .txtGuide{
-		position:absolute;
-		right:200px;
-		bottom:180px;
-	}
-	.mainRoom .roomContainer .txtGuide.gjb{
-		right:40px
-	}
-	.mainRoom .roomContainer .txtGuide li{
-		display:block
-	}
-	.mainRoom .roomInner{
-		position:relative;
-		padding-left:130px
-	}
-	.mainRoom .roomSel{
-		width:700px;
-		margin:30px 0 0;
-	}
-	.mainRoom .roomSel+.roomSel{
-		margin:80px 0 0;
-	}
-	.mainRoom .roomTit{
-		position:absolute;
-		left:0;
-		top:50%;
-		margin-top:-18px;
-		width:130px;
-		text-align:left;
-		font-size:24px;
-		font-weight:500;
-	}
-	.mainRoom .numPeople{
-		width: 200px;
-		border-bottom: 1px solid #000000;
-		text-align: center;
-		padding: 0 20px 10px 20px;
-	}
-	.mainRoom .numPeople+.numPeople{
-		margin-left:40px
-	}
-	#toggleop_select{
-		display: inline-block;
-	}
-	.numWrap {
-		display: flex;
-		align-items: center;
-	}
-
-	.numPeople {
-		display: flex;
-		align-items: center;
-		margin-right: 10px;
-		justify-content: space-between;
-		padding: 20px 0;
-	}
-	.btnDown,.btnUp{
-		border: none;
-	}
-	#btnDown_01{
-		border: none;
-	}
-	#room_cnt,#adult_cnt,#children_cnt{
-		background-color: transparent;
-		border: none;
-		cursor: pointer;
-		color: #ffffff;
-		width: 70px;
-		font-weight: bold;
-		padding-left: 0;
-		display: inline-block;
-		position: relative;
-		text-align: center;
-	}
-	#room_cnt:focus, #adult_cnt:focus, #children_cnt:focus{
-		outline: none;
-	}
-</style>
 
 <div id="fullpage">
 	<div class="section bg_imgs01" >
@@ -169,25 +21,42 @@
 			<input type="hidden" value="" id="check_out_hidden" name="check_out_hidden">
 			<input type="hidden" value="" id="check_in_show" name="check_in_show">
 			<input type="hidden" value="" id="check_out_show" name="check_out_show">
+			<input type="hidden" value="1" name="select_hotel" id="select_hotel_hidden">
 			<div class="main_mini_dl">
 				<div id="main_mini_dl_01" class="main_mini_dl_sub">
 					<div id="main_border_01" class="main_mini_dl_size">
-					RESERVATION
+						RESERVATION
 						<div id="main_mini_dl_01_room" class="main_mini_dl_main_txt">
 							ROOM
 						</div>
-						</div>
 					</div>
+				</div>
 				<div id="main_mini_dl_02" class="main_mini_dl_sub">
 					<div id="main_border_02" class="main_mini_dl_size">
 						HOTEL
-
-						<div id="main_mini_dl_02_hotel" class="main_mini_dl_main_txt">
-							<select id="select_hotel" onclick="hideCalendars();hideroom_option();" name="select_hotel">
+						<a href="#" id="total_hotels" onclick="toggleHotels();">
+							<div id="main_mini_dl_02_hotel" class="main_mini_dl_main_txt" >
 								<c:forEach var="dto" items="${list }">
-									<option class="select_hotel_option" value="${dto.num }">${dto.name }</option>
+									<c:if test="${dto.num == 1 }">
+										<div id="select_hotel">${dto.name }</div>
+									</c:if>
 								</c:forEach>
-							</select>
+							</div>
+						</a>
+						<div id="select_hotel_body" class="hidden">
+							<div id="select_hotels" class="animate__animated">
+								<a class="close-btn" onclick="hideHotels();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a>
+								<div id ="select_hotels_container">
+									<c:forEach var="dto" items="${list }">
+										<a href="#" id="select_hotel_list">
+											<input type="hidden" value="${dto.num }" name="select_hotel_list" id="select_hotel_val">
+											<div id="select_hotel_list_name" style="background-image: url('https://kr.object.ncloudstorage.com/dreamsstaybucket/hotel/${dto.photo }')">
+													${dto.name }
+											</div>
+										</a>
+									</c:forEach>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -207,10 +76,10 @@
 				</a>
 				<div id="calendars_body" class="hidden">
 					<div id="calendars" class="animate__animated">
-					<!--CHECK IN 달력-->
+						<!--CHECK IN 달력-->
 						<a class="close-btn" onclick="hideCalendars();"><img src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_25x25.png"></a> <!-- X 표시를 a 태그로 변경 -->
 						<div class="calendar" id="calendar">
-								CHECK IN
+							CHECK IN
 							<div class="cal_header">
 								<a class="calendar_btn" onclick="prevCal();">&lt;</a>
 								<div class="title"><span class="year"></span><span class="month"></span></div>
@@ -247,7 +116,7 @@
 							</div>
 							<div class="dates02"></div>
 						</div>
-				<!--CHECK OUT 달력끝-->
+						<!--CHECK OUT 달력끝-->
 					</div>
 				</div>
 				<a  href="#" id="toggleop_select" onclick="toggleop_select();">
@@ -362,12 +231,12 @@
 		</form>
 		<div class="icon-scroll animate__animated animate__fadeIn" id="icon_scroll" >
 			<a href="#secondPage"><span class="txt-scroll">SCROLL</span>
-			<img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_scroll.png" class="ico-scroll" alt="">
-			<div class="arrows-scroll">
-				<span></span>
-				<span></span>
-				<span></span>
-			</div></a>
+				<img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_scroll.png" class="ico-scroll" alt="">
+				<div class="arrows-scroll">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div></a>
 		</div>
 	</div>
 	<div class="section bg_imgs02">
@@ -410,11 +279,11 @@
 				<div class="one_cont" id="cont_02_01">
 					<a href="#">
 						<div><img class="one_cont_imgs" src="https://www.josunhotel.com/util/file/download.do?fileSn=1481795&sysCode=GJB"></div>
-					<div class="one_cont_main_txt">자세히보기</div>
-					<div class="one_cont_sub_txt"><h2>2 NIGHTS ESCAPE!</h2></div><br>
-					<div class="one_cont_sub_txt">1박만으로 아쉽다면 최대 20% 할인 받고 2박..</div>
-					<div class="one_cont_sub_txt">2023.03.08 ~ 2023.06.30</div><br>
-					<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color04">그랜드 조선 부산</div>
+						<div class="one_cont_main_txt">자세히보기</div>
+						<div class="one_cont_sub_txt"><h2>2 NIGHTS ESCAPE!</h2></div><br>
+						<div class="one_cont_sub_txt">1박만으로 아쉽다면 최대 20% 할인 받고 2박..</div>
+						<div class="one_cont_sub_txt">2023.03.08 ~ 2023.06.30</div><br>
+						<div class="one_cont_sub_txt one_cont_sub_color_txt" id="one_cont_sub_color04">그랜드 조선 부산</div>
 					</a>
 				</div>
 				<div class="one_cont" id="cont_02_02">
@@ -544,188 +413,4 @@
 
 </div>
 
-<script>
-	function toggleop_select() {
-		var room_options_body = document.getElementById("room_options_body");
-		var room_options = document.getElementById("room_options");
-		var calendars_body = document.getElementById("calendars_body");
-		var calendars = document.getElementById("calendars");
-		var mainResveForm = document.getElementById("mainResveForm");
-		var icon_scroll = document.getElementById("icon_scroll");
-		var main_txt = document.getElementById("main_txt");
-
-		calendars.classList.remove("animate__fadeInUp");
-		calendars.classList.add("animate__fadeOutDown");
-
-		if (room_options_body.classList.contains("hidden")) {
-
-			// 방옵션을 나타내기 전에 숨겨진 상태일 때
-			main_txt.classList.add("animate__fadeOut");
-			setTimeout(function(){
-
-				room_options_body.classList.remove("hidden");
-				room_options.style.display = "block";
-				calendars_body.classList.add("hidden");
-				calendars.style.display = "none";
-
-				room_options.classList.remove("animate__fadeOutDown");
-				room_options.classList.add("animate__fadeInUp");
-				mainResveForm.classList.add("calendars_show");
-				icon_scroll.classList.add("icon_scroll_show");
-			},300);
-		} else {
-			calendars_body.classList.add("hidden");
-			calendars.style.display = "none";
-			calendars.classList.remove("animate__fadeOutDown");
-			// 방옵션을 숨길 때
-			room_options.classList.remove("animate__fadeInUp");
-			room_options.classList.add("animate__fadeOutDown");
-
-
-
-			// 애니메이션 완료 후 방옵션 숨김 처리
-			setTimeout(function() {
-				room_options_body.classList.add("hidden");
-				room_options.style.display = "none";
-				room_options.classList.remove("animate__fadeOutDown");
-				mainResveForm.classList.remove("calendars_show");
-				icon_scroll.classList.remove("icon_scroll_show");
-				main_txt.classList.remove("animate__fadeOut");
-				main_txt.classList.add("animate__fadeIn");
-			}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
-		}
-	}
-
-	// CHECK IN 및 CHECK OUT 방옵션 숨김 처리 함수
-	function hideroom_option() {
-		var room_options_body = document.getElementById("room_options_body");
-		var room_options = document.getElementById("room_options");
-		var mainResveForm = document.getElementById("mainResveForm");
-		var icon_scroll = document.getElementById("icon_scroll");
-		var main_txt = document.getElementById("main_txt");
-
-		// 방옵션을 숨길 때
-		room_options.classList.remove("animate__fadeInUp");
-		room_options.classList.add("animate__fadeOutDown");
-
-		// 애니메이션 완료 후 달력 숨김 처리
-		setTimeout(function() {
-			room_options_body.classList.add("hidden");
-			room_options.style.display = "none";
-
-			room_options.classList.remove("animate__fadeOutDown");
-			mainResveForm.classList.remove("calendars_show");
-			icon_scroll.classList.remove("icon_scroll_show");
-			main_txt.classList.remove("animate__fadeOut");
-			main_txt.classList.add("animate__fadeIn");
-		}, 500); // 애니메이션 시간에 맞게 지연시간 설정 (500ms는 animate.css 기본값)
-	}
-
-
-	//룸 옵션 자바스크립트
-	$(".btnDown").click(function (){
-		var numPeople = $(this).parent().children("input").val();
-		$(this).parent().children("input").val(parseInt(numPeople)-1);
-		var numPeople_m = $(this).parent().children("input").val();
-		if(numPeople_m < 0){
-			alert("0보다 작을 수 없습니다.");
-			$(this).parent().children("input").val(0);
-			$(this).parent().children("span").children("em").text(0);
-		}else {
-			$(this).parent().children("span").children("em").text(numPeople_m);
-		}
-		var child_num =  $(this).parent().next().find("input").val();
-		if(child_num > 0 && numPeople_m <= 0){
-			$(this).parent().next().find("input").val(0);
-			$(this).parent().next().find("span").children("em").text(0);
-		}
-
-		var adltCntArr01 = $("#adltCntArr01").val();
-		var adltCntArr02 = $("#adltCntArr02").val();
-		var adltCntArr03 = $("#adltCntArr03").val();
-		var chldCntArr01 = $("#chldCntArr01").val();
-		var chldCntArr02 = $("#chldCntArr02").val();
-		var chldCntArr03 = $("#chldCntArr03").val();
-
-		if(adltCntArr02 > 0 && adltCntArr03 > 0){
-			$("#room_cnt").val(3);
-		} else if(adltCntArr02 > 0 || adltCntArr03 > 0){
-			$("#room_cnt").val(2);
-		} else{
-			$("#room_cnt").val(1);
-		}
-
-		$("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
-		$("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
-
-	});
-	$("#btnDown_01").click(function (){
-		var numPeople = $(this).parent().children("input").val();
-		$(this).parent().children("input").val(parseInt(numPeople)-1);
-		var numPeople_m = $(this).parent().children("input").val();
-		if(numPeople_m < 1){
-			alert("최소 한명은 필요합니다.");
-			$(this).parent().children("input").val(1);
-			$(this).parent().children("span").children("em").text(1);
-		}else {
-			$(this).parent().children("span").children("em").text(numPeople_m);
-		}
-		var adltCntArr01 = $("#adltCntArr01").val();
-		var adltCntArr02 = $("#adltCntArr02").val();
-		var adltCntArr03 = $("#adltCntArr03").val();
-		var chldCntArr01 = $("#chldCntArr01").val();
-		var chldCntArr02 = $("#chldCntArr02").val();
-		var chldCntArr03 = $("#chldCntArr03").val();
-
-		if(adltCntArr02 > 0 && adltCntArr03 > 0){
-			$("#room_cnt").val(3);
-		} else if(adltCntArr02 > 0 || adltCntArr03 > 0){
-			$("#room_cnt").val(2);
-		} else{
-			$("#room_cnt").val(1);
-		}
-
-		$("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
-		$("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
-	});
-	$(".btnUp").click(function (){
-		var numPeople = $(this).parent().children("input").val();
-		$(this).parent().children("input").val(parseInt(numPeople)+1);
-		var numPeople_s = $(this).parent().children("input").val();
-		if(numPeople_s > 4){
-			alert("최대 4명이 이용 가능합니다.");
-			$(this).parent().children("input").val(4);
-			$(this).parent().children("span").children("em").text(4);
-		}else {
-			$(this).parent().children("span").children("em").text(numPeople_s);
-		}
-
-		var adult_num =  $(this).parent().prev().find("input").val();
-		if(adult_num == 0){
-			alert("성인 없이 어린이만 예약 할 수 없습니다.");
-			$(this).parent().children("input").val(0);
-			$(this).parent().children("span").children("em").text(0);
-		}
-		var adltCntArr01 = $("#adltCntArr01").val();
-		var adltCntArr02 = $("#adltCntArr02").val();
-		var adltCntArr03 = $("#adltCntArr03").val();
-		var chldCntArr01 = $("#chldCntArr01").val();
-		var chldCntArr02 = $("#chldCntArr02").val();
-		var chldCntArr03 = $("#chldCntArr03").val();
-
-		if(adltCntArr02 > 0 && adltCntArr03 > 0){
-			$("#room_cnt").val(3);
-		} else if(adltCntArr02 > 0 || adltCntArr03 > 0){
-			$("#room_cnt").val(2);
-		} else{
-			$("#room_cnt").val(1);
-		}
-
-		$("#adult_cnt").val(parseInt(adltCntArr01) + parseInt(adltCntArr02) + parseInt(adltCntArr03));
-		$("#children_cnt").val(parseInt(chldCntArr01) + parseInt(chldCntArr02) + parseInt(chldCntArr03));
-	});
-
-
-</script>
 <script type="text/javascript" src="/js/main.js"></script>
-

@@ -1,7 +1,8 @@
 package com.bitnc4.service;
 
 import com.bitnc4.dto.BookDto;
-import com.bitnc4.dto.HotelDto;
+import com.bitnc4.dto.CardDto;
+import com.bitnc4.dto.MemberDto;
 import com.bitnc4.dto.RoomDto;
 import com.bitnc4.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +35,20 @@ public class BookService implements BookServiceInter{
         data.put("pw", bookpw);
         return bookMapper.getNomemberBookData(data);
     }
+
+    @Override
+    public int maxMemberNum() {
+        return bookMapper.maxMemberNum();
+    }
+
+    @Override
+    public void insert_nomember(MemberDto dto){
+        bookMapper.insert_nomember(dto);
+    }
+
+    @Override
+    public int insert_card(CardDto dto){
+        return bookMapper.insert_card(dto);
+    }
+
 }
