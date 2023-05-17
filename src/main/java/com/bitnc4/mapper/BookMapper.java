@@ -23,4 +23,8 @@ public interface BookMapper {
     public void insert_nomember (MemberDto dto);
 
     public int  insert_card(CardDto dto);
+
+    public String select_card (CardDto dto);
+
+    public void insert_book (BookDto dto);
 }

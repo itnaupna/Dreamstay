@@ -135,7 +135,7 @@
         border: none;
         border-radius: 5px;
         width: 600px;
-        height: 400px;
+        height: 450px;
         box-shadow: -4px 4px 7px 7px #dddddd;
         margin-top: 30px;
         background-color: white;
@@ -221,7 +221,7 @@
     .r_a1 a,
     .r_a2 a,
     .r_a3 a,
-    .r_a4 a{
+    .r_a4 a {
         color: #000;
         text-decoration: none;
         border-bottom: 2px solid transparent;
@@ -231,10 +231,30 @@
     .r_a1 a:hover,
     .r_a2 a:hover,
     .r_a3 a:hover,
-    .r_a4 a:hover{
+    .r_a4 a:hover {
         border-bottom-color: #000;
     }
 
+    .buttondiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .del_btn {
+        border: none;
+        background-color: black;
+        color: white;
+        width: 80px;
+        height: 30px;
+    }
+
+    .del_btn:hover {
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+    }
 </style>
 
 <div class="res_main">
@@ -273,48 +293,60 @@
             </c:when>
             <c:otherwise>
                 <div class="book_info">
-                    <span class="book_name">${familyname}${firstname}님 예약 정보</span>
-                    <div class="book_list">
-                        <c:forEach var="list" items="${data}" varStatus="i">
-                            <div class="for_list">
-                                <div class="wrapper">
-                                    <div class="list_img">
-                                        <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${list.photo}?type=f&w=160&h=160&faceopt=true">
-                                    </div>
-                                    <div class="list_data">
-                                        <div class="list1">
-                                            <span>객실 :</span> ${list.roomtype}<br>
+                        <span class="book_name">${familyname}${firstname}님 예약 정보</span>
+                        <div class="book_list">
+                            <c:forEach var="list" items="${data}" varStatus="i">
+                                <div class="for_list">
+                                    <div class="wrapper">
+                                        <div class="list_img">
+                                            <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${list.photo}?type=f&w=160&h=160&faceopt=true">
                                         </div>
-                                        <div class="list2">
-                                            <span>체크인 :</span>
-                                            <fmt:parseDate value='${list.checkin}' var='checkin' pattern='yyyy-mm-dd'/>
-                                            <fmt:formatDate value="${checkin}" pattern="yyyy-mm-dd"/>
-                                            <span>체크아웃 :</span>
-                                            <fmt:parseDate value='${list.checkout}' var='checkout'
-                                                           pattern='yyyy-mm-dd'/>
-                                            <fmt:formatDate value="${checkout}" pattern="yyyy-mm-dd"/>
-                                            <br>
-                                        </div>
-                                        <div class="list3">
-                                            <span>성인 :</span> ${list.adult}명
-                                            <span>어린이 :</span> ${list.kids}명<br>
-                                        </div>
-                                        <div class="list4">
-                                            <span>요구사항 :</span> ${list.memo}<br>
-                                        </div>
-                                        <div class="list5">
-                                            <span>가격 :</span><fmt:formatNumber value="${list.total_price}" type="currency"/>
+                                        <div class="list_data">
+                                            <div class="list1">
+                                                <span>객실 :</span> ${list.roomtype}<br>
+                                            </div>
+                                            <div class="list2">
+                                                <span>체크인 :</span>
+                                                <fmt:parseDate value='${list.checkin}' var='checkin'
+                                                               pattern='yyyy-mm-dd'/>
+                                                <fmt:formatDate value="${checkin}" pattern="yyyy-mm-dd"/>
+                                                <span>체크아웃 :</span>
+                                                <fmt:parseDate value='${list.checkout}' var='checkout'
+                                                               pattern='yyyy-mm-dd'/>
+                                                <fmt:formatDate value="${checkout}" pattern="yyyy-mm-dd"/>
+                                                <br>
+                                            </div>
+                                            <div class="list3">
+                                                <span>성인 :</span> ${list.adult}명
+                                                <span>어린이 :</span> ${list.kids}명<br>
+                                            </div>
+                                            <div class="list4">
+                                                <span>요구사항 :</span> ${list.memo}<br>
+                                            </div>
+                                            <div class="list5">
+                                                <span>가격 :</span><fmt:formatNumber value="${list.total_price}"
+                                                                                   type="currency"/>
+                                            </div>
+                                            <div class="buttondiv">
+                                                <button type="button" id="del_btn" class="del_btn" onclick="deletebook(${list.booknum});">예약취소</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <c:if test="${i.count%3==0}">
-                                <br>
-                            </c:if>
-                        </c:forEach>
-                    </div>
+                                <c:if test="${i.count%3==0}">
+                                    <br>
+                                </c:if>
+                            </c:forEach>
+                        </div>
                 </div>
             </c:otherwise>
         </c:choose>
     </div>
 </div>
+
+<script>
+    function deletebook(num){
+        if(!confirm("del?")) return;
+        location.href="/mypage/deletebook?num="+num;
+    }
+</script>

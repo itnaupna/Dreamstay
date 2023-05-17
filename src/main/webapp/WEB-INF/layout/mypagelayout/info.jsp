@@ -25,6 +25,15 @@
         <div class="m_info">
             <ul class="m_infoul">
                 <li>
+                    <span>예약확인</span>
+                    <ul>
+                        <li>
+                            <a href="/mypage">객실 예약</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
                     <span>멤버십</span>
                     <ul>
                         <li>

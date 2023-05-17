@@ -38,10 +38,14 @@
 	<definition name="/admin" extends="adminLayout">
 		<put-attribute name="adminmain" value="/WEB-INF/layout/adminlayout/adminmain.jsp"/>
 	</definition>
-
 	<definition name="/mypage" extends="myPageLayout">
 		<put-attribute name="mypagecontent" value="/WEB-INF/layout/mypagelayout/mypagecontent.jsp"/>
 	</definition>
+	<definition name="/noLayout" extends="noLayout">
+		<put-attribute name="noLayout" value="/WEB-INF/layout/nolayout/main.jsp"/>
+	</definition>
+
+
 
 
 	<!-- wild card macro -->
@@ -59,5 +63,8 @@
 	</definition>
 	<definition name="/nolayout/*" extends="noLayout">
 		<put-attribute name="main" value="/WEB-INF/{1}.jsp"/>
+	</definition>
+	<definition name="/nolayout/*/*" extends="noLayout">
+		<put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
 	</definition>
 </tiles-definitions>

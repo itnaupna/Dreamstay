@@ -1,9 +1,6 @@
 package com.bitnc4.controller;
 
-import com.bitnc4.dto.BookDto;
-import com.bitnc4.dto.MemberDto;
-import com.bitnc4.dto.HotelDto;
-import com.bitnc4.dto.RoomDto;
+import com.bitnc4.dto.*;
 import com.bitnc4.service.AdminHnRService;
 import com.bitnc4.service.BookService;
 import com.bitnc4.service.MainHnRService;
@@ -105,6 +102,10 @@ public class BookController {
             String[] emailSplit = email.split("@");
             String username = emailSplit[0];
             String domain = emailSplit[1];
+            MemberDto dto1 = (MemberDto) session.getAttribute("loginuser");
+            String[] fnFn = dto1.getUser_name().split("/");
+            model.addAttribute("familyname", fnFn[0]);
+            model.addAttribute("firstname", fnFn[1]);
             /*String email = "1234@1234.1234"*/
             model.addAttribute("memberDto", dto);
             model.addAttribute("username", username);
@@ -112,6 +113,8 @@ public class BookController {
         }catch(Exception e){
             model.addAttribute("username", "");
             model.addAttribute("domain", "");
+            model.addAttribute("familyname", "");
+            model.addAttribute("firstname", "");
         }
 
         String roomnum = request.getParameter("roomnum");
@@ -129,6 +132,9 @@ public class BookController {
         model.addAttribute("roommemo", roommemo);
         model.addAttribute("roomdetail", roomdetail);
         model.addAttribute("totaldays", totaldays);
+
+
+
 
 
         return "/main/book/payment";
@@ -160,7 +166,7 @@ public class BookController {
     }
 
     @PostMapping("/insertbook")
-    public String insertBook(MemberDto mdto, HttpServletRequest request, HttpSession session) {
+    public String insertBook(MemberDto mdto, CardDto cdto, HttpServletRequest request, HttpSession session, BookDto bdto) {
         int maxMemberNum = bookService.maxMemberNum() + 1;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
@@ -173,27 +179,103 @@ public class BookController {
         var email = username + "@" + domain;
         var phone = request.getParameter("pay_phone");
         var addr = "비회원 예약 입니다.";
-        int num = ((MemberDto)session.getAttribute("loginuser")).getNum();
-
-        //TODO : 유찬민 일해~~
-//    if(session.getAttribute()){
-//       mdto.setId(nomemberId);
-//       mdto.setPw(pass);
-//       mdto.setUser_name(username);
-//       mdto.setUser_name(nomember_name);
-//       mdto.setEmail(email);
-//       mdto.setPhone(phone);
-//      mdto.setAddr(addr);
-//
-//
-//       bookService.insert_nomember(mdto);
-//   }
 
 
+        int user_num;
+        try {//회원이면 그냥 회원번호 받아오기
+            user_num = ((MemberDto)session.getAttribute("loginuser")).getNum();
+        }catch (Exception e){//비회원일때 처리
+            //비회원일때 member 테이블에 추가
+            mdto.setId(nomemberId);
+            mdto.setPw(pass);
+            mdto.setUser_name(username);
+            mdto.setUser_name(nomember_name);
+            mdto.setEmail(email);
+            mdto.setPhone(phone);
+            mdto.setAddr(addr);
+            session.setAttribute("nomemberId",nomemberId);
+            session.setAttribute("nomemberusername", nomember_name);
+
+            bookService.insert_nomember(mdto);
+
+            user_num = bookService.maxMemberNum();
+
+        }
+
+
+        //카드넣기
+        String company = request.getParameter("company");
+        int card_month = Integer.parseInt(request.getParameter("card_month").replaceAll("월",""));
+        int card_year = Integer.parseInt(request.getParameter("card_year").replaceAll("년",""));
+        String c_num1 = request.getParameter("c_num1");
+        String c_num2 = request.getParameter("c_num2");
+        String c_num3 = request.getParameter("c_num3");
+        String c_num4 = request.getParameter("c_num4");
+        String card_num = c_num1 + c_num2 + c_num3 + c_num4;
+
+        cdto.setCompany(company);
+        cdto.setCardnum(card_num);
+        cdto.setCardmonth(card_month);
+        cdto.setCardyear(card_year);
+        cdto.setMembernum(user_num);
+
+        String dbcard_num;
+        dbcard_num = String.valueOf(bookService.select_card(cdto));
+        if(dbcard_num.equals("null")){
+            bookService.insert_card(cdto);
+            dbcard_num = String.valueOf(bookService.select_card(cdto));
+        }
+
+
+        //예약 추기
+        int roomnum = Integer.parseInt(request.getParameter("roomnum"));
+        String checkIn = request.getParameter("checkIn");
+        String checkOut = request.getParameter("checkOut");
+        int adultCount = Integer.parseInt(request.getParameter("adultCount"));
+        int childrenCount = Integer.parseInt(request.getParameter("childrenCount"));
+        String memo = request.getParameter("memo");
+        int total_price = Integer.parseInt(request.getParameter("roomprice"));
+        String peopleinfo = "{" + "\"adult\"" + ":" + "\"" + adultCount + "\"" + "," + "\"kids\"" + ":" + "\"" + childrenCount + "\"" + "}";
+
+        bdto.setInsert_member_num(user_num);
+        bdto.setCheckin(checkIn);
+        bdto.setCheckout(checkOut);
+        bdto.setInsert_roomnum(roomnum);
+        bdto.setPeopleinfo(peopleinfo);
+        bdto.setMemo(memo);
+        bdto.setTotal_price(total_price);
+        bdto.setCardnum(Integer.parseInt(dbcard_num));
+
+        bookService.insert_book(bdto);
 
 
 
-        return "redirect:/";
+
+        return "redirect:/booksuccess";
+    }
+
+    @RequestMapping("/booksuccess")
+    public String pop(HttpSession session, Model model){
+
+        MemberDto dto = (MemberDto) session.getAttribute("loginuser");
+        model.addAttribute("memberDto", dto);
+        String nomemberId = (String) session.getAttribute("nomemberId");
+        String nomemberusername = (String) session.getAttribute("nomemberusername");
+        model.addAttribute("nomemberId",nomemberId);
+        model.addAttribute("nomemberusername",nomemberusername);
+
+        // <상혁 추가>
+        try {
+            MemberDto dto1 = (MemberDto) session.getAttribute("loginuser");
+            String[] fnFn = dto1.getUser_name().split("/");
+            model.addAttribute("familyname", fnFn[0]);
+            model.addAttribute("firstname", fnFn[1]);
+        }catch (Exception e){
+            model.addAttribute("familyname", "");
+            model.addAttribute("firstname", "");
+        }
+
+        return "/main/book/booksuccess";
     }
 }
 

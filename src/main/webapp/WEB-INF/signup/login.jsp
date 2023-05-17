@@ -56,7 +56,7 @@
         <form action="/book/nomemberbooksearch" method="post" id="search_nomember_book">
             <div id="nomembersearchbox">
                 <input type="text" class="login_input login_booksearch_input" name="searchnum" id="login_book_searchnum" placeholder="예약 번호">
-                <input type="text" class="login_input login_booksearch_input" name="bookpw" id="login_book_pw" placeholder="예약 비밀번호">
+                <input type="text" class="login_input login_booksearch_input" name="bookpw" id="login_book_pw" placeholder="휴대폰 번호">
                 <button type="button" id="booksearch">비회원 예약 확인</button>
                 <span class="login_subtext">회원이 되시면 더 많은 혜택이 있습니다.</span>
             </div>
