@@ -4,11 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
 <style>
     .qnaboard {
         /*border: 1px solid red;*/
         height: 1400px;
+        margin-top: 55px;
+        font-family: 'Nanum Gothic';
     }
 
     .custom-select1,
@@ -41,6 +44,7 @@
         background: #ffffff url("/photo/arrow_196221.png") no-repeat;
         background-position: 96% center;
         background-size: 10px 10px;
+        margin-top: 20px;
     }
 
     .options1,
@@ -59,6 +63,7 @@
         overflow-y: scroll;
         max-height: 150px;
         z-index: 11;
+        font-size: 17px;
     }
 
     .options1 li,
@@ -94,19 +99,34 @@
     .qnaboard_main_content2,
     .qnaboard_main_content3,
     .qnaboard_main_content4,
-    .qnaboard_main_content5{
+    .qnaboard_main_content5,
+    .qnaboard_main_content6
+    {
         /*border: 1px solid pink;*/
-        margin-top: 50px;
+        margin-top: 60px;
     }
 
     .qnaboard_main_content input[type=text] {
         border: none;
         border-bottom: 1px solid #ccc;
         width: 100%;
-        margin-top: 10px;
+        margin-top: 27px;
+        font-size: 17px;
     }
 
     .qnaboard_main_content input[type=text]:focus {
+        outline: none;
+    }
+
+    .qnaboard_main_content6 input[type=text] {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+        margin-top: 27px;
+        font-size: 17px;
+    }
+
+    .qnaboard_main_content6 input[type=text]:focus {
         outline: none;
     }
 
@@ -121,11 +141,17 @@
         border: none;
         border-bottom: 1px solid #ccc;
         margin-top: 20px;
+        resize: none;
+        font-family: 'Nanum Gothic';
+        font-size: 17px;
     }
 
     .qnaboard_main_content3_subject input[type=text]{
         border: none;
         border-bottom: 1px solid #ccc;
+        margin-top: 27px;
+        font-size: 17px;
+
     }
 
     /* span 태그 위 간격 조절 */
@@ -193,6 +219,10 @@
         height: auto;
     }
 
+    .qnaboard_top{
+        font-size: 18px;
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -207,26 +237,135 @@
         //초기값 (문의)
 
         $(".useday").hide();
-        $(".filebox preview-image").hide();
+        $("#qnaboard_sub_content2").hide();
 
         $("input[name='qna_type']").change(function () {
 
             //문의 선택 시
             if ($("input[name='qna_type']:checked").val() == '문의') {
                 $(".useday").hide();
-                $(".filebox preview-image").hide();
+                $("#qnaboard_sub_content2").hide();
 
             }
 
             //의견 선택 시
             else if ($("input[name='qna_type']:checked").val() == '의견') {
                 $(".useday").show();
-                $(".filebox preview-image").show();
-                $(".reserveno").hide();
+                $("#qnaboard_sub_content2").show();
+                $(".qnaboard_main_content6").hide();
             }
         });
     });
 
+</script>
+
+
+<div class="qnaboard">
+    <div class="qnaboard_full">
+        <form action="/insertqna" method="post" name="qnaboard" enctype="multipart/form-data">
+            <div class="qnaboard_top">
+                <span>* 문의유형</span><br><br>
+                <label>
+                    <input type="radio" name="qna_type" value="문의" checked>문의
+                </label>
+                <label>
+                    <input type="radio" name="qna_type" value="의견">의견
+                </label>
+                <%--<div class="qnaboard_main_title">
+                    <span>Q&A</span>
+                </div>--%>
+            </div>
+            <div class="selectli1">
+                <div class="custom-select1">
+                    <span style="font-size: 18px;">* 호텔</span>
+                    <div class="selected1">호텔선택</div>
+                    <ul class="options1">
+                        <c:forEach var="hotel" items="${hotelList}">
+                            <li class="options1_list" value="${hotel.name}" onclick="selectHotel('${hotel.name}')">${hotel.name}</li>
+                        </c:forEach>
+                    </ul>
+                    <input type="hidden" name="hotelname" value="" id="hotelname" required>
+                </div>
+            </div>
+
+            <div class="selectli2">
+                <div class="custom-select2">
+                    <span style="font-size: 18px; margin-bottom: 20px;">* 관련문의</span>
+                    <div class="selected2">관련문의</div>
+                    <ul class="options2">
+                        <li class="options2_list" value="1" onclick="setCategoryValue(1)">가입문의</li>
+                        <li class="options2_list" value="2" onclick="setCategoryValue(2)">예약문의</li>
+                        <li class="options2_list" value="3" onclick="setCategoryValue(3)">객실/패키지문의</li>
+                        <li class="options2_list" value="4" onclick="setCategoryValue(4)">기타</li>
+                    </ul>
+                    <input type="hidden" id="categoryInput" name="category" required>
+                </div>
+            </div>
+
+
+
+            <div class="qnaboard_main_content">
+                <span>TITLE *</span>
+                <div class="qnaboard_main_content_subject">
+                    <input type="text" id="subject" name="subject" class="subject" required>
+                </div>
+            </div>
+
+            <div class="qnaboard_main_content6">
+                <span>예약번호 *</span>
+                <div class="qnaboard_main_content_reserve">
+                    <input type="text" id="reservenum" name="reservenum" class="reservenum">
+                </div>
+            </div>
+
+
+            <div class="useday" id="qnaboard_sub_content1">
+                <input type="date" name="useday" class="flatpickr flatpickr-input">
+            </div>
+
+            <div class="filebox preview-image" id="qnaboard_sub_content2">
+             <input class="upload-name" value="파일선택" disabled="disabled" >
+
+                <label for="input-file">업로드</label>
+                <input type="file" id="input-file" class="upload-hidden" name="photo" multiple>
+            </div>
+
+            <div class="qnaboard_main_content2">
+                    <span>CONTENT *</span>
+                    <div class="qnaboard_main_content2_subject">
+                        <textarea name="content" class="content" required placeholder="불건전한 내용(예: 개인정보보안, 불충분한 증거/귀책 사유에 대한 개인 음해성/음란성 비방 등) 또는 광고성 게시물은 사전 통보없이 삭제 처리될 수 있으며, 등록된 의겨은 수정이 불가능하오니이 점 양지하여 주시기 바랍니다"></textarea>
+                </div>
+            </div>
+
+            <div class="qnaboard_main_content3">
+                <span>NAME *</span>
+                <div class="qnaboard_main_content3_subject">
+                    <input type="text" name="qna_name" value="${familyname}${firstname}" class="qna_name" required>
+                </div>
+            </div>
+
+            <div class="qnaboard_main_content4">
+                <span>EMAIL *</span>
+                <div class="qnaboard_main_content4_subject">
+                    <input type="text" name="qna_email" value="${memberDto.email}" class="qna_email" required>
+                </div>
+            </div>
+
+            <div class="qnaboard_main_content5">
+                <span>PHONE *</span>
+                <div class="qnaboard_main_content5_subject">
+                    <input type="text" name="qna_phone" value="${memberDto.phone}" class="qna_phone" required>
+                </div>
+            </div>
+
+            <div class="qnaboard_btn">
+                <button type="submit" class="submit_btn" onclick="return validateSelection()">등록</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
     // 호텔 선택
     const select1 = document.querySelector('.custom-select1');
     const selected1 = select1.querySelector('.selected1');
@@ -290,95 +429,26 @@
         }
     });
 
+    function selectHotel(hotelName) {
+        document.getElementById("hotelname").value = hotelName
+    }
+
+    function setCategoryValue(value) {
+        var categoryInput = document.getElementById("categoryInput");
+        categoryInput.value = value;
+    }
+
+    function validateSelection() {
+        var hotelName = document.getElementById("hotelname").value;
+        var category = document.getElementById("categoryInput").value;
+        if (hotelName === "") {
+            alert("호텔을 선택해주세요.");
+            return false; // 폼 전송 중지
+        }else if(category == ""){
+            alert("카테고리를 선택해주세요.");
+            return false;
+        }
+        return true; // 선택했을 경우 폼 전송 진행
+    }
+
 </script>
-
-
-<div class="qnaboard">
-    <div class="qnaboard_full">
-        <form action="/insertqna" method="post" name="qnaboard" enctype="multipart/form-data">
-            <div class="qnaboard_top">
-                <input type="radio" name="qna_type" value="문의" checked>문의
-                <input type="radio" name="qna_type" value="의견">의견
-                <div class="qnaboard_main_title">
-                    <span>Q & A</span>
-                </div>
-            </div>
-            <div class="selectli1">
-                <div class="custom-select1">
-                    <span>* 호텔</span>
-                    <div class="selected1">호텔선택</div>
-                    <ul class="options1">
-                        <li class="options1_list">그랜드조선 서울</li>
-                        <li class="options1_list">그랜드조선 부산</li>
-                        <li class="options1_list">그랜드조선 제주</li>
-                        <li class="options1_list">그랜드조선 여수</li>
-                        <li class="options1_list">그랜드조선 속초</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="selectli2">
-                <div class="custom-select2">
-                    <span>* 관련문의</span>
-                    <div class="selected2">관련문의</div>
-                    <ul class="options2">
-                        <li class="options2_list">가입문의</li>
-                        <li class="options2_list">예약문의</li>
-                        <li class="options2_list">객실/패키지문의</li>
-                        <li class="options2_list">기타</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="qnaboard_main_content">
-                <span>TITLE *</span>
-                <div class="qnaboard_main_content_subject">
-                    <input type="text" id="subject" name="subject" class="subject">
-                </div>
-            </div>
-
-            <div class="useday" id="qnaboard_sub_content1">
-                <input type="date" name="useday" class="flatpickr flatpickr-input">
-            </div>
-
-            <div class="filebox preview-image" id="qnaboard_sub_content2">
-                <input class="upload-name" value="파일선택" disabled="disabled" >
-
-                <label for="input-file">업로드</label>
-                <input type="file" id="input-file" class="upload-hidden">
-            </div>
-
-            <div class="qnaboard_main_content2">
-                <span>CONTENT *</span>
-                <div class="qnaboard_main_content2_subject">
-                    <textarea name="content" class="content" placeholder="불건전한 내용(예: 개인정보보안, 불충분한 증거/귀책 사유에 대한 개인 음해성/음란성 비방 등) 또는 광고성 게시물은 사전 통보없이 삭제 처리될 수 있으며, 등록된 의겨은 수정이 불가능하오니이 점 양지하여 주시기 바랍니다"></textarea>
-                </div>
-            </div>
-
-            <div class="qnaboard_main_content3">
-                <span>NAME *</span>
-                <div class="qnaboard_main_content3_subject">
-                    <input type="text" name="qna_name" value="${familyname}${firstname}" class="qna_name">
-                </div>
-            </div>
-
-            <div class="qnaboard_main_content4">
-                <span>EMAIL *</span>
-                <div class="qnaboard_main_content4_subject">
-                    <input type="text" name="qna_email" value="${memberDto.email}" class="qna_email">
-                </div>
-            </div>
-
-            <div class="qnaboard_main_content5">
-                <span>PHONE *</span>
-                <div class="qnaboard_main_content5_subject">
-                    <input type="text" name="qna_phone" value="${memberDto.phone}" class="qna_phone">
-                </div>
-            </div>
-
-            <div class="qnaboard_btn">
-                <button type="submit" class="submit_btn">등록</button>
-            </div>
-        </form>
-    </div>
-</div>

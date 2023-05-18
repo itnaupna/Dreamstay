@@ -1,5 +1,6 @@
 package com.bitnc4.mapper;
 
+import com.bitnc4.dto.BookDto;
 import com.bitnc4.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 

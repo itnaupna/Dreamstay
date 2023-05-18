@@ -23,7 +23,7 @@
 
     #qnapage .Q>span{
         position: relative;
-       top: 10px;
+        top: 10px;
     }
 
     .qnatitle{
@@ -34,7 +34,7 @@
         margin-left: 20px;
         font-size: 30px;
         font-weight: bold;
-/*        border: 1px solid black;*/
+        /*        border: 1px solid black;*/
         width: 1000px;
         height: 40px;
         margin-top: 5px;
@@ -114,7 +114,7 @@
         margin-left: 20px;
         font-size: 30px;
         font-weight: bold;
-       /* border: 1px solid black;*/
+        /* border: 1px solid black;*/
         height: 40px;
         margin-top: 20px;
     }
@@ -163,14 +163,14 @@
                 <%--답변상태--%>
                 <div class="qnaanswer">
                     <div>
-                    <c:if test="${dto.answer== '답변대기'}">
-                    <span class="daegi">${dto.answer}</span>
-                    </c:if>
+                        <c:if test="${dto.answer== '답변대기'}">
+                            <span class="daegi">${dto.answer}</span>
+                        </c:if>
                     </div>
                     <div>
-                    <c:if test="${dto.answer== '답변완료'}">
-                        <span class="wan">${dto.answer}</span>
-                    </c:if>
+                        <c:if test="${dto.answer== '답변완료'}">
+                            <span class="wan">${dto.answer}</span>
+                        </c:if>
                     </div>
                 </div>
 
@@ -204,39 +204,36 @@
                 </div>
             </div>
         </td>
+    <tr>
+        <td style="height: 50px; line-height: 50px;">
+            <div class="answerinfo">
+                <span style="color: #968a8b;">문의자 :</span> <span>${dto.qna_name}</span>
+                <span style="color: #968a8b;">|</span>
+
+                <span style="color: #968a8b;">연락처 :</span> <span>${dto.qna_phone} </span>
+                <span style="color: #968a8b;">|</span>
+
+                <span style="color: #968a8b;">이메일 :</span> <span>${dto.qna_email} </span>
+
+            </div>
+        </td>
+    </tr>
+
+    <c:if test="${dto.qna_photo != ''}">
         <tr>
-            <td style="height: 50px; line-height: 50px;">
-                <div class="answerinfo">
-                    <span style="color: #968a8b;">문의자 :</span> <span>${dto.qna_name}</span>
-                    <span style="color: #968a8b;">|</span>
+            <td>
+                <c:forEach var="photo" items="${dto.qna_photo}">
 
-                    <span style="color: #968a8b;">연락처 :</span> <span>${dto.qna_phone} </span>
-                    <span style="color: #968a8b;">|</span>
-
-                    <span style="color: #968a8b;">이메일 :</span> <span>${dto.qna_email} </span>
-
-                </div>
+                    <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/qnaboard/${photo}?type=f&w=80&h=80"
+                         onclick="location.href='https://kr.object.ncloudstorage.com/dreamsstaybucket/qnaboard/${photo}'">
+                </c:forEach>
             </td>
         </tr>
+    </c:if>
 
-        <c:if test="${dto.qna_photo != ''}">
-          <tr>
-              <td>
-            <c:forEach var="photo" items="${dto.qna_photo}">
-                <tr>
-                    <td>
-                        <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/qnaboard/${photo}?type=f&w=80&h=80"
-                             onclick="location.href='https://kr.object.ncloudstorage.com/dreamsstaybucket/qnaboard/${photo}'">
-                    </td>
-                </tr>
-            </c:forEach>
-              </td>
-          </tr>
-        </c:if>
-
-        <tr style="height: 100px;">
-            <td style="font-size: 18px;">${dto.content}</td>
-        </tr>
+    <tr style="height: 100px;">
+        <td style="font-size: 18px;">${dto.content}</td>
+    </tr>
 </table>
 
 <br>

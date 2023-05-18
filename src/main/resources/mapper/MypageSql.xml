@@ -31,4 +31,5 @@
                      inner join member m on b.user_num = m.num
         where m.num=#{num}
     </select>
+
 </mapper>

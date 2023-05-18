@@ -7,6 +7,7 @@ import com.bitnc4.repo.ChatRoomRepository;
 import com.bitnc4.service.AdminHnRService;
 import com.bitnc4.service.AdminNoticeService;
 import com.bitnc4.service.AdminQnaServeice;
+import com.bitnc4.service.HotelService;
 import lombok.extern.slf4j.Slf4j;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class AdminController {
     AdminNoticeService adminNoticeService;
     @Autowired
     AdminQnaServeice adminQnaServeice;
+    @Autowired
+    HotelService hotelService;
     String bucketName="dreamsstaybucket";
     @Autowired
     NcpObjectStorageService ncp;
@@ -177,6 +180,9 @@ public class AdminController {
     {
         model.addAttribute("qnaList",adminQnaServeice.getQnaList(1,new QnaBoardDto()));
         model.addAttribute("page",adminQnaServeice.getQnaCount(1,new QnaBoardDto()));
+        // 호텔 데이터 가져오기
+        List<HotelDto> hotelList = hotelService.getAllHotelData();
+        model.addAttribute("hotelList", hotelList);
 
         return "/admin/qna/list";
     }

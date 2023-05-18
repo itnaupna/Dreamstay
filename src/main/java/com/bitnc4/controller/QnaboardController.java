@@ -1,7 +1,9 @@
 package com.bitnc4.controller;
 
+import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.dto.QnaBoardDto;
+import com.bitnc4.service.HotelService;
 import com.bitnc4.service.QnaBoardService;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -33,6 +34,9 @@ public class QnaboardController {
 
     @Autowired
     private NcpObjectStorageService storageService;
+
+    @Autowired
+    HotelService hotelService;
     String bucketName = "dreamsstaybucket";
 
     @GetMapping("/mypage/qnaboard")
@@ -51,40 +55,39 @@ public class QnaboardController {
         String[] fnFn = dto.getUser_name().split("/");
         model.addAttribute("familyname", fnFn[0]);
         model.addAttribute("firstname", fnFn[1]);
+
+        // 호텔 데이터 가져오기
+        List<HotelDto> hotelList = hotelService.getAllHotelData();
+        model.addAttribute("hotelList", hotelList);
+
         return "/mypage/qnaboard/qnaform";
+
     }
 
     @PostMapping("/insertqna")
     public String insertqna(QnaBoardDto dto,
                             HttpServletRequest request,
                             HttpSession session,
-                            MultipartFile photo) {
+                            List<MultipartFile> photo,
+                            Model model) {
 
-        String filename = "";
-        //업로드를 한 경우만 버킷에 이미지 저장
-        if(!photo.getOriginalFilename().equals("")){
-            filename = storageService.uploadFile(bucketName, "qnaboard", photo);
+       // 사진 저장
+       String fielname = "";
+
+       List<String> photoNames=new ArrayList<>();
+
+      if(!photo.get(0).getOriginalFilename().equals("")) {
+/*          System.out.println("size:"+photo.size());*/
+            for(MultipartFile file:photo)
+            {//스토리지에 업로드하기
+                String photoname=storageService.uploadFile(bucketName, "qnaboard", file);
+                fielname+=photoname+",";
+            }
+
+            fielname=fielname.substring(0,fielname.length()-1);
         }
 
-
-
-        // dto에 photo 저장\
-        dto.setQna_photo(filename);
-
-
-   /*     if(photo!=null) {
-            System.out.println("size:"+photo.size());
-
-            for(MultipartFile file:photo)
-            {
-                //List<String> photoNames=new ArrayList<>();
-                //스토리지에 업로드하기
-                String photoname=storageService.uploadFile(bucketName, "qnaboard", file);
-                //업로드한 파일명을 db 에 저장
-                dto.setQna_photo(photoname);
-
-            }
-        }*/
+        dto.setQna_photo(fielname);
 
         // 아이디 저장 세션에 저장된 id
         String writer=(String)session.getAttribute("userid");
@@ -95,14 +98,17 @@ public class QnaboardController {
         }
         //dto에 id 저장
         dto.setWriter(writer);
+        System.out.println(writer);
 
         //radio 값 저장
         String qnaType = request.getParameter("qna_type");
         dto.setQna_type(qnaType);
+        System.out.println("qnaType="+qnaType);
 
         // 사용일자 파싱
         String usedayStr = request.getParameter("useday");
-        System.out.println(usedayStr);
+        System.out.println("usedayStr="+usedayStr);
+
 
         String resrevenum = request.getParameter("resrevenum");
         dto.setReservenum(resrevenum);
@@ -124,8 +130,6 @@ public class QnaboardController {
         }
         //dto에 id 저장
         dto.setWriter(writer);
-
-       //
 
         //게시판의 총 글갯수 얻기
         int totalCount= qnaBoardService.getQnaCount(writer);
@@ -192,10 +196,18 @@ public class QnaboardController {
     @GetMapping("/mypage/deleteqna")
     public String deleteqna(int num, HttpSession session, Model model) {
         //db 삭제 전에 저장된 이미지 버켓에서 지운다
-        String filename = qnaBoardService.getQna(num).getQna_photo();
-        if (filename != null && !filename.equals("")) {
-            storageService.deleteFile(bucketName, "qnaboard", filename);
+        //String filename = qnaBoardService.getQna(num).getQna_photo();
+
+        // 이미지 파일 이름 리스트 가져오기
+        List<String> photoNames = Arrays.asList(qnaBoardService.getQna(num).getQna_photo().split(","));
+
+        // 버킷에서 이미지 삭제
+        for (String photoName : photoNames) {
+            if (photoName!= null && !photoName.equals("")) {
+                storageService.deleteFile(bucketName, "qnaboard", photoName);
+            }
         }
+
         //db 삭제
         qnaBoardService.deleteQna(num);
 
@@ -207,39 +219,6 @@ public class QnaboardController {
 
         return "redirect:/mypage/qnalist";
     }
-
- /*   @PostMapping("/updateQnaBoard")
-    public String updateQnaBoard(QnaBoardDto dto,MultipartFile photo,int currentPage){
-
-        String filename="";
-        if(!photo.getOriginalFilename().equals("")) {
-            //기존 파일명 알아내기
-            filename=qnaBoardService.getQna(dto.getNum()).getQna_photo();
-            //버켓에서 삭제
-            storageService.deleteFile(bucketName, "qnaboard", filename);
-
-            //다시 업로드후 업로드한 파일명 얻기
-            filename=storageService.uploadFile(bucketName, "qnaboard", photo);
-        }
-        dto.setQna_photo(filename);
-
-        qnaBoardService.updateQnaBoard(dto);
-
-        return "/mypage/qnadetail?num="+dto.getNum()+"&currentPage="+currentPage;
-
-    }
-
-    @GetMapping("/mypage/updateqna")
-    public String updateqna(int num,int currentPage,Model model)
-    {
-        QnaBoardDto dto=qnaBoardService.getQna(num);
-
-        model.addAttribute("dto", dto);
-        model.addAttribute("currentPage", currentPage);
-
-        return "/mypage/qnaboard/qnaupdateform";
-    }
-*/
 
 
 }

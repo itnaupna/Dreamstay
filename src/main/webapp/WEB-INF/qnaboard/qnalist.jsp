@@ -76,6 +76,13 @@
         </tr>
 
         <c:forEach items="${qnaBoardList}" var="qnaBoardDto">
+
+            <c:if test="${qnaBoardList.size() == 0}">
+                <tr>
+                    <td colspan="5">등록된 게시물이 없습니다.</td>
+                </tr>
+            </c:if>
+
             <tr>
                 <td>${qnaBoardDto.hotelname}</td>
                 <td>

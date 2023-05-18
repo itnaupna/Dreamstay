@@ -1,5 +1,6 @@
 package com.bitnc4.controller;
 
+import com.bitnc4.dto.BookDto;
 import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.service.AdminHnRService;
@@ -37,6 +38,7 @@ public class MyPageController {
         model.addAttribute("familyname", fnFn[0]);
         model.addAttribute("firstname", fnFn[1]);
         session.setAttribute("loginuser", dto);
+
         return "/mypage/mypage";
     }
 

@@ -1,5 +1,6 @@
 package com.bitnc4.service;
 
+import com.bitnc4.dto.BookDto;
 import com.bitnc4.dto.MemberDto;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface MypageServiceInter {
     public void updateUserInfo(MemberDto dto);
 
     public List<Map<String, String>> getmemberBookData(String searchnum);
+
 }
