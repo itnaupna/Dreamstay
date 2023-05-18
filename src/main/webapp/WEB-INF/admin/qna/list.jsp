@@ -11,19 +11,17 @@
 <form name="search-form" autocomplete="off">
     <table class="table table-bordered searchQnas">
         <tr>
-            <td>호텔</td>
+            <td class="colortd">호텔</td>
             <td>
                 <select name="hotelname" class="form-select">
                     <option value="전체">전체</option>
-                    <option value="그랜드조선 서울">그랜드조선 서울</option>
-                    <option value="그랜드조선 부산">그랜드조선 부산</option>
-                    <option value="그랜드조선 제주">그랜드조선 제주</option>
-                    <option value="그랜드조선 여수">그랜드조선 여수</option>
-                    <option value="그랜드조선 속초">그랜드조선 속초</option>
+                        <c:forEach var="hotel" items="${hotelList}">
+                            <option value="${hotel.name}">${hotel.name}</option>
+                        </c:forEach>
                 </select>
             </td>
 
-            <td>카테고리 조회</td>
+            <td class="colortd">카테고리 조회</td>
             <td>
                 <select name="category" class="form-select">
                     <option value="0" selected>전체</option>
@@ -34,7 +32,7 @@
                 </select>
             </td>
 
-            <td>게시글찾기</td>
+            <td class="colortd">게시글찾기</td>
             <td>
                 <div id="findarticlediv" class="input-group">
                     <select name="searchtype" class="form-select" style="width:100px;">
@@ -51,14 +49,14 @@
                 </div>
             </td>
 
-            <td>답변상태</td>
+            <td class="colortd">답변상태</td>
             <td>
                 <label><input class="form-check-input" type="radio"  name="answer" value="전체" checked>전체</label>
                 <label><input class="form-check-input" type="radio"  name="answer" value="답변대기">답변대기</label>
                 <label><input class="form-check-input" type="radio"  name="answer" value="답변완료">답변완료</label>
             </td>
 
-            <td>카테고리</td>
+            <td class="colortd">타입 조회</td>
             <td>
                 <label><input class="form-check-input" type="radio"  name="qna_type" value="전체" checked>전체</label>
                 <label><input class="form-check-input" type="radio"  name="qna_type" value="의견">의견</label>
@@ -80,6 +78,8 @@
         <th>제목</th>
         <th>글쓴이</th>
         <th>답변여부</th>
+        <th>카테고리</th>
+        <th>타입</th>
         <th>작성일</th>
     </tr>
     </thead>
@@ -88,10 +88,16 @@
         <tr onclick="location.href='qna/content?num=${dto.num}';">
             <td>${dto.num}</td>
             <td>
-<%--                <a href="qna/content?num=${dto.num}">--%>
-                    <span class="qna_sub">${dto.subject}</span>
-<%--                </a>--%>
+                    <%--                <a href="qna/content?num=${dto.num}">--%>
+                <span class="qna_sub">
+                    ${dto.subject}
+                   <%-- <c:if test="${dto.qna_photo!='' || dto.qna_photo!=null}">
+                        <i class="bi bi-image"></i>
+                    </c:if>--%>
+                </span>
+                    <%--                </a>--%>
             </td>
+
             <td>${dto.writer}</td>
             <c:if test="${dto.answer=='답변대기'}">
                 <td><span class="answer_before">${dto.answer}</span></td>
@@ -99,13 +105,20 @@
             <c:if test="${dto.answer=='답변완료'}">
                 <td><span class="answer_after">${dto.answer}</span></td>
             </c:if>
+
+            <td>
+                ${dto.category == 1 ? '가입문의' : dto.category == 2 ? '예약문의' : dto.category == 3 ? '객실문의' : dto.category == 4 ? '기타' : ''}
+            </td>
+
+            <td>${dto.qna_type}</td>
+
             <td><fmt:formatDate value="${dto.writeday}" type="both"/> </td>
         </tr>
     </c:forEach>
     </tbody>
     <tfoot>
     <tr>
-        <td colspan="5">
+        <td colspan="8">
             <c:if test="${page[0]>10}">
                 <span class="pagenumber" onclick="getSearchQna(${page[0]-1})">&lt;</span>
             </c:if>
@@ -180,6 +193,14 @@
 
     }
 
+    .colortd{
+        background-color: #F3F3F3 !important;
+    }
+
+    #searchtype{
+        width: 100px;
+    }
+
 </style>
 <script>
 
@@ -192,22 +213,20 @@
             success:(e)=>{
                 $('#qnaTable > tbody').empty();
                 $('#qnaTable tbody').empty();
-                if (e[0].length === 0) { // 검색 결과가 0인 경우
-                    $('#qnaTable tbody').append(`<tr><td colspan="5">조회된 게시글이 없습니다.</td></tr>`);
-                } else {
                     $.each(e[0], (i, e) => {
                         $('#qnaTable tbody').append(
                             `<tr>
                             <td>\${e.num}</td>
-                            <td>
-                            <a href="qna/content?num=\${e.num}">\${e.subject}</a></td>
+                            <td> <a href="qna/content?num=\${e.num}">\${e.subject}</a></td>
                             <td>\${e.writer}</td>
                             <td>\${e.answer=="답변완료"?"<span class='answer_after'>답변완료</span>":"<span class='answer_before'>답변대기</span>"}</td>
+                            <td>\${e.category==1?"가입문의":e.category==2?"예약문의":e.category==3?"객실문의":"기타"}</td>
+                            <td>\${e.qna_type}</td>
                             <td>\${new Date(e.writeday).toLocaleString()}</td>
                         </tr>`
                         );
                     });
-                }
+
                 $('#qnaTable tfoot>tr>td').empty();
                 if(e[1][0]>10)
                     $('#qnaTable tfoot>tr>td').append(`<span class='pagenumber' onclick='getSearchQna(\${e[1][0]-1})'>&lt;</span> `);
@@ -230,4 +249,3 @@
     }
 
 </script>
-
