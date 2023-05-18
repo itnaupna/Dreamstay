@@ -578,6 +578,20 @@
     .book_memo_input{
         margin-top: 20px;
     }
+    .nomember_name:focus{
+        outline: none;
+    }
+    .nomember_name{
+        border:none;
+        border-bottom: solid #aaaaaa 1px;
+        flex: 1;
+        background: none;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        position: relative;
+        font-size: 15px;
+        margin-top: 10px;
+    }
 </style>
 
 <div class="book_main">
@@ -795,7 +809,7 @@
 
 
                 <div class="book_memo">
-                    <span>REQUESTS *</span>
+                    <span>REQUESTS  </span>
                     <div class="book_memo_input">
                         <input type="text" name="memo" class="memo" placeholder="추가 요구사항을 적어주세요">
                     </div>
