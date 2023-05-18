@@ -1,7 +1,9 @@
 package com.bitnc4.controller;
 
 import com.bitnc4.dto.MemberDto;
+import com.bitnc4.dto.NoticeDto;
 import com.bitnc4.dto.QnaBoardDto;
+import com.bitnc4.service.AdminNoticeService;
 import com.bitnc4.service.QnaBoardService;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +26,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -30,6 +34,9 @@ public class QnaboardController {
 
     @Autowired
     private QnaBoardService qnaBoardService;
+
+    @Autowired
+    AdminNoticeService adminNoticeService;
 
     @Autowired
     private NcpObjectStorageService storageService;
@@ -116,19 +123,19 @@ public class QnaboardController {
     public String qnalist(QnaBoardDto dto, HttpSession session, HttpServletResponse response,
                           Model model, @RequestParam(defaultValue = "1") int currentPage){
         //세션에 저장된 id
-        String writer=(String)session.getAttribute("userid");
+        MemberDto writer= (MemberDto)session.getAttribute("loginuser");
 
         // 비회원으로 로그인 시 로그인 페이지로 이동
-        if (writer == null || writer.isEmpty()) {
+        if (writer == null || writer.getId().isEmpty()) {
             return "/main/signup/login";
         }
         //dto에 id 저장
-        dto.setWriter(writer);
+        dto.setWriter(writer.getId());
 
        //
 
         //게시판의 총 글갯수 얻기
-        int totalCount= qnaBoardService.getQnaCount(writer);
+        int totalCount= qnaBoardService.getQnaCount(writer.getId());
         int totalPage;//총 페이지수
         int perPage=5; //한 페이지당 보여질 글의 갯수
         int perBlock=10;//한 블럭당 보여질 페이지의 갯수
@@ -154,7 +161,7 @@ public class QnaboardController {
         no=totalCount-startNum;
 
         //각 페이지에 필요한 게스글 db 에서 가져오기
-        List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(startNum,perPage,writer);
+        List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(startNum,perPage,writer.getId());
 
         //출력시 필요한 변수들을 model 에 몽땅 저장
         model.addAttribute("totalCount", totalCount);
@@ -241,5 +248,19 @@ public class QnaboardController {
     }
 */
 
+    @GetMapping("/notice/noticeboard")
+    public String noticeBoard(@RequestParam(defaultValue = "1") int currentPage, Model model) {
+        Map<String, Integer> paging = adminNoticeService.getCountData(currentPage);
+        List<NoticeDto> data = adminNoticeService.getAllNotice(paging.get("start"), paging.get("perPage"));
+        model.addAttribute("data", data);
+        model.addAttribute("paging", paging);
+        return "/main/qnaboard/noticeboard";
+    }
 
+    @PostMapping("/notice/viewcount")
+    @ResponseBody
+    public int viewCount(int num) {
+        adminNoticeService.viewCount(num);
+        return adminNoticeService.getViewCount(num);
+    }
 }

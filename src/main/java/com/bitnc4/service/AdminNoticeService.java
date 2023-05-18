@@ -80,4 +80,45 @@ public class AdminNoticeService implements AdminNoticeServiceInter{
     public NoticeDto readNotice(int num) {
         return m.readNotice(num);
     }
+
+    @Override
+    public Map<String, Integer> getCountData(int currentPage) {
+        Map<String, Integer> paging = new HashMap<>();
+        int totalCount = m.getCount();
+        int perPage = 10; // 한페이지에 보여질 글 개수
+        int perBlock = 10; // 페이징 개수
+        int start = (currentPage - 1) * perPage;
+        int totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+        int startPage = (currentPage - 1) / perBlock * perBlock + 1;
+        int endPage= startPage + perBlock - 1;
+        if(endPage > totalPage) {
+            endPage = totalPage;
+        }
+        paging.put("perPage", perPage);
+        paging.put("perBlock", perBlock);
+        paging.put("start", start);
+        paging.put("totalPage", totalPage);
+        paging.put("startPage", startPage);
+        paging.put("endPage", endPage);
+        paging.put("currentPage", currentPage);
+        return paging;
+    }
+
+    @Override
+    public List<NoticeDto> getAllNotice(int start, int perpage) {
+        Map<String, Object> paging = new HashMap<>();
+        paging.put("start", start);
+        paging.put("perpage", perpage);
+        return m.getAllNotice(paging);
+    }
+
+    @Override
+    public void viewCount(int num) {
+        m.viewCount(num);
+    }
+
+    @Override
+    public int getViewCount(int num) {
+        return m.getViewCount(num);
+    }
 }

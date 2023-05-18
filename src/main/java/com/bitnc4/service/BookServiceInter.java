@@ -20,5 +20,6 @@ public interface BookServiceInter {
     public int  maxMemberNum();
 
     public void  insert_nomember(MemberDto dto);
+
     public int insert_card(CardDto dto);
 }

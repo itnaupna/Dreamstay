@@ -225,6 +225,7 @@ $("#signupBtn").click(function(){
             $("#family_name").focus();
         }
         if(joinConfirm.c_name && joinConfirm.c_id && joinConfirm.c_pw && joinConfirm.c_pwform && joinConfirm.c_email && joinConfirm.c_phonenum && joinConfirm.c_addr) {
+            alert("회원가입이 완료되었습니다.");
             $("#join_form").submit();
         }
 });

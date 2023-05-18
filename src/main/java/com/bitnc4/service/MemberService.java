@@ -144,8 +144,8 @@ public class MemberService implements MemberServiceInter {
     }
 
     @Override
-    public void socialJoin(MemberDto social) {
-        memberMapper.socialJoin(social);
+    public void socialJoin(MemberDto socialData) {
+        memberMapper.socialJoin(socialData);
     }
 
     @Override
