@@ -232,7 +232,7 @@
                         </li>
                     </c:if>
                     <li>
-                        <a href="" id="confirmReserve">예약확인</a>
+                        <a href="/signup/login" id="confirmReserve">예약확인</a>
                     </li>
                 </ul>
 

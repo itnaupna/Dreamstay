@@ -11,6 +11,63 @@
 <link rel="stylesheet" href="/css/main.css" />
 
 
+<style>
+	.section_3{
+		text-align: center;
+		color: #000000;
+		font-size: 20px;
+		font-weight: bold;
+
+	}
+	#section_3_body{
+
+		display: inline-block;
+		height: 500px;
+		width: 1200px;
+		background-color: #ffffff;
+		text-align: center;
+	}
+	#section_3_logo{
+
+		display: inline-block;
+		position: relative;
+		height: 400px;
+		width: 400px;
+		left: -1%;
+		top: -85px;
+
+	}
+	#section_3_text_body{
+
+		display: inline-block;
+		height: 350px;
+		width: 700px;
+		margin-top: 75px;
+		line-height: 20px;
+		left: 30%;
+		padding-top: 65px;
+	}
+	#section_3_text1{
+		font-size: 35px;
+		height: 70px;
+	}
+	#section_3_text2{
+
+		display: inline-block;
+		height: 100px;
+		width: 700px;
+		margin-top:50px;
+		line-height: 20px;
+		left: 30%;
+		text-align: left;
+	}
+	#section_3_logo img {
+		width: 400px;
+		height: 400px;
+	}
+
+</style>
+
 <div id="fullpage">
 	<div class="section bg_imgs01" >
 		<strong id="main_txt" class="animate__animated animate__fadeIn">
@@ -327,7 +384,20 @@
 			</div>
 		</div>
 	</div>
-	<div class="section bg_imgs03" >Some section3 <a href="#">아래</a></div>
+	<div class="section bg_imgs03" >
+		<div class="section_3">
+			<dviv class="section_3" id="section_3_body">
+				<div class="section_3" id="section_3_logo"><img src="https://cdn.discordapp.com/attachments/1100773197546279023/1106018603955916890/Dream_Stay.png"></div>
+				<div class="section_3" id="section_3_text_body">
+					<div class="section_3" id="section_3_text1">
+						편안함(Easy), 자연(Green), 어울림(Love)
+					</div>
+					<div class="section_3" id="section_3_text2">1914년 조선호텔이 시작된 이래, 조선호텔앤리조트는 ‘First & Best’ 정신을 이어오며 호스피탈리티 산업의 대표기업으로 자리매김 하고 있습니다.<br>
+						수많은 ‘한국 최초’의 신화를 남겨온 조선호텔앤리조트는 호텔 뿐 아니라 외식사업, 오피스 빌딩 위탁 운영 등 품격 있는 서비스와 시설을 제공합니다.</div>
+				</div>
+			</dviv>
+		</div>
+	</div>
 	<div class="section bg_imgs04" id="bg_imgs04">
 		<div id="page4">
 			<div class="page4_title">

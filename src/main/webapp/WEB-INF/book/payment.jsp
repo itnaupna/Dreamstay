@@ -675,10 +675,10 @@
                 <div class="pay_name">
                     <p>RESERVATION NAME *</p>
                     <c:if  test="${memberDto.user_name == null}">
-                        <span><input type="text" value="" name="nomember_name" class="nomember_name" required></span>
+                        <span><input type="text" value="" name="nomember_name" class="nomember_name" required autofocus></span>
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
-                        <span><input type="text" value="${familyname}${firstname}" name="nomember_name" class="nomember_name" readonly></span>
+                        <span><input type="text" value="${familyname}${firstname}" name="nomember_name" class="nomember_name" readonly autofocus></span>
                     </c:if>
                 </div>
 
@@ -710,14 +710,16 @@
                         <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}" readonly>
                     </c:if>
                     <div class="email_selectbox">
-                        <div id="email_select_domain">직접 입력</div>
-                        <ul id="email_custom_option">
-                            <li class="email_select_option">naver.com</li>
-                            <li class="email_select_option">gmail.com</li>
-                            <li class="email_select_option">hanmail.net</li>
-                            <li class="email_select_option">hotmail.com</li>
-                            <li class="email_select_option">nate.com</li>
-                        </ul>
+                        <c:if  test="${memberDto.user_name == null}">
+                            <div id="email_select_domain">직접 입력</div>
+                            <ul id="email_custom_option">
+                                <li class="email_select_option">naver.com</li>
+                                <li class="email_select_option">gmail.com</li>
+                                <li class="email_select_option">hanmail.net</li>
+                                <li class="email_select_option">hotmail.com</li>
+                                <li class="email_select_option">nate.com</li>
+                            </ul>
+                        </c:if>
                     </div>
                 </div>
 
@@ -983,12 +985,12 @@
     var company = $("#company").val();
     var card_month = $("#card_month").val();
     var card_year = $("#card_year").val();
+    const target = document.getElementById('paybtn');
     $(".options2_list").click(function (){
         var selected2 = $(this).text();
         $("#company").val(selected2);
         company = $("#company").val(selected2);
         if(company != "" && card_month != "" && card_year != ""){
-            const target = document.getElementById('paybtn');
             target.disabled = false;
         }
     });
@@ -997,7 +999,6 @@
         $("#card_month").val(selected);
         card_month = $("#card_month").val(selected);
         if(company != "" && card_month != "" && card_year != ""){
-            const target = document.getElementById('paybtn');
             target.disabled = false;
         }
     });
@@ -1006,11 +1007,9 @@
         $("#card_year").val(selected1);
         card_year = $("#card_year").val(selected1);
         if(company != "" && card_month != "" && card_year != ""){
-            const target = document.getElementById('paybtn');
             target.disabled = false;
         }
     });
-
 
 
 </script>
