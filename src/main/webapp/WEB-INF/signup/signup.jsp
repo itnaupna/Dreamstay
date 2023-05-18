@@ -27,7 +27,7 @@
 
         <div class="signup_subbox" id="signup_idbox">
             <span class="signup_title signup_subtitle">ID *</span>
-            <input type="text" class="signup_input" name="id" id="id" placeholder="아이디는 5자리 이상 15이하로 사용가능합니다">
+            <input type="text" class="signup_input" name="id" id="id" placeholder="아이디는 문자 숫자 포함 5자리 이상 15이하로 사용가능합니다">
             <button type="button" class="signup_btn" id="id_check" name="id_check">중복확인</button>
             <span class="signup_notice" id="join_idchk"></span>
         </div>

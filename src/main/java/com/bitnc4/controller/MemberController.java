@@ -87,7 +87,7 @@ public class MemberController {
         dto.setAddr("(" + zipcode + ")" + dto.getAddr() + addrdetail);
         dto.setEmail(dto.getEmail() + "@" + email_domain);
         memberService.joinMember(dto);
-        return "/main";
+        return "redirect:/";
     }
 
     // 로그인
