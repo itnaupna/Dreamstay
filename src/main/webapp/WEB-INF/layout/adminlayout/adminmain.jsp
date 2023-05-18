@@ -248,6 +248,7 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        cursor:pointer;
     }
     .boxlist1:hover{
         /*background-color: rgba(211, 211, 211, 0.49);*/
@@ -335,7 +336,7 @@
         <div class="test2">
         <ul>
             <c:forEach items="${data.Notice}" var="item">
-                <li class="boxlist1">${item.subject}</li>
+                <li class="boxlist1" onclick="location.href='/admin/notice?num=${item.num}'">${item.subject}</li>
             </c:forEach>
         </ul>
         </div>

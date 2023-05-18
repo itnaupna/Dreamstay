@@ -68,7 +68,7 @@
                 &nbsp;&nbsp;
                 <span id="btnDelete">🗑</span>
                 &nbsp;&nbsp;
-                <span onclick="dismissMdl();">✖</span>
+                <span onclick="dismissMdl(true);">✖</span>
             </div>
             <textarea name="content" id="mdltextarea" required="required" style="width: 100%; height: 700px; visibility: hidden;"></textarea>
             <div id="mdlViewPart"></div>
@@ -79,6 +79,7 @@
 </div>
 <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
 <script type="text/javascript">
+
     let oEditors;
     $('#noticeTable tbody').on('click','tr',(e)=>{
         readNotice(e.currentTarget.children[0].innerText);
@@ -379,4 +380,11 @@
             }
         });
     }
+    $(()=>{
+        let search = location.search.substring(1);
+        console.log(search);
+        if(search.length < 1) return;
+        let numstr = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+        readNotice(numstr.num);
+    });
 </script>

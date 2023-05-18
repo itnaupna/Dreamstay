@@ -2,12 +2,11 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
     .qnaboardlist {
         position: absolute;
-        top: 20px;
+        top: 80px;
         width: 100% !important;
     }
 
@@ -22,12 +21,15 @@
     }
 
     #qmalisttable{
-        width: 100% !important;
+        width: 100%;
         text-align: center;
+        border-collapse: collapse;
     }
 
     #qmalisttable tr{
         height: 80px;
+        border-bottom: 1px solid lightgray ;
+        z-index: 10;
 
     }
 
@@ -38,7 +40,7 @@
 
     .qnatr{
         height: 80px !important;
-        border-bottom: 3px solid lightgray;
+        border-bottom: 3px solid lightgray !important;
     }
 
     .answerend{
@@ -55,7 +57,6 @@
         border: 1px solid #001100;
         font-size: 15px;
     }
-
 
 
 
@@ -77,8 +78,9 @@
         <c:forEach items="${qnaBoardList}" var="qnaBoardDto">
             <tr>
                 <td>${qnaBoardDto.hotelname}</td>
-                <td><span style="color: #989442">${qnaBoardDto.category_txt}</span>
-                    <a href='/mypage/qnadetail?num=${qnaBoardDto.num}'>${qnaBoardDto.subject}</a>
+                <td>
+                    <a href='/mypage/qnadetail?num=${qnaBoardDto.num}'><span style="color: #989442">${qnaBoardDto.category_txt}</span>
+                    ${qnaBoardDto.subject}</a>
                 </td>
                 <c:if test="${qnaBoardDto.answer=='답변대기'}">
                     <td><span class="answerstart">${qnaBoardDto.answer}</span></td>
@@ -93,8 +95,9 @@
 
     </table>
 
+    <br>
     <!-- 페이징 처리 -->
-    <div  style="width: 700px;text-align: center;font-size: 17px;">
+    <div  style="width: 100%;text-align: center;font-size: 17px; ">
         <!-- 이전 -->
         <c:if test="${startPage>1}">
             <a style="color:black;text-decoration: none;cursor: pointer;"
@@ -104,7 +107,7 @@
         <!-- 페이지번호 출력 -->
         <c:forEach var="pp" begin="${startPage}" end="${endPage}">
             <c:if test="${currentPage==pp}">
-                <a style="color:green;text-decoration: none;cursor: pointer;"
+                <a style="color:#989442;text-decoration: none;cursor: pointer;"
                    href="/mypage/qnalist?currentPage=${pp}">${pp}</a>
             </c:if>
             <c:if test="${currentPage!=pp}">

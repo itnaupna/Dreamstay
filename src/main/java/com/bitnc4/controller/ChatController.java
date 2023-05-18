@@ -91,6 +91,7 @@ public List<ChatDto> getRecentChatAdmin(HttpSession session, int room){
         }else{
             crr.createChatRoom(mdto.getNum());
             session.setAttribute("useChat",true);
+            smso.convertAndSend("/sub/room",true);
             return true;
         }
 

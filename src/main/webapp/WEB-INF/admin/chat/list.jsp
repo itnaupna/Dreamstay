@@ -243,7 +243,18 @@
         $('#chatViewTitle').text($(e.currentTarget).children()[0].children[0].innerText);
         connect($(e.currentTarget).children()[0].children[0].attributes.room.value);
     });
-    let ws;
+    let ws,listsocket;
+    function getlstroom(){
+        let sock=new SockJS("/ws-stomp");
+        ws = Stomp.over(sock);
+        listsocket = Stomp.over(sock);
+        ws.connect({},function(f){
+           ws.subscribe("/sub/room",(lst)=>{
+               let list = JSON.parse(lst.body);
+               console.log(list);
+            });
+        });
+    }
     function connect(room){
 
         if(ws!==undefined){
