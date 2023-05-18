@@ -239,7 +239,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/stomp-websocket@2.3.4-next/lib/stomp.min.js"></script>
 <script>
-    SetAdminTitle('채팅관리페이지');
+    SetAdminTitle('실시간 채팅상담');
     $('#chatList').on('click','.chatlistWrapper',(e)=>{
         $('#chatViewTitle').text($(e.currentTarget).children()[0].children[0].innerText);
         connect($(e.currentTarget).children()[0].children[0].attributes.room.value);

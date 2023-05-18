@@ -387,4 +387,5 @@
         let numstr = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
         readNotice(numstr.num);
     });
+    SetAdminTitle("공지사항");
 </script>

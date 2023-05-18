@@ -691,5 +691,6 @@
       }
     })
   }
+  SetAdminTitle("호텔/객실 관리");
 </script>
 

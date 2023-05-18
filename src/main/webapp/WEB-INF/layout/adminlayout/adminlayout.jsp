@@ -4,13 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%--${loginuser.user_level>=10}--%>
-<%--<c:if test="${loginuser==null || loginuser.user_level<10}">--%>
-<%--	&lt;%&ndash;special thx:kho&ndash;%&gt;--%>
-<%--	<script>--%>
-<%--		location.href="/";--%>
-<%--	</script>--%>
-<%--</c:if>--%>
-<%--<c:if test="${loginuser.user_level>=10}">--%>
+<c:if test="${loginuser==null || loginuser.user_level<10}">
+	<%--special thx:kho--%>
+	<script>
+		location.href="/";
+	</script>
+</c:if>
+<c:if test="${loginuser.user_level>=10}">
 	<!DOCTYPE html>
 	<html lang="ko">
 	<head>
@@ -42,7 +42,7 @@
 				width:calc(100vw - 80px);
 				/*max-height: 80px;*/
 				height:80px;
-				background-color: rgba(136, 93, 54, 0.62);
+				background-color: rgba(136, 93, 54, 0.31);
 				padding:10px;
 			}
 			.adminmain{
@@ -78,4 +78,4 @@
 
 	</body>
 	</html>
-<%--</c:if>--%>
+</c:if>

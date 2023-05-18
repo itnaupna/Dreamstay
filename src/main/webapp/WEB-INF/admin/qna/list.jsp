@@ -247,5 +247,5 @@
             }
         });
     }
-
+    SetAdminTitle("문의사항");
 </script>

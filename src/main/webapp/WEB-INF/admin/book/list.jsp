@@ -204,4 +204,5 @@ $('#bookTable tbody').on('click','tr',(e)=>{
            break;
    }
 });
+SetAdminTitle("예약관리");
 </script>

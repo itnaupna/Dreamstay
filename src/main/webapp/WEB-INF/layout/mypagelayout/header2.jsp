@@ -420,6 +420,11 @@
                         <li>
                             <a href="/mypage/" id="header_mypage">마이페이지</a>
                         </li>
+                        <c:if test="${loginuser.user_level>=10}">
+                            <li>
+                                <a href="/admin" id="header_admin"><b>관리 대시보드</b></a>
+                            </li>
+                        </c:if>
                     </c:if>
                     <c:if test="${userid == null}">
                         <li>
