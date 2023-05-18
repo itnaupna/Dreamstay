@@ -76,6 +76,10 @@ public class BookController {
         System.out.println(checkOut);*/
 
         List<RoomDto> roomList = bookService.searchroom(dto);
+        //String[] photoArr = roomList.get(0).getRoomphoto().split(",");// roomList의 i번쨰 인덱스에서 roomphoto가져온 후 스플릿 -> 아중배열에 저장
+        //{"photo1","photo2"}{"photo3","photo4"}{"photo5","photo6"}
+        // 1번지 불러올 경우 -> {"photo1","photo2"} ->for문으로 하나씩
+
         model.addAttribute("roomList", roomList);
 
         String hotelname = bookService.hotelname(Integer.parseInt((String) selectedHotel));

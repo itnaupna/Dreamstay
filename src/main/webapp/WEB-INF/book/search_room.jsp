@@ -147,6 +147,7 @@
         border-top: 0px;
         border-left: 0px;
         border-bottom: 0px;
+        width: 500px;
     }
     .RoomList p input:focus{
         outline:none;
@@ -161,11 +162,14 @@
         box-shadow: 0 .15rem 1.0rem 0 rgba(58, 59, 69, .15) !important;
         transition: box-shadow 0.1s ease;
         font-weight: 900 !important;
-        font-size: .6rem;
+        font-size: 16px;
         padding-left: 30px;
         padding-top:20px;
         padding-bottom: 20px;
 
+    }
+    #roomPhotos{
+        margin-top:;
     }
 </style>
 
@@ -219,8 +223,9 @@
 
     <c:forEach var="room" items="${roomList}">
         <form action="../payment" method="post" name="payment">
-            <span>
-                <img src="../photo/profile.png" style="display: flex;float: left;margin-left: 100px;margin-top: 20px;">
+            <span id="roomPhotos">
+                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${room.roomphoto}" name="roomphoto"style="position:relative;display: flex;float: left;margin-left: 70px;margin-top: 40px;width:250px;height: 182px;
+padding-right: 50px;">
             </span>
             <div class="RoomList">
                 <div class="RoomInfo">
@@ -234,8 +239,8 @@
                 <c:if test="${totaldays < 3}">
                     <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays * roomCount)}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
                 </c:if>
-                    <p>요청사항 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
-                    <p>상세정보 : <input value="${room.roomdetail}" type="text" name="roomdetail" readonly></p>
+                    <p>상세정보 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
+<%--                    <p>상세정보 : <input value="TODO : 수정요함" type="text" name="roomdetail" readonly></p>--%>
                 </div>
                 <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>
             <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
@@ -246,7 +251,21 @@
 </div>
 
     <script>
+        var imageUrls="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${room.roomphoto}";
 
+        var roomPhotoDiv=document.getElementById("roomPhotos");
 
+        imageUrlArray.forEach(function (imageUrl){
+           var img=document.createElement("img");
+           img.src=imageUrl;
+           img.style.display="flex";
+           img.style.float="left";
+           img.style.marginLeft="70px";
+           img.style.margintop="80px";
+           img.style.width="250px";
+           img.style.paddingRight="50px";
+
+           roomPhotoDiv.appendChild(img);
+        });
     </script>
 
