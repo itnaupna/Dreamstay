@@ -9,6 +9,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <style>
@@ -167,6 +168,15 @@
         padding-bottom: 20px;
 
     }
+    .roomimg{
+        height: 180px;
+        width: 250px;
+        display: flex;
+        float: left;
+        margin-left: 45px;
+        margin-top: 35px;
+    }
+    }
 </style>
 
 <div class="book_main">
@@ -220,7 +230,7 @@
     <c:forEach var="room" items="${roomList}">
         <form action="../payment" method="post" name="payment">
             <span>
-                <img src="../photo/profile.png" style="display: flex;float: left;margin-left: 100px;margin-top: 20px;">
+                 <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${fn:split(room.roomphoto,",")[0]}" class="roomimg">
             </span>
             <div class="RoomList">
                 <div class="RoomInfo">
