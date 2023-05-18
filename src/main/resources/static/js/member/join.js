@@ -227,7 +227,6 @@ $("#signupBtn").click(function(){
         if(joinConfirm.c_name && joinConfirm.c_id && joinConfirm.c_pw && joinConfirm.c_pwform && joinConfirm.c_email && joinConfirm.c_phonenum && joinConfirm.c_addr) {
             $("#join_form").submit();
         }
-
 });
 
 //특수문자, 괄호, 공백 모두 제거 - 점은 제거 안함
