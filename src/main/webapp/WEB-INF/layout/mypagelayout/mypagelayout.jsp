@@ -42,5 +42,10 @@
     <footer class="footer2">
         <tiles:insertAttribute name="footer2"/>
     </footer>
+    <c:if test="${loginuser != null and loginuser.user_level == 1}"> <%-- 채팅기능은 로그인 유저에게만 노출 --%>
+        <aside class="floatingchat">
+            <tiles:insertAttribute name="floating"/>
+        </aside>
+    </c:if>
 </div>
 </body>

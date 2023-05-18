@@ -4,13 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%--${loginuser.user_level>=10}--%>
-<c:if test="${loginuser==null || loginuser.user_level<10}">
-	<%--special thx:kho--%>
-	<script>
-		location.href="/";
-	</script>
-</c:if>
-<c:if test="${loginuser.user_level>=10}">
+<%--<c:if test="${loginuser==null || loginuser.user_level<10}">--%>
+<%--	&lt;%&ndash;special thx:kho&ndash;%&gt;--%>
+<%--	<script>--%>
+<%--		location.href="/";--%>
+<%--	</script>--%>
+<%--</c:if>--%>
+<%--<c:if test="${loginuser.user_level>=10}">--%>
 	<!DOCTYPE html>
 	<html lang="ko">
 	<head>
@@ -34,6 +34,9 @@
 				border-right:1px solid #e0e0e0;
 				position:relative;
 			}
+			.rightside{
+				overflow:hidden;
+			}
 			.top{
 				/*height:7.5vh;*/
 				width:calc(100vw - 80px);
@@ -46,6 +49,7 @@
 				height:calc(100vh - 80px);
 				width:calc(100vw - 80px);
 				padding: 10px;
+				overflow:auto;
 			}
 
 		</style>
@@ -74,4 +78,4 @@
 
 	</body>
 	</html>
-</c:if>
+<%--</c:if>--%>

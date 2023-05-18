@@ -39,9 +39,10 @@
 <ul class="ulMaster">
     <li id="liAdmin" onclick="location.href='/admin'" data-bs-toggle="tooltip" data-bs-placement="right" title="대시보드"><i class="bi bi-clipboard-data"></i></li>
     <li id="liChat" onclick="location.href='/admin/chat'" data-bs-toggle="tooltip" data-bs-placement="right" title="채팅관리"><i class="bi bi-chat-dots"></i></li>
-    <li id="liBoard" onclick="location.href='/admin/notice'" data-bs-toggle="tooltip" data-bs-placement="right" title="공지사항"><i class="bi bi-person-circle"></i></li>
+    <li id="liBoard" onclick="location.href='/admin/notice'" data-bs-toggle="tooltip" data-bs-placement="right" title="공지사항"><i class="bi bi-megaphone"></i></li>
     <li id="liQna" onclick="location.href='/admin/qna'" data-bs-toggle="tooltip" data-bs-placement="right" title="QnA문의"><i class="bi bi-question-circle"></i></li>
     <li id="liHotel" onclick="location.href='/admin/hotel'" data-bs-toggle="tooltip" data-bs-placement="right" title="호텔관리"><i class="bi bi-hospital"></i></li>
+    <li id="liBook" onclick="location.href='/admin/book'" data-bs-toggle="tooltip" data-bs-placement="right" title="예약관리"><i class="bi bi-journal-check"></i></li>
 </ul>
 <div id="liLogout" onclick="if(confirm('로갓?'))location.href='/signup/logout'"><i class="bi bi-box-arrow-left"></i></div>
 

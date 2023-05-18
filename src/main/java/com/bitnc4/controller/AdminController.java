@@ -5,10 +5,7 @@ import com.bitnc4.dto.NoticeDto;
 import com.bitnc4.dto.QnaBoardDto;
 import com.bitnc4.dto.RoomDto;
 import com.bitnc4.repo.ChatRoomRepository;
-import com.bitnc4.service.AdminHnRService;
-import com.bitnc4.service.AdminNoticeService;
-import com.bitnc4.service.AdminQnaServeice;
-import com.bitnc4.service.HotelService;
+import com.bitnc4.service.*;
 import lombok.extern.slf4j.Slf4j;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ import java.util.List;
 @Slf4j
 public class AdminController {
 
+@Autowired
+    AdminBookService adminBookService;
     @Autowired
     AdminHnRService adminHnRService;
     @Autowired
@@ -294,5 +293,9 @@ public class AdminController {
         return result;
     }
 
-
+    @GetMapping("/book")
+    public String bookInit(Model m){
+        m.addAttribute("blst",adminBookService.getAll());
+        return "/admin/book/list";
+    }
 }

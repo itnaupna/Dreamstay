@@ -31,7 +31,7 @@
         delete from room where num=#{roomnum}
     </update>
     <select id="getMemberCount" resultType="int">
-        select count(*) from member where user_level&lt;10
+        select count(*) from member where user_level between 1 and 9
     </select>
     <select id="getHotelCount" resultType="int">
         select count(*) from hotel

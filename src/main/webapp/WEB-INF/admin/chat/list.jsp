@@ -6,51 +6,52 @@
 <%--${list}--%>
 <div id="chatWrapper">
     <div id="chatList">
+
         <c:forEach items="${list}" var="item">
             <div class="chatlistWrapper">
                 <div class="chatBody">
                     <div class="chatlistName" room="${item.memberNum}">
-                        ${item.memberName}
+                            ${item.memberName}
                     </div>
                     <div class="chatlistContent">
-                        ${item.memberLastchat}
+                            ${item.memberLastchat}
                     </div>
                 </div>
                 <div class="chatlistTimestamp">
-                        <fmt:formatDate value="${item.lastTimeStamp}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
+                    <fmt:formatDate value="${item.lastTimeStamp}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
             </div>
         </c:forEach>
-<%--        <div class="chatlistWrapper">--%>
-<%--            <div class="chatBody">--%>
-<%--                <div class="chatlistName">--%>
-<%--                    애옹이--%>
-<%--                </div>--%>
-<%--                <span class="chatlistContent">이 호텔은 고양이 말고 사람도 숙박이 가능한가요.알고 싶어요.</span>--%>
-<%--            </div>--%>
-<%--            <span class="chatlistTimestamp">2023-05-10 23:23</span>--%>
-<%--        </div>--%>
+        <%--        <div class="chatlistWrapper">--%>
+        <%--            <div class="chatBody">--%>
+        <%--                <div class="chatlistName">--%>
+        <%--                    애옹이--%>
+        <%--                </div>--%>
+        <%--                <span class="chatlistContent">이 호텔은 고양이 말고 사람도 숙박이 가능한가요.알고 싶어요.</span>--%>
+        <%--            </div>--%>
+        <%--            <span class="chatlistTimestamp">2023-05-10 23:23</span>--%>
+        <%--        </div>--%>
     </div>
     <div id="chatView">
         <div id="chatViewTitle">
-            <span>애옹이</span>
+            <span></span>
         </div>
         <div id="txtChatViewPort">
-<%--            <div class="chatMsgWrapper chatLeft">--%>
-<%--                <div class="chatMsgBody">--%>
-<%--                    채팅내용--%>
-<%--                </div>--%>
-<%--                <div class="chatMsgBottom">--%>
-<%--                    <span class="chatMsgTime">2023-05-10 23:23</span>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="chatMsgWrapper chatRight">--%>
-<%--                <div class="chatMsgBody">--%>
-<%--                    안녕하세요, 채팅메세지 css뷰 테스트입니다.--%>
-<%--                </div>--%>
-<%--                <div class="chatMsgBottom">--%>
-<%--                    <span class="chatMsgTime">오전 00:00</span>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            <%--            <div class="chatMsgWrapper chatLeft">--%>
+            <%--                <div class="chatMsgBody">--%>
+            <%--                    채팅내용--%>
+            <%--                </div>--%>
+            <%--                <div class="chatMsgBottom">--%>
+            <%--                    <span class="chatMsgTime">2023-05-10 23:23</span>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
+            <%--            <div class="chatMsgWrapper chatRight">--%>
+            <%--                <div class="chatMsgBody">--%>
+            <%--                    안녕하세요, 채팅메세지 css뷰 테스트입니다.--%>
+            <%--                </div>--%>
+            <%--                <div class="chatMsgBottom">--%>
+            <%--                    <span class="chatMsgTime">오전 00:00</span>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
         </div>
         <div id="txtChatBottom" class="form-floating">
             <input type="text" id="txtChat" placeholder="_" class="form-control">
@@ -249,12 +250,17 @@
         ws = Stomp.over(sock);
         listsocket = Stomp.over(sock);
         ws.connect({},function(f){
-           ws.subscribe("/sub/room",(lst)=>{
-               let list = JSON.parse(lst.body);
-               console.log(list);
+            ws.subscribe("/sub/room",(lst)=>{
+                // let list = JSON.parse(lst.body);
+                // console.log(list);
+                if(lst.body)
+                    getroomlist();
             });
         });
     }
+    $(()=>{
+        getlstroom();
+    });
     function connect(room){
 
         if(ws!==undefined){
@@ -329,24 +335,43 @@
             }
         }
     });
+    function formatTimestamp(timestamp) {
+        var date = new Date(timestamp);
+        var year = date.getFullYear();
+        var month = ('0' + (date.getMonth() + 1)).slice(-2);
+        var day = ('0' + date.getDate()).slice(-2);
+        var hours = ('0' + date.getHours()).slice(-2);
+        var minutes = ('0' + date.getMinutes()).slice(-2);
+        var seconds = ('0' + date.getSeconds()).slice(-2);
+
+        var formattedDate = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+        return formattedDate;
+    }
     //getroomlist();
-    // function getroomlist(){
-    //     $.ajax({
-    //         url:'/chat/rooms',
-    //         type:'get',
-    //         dataType:'json',
-    //         success:e=>{
-    //             $('#chatList').empty();
-    //             $.each(e,(i,e)=>{
-    //                 $('#chatList').append(
-    //                     `<div class="chatlistWrapper">
-    //                         <div class="chatlistName">\${e.roomId}</div>
-    //                         <div class="chatlistContent">\${e.roomName}</div>
-    //                         <div class="chatlistTimestamp">2323.23.23 23:23</div>
-    //                     </div>`
-    //                 );
-    //             });
-    //         }
-    //     });
-    // }
+    function getroomlist(){
+        $.ajax({
+            url:'/chat/rooms',
+            type:'get',
+            dataType:'json',
+            success:e=>{
+                $('#chatList').empty();
+                $.each(e,(i,e)=>{
+                    console.log(e);
+                    // var date = new Date(e.lastTimeStamp);
+                    $('#chatList').append(
+                        $('<div>').addClass("chatlistWrapper").append(
+                            $('<div>').addClass("chatBody").append(
+                                $('<div>').addClass("chatlistName").attr("room",e.memberNum)
+                                    .text(e.memberName),
+                                $('<div>').addClass("chatlistContent")
+                                    .text(e.memberLastchat)
+                            ),
+                            $('<div>').addClass("chatlistTimestamp")
+                                .text(formatTimestamp(e.lastTimeStamp))
+                        )
+                    );
+                });
+            }
+        });
+    }
 </script>
