@@ -21,6 +21,7 @@ import java.util.HashMap;
 public class MemberController {
 
     private final String kCode = "09e7bd588320e6991f62d894f6a723a6";
+    private final String nCode = "2plAFu6gKZlsog8ZfGkK";
 
     @Autowired
     MemberService memberService;
@@ -214,6 +215,14 @@ public class MemberController {
             session.setAttribute("loginuser", socialLogin);
         }
         return "redirect:/";
+    }
+
+    // 네이버 키 가져오기
+    @PostMapping("/ncode")
+    @ResponseBody
+    public String nCode() {
+        System.out.println(nCode);
+        return nCode;
     }
 
     // 네이버 팝업

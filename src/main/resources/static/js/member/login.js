@@ -97,53 +97,51 @@ $("#login_nomember_select").click(function() {
 
 // 카카오 로그인
 $("#kakao_login").click(function() {
-    let code;
     $.ajax({
         url: "/signup/kcode",
         type: "post",
         dataType: "text",
         success: function(data)  {
-            console.log(typeof (data));
-            code = data;
+            Kakao.init(data);
+            Kakao.Auth.login({
+                success: function(response) {
+                    Kakao.API.request({
+                        url: "/v2/user/me",
+                        success:function(response) {
+                            let id = JSON.stringify(response.id);
+                            let nickname = " /" + JSON.stringify(response.properties.nickname).replaceAll("\"", "");
+                            let email = JSON.stringify(response.kakao_account.email).replaceAll("\"", "");
+                            let social = "kakao-";
+                            let issocial = 1;
+                            $.ajax({
+                                url: "/signup/kakaologin",
+                                data: {"id": id, "user_name": nickname, "email": email, "issocial": issocial, "social": social},
+                                type: "post",
+                                success: function() {
+                                    alert("카카오 로그인");
+                                    location.href = "/";
+                                },
+                                error: function () {
+                                    alert("카카오 로그인 실패")
+                                }
+                            });
+                        },
+                        fail : function (error) {
+                            alert(JSON.stringify(error));
+                        }
+                    });
+                },
+                fail: function(error) {
+                    alert(JSON.stringify(error));
+                }
+            });
         }
     });
-    Kakao.init(code);
+    // Kakao.init(code);
     // location.href = 'https://kauth.kakao.com/oauth/authorize?client_id=f3d379546c1b36b64b38a67e6b3b2e27&redirect_uri=http://localhost:8080/signup/login&response_type=code';
 
     // var kakaoCode = window.location.href;
     // console.log(kakaoCode);
-    Kakao.Auth.login({
-        success: function(response) {
-            Kakao.API.request({
-                url: "/v2/user/me",
-                success:function(response) {
-                    let id = JSON.stringify(response.id);
-                    let nickname = " /" + JSON.stringify(response.properties.nickname).replaceAll("\"", "");
-                    let email = JSON.stringify(response.kakao_account.email).replaceAll("\"", "");
-                    let social = "kakao-";
-                    let issocial = 1;
-                    $.ajax({
-                        url: "/signup/kakaologin",
-                        data: {"id": id, "user_name": nickname, "email": email, "issocial": issocial, "social": social},
-                        type: "post",
-                        success: function() {
-                            alert("카카오 로그인");
-                            location.href = "/";
-                        },
-                        error: function () {
-                            alert("카카오 로그인 실패")
-                        }
-                    });
-                },
-                fail : function (error) {
-                    alert(JSON.stringify(error));
-                }
-            });
-        },
-        fail: function(error) {
-            alert(JSON.stringify(error));
-        }
-    });
 });
 
 // 네이버 로그인
@@ -174,7 +172,6 @@ $("#booksearch").click(function() {
                     $("#search_nomember_book").submit();
                 }
             }
-
         });
     } else {
         alert("예약 번호와 비밀번호를 입력해주세요");
