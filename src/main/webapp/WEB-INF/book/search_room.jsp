@@ -168,9 +168,7 @@
         padding-bottom: 20px;
 
     }
-    #roomPhotos{
-        margin-top:;
-    }
+
 </style>
 
 <div class="book_main">
@@ -250,22 +248,5 @@ padding-right: 50px;">
     </div>
 </div>
 
-    <script>
-        var imageUrls="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${room.roomphoto}";
 
-        var roomPhotoDiv=document.getElementById("roomPhotos");
-
-        imageUrlArray.forEach(function (imageUrl){
-           var img=document.createElement("img");
-           img.src=imageUrl;
-           img.style.display="flex";
-           img.style.float="left";
-           img.style.marginLeft="70px";
-           img.style.margintop="80px";
-           img.style.width="250px";
-           img.style.paddingRight="50px";
-
-           roomPhotoDiv.appendChild(img);
-        });
-    </script>
 
