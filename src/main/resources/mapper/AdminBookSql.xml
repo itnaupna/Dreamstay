@@ -6,5 +6,11 @@
     select * from bookview order by checkin asc;
 </select>
 
+    <delete id="deleteBook" parameterType="int">
+        delete from book where num=#{num}
+    </delete>
+    <update id="checkinBook" parameterType="int">
+        update book set realcheckin=1 where num=#{num}
+    </update>
 
 </mapper>

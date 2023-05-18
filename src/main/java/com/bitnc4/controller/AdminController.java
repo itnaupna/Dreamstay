@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -296,6 +297,20 @@ public class AdminController {
     @GetMapping("/book")
     public String bookInit(Model m){
         m.addAttribute("blst",adminBookService.getAll());
+        m.addAttribute("now",new Date());
         return "/admin/book/list";
     }
+
+    @PostMapping("/book/delete")
+    @ResponseBody
+    public boolean deleteBook(int num){
+        return adminBookService.deleteBook(num);
+    }
+
+    @PostMapping("/book/checkin")
+    @ResponseBody
+    public boolean checkinBook(int num){
+        return adminBookService.checkinBook(num);
+    }
+
 }

@@ -5,4 +5,6 @@ import java.util.Map;
 
 public interface AdminBookServiceInter {
     public List<Map<String,Object>> getAll();
+    public boolean deleteBook(int num);
+    public boolean checkinBook(int num);
 }

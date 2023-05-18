@@ -9,134 +9,101 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--${blst}--%>
-<%--<form name="search-form" autocomplete="off">--%>
-<%--    <table class="table table-bordered searchQnas">--%>
-<%--        <tr>--%>
-<%--            <td class="colortd">호텔</td>--%>
-<%--            <td>--%>
-<%--                <select name="hotelname" class="form-select">--%>
-<%--                    <option value="전체">전체</option>--%>
-<%--                        <c:forEach var="hotel" items="${hotelList}">--%>
-<%--                            <option value="${hotel.name}">${hotel.name}</option>--%>
-<%--                        </c:forEach>--%>
-<%--                </select>--%>
-<%--            </td>--%>
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 
-<%--            <td class="colortd">카테고리 조회</td>--%>
-<%--            <td>--%>
-<%--                <select name="category" class="form-select">--%>
-<%--                    <option value="0" selected>전체</option>--%>
-<%--                    <option value="1">가입문의</option>--%>
-<%--                    <option value="2">예약문의</option>--%>
-<%--                    <option value="3">객실문의</option>--%>
-<%--                    <option value="4">기타</option>--%>
-<%--                </select>--%>
-<%--            </td>--%>
-
-<%--            <td class="colortd">게시글찾기</td>--%>
-<%--            <td>--%>
-<%--                <div id="findarticlediv" class="input-group">--%>
-<%--                    <select name="searchtype" class="form-select" style="width:100px;">--%>
-<%--                        <option value="title" selected >제목</option>--%>
-<%--                        <option value="writer">작성자</option>--%>
-<%--                        <option value="content">내용</option>--%>
-<%--                    </select>--%>
-<%--                    <style>--%>
-<%--                        #findarticlediv .form-select{--%>
-<%--                            flex:initial !important;--%>
-<%--                        }--%>
-<%--                    </style>--%>
-<%--                    <input type="text" name="keyword" value="" class="form-control">--%>
-<%--                </div>--%>
-<%--            </td>--%>
-
-<%--            <td class="colortd">답변상태</td>--%>
-<%--            <td>--%>
-<%--                <label><input class="form-check-input" type="radio"  name="answer" value="전체" checked>전체</label>--%>
-<%--                <label><input class="form-check-input" type="radio"  name="answer" value="답변대기">답변대기</label>--%>
-<%--                <label><input class="form-check-input" type="radio"  name="answer" value="답변완료">답변완료</label>--%>
-<%--            </td>--%>
-
-<%--            <td class="colortd">타입 조회</td>--%>
-<%--            <td>--%>
-<%--                <label><input class="form-check-input" type="radio"  name="qna_type" value="전체" checked>전체</label>--%>
-<%--                <label><input class="form-check-input" type="radio"  name="qna_type" value="의견">의견</label>--%>
-<%--                <label><input class="form-check-input" type="radio"  name="qna_type" value="문의">문의</label>--%>
-<%--            </td>--%>
-
-<%--            <td colspan="2">--%>
-<%--                <input type="button" class="btn btn-outline-secondary" onclick="getSearchQna(1)" value="검색">--%>
-<%--            </td>--%>
-<%--    </table>--%>
-<%--</form>--%>
 <div id="bookTableWrapper">
-<table id="bookTable" class="table">
-    <caption>
-    </caption>
-    <thead>
-    <tr>
-        <th rowspan="2" style="width:50px;">체크인<br>여부</th>
-        <th rowspan="2" style="width:40px;">번호</th>
-        <th rowspan="2" style="width:155px;">예약ID</th>
-        <th rowspan="2" style="width:140px;">이름</th>
-        <th rowspan="2" style="width:105px;">기간</th>
-        <th colspan="2" style="width:100px">인원정보</th>
-        <th rowspan="2" style="width:200px;">요청사항</th>
-        <th rowspan="2" style="width:80px;">예약금액</th>
-        <th rowspan="2" style="width:220px;">이메일</th>
-        <th rowspan="2" style="width:150px;">연락처</th>
-        <th rowspan="2" style="width:180px;">호텔</th>
-        <th rowspan="2" style="width:110px;">객실타입</th>
-        <th rowspan="2" style="width:150px;">호텔전화</th>
-    </tr>
-    <tr>
-        <th style="width:50px;">성인</th>
-        <th style="width:50px;">어린이</th>
-    </tr>
-    </thead>
-    <tbody>
+    <table id="bookTable" class="table">
+        <caption style="caption-side: top">
+            <span class="nolook" style="outline: 1px solid;">　　</span> : 노쇼
+            <span class="checkedin" style="outline: 1px solid;">　　</span> : 체크인
+            <span class="today" style="outline: 1px solid;">　　</span> : 오늘 체크인
+        </caption>
+        <thead>
+        <tr>
+<%--            <th rowspan="2" style="width:50px;">체크인<br>여부</th>--%>
+            <th rowspan="2" style="width:40px;">번호</th>
+            <th rowspan="2" style="width:155px;">예약ID</th>
+            <th rowspan="2" style="width:140px;">이름</th>
+            <th rowspan="2" style="width:105px;">기간</th>
+            <th colspan="2" style="width:100px">인원정보</th>
+            <th rowspan="2" style="width:200px;">요청사항</th>
+            <th rowspan="2" style="width:80px;">예약금액</th>
+            <th rowspan="2" style="width:220px;">이메일</th>
+            <th rowspan="2" style="width:150px;">연락처</th>
+            <th rowspan="2" style="width:180px;">호텔</th>
+            <th rowspan="2" style="width:110px;">객실타입</th>
+            <th rowspan="2" style="width:150px;">호텔전화</th>
+        </tr>
+        <tr>
+            <th style="width:50px;">성인</th>
+            <th style="width:50px;">어린이</th>
+        </tr>
+        </thead>
+        <tbody>
         <c:forEach items="${blst}" var="dto">
-            <tr>
-                <td>${dto.realcheckin}</td>
-                <td>${dto.num}</td>
-                <td>${dto.id}</td>
-                <td>${dto.name}</td>
-                <td>${fn:substringBefore(dto.checkin,"T")} ~ <br/>
-                        ${fn:substringBefore(dto.checkout,"T")}</td>
-                <td>${dto.adult}</td>
-                <td>${dto.kids}</td>
-                <td>${dto.memo}</td>
-                <td><fmt:formatNumber value="${dto.totalprice}"/></td>
-                <td class="noover">${dto.memberemail}</td>
-                <td>${dto.memberphone}</td>
-                <td>${dto.hotelname}</td>
-                <td>${dto.roomtype}</td>
-                <td>${dto.hotelphone}</td>
+            <c:set value="${fn:substringBefore(dto.checkin,'T')}" var="tcin"/>
+            <c:set value="${fn:substringBefore(dto.checkout,'T')}" var="tcout"/>
+            <fmt:parseDate value="${tcin}" pattern="yyyy-MM-dd" var="cin"/>
+            <fmt:parseDate value="${tcout}" pattern="yyyy-MM-dd" var="cout"/>
+            <fmt:formatDate value="${cin}" pattern="yyyy-MM-dd" var="ucin"/>
+            <fmt:formatDate value="${cout}" pattern="yyyy-MM-dd" var="ucout"/>
+            <c:if test="${today<=ucout}">
+                <c:if test="${today>ucin && dto.realcheckin==0}">
+                    <c:set value="nolook" var="strClass"/>
+                </c:if>
+                <c:if test="${today==ucin && dto.realcheckin==0}">
+                    <c:set value="today" var="strClass"/>
+                </c:if>
+                <c:if test="${dto.realcheckin==1}">
+                    <c:set value="checkedin" var="strClass"/>
+                </c:if>
+                <c:if test="${today<ucin}">
+                    <c:set value="notyet" var="strClass"/>
+                </c:if>
+            </c:if>
+            <c:if test="${today>ucout}">
+                <c:set value="outdated" var="strClass"/>
+            </c:if>
+            <tr class="${strClass}">
+<%--            <td>${dto.realcheckin}</td>--%>
+            <td>${dto.num}</td>
+            <td>${dto.id}</td>
+            <td>${dto.name}</td>
+            <td>${ucin} ~ <br/>
+                    ${ucout}</td>
+            <td>${dto.adult}</td>
+            <td>${dto.kids}</td>
+            <td>${dto.memo}</td>
+            <td><fmt:formatNumber value="${dto.totalprice}"/></td>
+            <td class="noover">${dto.memberemail}</td>
+            <td>${dto.memberphone}</td>
+            <td>${dto.hotelname}</td>
+            <td>${dto.roomtype}</td>
+            <td>${dto.hotelphone}</td>
             </tr>
         </c:forEach>
-    </tbody>
-    <tfoot>
-    <tr>
-        <td colspan="14">
-            <c:if test="${page[0]>10}">
-                <span class="pagenumber" onclick="getSearchQna(${page[0]-1})">&lt;</span>
-            </c:if>
-            <c:forEach begin="${page[0]}" end="${page[2]}" var="i">
-                <c:if test="${i==page[1]}">
-                    <span class="currpage pagenumber">${i}</span>
-                </c:if>
-                <c:if test="${i!=page[1]}">
-                    <span class="pagenumber" onclick="getSearchQna(${i})">${i}</span>
-                </c:if>
-            </c:forEach>
-            <c:if test="${page[2]<page[3]}">
-                <span class="pagenumber" onclick="getSearchQna(${page[2]+1})">&gt;</span>
-            </c:if>
-        </td>
-    </tr>
-    </tfoot>
-</table>
+        </tbody>
+<%--        <tfoot>--%>
+<%--        <tr>--%>
+<%--            <td colspan="13">--%>
+<%--                <c:if test="${page[0]>10}">--%>
+<%--                    <span class="pagenumber" onclick="getSearchQna(${page[0]-1})">&lt;</span>--%>
+<%--                </c:if>--%>
+<%--                <c:forEach begin="${page[0]}" end="${page[2]}" var="i">--%>
+<%--                    <c:if test="${i==page[1]}">--%>
+<%--                        <span class="currpage pagenumber">${i}</span>--%>
+<%--                    </c:if>--%>
+<%--                    <c:if test="${i!=page[1]}">--%>
+<%--                        <span class="pagenumber" onclick="getSearchQna(${i})">${i}</span>--%>
+<%--                    </c:if>--%>
+<%--                </c:forEach>--%>
+<%--                <c:if test="${page[2]<page[3]}">--%>
+<%--                    <span class="pagenumber" onclick="getSearchQna(${page[2]+1})">&gt;</span>--%>
+<%--                </c:if>--%>
+<%--            </td>--%>
+<%--        </tr>--%>
+<%--        </tfoot>--%>
+    </table>
 </div>
 <style>
     .noover{
@@ -174,13 +141,67 @@
         vertical-align: middle;
         text-align: center;
     }
-
+    .nolook{
+        background-color:rgba(255,0,0,0.1);
+    }
+    .today{
+        background-color:rgba(0,255,0,0.1);
+    }
+    .checkedin{
+        background-color:rgba(0,0,255,0.1);
+    }
+    .outdated{
+        background-color:rgba(0,0,0,0.1);
+    }
     #bookTable tbody tr:hover{
         background-color: rgba(136, 93, 54, 0.26);
         cursor:pointer;
     }
-    </style>
+</style>
 
 <script>
-
+$('#bookTable tbody').on('click','tr',(e)=>{
+   let cls = $(e.currentTarget)[0].className;
+   let num = $(e.currentTarget)[0].children[0].innerText;
+   switch (cls){
+       case "nolook":
+       case "today":
+           if(confirm("체크인하시겠습니까?"))
+           $.ajax({
+               url:'/admin/book/checkin',
+               type:'post',
+               data:{num:num},
+               success:(e)=>{
+                   alert('체크인되었습니다.');
+                   location.reload();
+               }
+           });
+           break;
+       case "notyet":
+       case "checkedin":
+           if(confirm("예약을 취소하시겠습니까?"))
+               $.ajax({
+                   url:'/admin/book/delete',
+                   type:'post',
+                   data:{num:num},
+                   success:(e)=>{
+                       alert('취소되었습니다.');
+                       location.reload();
+                   }
+               });
+           break;
+       case "outdated":
+           if(confirm("삭제하시겠습니까?"))
+               $.ajax({
+                   url:'/admin/book/delete',
+                   type:'post',
+                   data:{num:num},
+                   success:(e)=>{
+                       alert('삭제되었습니다.');
+                       location.reload();
+                   }
+               });
+           break;
+   }
+});
 </script>
