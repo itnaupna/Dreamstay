@@ -148,6 +148,7 @@
         border-top: 0px;
         border-left: 0px;
         border-bottom: 0px;
+        width: 500px;
     }
     .RoomList p input:focus{
         outline:none;
@@ -162,7 +163,7 @@
         box-shadow: 0 .15rem 1.0rem 0 rgba(58, 59, 69, .15) !important;
         transition: box-shadow 0.1s ease;
         font-weight: 900 !important;
-        font-size: .6rem;
+        font-size: 16px;
         padding-left: 30px;
         padding-top:20px;
         padding-bottom: 20px;
@@ -176,7 +177,8 @@
         margin-left: 45px;
         margin-top: 35px;
     }
-    }
+
+
 </style>
 
 <div class="book_main">
@@ -229,8 +231,9 @@
 
     <c:forEach var="room" items="${roomList}">
         <form action="../payment" method="post" name="payment">
-            <span>
-                 <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${fn:split(room.roomphoto,",")[0]}" class="roomimg">
+            <span id="roomPhotos">
+                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${room.roomphoto}" name="roomphoto"style="position:relative;display: flex;float: left;margin-left: 70px;margin-top: 40px;width:250px;height: 182px;
+padding-right: 50px;">
             </span>
             <div class="RoomList">
                 <div class="RoomInfo">
@@ -244,8 +247,8 @@
                 <c:if test="${totaldays < 3}">
                     <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays * roomCount)}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
                 </c:if>
-                    <p>요청사항 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
-                    <p>상세정보 : <input value="${room.roomdetail}" type="text" name="roomdetail" readonly></p>
+                    <p>상세정보 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
+<%--                    <p>상세정보 : <input value="TODO : 수정요함" type="text" name="roomdetail" readonly></p>--%>
                 </div>
                 <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>
             <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
@@ -255,8 +258,5 @@
     </div>
 </div>
 
-    <script>
 
-
-    </script>
 
