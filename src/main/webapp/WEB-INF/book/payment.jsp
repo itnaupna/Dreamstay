@@ -656,7 +656,7 @@
                     <hr class="sidehr">
                     <div class="divbtn">
                         <input type="hidden" name="peopleinfo">
-                        <button type="submit" id="paybtn" class="paybtn" onclick=""disabled='disabled'>예약완료</button>
+                        <button type="button" id="paybtn" class="paybtn" onclick="payment()">예약완료</button>
                     </div>
                 </div>
             </div>
@@ -823,7 +823,7 @@
 
                     <ul class="open_ul">
                         <li class="open_li">
-                            <input type="checkbox" required>
+                            <input type="checkbox" id="checkbox">
                             <label class="clickimg">
                                 [필수] 취소 및 노쇼(No - Show) 규정에 동의합니다
                             </label>
@@ -982,10 +982,10 @@
         });
     }
 
-    var company = $("#company").val();
-    var card_month = $("#card_month").val();
-    var card_year = $("#card_year").val();
-    const target = document.getElementById('paybtn');
+
+
+   /* const target = document.getElementById('paybtn');
+
     $(".options2_list").click(function (){
         var selected2 = $(this).text();
         $("#company").val(selected2);
@@ -1009,7 +1009,84 @@
         if(company != "" && card_month != "" && card_year != ""){
             target.disabled = false;
         }
-    });
+    });*/
+        var company = $("#company").val();
+        var card_month = $("#card_month").val();
+        var card_year = $("#card_year").val();
 
+        $(".options2_list").click(function (){
+            var selected2 = $(this).text();
+            $("#company").val(selected2);
+            company = $("#company").val(selected2);
+        });
+        $(".options_list").click(function (){
+            var selected = $(this).text();
+            $("#card_month").val(selected);
+            card_month = $("#card_month").val(selected);
+        });
+        $(".options1_list").click(function (){
+            var selected1 = $(this).text();
+            $("#card_year").val(selected1);
+            card_year = $("#card_year").val(selected1);
+        });
+    function payment(){
+        var nomember_name = $(".nomember_name").val();
+        var pay_phone = $("#pay_phone").val();
+        var input_email = $("#input_email").val();
+        var input_domain = $("#input_domain").val();
+        var c_num1 = $("#c_num1").val();
+        var c_num2 = $("#c_num2").val();
+        var c_num3 = $("#c_num3").val();
+        var c_num4 = $("#c_num4").val();
+        const checkbox = document.getElementById('checkbox');
+        const is_checked = checkbox.checked;
+
+
+        if(nomember_name == ""){
+            alert("이름을 입력해 주세요.");
+            $(".nomember_name").focus();
+        }
+        if(pay_phone == "" && nomember_name != ""){
+            alert("휴대폰 번호를 입력해 주세요.");
+            $("#pay_phone").focus();
+        }
+        if(input_email == "" && nomember_name != "" && pay_phone != "" || input_domain == "" && nomember_name != "" && pay_phone != ""){
+            alert("이메일을 입력해 주세요.");
+            $("#input_email").focus();
+        }
+        if(company == "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != ""){
+            alert("카드 회사를 선택해 주세요.");
+        }
+        if(c_num1 == "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != ""){
+            alert("카드번호를 입력해 주세요.");
+            $("#c_num1").focus();
+        }
+        if(c_num2 == "" && c_num1 != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != ""){
+            alert("카드번호를 입력해 주세요.");
+            $("#c_num2").focus();
+        }
+        if(c_num3 == "" && c_num2 != "" && c_num1 != ""  && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != ""){
+            alert("카드번호를 입력해 주세요.");
+            $("#c_num3").focus();
+        }
+        if(c_num4 == "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != ""){
+            alert("카드번호를 입력해 주세요.");
+            $("#c_num4").focus();
+        }
+        if(card_month == "" && c_num4 != "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != ""){
+            alert("카드 유효기간(월)을 선택해 주세요.");
+        }
+        if(card_year == "" && card_month != "" && c_num4 != "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != ""){
+            alert("카드 유효기간(년도)을 선택해 주세요.");
+        }
+        if(is_checked == false && c_num4 != "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && card_year != "" && card_month != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != ""){
+            alert("필수 규정을 확인하시고 체크해 주세요.");
+        }
+        if(is_checked == true && c_num4 != "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && card_year != "" && card_month != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "" ) {
+            document.getElementById("bookform").submit();
+        }
+
+
+    }
 
 </script>
