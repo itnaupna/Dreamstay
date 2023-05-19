@@ -982,34 +982,6 @@
         });
     }
 
-
-
-   /* const target = document.getElementById('paybtn');
-
-    $(".options2_list").click(function (){
-        var selected2 = $(this).text();
-        $("#company").val(selected2);
-        company = $("#company").val(selected2);
-        if(company != "" && card_month != "" && card_year != ""){
-            target.disabled = false;
-        }
-    });
-    $(".options_list").click(function (){
-        var selected = $(this).text();
-        $("#card_month").val(selected);
-        card_month = $("#card_month").val(selected);
-        if(company != "" && card_month != "" && card_year != ""){
-            target.disabled = false;
-        }
-    });
-    $(".options1_list").click(function (){
-        var selected1 = $(this).text();
-        $("#card_year").val(selected1);
-        card_year = $("#card_year").val(selected1);
-        if(company != "" && card_month != "" && card_year != ""){
-            target.disabled = false;
-        }
-    });*/
         var company = $("#company").val();
         var card_month = $("#card_month").val();
         var card_year = $("#card_year").val();
