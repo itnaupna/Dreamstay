@@ -174,7 +174,7 @@
 
     #email_custom_option {
         position: absolute;
-        top: 100%;
+        top: 98%;
         left: 0;
         right: 0;
         background-color: white;
@@ -187,7 +187,6 @@
         overflow-y: scroll;
         max-height: 150px;
         width: 200px;
-        margin-top: 45px;
     }
 
     #email_select_domain {
@@ -473,15 +472,29 @@
     }
 
     .book_main .pay .sideBanner .txt-label .paybtn {
-        text-align: center;
-        font-size: 15px;
-        border-color: #000000;
-        border-width: thin;
         width: 250px;
         background-color: black;
         height: 60px;
         color: white;
         cursor: pointer;
+        padding: 0 25px;
+        font-size: 15px;
+        letter-spacing: -.01em;
+        text-align: center;
+        vertical-align: middle;
+        background-color: black;
+        color: white;
+        border: thin solid #000000;
+        border-radius: 0;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .book_main .pay .sideBanner .txt-label .paybtn:hover{
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        background-color: white;
+        color: black;
     }
 
     .divbtn {
@@ -578,6 +591,16 @@
     .book_memo_input{
         margin-top: 20px;
     }
+
+    .nomember_name{
+        border: none;
+        border-bottom: 1px solid #ccc;
+        width: 300px;
+    }
+
+    .nomember_name:focus{
+        outline: none;
+    }
 </style>
 
 <div class="book_main">
@@ -661,7 +684,7 @@
                 <div class="pay_name">
                     <p>RESERVATION NAME *</p>
                     <c:if  test="${memberDto.user_name == null}">
-                        <span><input type="text" value="" name="nomember_name" class="nomember_name" required></span>
+                        <span><input type="text" value="" name="nomember_name" class="nomember_name" required oninput="onlyKoEng(this)" maxlength="10"></span>
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
                         <span><input type="text" value="${familyname}${firstname}" name="nomember_name" class="nomember_name" readonly></span>
@@ -671,7 +694,7 @@
                 <div class="pay_phone">
                     <span>PHONE NUMBER *</span>
                     <c:if  test="${memberDto.user_name == null}">
-                        <input type="text" id="pay_phone" name="pay_phone" value="" required>
+                        <input type="text" id="pay_phone" name="pay_phone" value="" required oninput="onlyPhone(this)" maxlength="11" placeholder="숫자만 입력가능합니다.">
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
                         <input type="text" id="pay_phone" name="pay_phone" value="${memberDto.phone}" readonly>
@@ -682,7 +705,7 @@
                     <span class="sp_email">EMAIL *</span>
                     <c:if  test="${memberDto.user_name == null}">
                         <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
-                               value="" required>
+                               value="" required oninput="onlyEngNum(this)">
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
                         <input type="text" name="email" class="input_email" id="input_email" placeholder="이메일"
@@ -690,7 +713,7 @@
                     </c:if>
                     <span id="at">@</span>
                     <c:if  test="${memberDto.user_name == null}">
-                        <input type="text" name="input_domain" class="input_domain" id="input_domain" value="" required>
+                        <input type="text" name="input_domain" class="input_domain" id="input_domain" value="" required oninput="onlyEngNum(this)">
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
                         <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}" readonly>
@@ -747,10 +770,10 @@
 
                 <div class="cardnumber">
                     <p>CARD NUMBER *</p>
-                    <input type="text" class="c_num" id="c_num1" placeholder="CARD NUMBER" name="c_num1" maxlength="4" required>
-                    <input type="text" class="c_num" id="c_num2" name="c_num2" maxlength="4" required>
-                    <input type="text" class="c_num" id="c_num3" name="c_num3" maxlength="4" required>
-                    <input type="text" class="c_num" id="c_num4" name="c_num4" maxlength="4" required>
+                    <input type="text" class="c_num" id="c_num1" placeholder="CARD NUMBER" name="c_num1" maxlength="4" required oninput="onlyNum()">
+                    <input type="text" class="c_num" id="c_num2" name="c_num2" maxlength="4" required oninput="onlyNum()">
+                    <input type="text" class="c_num" id="c_num3" name="c_num3" maxlength="4" required oninput="onlyNum()">
+                    <input type="text" class="c_num" id="c_num4" name="c_num4" maxlength="4" required oninput="onlyNum()">
                 </div>
 
                 <span class="ex_date">EXPIRY DATE *</span>
@@ -792,7 +815,6 @@
                         </ul>
                     </div>
                 </div>
-
 
                 <div class="book_memo">
                     <span>REQUESTS *</span>
@@ -950,6 +972,7 @@
         }
     });
 
+    // 토스api
     var clientKey = 'test_ck_d26DlbXAaV0xjj5gR9dVqY50Q9RB'
     var tossPayments = TossPayments(clientKey) // 클라이언트 키로 초기화하기
 
@@ -997,6 +1020,45 @@
         }
     });
 
+    //영어와 숫자만
+    function onlyEngNum(e) {
+        const regex = /[^A-Za-z0-9.]/g;
+        if (regex.test(e.value)) {
+            alert('영문자,숫자, . 만 입력 가능합니다');
+            e.value = e.value.replace(regex, '');
+        }
+    }
 
+    // 전화번호 입력
+    function onlyPhone(target) {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+    }
+
+    const phoneInput = document.querySelector('#pay_phone');
+    phoneInput.addEventListener('input', (e) => {
+        if (/[^0-9]/g.test(e.target.value)) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        }
+    });
+
+    // 한글과 영문만
+    function onlyKoEng(e){
+        const regex = /[^(ㄱ-힣a-zA-Z)]/gi;
+        if (regex.test(e.value)){
+            alert("한글과 영문만 입력 가능합니다");
+            e.value = e.value.replace(regex, '');
+        }
+    }
+
+    // 숫자만 입력
+    function onlyNum(e) {
+        const regex = /[^0-9]/g;
+        if(regex.test(e.value)){
+            alert("숫자만 입력 가능합니다");
+            e.value = e.value.replace(regex, '');
+        }
+    }
 
 </script>

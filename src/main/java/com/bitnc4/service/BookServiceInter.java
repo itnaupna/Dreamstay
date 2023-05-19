@@ -27,4 +27,6 @@ public interface BookServiceInter {
     public String select_card (CardDto dto);
 
     void insert_book(BookDto dto);
+
+    public void noMemberDeleteData(int num);
 }

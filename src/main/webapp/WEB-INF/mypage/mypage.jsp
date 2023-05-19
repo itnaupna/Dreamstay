@@ -87,13 +87,14 @@
 
     .nobook {
         /*border: 1px solid red;*/
-        height: 300px;
+        height: 400px;
         text-align: center;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 30px;
         flex-direction: column;
+        margin-top: 200px;
     }
 
     .bookbtn {
@@ -134,7 +135,7 @@
     .for_list {
         border: none;
         border-radius: 5px;
-        width: 600px;
+        width: 650px;
         height: 450px;
         box-shadow: -4px 4px 7px 7px #dddddd;
         margin-top: 30px;
@@ -243,17 +244,25 @@
     }
 
     .del_btn {
-        border: none;
+        font-size: 13px;
+        letter-spacing: -.01em;
+        text-align: center;
+        vertical-align: middle;
         background-color: black;
         color: white;
+        border: thin solid #000000;
+        border-radius: 0;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
         width: 80px;
         height: 30px;
     }
 
     .del_btn:hover {
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
         background-color: white;
         color: black;
-        border: 1px solid #ccc;
     }
 </style>
 
@@ -287,57 +296,62 @@
                         <p>${familyname}${firstname}님의 예약내역이 없습니다.</p>
                         <p class="nobooktitle">다양한 Dream Stay의 상품을 예약해보세요</p>
                         <button type="button" onclick="location.href='/'" class="bookbtn">예약하기</button>
-                        <hr>
                     </div>
                 </div>
             </c:when>
             <c:otherwise>
                 <div class="book_info">
-                        <span class="book_name">${familyname}${firstname}님 예약 정보</span>
-                        <div class="book_list">
-                            <c:forEach var="list" items="${data}" varStatus="i">
-                                <div class="for_list">
-                                    <div class="wrapper">
-                                        <div class="list_img">
-                                            <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${list.photo}?type=f&w=160&h=160&faceopt=true">
+                    <span class="book_name">${familyname}${firstname}님 예약 정보</span>
+                    <div class="book_list">
+                        <c:forEach var="list" items="${data}" varStatus="i">
+                            <div class="for_list">
+                                <div class="wrapper">
+                                    <div class="list_img">
+                                        <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${list.photo}?type=f&w=160&h=160&faceopt=true">
+                                    </div>
+                                    <div class="list_data">
+                                        <div class="list1">
+                                            <span>객실타입 :</span> ${list.roomtype}<br>
                                         </div>
-                                        <div class="list_data">
-                                            <div class="list1">
-                                                <span>객실 :</span> ${list.roomtype}<br>
-                                            </div>
-                                            <div class="list2">
-                                                <span>체크인 :</span>
-                                                <fmt:parseDate value='${list.checkin}' var='checkin'
-                                                               pattern='yyyy-mm-dd'/>
-                                                <fmt:formatDate value="${checkin}" pattern="yyyy-mm-dd"/>
-                                                <span>체크아웃 :</span>
-                                                <fmt:parseDate value='${list.checkout}' var='checkout'
-                                                               pattern='yyyy-mm-dd'/>
-                                                <fmt:formatDate value="${checkout}" pattern="yyyy-mm-dd"/>
-                                                <br>
-                                            </div>
-                                            <div class="list3">
-                                                <span>성인 :</span> ${list.adult}명
-                                                <span>어린이 :</span> ${list.kids}명<br>
-                                            </div>
-                                            <div class="list4">
+                                        <div class="list2">
+                                            <span>체크인 :</span>
+                                            <fmt:parseDate value='${list.checkin}' var='checkin'
+                                                           pattern='yyyy-mm-dd'/>
+                                            <fmt:formatDate value="${checkin}" pattern="yyyy-mm-dd"/>
+                                            <span>체크아웃 :</span>
+                                            <fmt:parseDate value='${list.checkout}' var='checkout'
+                                                           pattern='yyyy-mm-dd'/>
+                                            <fmt:formatDate value="${checkout}" pattern="yyyy-mm-dd"/><br>
+                                        </div>
+                                        <div class="list3">
+                                            <span>성인 :</span> ${list.adult}명
+                                            <span>어린이 :</span> ${list.kids}명<br>
+                                        </div>
+                                        <div class="list4">
+                                            <c:if test="${empty list.memo}">
+                                                <span>요구사항이 없습니다.</span>
+                                            </c:if>
+                                            <c:if test="${not empty list.memo}">
                                                 <span>요구사항 :</span> ${list.memo}<br>
-                                            </div>
-                                            <div class="list5">
-                                                <span>가격 :</span><fmt:formatNumber value="${list.total_price}"
-                                                                                   type="currency"/>
-                                            </div>
-                                            <div class="buttondiv">
-                                                <button type="button" id="del_btn" class="del_btn" onclick="deletebook(${list.booknum});">예약취소</button>
-                                            </div>
+                                            </c:if>
+                                        </div>
+                                        <div class="list5">
+                                            <span>가격 :</span><fmt:formatNumber value="${list.total_price}"
+                                                                               type="currency"/>
+                                        </div>
+                                        <div class="buttondiv">
+                                            <button type="button" id="del_btn" class="del_btn"
+                                                    onclick="deletebook(${list.booknum});">예약취소
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                                <c:if test="${i.count%3==0}">
-                                    <br>
-                                </c:if>
-                            </c:forEach>
-                        </div>
+                            </div>
+                            <c:if test="${i.count%3==0}">
+                                <br>
+                            </c:if>
+                        </c:forEach>
+                    </div>
                 </div>
             </c:otherwise>
         </c:choose>
@@ -345,8 +359,8 @@
 </div>
 
 <script>
-    function deletebook(num){
-        if(!confirm("del?")) return;
-        location.href="/mypage/deletebook?num="+num;
+    function deletebook(num) {
+        if (!confirm("예약 취소하시겠습니까?")) return;
+        location.href = "/mypage/deletebook?num=" + num;
     }
 </script>

@@ -33,13 +33,15 @@ public class MyPageController {
         MemberDto dto = (MemberDto)session.getAttribute("loginuser");
         List<Map<String, String>> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
         model.addAttribute("data",map);
-        System.out.println("data");
         model.addAttribute("size", map.size());
+
         String[] fnFn = dto.getUser_name().split("/");
         model.addAttribute("familyname", fnFn[0]);
         model.addAttribute("firstname", fnFn[1]);
+
         List<BookDto> list = mypageService.selectForBookNum();
         model.addAttribute("list", list);
+
         return "/mypage/mypage";
     }
 
@@ -53,7 +55,8 @@ public class MyPageController {
         String[] fnFn = dto.getUser_name().split("/");
         model.addAttribute("familyname", fnFn[0]);
         model.addAttribute("firstname", fnFn[1]);
-        return "/mypage/mypage";
+
+        return "redirect:/mypage";
     }
 
     @GetMapping("/updateinfo")
@@ -77,6 +80,7 @@ public class MyPageController {
     {
         dto.setId(((MemberDto)session.getAttribute("loginuser")).getId());
         mypageService.updateUserInfo(dto);
+        dto.setNum(((MemberDto) session.getAttribute("loginuser")).getNum());
         session.setAttribute("loginuser", dto);
     }
 

@@ -95,19 +95,25 @@
         height: 60px;
         font-size: 15px;
         margin-top: 10px;
-        border-color: #000000;
-        border-width: thin;
-        background-color: black;
+        border: none;
+        background-color: white !important;
         color: black;
         cursor: pointer;
-        font-weight: 700 !important;
+        overflow: hidden;
+        z-index: 1;
+        vertical-align: middle;
+    }
 
+    .mainbtn:hover{
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out !important;
+        background-color: black !important;
+        color: white;
     }
 
     .nomemberdiv,
     .memberdiv {
-        height: 500px;
-        width: 500px;
+        height: 700px;
+        width: 700px;
         margin-left: auto;
         margin-right: auto;
         margin-top: 60px;
@@ -123,9 +129,13 @@
         padding: 30px 30px;
     }
 
+    .yes_name{
+        margin-right: 30px;
+    }
+
     .no_name h2,
     .yes_name h2 {
-        font-size: 25px;
+        font-size: 40px;
         font-weight: normal;
         font-family: "Playfair Display", serif;
         font-style: italic;
@@ -133,10 +143,16 @@
         flex: 1;
     }
 
+    .no_name span,
+    .yes_name span{
+        font-size: 20px;
+    }
+
     .no_name input[type=text],
     .yes_name input[type=text] {
         border: none;
-        width: 80px;
+        width: 120px;
+        text-align: right;
     }
 
     .no_name input[type=text]:focus,
@@ -201,14 +217,26 @@
 
     .go_to_main .mainbtn1,
     .go_to_home .mainbtn{
-        background-color: black;
-        color: white;
-        border: none;
-        border-bottom: 1px solid #ccc;
+        letter-spacing: -.01em;
+        text-align: center;
+        vertical-align: middle;
+        background-color: black !important;
+        color: white !important;
+        border: thin solid #000000;
+        border-radius: 0;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
         font-size: 15px;
         width: 200px;
         height: 60px;
-        text-align: center;
+    }
+
+    .go_to_main .mainbtn1:hover,
+    .go_to_main .mainbtn:hover{
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out !important;
+        background-color: white !important;
+        color: black !important;
     }
 
     .go_to_home{
@@ -283,7 +311,7 @@
             <button onclick="copy_to_clipboard()" id="book_copy_btn">copy</button>
         </div>
         <div class="go_to_main">
-            <button type="button" class="mainbtn1" onclick="location.href='/'">MAIN PAGE</button>
+            <button type="button" class="mainbtn1" onclick="location.href='/signup/login'">예약확인</button>
         </div>
     </div>
     </div>
