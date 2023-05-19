@@ -1,6 +1,7 @@
 package com.bitnc4.dto;
 
 import lombok.Data;
+import lombok.ToString;
 import org.apache.ibatis.type.Alias;
 
 import java.sql.Date;
@@ -8,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 
+@ToString
 @Data
 @Alias("QnaBoardDto")
 public class QnaBoardDto {
@@ -33,5 +35,7 @@ public class QnaBoardDto {
     //admin에서 search할 변수
     private String searchtype; // 검색타입
     private String keyword; // 검색 내용
+
+    private String qna_pass;
 
 }

@@ -14,5 +14,9 @@ public interface QnaBoardServiceInter {
     public QnaBoardDto getQna (int num);
     public void deleteQna(int num);
     public int getQnaCount(String witer);
-   /* public void updateQnaBoard(QnaBoardDto dto);*/
+    public boolean isEqualQna(int num, String qna_pass);
+    public List<QnaBoardDto> searchQna(int start, int perpage,String writer,String keyword,String searchtype);
+    public int searchQnaCount(String writer);
+
+    /* public void updateQnaBoard(QnaBoardDto dto);*/
 }

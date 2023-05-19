@@ -100,7 +100,8 @@
     .qnaboard_main_content3,
     .qnaboard_main_content4,
     .qnaboard_main_content5,
-    .qnaboard_main_content6
+    .qnaboard_main_content6,
+    .qnaboard_main_content7
     {
         /*border: 1px solid pink;*/
         margin-top: 60px;
@@ -118,13 +119,6 @@
         outline: none;
     }
 
-    .qnaboard_main_content6 input[type=text] {
-        border: none;
-        border-bottom: 1px solid #ccc;
-        width: 100%;
-        margin-top: 27px;
-        font-size: 17px;
-    }
 
     .qnaboard_main_content6 input[type=text]:focus {
         outline: none;
@@ -154,10 +148,21 @@
 
     }
 
+    .qnaboard_main_content7_subject input[type=password]{
+        border: none;
+        border-bottom: 1px solid #ccc;
+        margin-top: 27px;
+        font-size: 17px;
+
+    }
+
     /* span 태그 위 간격 조절 */
     .qnaboard_main_content3 input[type=text],
     .qnaboard_main_content4 input[type=text],
-    .qnaboard_main_content5 input[type=text]{
+    .qnaboard_main_content5 input[type=text],
+    .qnaboard_main_content6 input[type=text],
+    .qnaboard_main_content7 input[type=password]
+    {
         margin-top: 10px;
         border: none;
         border-bottom: 1px solid #ccc;
@@ -167,7 +172,9 @@
 
     .qnaboard_main_content3 input[type=text]:focus,
     .qnaboard_main_content4 input[type=text]:focus,
-    .qnaboard_main_content5 input[type=text]:focus{
+    .qnaboard_main_content5 input[type=text]:focus,
+    .qnaboard_main_content7 input[type=password]:focus
+    {
         outline: none;
     }
 
@@ -221,6 +228,55 @@
 
     .qnaboard_top{
         font-size: 18px;
+        margin-top: 30px;
+    }
+
+    .qnaboard{
+        margin-top: 180px;
+        margin-left: 150px;
+    }
+
+    .customer_text .maintext{
+        font-size: 60px;
+        font-family: "Playfair Display SC";
+    }
+
+    .customer_text .subtext{
+        font-size: 18px;
+    }
+
+    .nomember .qna{
+        margin-top: 10px;
+        font-size: 28px;
+
+    }
+
+    .nomember {
+        margin-top: 30px;
+
+    }
+
+    .nomember_box {
+        background-color: #F9F9F9;
+        height: 105px;
+        margin-top: 10px;
+        width: 1000px;
+        font-size: 18px;
+    }
+
+    .nomember_box_list{
+        margin-left: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    .nomember_box_list button {
+        margin-right: 100px;
+        padding: 10px;
+        width: 160px;
+        font-size: 16px;
     }
 
 </style>
@@ -261,6 +317,23 @@
 
 
 <div class="qnaboard">
+    <div class="customer_text">
+        <span class="maintext">Customer Service</span><br><br>
+        <span class="subtext">조선호텔앤리조트는 언제나 고객의 목소리에 귀기울이고 있습니다.</span><br>
+        <span class="subtext">소중한 충고와 격려, 또는 제안의 말씀을 남겨 주시면 최대한 반영하여 더 나은 서비스로 보답하겠습니다.</span>
+    </div>
+
+    <c:if test="${writer=='nomember'}">
+        <div class="nomember">
+            <span class="qna">Q&A</span>
+            <div class="nomember_box">
+                <div class="nomember_box_list">
+                    <span>Dream Stay 회원이신가요?</span>
+                    <button type="button" onclick="location.href='/signup/login'">로그인하기<strong style="font-family: 'Playfair Display SC'"> ></strong></button>
+                </div>
+            </div>
+        </div>
+    </c:if>
     <div class="qnaboard_full">
         <form action="/insertqna" method="post" name="qnaboard" enctype="multipart/form-data">
             <div class="qnaboard_top">
@@ -312,7 +385,7 @@
             </div>
 
             <div class="qnaboard_main_content6">
-                <span>예약번호 *</span>
+                <span>예약번호</span>
                 <div class="qnaboard_main_content_reserve">
                     <input type="text" id="reservenum" name="reservenum" class="reservenum">
                 </div>
@@ -343,6 +416,15 @@
                     <input type="text" name="qna_name" value="${familyname}${firstname}" class="qna_name" required>
                 </div>
             </div>
+
+            <c:if test="${writer=='nomember'}">
+                <div class="qnaboard_main_content7">
+                    <span>PASSWORD *</span>
+                    <div class="qnaboard_main_content7_subject">
+                        <input type="password" name="qna_pass" class="qna_pass" minlength="4" maxlength="12" required>
+                    </div>
+                </div>
+            </c:if>
 
             <div class="qnaboard_main_content4">
                 <span>EMAIL *</span>

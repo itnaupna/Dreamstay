@@ -3,6 +3,7 @@ package com.bitnc4.service;
 import com.bitnc4.dto.MemberDto;
 import com.bitnc4.dto.QnaBoardDto;
 import com.bitnc4.mapper.QnaBoardMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class QnaBoardService implements QnaBoardServiceInter {
 
     @Autowired
@@ -60,5 +62,32 @@ public class QnaBoardService implements QnaBoardServiceInter {
         return qnaBoardMapper.getQnaCount(witer);
     }
 
+    @Override
+    public boolean isEqualQna(int num, String qna_pass) {
+        Map<String, Object> map=new HashMap<>();
+        map.put("num", num);
+        map.put("qna_pass", qna_pass);
+        //비번이 맞으면 1->true반환, 틀리면 0->false반환
+        boolean b=qnaBoardMapper.isEqualQna(map)==0?false:true;
+        return b;
+    }
+
+    @Override
+    public List<QnaBoardDto> searchQna(int start, int perpage, String writer,String searchtype, String keyword) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("start", start);
+        map.put("perpage", perpage);
+        map.put("searchtype",searchtype);
+        map.put("writer",writer);
+        map.put("keyword",keyword);
+        log.info("{}",map.toString());
+        return qnaBoardMapper.searchQna(map);
+    }
+
+    @Override
+    public int searchQnaCount(String writer) {
+
+        return qnaBoardMapper.searchQnaCount(writer);
+    }
 
 }

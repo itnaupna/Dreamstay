@@ -213,7 +213,7 @@
     left: 43%;
     margin-left: 150px;
     transform: translateX(-50%);
-    z-index: 9999;
+    /*z-index: 9999;*/
     position: relative !important;
     top: 31%;
 }

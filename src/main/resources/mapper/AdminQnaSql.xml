@@ -17,6 +17,10 @@
         update board_qna set answer='답변완료', answer_text=#{answer_text} where num=#{num}
     </update>
 
+    <update id="delQnaAnswer" parameterType="QnaBoardDto">
+        update board_qna set answer='답변대기', answer_text='' where num=#{num}
+    </update>
+
 
     <select id="getUnanswerCount" parameterType="int" resultType="int">
         select count(*) from board_qna where answer='답변대기'
