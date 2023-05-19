@@ -53,6 +53,7 @@
 
     .btnMenulist{
         position: absolute;
+        z-index: 9999;
     }
 
 
@@ -136,8 +137,8 @@
                         <div class="btntitlebox">
                             <span>MEMBERSHIP</span><br><br>
                             <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
+                                <a href="/qnaboard"><li>문의하기</li></a>
+                                <a href="/qnanomemberlist"><li>비회원 문의조회</li></a>
                                 <li>수상내역</li>
                                 <li>ESG경영</li>
                                 <li>결산공고</li>

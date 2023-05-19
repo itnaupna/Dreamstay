@@ -60,5 +60,25 @@ public class QnaBoardService implements QnaBoardServiceInter {
         return qnaBoardMapper.getQnaCount(witer);
     }
 
+    @Override
+    public boolean isEqualQna(int num, String qna_pass) {
+        Map<String, Object> map=new HashMap<>();
+        map.put("num", num);
+        map.put("qna_pass", qna_pass);
+        //비번이 맞으면 1->true반환, 틀리면 0->false반환
+        boolean b=qnaBoardMapper.isEqualQna(map)==0?false:true;
+        return b;
+    }
+
+    @Override
+    public List<QnaBoardDto> searchQna(QnaBoardDto dto) {
+        return qnaBoardMapper.searchQna(dto);
+    }
+
+    @Override
+    public int searchQnaCount(String writer) {
+        return qnaBoardMapper.searchQnaCount(writer);
+    }
+
 
 }

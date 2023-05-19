@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,28 +40,32 @@ public class QnaboardController {
     HotelService hotelService;
     String bucketName = "dreamsstaybucket";
 
-    @GetMapping("/mypage/qnaboard")
+    @GetMapping("/qnaboard")
     public String quaboard(Model model, HttpSession session) {
         // 세션에 저장된 id
         String writer = (String) session.getAttribute("userid");
         // 비회원일 경우 공란
         if (writer == null || writer.isEmpty()) {
-            return "/mypage/qnaboard/qnaform";
+            writer = "nomember";
+            model.addAttribute("writer",writer);
         }
+
+
         MemberDto memberDto = qnaBoardService.searchIdOfinfo(writer);
         model.addAttribute("memberDto", memberDto);
 
-        // info user name 출력 <상혁>
-        MemberDto dto = (MemberDto) session.getAttribute("loginuser");
-        String[] fnFn = dto.getUser_name().split("/");
-        model.addAttribute("familyname", fnFn[0]);
-        model.addAttribute("firstname", fnFn[1]);
-
+        if(writer!="nomember") {
+            // info user name 출력 <상혁>
+            MemberDto dto = (MemberDto) session.getAttribute("loginuser");
+            String[] fnFn = dto.getUser_name().split("/");
+            model.addAttribute("familyname", fnFn[0]);
+            model.addAttribute("firstname", fnFn[1]);
+        }
         // 호텔 데이터 가져오기
         List<HotelDto> hotelList = hotelService.getAllHotelData();
         model.addAttribute("hotelList", hotelList);
 
-        return "/mypage/qnaboard/qnaform";
+        return "/main/qnaboard/qnaform";
 
     }
 
@@ -113,7 +118,17 @@ public class QnaboardController {
         String resrevenum = request.getParameter("resrevenum");
         dto.setReservenum(resrevenum);
 
+
+        String qna_pass = request.getParameter("qna_pass");
+        if(qna_pass != null && !qna_pass.isEmpty())
+        {
+            dto.setQna_pass(qna_pass);
+            qnaBoardService.insertqna(dto);
+            return "redirect:/qnanomemberlist";
+        }
+
         qnaBoardService.insertqna(dto);
+
 
         return "redirect:/mypage/qnalist";
     }
@@ -179,6 +194,7 @@ public class QnaboardController {
         return "/mypage/qnaboard/qnalist";
     }
 
+
     @GetMapping("/mypage/qnadetail")
     public String detail(int num, Model model, HttpSession session) {
         QnaBoardDto dto = qnaBoardService.getQna(num);
@@ -192,6 +208,7 @@ public class QnaboardController {
 
         return "/mypage/qnaboard/qnadetail";
     }
+
 
     @GetMapping("/mypage/deleteqna")
     public String deleteqna(int num, HttpSession session, Model model) {
@@ -218,6 +235,106 @@ public class QnaboardController {
         model.addAttribute("firstname", fnFn[1]);
 
         return "redirect:/mypage/qnalist";
+    }
+
+    ////////////////////비회원 list/////////////////////
+
+    @GetMapping("/qnanomemberlist")
+    public String nomemberlist(QnaBoardDto dto, HttpSession session, HttpServletResponse response,
+                               Model model, @RequestParam(defaultValue = "1") int currentPage){
+        //비회원은 nomember로 저장
+        String writer="nomember";
+        dto.setWriter(writer);
+
+        //게시판의 총 글갯수 얻기
+        int totalCount= qnaBoardService.getQnaCount(writer);
+        int totalPage;//총 페이지수
+        int perPage=5; //한 페이지당 보여질 글의 갯수
+        int perBlock=10;//한 블럭당 보여질 페이지의 갯수
+        int startNum;//각 페이지에서 보여질 글의 시작번호
+        int startPage;//각 블럭에서 보여질 시작 페이지번호
+        int endPage;//각 블럭에서 보여질 끝 페이지번호
+        int no;//글 출력시 출력할 시작번호
+
+        //총 페이지수
+        totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
+        //시작페이지
+        startPage=(currentPage-1)/perBlock*perBlock+1;
+        //끝페이지
+        endPage=startPage+perBlock-1;
+        //이때 문제점....endPage 가 totalpage 보다 크면 안된다
+        if(endPage>totalPage)
+            endPage=totalPage;
+
+        //각 페이지의 시작번호(1페이지 : 0, 2페이지:3,3페이지 :6...)
+        startNum=(currentPage-1)*perPage;
+        //각 글마다 출력할 글번호(예:10개일경우 1페이지:10, 2페이지: 7...
+        //no=totalCount-(currentPage-1)*perPage;
+        no=totalCount-startNum;
+
+        //각 페이지에 필요한 게스글 db 에서 가져오기
+        List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(startNum,perPage,writer);
+
+        for (QnaBoardDto qnaBoardDto : qnaBoardList) {
+            qnaBoardDto.setNum(qnaBoardDto.getNum()); // num 값을 따로 저장
+        }
+
+        //출력시 필요한 변수들을 model 에 몽땅 저장
+        model.addAttribute("totalCount", totalCount);
+        model.addAttribute("qnaBoardList", qnaBoardList);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("no", no);
+
+        return "/main/qnaboard/qnanolist";
+    }
+
+    @PostMapping("/seachQna")
+    @ResponseBody
+    public List<QnaBoardDto> seachQna(String writer, String keyword, String searchtype, HttpSession session) {
+        writer = "nomember";
+        List<QnaBoardDto> result = new ArrayList<>();
+        QnaBoardDto dto = new QnaBoardDto();
+        dto.setWriter(writer);
+
+        // 세션에 검색 조건 저장
+        session.setAttribute("searchtype", searchtype);
+        session.setAttribute("keyword", keyword);
+
+        // 세션에서 검색 조건 가져오기
+        String savedSearchType = (String) session.getAttribute("searchtype");
+        String savedKeyword = (String) session.getAttribute("keyword");
+
+        dto.setSearchtype(savedSearchType);
+        dto.setKeyword(savedKeyword);
+
+        result.addAll(qnaBoardService.searchQna(dto));
+
+        return result;
+    }
+
+    @GetMapping("/qnapass")
+    @ResponseBody
+    public Map<String, Object> qnapass(int num, String qna_pass) {
+
+        Map<String, Object> map=new HashMap<>();
+        boolean b=qnaBoardService.isEqualQna(num, qna_pass);
+        if(b) {
+            map.put("result", "success");
+        }else {
+            map.put("result", "fail");
+        }
+        return map;
+    }
+
+    @GetMapping("/qnanodetail")
+    public String qnadetail(int num, Model model, HttpSession session) {
+        QnaBoardDto dto = qnaBoardService.getQna(num);
+        model.addAttribute("dto", dto);
+
+        return "/main/qnaboard/qnanodetail";
     }
 
 

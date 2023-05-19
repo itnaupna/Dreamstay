@@ -50,7 +50,7 @@
                         </li>
 
                         <li>
-                            <a href="/mypage/qnaboard">문의 하기</a>
+                            <a href="/qnaboard">문의 하기</a>
                         </li>
                     </ul>
                 </li>

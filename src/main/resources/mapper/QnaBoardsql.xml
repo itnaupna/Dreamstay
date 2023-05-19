@@ -4,9 +4,9 @@
 
     <insert id="insertqna" parameterType="QnaBoardDto">
         insert into board_qna(category,subject,content,writer,qna_name,qna_email,
-        qna_phone,hotelname,reservenum,qna_type,qna_photo<if test="qna_type == '의견'">,useday</if>)
+        qna_phone,hotelname,reservenum,qna_type,qna_photo<if test="qna_type == '의견'">,useday</if>,qna_pass)
         values (#{category},#{subject},#{content},#{writer},#{qna_name},#{qna_email},#{qna_phone},#{hotelname},
-        #{reservenum},#{qna_type},#{qna_photo}<if test="qna_type == '의견'">,#{useday}</if>)
+        #{reservenum},#{qna_type},#{qna_photo}<if test="qna_type == '의견'">,#{useday}</if>,#{qna_pass})
     </insert>
 
     <select id="searchIdOfinfo" parameterType="String" resultType="MemberDto">
@@ -34,6 +34,50 @@
 
     <select id="getQnaCount" parameterType="String" resultType="int">
         select count(*) from board_qna where writer = #{writer}
+    </select>
+    
+    <select id="isEqualQna" parameterType="Map" resultType="int">
+        select count(*) from board_qna where num=#{num} and qna_pass=#{qna_pass}
+    </select>
+
+    <select id="searchQna" parameterType="Map" resultType="QnaBoardDto">
+        select * from board_qna
+        where writer = #{writer}
+
+        <if test="searchtype != null and keyword != null">
+            <choose>
+                <when test="searchtype !=null and searchtype.equals('title')">
+                    and subject like concat ('%', #{keyword},'%')
+                </when>
+                <when test="searchtype !=null and searchtype.equals('content')">
+                    and content like concat ('%', #{keyword},'%')
+                </when>
+                <when test="searchtype !=null and searchtype.equals('writer')">
+                    and writer like concat ('%', #{keyword},'%')
+                </when>
+            </choose>
+        </if>
+
+        order by num desc
+
+    </select>
+
+    <select id="searchQnaCount" parameterType="String" resultType="int">
+        select count(*) from board_qna
+        where writer = #{writer}
+        <if test="searchtype != null and keyword != null">
+            <choose>
+                <when test="searchtype !=null and searchtype.equals('title')">
+                    and subject like concat ('%', #{keyword},'%')
+                </when>
+                <when test="searchtype !=null and searchtype.equals('content')">
+                    and content like concat ('%', #{keyword},'%')
+                </when>
+                <when test="searchtype !=null and searchtype.equals('writer')">
+                    and writer like concat ('%', #{keyword},'%')
+                </when>
+            </choose>
+        </if>
     </select>
 
 
