@@ -24,22 +24,22 @@
 <!-- 다음 맵 api script 끝 -->
 
 <style>
-    #addr{
+    #addr {
         font-weight: lighter;
     }
 
     .u_username span,
-    .u_emaildetail span{
+    .u_emaildetail span {
         font-weight: lighter;
     }
 
-    .u_emaildetail span{
+    .u_emaildetail span {
         margin-left: 20px;
     }
 
     .u_chphoe input[type=text],
     .u_addrdetail input[type=text],
-    .u_emaildetail input[type=text]{
+    .u_emaildetail input[type=text] {
         width: 400px;
     }
 </style>
@@ -63,15 +63,18 @@
     </div>
 
     <div class="u_name2">
-        <input type="text" id="ch_name" class="ch_name" value="${familyname}" placeholder="FIRST NAME">
-        <input type="text" id="ch_name2" class="ch_name2" value="${firstname}" placeholder="LAST NAME">
+        <input type="text" id="ch_name" class="ch_name" value="${familyname}" placeholder="FIRST NAME"
+               oninput="onlyKoEng(this)">
+        <input type="text" id="ch_name2" class="ch_name2" value="${firstname}" placeholder="LAST NAME"
+               oninput="onlyKoEng(this)">
     </div>
 
     <div class="u_phone">
         <span>PHONE NUMBER *</span>
     </div>
     <div class="u_chphoe">
-        <input type="text" id="u_phone" class="u_phone" value="${memberDto.phone}">
+        <input type="text" id="u_phone" class="u_phone" value="${memberDto.phone}" oninput="onlyPhone(this)"
+               maxlength="11" placeholder="숫자만 입력가능합니다.">
     </div>
 
     <div class="u_addr">
@@ -120,5 +123,28 @@
                 alert("정보가 수정되었습니다");
             }
         });
+    });
+
+    // 한글과 영문만
+    function onlyKoEng(e) {
+        const regex = /[^(ㄱ-힣a-zA-Z)]/gi;
+        if (regex.test(e.value)) {
+            alert("한글과 영문만 입력 가능합니다");
+            e.value = e.value.replace(regex, '');
+        }
+    }
+
+    // 전화번호 입력
+    function onlyPhone(target) {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+    }
+
+    const phoneInput = document.querySelector('#u_phone');
+    phoneInput.addEventListener('input', (e) => {
+        if (/[^0-9]/g.test(e.target.value)) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        }
     });
 </script>

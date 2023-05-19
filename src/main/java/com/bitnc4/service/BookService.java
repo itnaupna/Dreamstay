@@ -61,4 +61,9 @@ public class BookService implements BookServiceInter{
         bookMapper.insert_book(dto);
     }
 
+    @Override
+    public void noMemberDeleteData(int num) {
+        bookMapper.noMemberDeleteData(num);
+    }
+
 }

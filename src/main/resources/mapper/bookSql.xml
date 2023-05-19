@@ -20,7 +20,7 @@
     <select id="getNomemberBookData" parameterType="Map" resultType="Map">
         select h.num, h.name, h.addr, h.phone, h.photo,
                r.roomtype, r.roommemo, r.roomdetail, r.roomphoto,
-               date_format(b.checkin, "%Y-%m-%d %H:%i") checkin, date_format(b.checkout, "%Y-%m-%d %H:%i") checkout,
+               date_format(b.checkin, "%Y-%m-%d %H:%i") checkin, date_format(b.checkout, "%Y-%m-%d %H:%i") checkout, b.num booknum, b.user_num user_num,
                json_unquote(json_extract(b.peopleinfo, '$.adult')) adult, json_unquote(json_extract(b.peopleinfo, '$.kids')) kids, b.memo, b.total_price,m.user_name
         from hotel h inner join room r on h.num = r.hotelnum
             inner join book b on b.room_num = r.num
@@ -49,6 +49,10 @@
         insert into book (num, user_num, checkin, checkout, room_num, peopleinfo, memo, total_price, cardnum)
         values (null, #{insert_member_num }, #{checkin }, #{checkout }, #{insert_roomnum },#{peopleinfo }, #{memo }, #{total_price }, #{cardnum }) ;
     </insert>
+
+    <delete id="noMemberDeleteData" parameterType="int">
+        delete from member where num=#{user_num}
+    </delete>
 
 
 

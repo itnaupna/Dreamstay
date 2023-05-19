@@ -27,4 +27,6 @@ public interface BookMapper {
     public String select_card (CardDto dto);
 
     public void insert_book (BookDto dto);
+
+    public void noMemberDeleteData(int num);
 }

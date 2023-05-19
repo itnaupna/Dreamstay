@@ -7,6 +7,7 @@ import com.bitnc4.service.MainHnRService;
 import com.bitnc4.service.MypageService;
 import com.bitnc4.service.MypageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -276,6 +277,17 @@ public class BookController {
         }
 
         return "/main/book/booksuccess";
+    }
+
+    @GetMapping("/book/deletebook")
+    public String deletebook(int num, HttpSession session,Model model)
+    {
+        bookService.noMemberDeleteData(num);
+        MemberDto dto = (MemberDto)session.getAttribute("loginuser");
+//        List<Map<String, String>> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
+        model.addAttribute("data",dto);
+
+        return "redirect:/";
     }
 }
 
