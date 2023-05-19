@@ -60,7 +60,6 @@
 		height: 70px;
 	}
 	#section_3_text2{
-
 		display: inline-block;
 		height: 100px;
 		width: 700px;
