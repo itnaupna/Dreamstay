@@ -266,12 +266,12 @@
             </ul>
         </div>
     </div>
-    <div class="box">
-        <div class="boxtitle">
-            <span style="font-size:1.25rem;color:#5a5c69;font-weight: 700!important;"><i class="bi bi-journal-check" style="margin-right: 10px;">
-            </i>오늘의 예약</span>
-        </div>
-    </div>
+<%--    <div class="box">--%>
+<%--        <div class="boxtitle">--%>
+<%--            <span style="font-size:1.25rem;color:#5a5c69;font-weight: 700!important;"><i class="bi bi-journal-check" style="margin-right: 10px;">--%>
+<%--            </i>오늘의 예약</span>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 </div>
 <script>
     SetAdminTitle("관리자 대시보드");

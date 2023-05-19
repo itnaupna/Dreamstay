@@ -8,6 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <form name="search-form" autocomplete="off">
     <table class="table table-bordered searchQnas">
         <tr>
@@ -98,7 +99,7 @@
                     <%--                </a>--%>
             </td>
 
-            <td>${dto.writer}</td>
+            <td>${fn:replace(dto.qna_name,"/","")}</td>
             <c:if test="${dto.answer=='답변대기'}">
                 <td><span class="answer_before">${dto.answer}</span></td>
             </c:if>
@@ -218,7 +219,7 @@
                             `<tr>
                             <td>\${e.num}</td>
                             <td> <a href="qna/content?num=\${e.num}">\${e.subject}</a></td>
-                            <td>\${e.writer}</td>
+                            <td>\${e.qna_name.replace("/","")}</td>
                             <td>\${e.answer=="답변완료"?"<span class='answer_after'>답변완료</span>":"<span class='answer_before'>답변대기</span>"}</td>
                             <td>\${e.category==1?"가입문의":e.category==2?"예약문의":e.category==3?"객실문의":"기타"}</td>
                             <td>\${e.qna_type}</td>

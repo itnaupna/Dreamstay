@@ -35,16 +35,19 @@
     </tbody>
     <tfoot>
     <tr>
+<%--        ${page}--%>
         <td colspan="4">
             <c:if test="${page[0]>10}">
                 <span class="pagenumber" onclick="Paging(${page[0]-1})">&lt;</span>
             </c:if>
             <c:forEach begin="${page[0]}" end="${page[2]}" var="i">
-                <c:if test="${i==page[1]}">
-                    <span class="currpage pagenumber">${i}</span>
-                </c:if>
-                <c:if test="${i!=page[1]}">
-                    <span class="pagenumber" onclick="Paging(${i})">${i}</span>
+                <c:if test="${i<=page[3]}">
+                    <c:if test="${i==page[1]}">
+                        <span class="currpage pagenumber">${i}</span>
+                    </c:if>
+                    <c:if test="${i!=page[1]}">
+                        <span class="pagenumber" onclick="Paging(${i})">${i}</span>
+                    </c:if>
                 </c:if>
             </c:forEach>
             <c:if test="${page[2]<page[3]}">

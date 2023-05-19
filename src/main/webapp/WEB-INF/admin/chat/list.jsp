@@ -11,7 +11,7 @@
             <div class="chatlistWrapper">
                 <div class="chatBody">
                     <div class="chatlistName" room="${item.memberNum}">
-                            ${item.memberName}
+                            ${fn:replace(item.memberName,"/","")}
                     </div>
                     <div class="chatlistContent">
                             ${item.memberLastchat}
@@ -362,7 +362,7 @@
                         $('<div>').addClass("chatlistWrapper").append(
                             $('<div>').addClass("chatBody").append(
                                 $('<div>').addClass("chatlistName").attr("room",e.memberNum)
-                                    .text(e.memberName),
+                                    .text(e.memberName.replace("/","")),
                                 $('<div>').addClass("chatlistContent")
                                     .text(e.memberLastchat)
                             ),

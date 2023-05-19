@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<i id="btnChat" class="bi bi-chat-text" style="font-size:2rem;"></i>
+<%--<i id="btnChat" class="bi bi-chat-text" style="font-size:2rem;"></i>--%>
+<div id="btnChat" style="font-size:2rem;">💬</div>
 <div id="chatInner">
     <div id="chatTitle">
         <span><img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/con3.png" style="width:30px;height:30px;margin-right:5px;">DreamStay</span>
@@ -28,12 +29,22 @@
         <%--        </div>--%>
     </div>
 
-    <div id="txtChatBottom" class="form-floating">
-        <input type="text" id="txtChat" placeholder="_" class="form-control">
-        <label class="form-label">실시간 문의 입력</label>
+
+    <div id="txtChatBottom">
+        <input type="text" id="txtChat" placeholder="실시간 문의 입력">
+<%--        <label class="form-label">실시간 문의 입력</label>--%>
     </div>
 </div>
 <style>
+
+    #btnChat{
+        font-size:2rem;
+        display:flex;
+        width:100%;
+        height:100%;
+        justify-content: center;
+        align-items: center;
+    }
     .chatMsgWrapper{
         width:80%;
         margin-bottom:10px;
@@ -130,6 +141,8 @@
     #txtChatBottom{
         order:3;
         flex-grow:1;
+        width:100%;
+        height:1.2rem;
         /*display:flex;*/
         /*justify-content: space-between;*/
     }
@@ -137,6 +150,8 @@
         /*width:200px;*/
         background:transparent;
         border:none;
+        width:100%;
+        height:100%;
     }
     #txtChat:focus{
         outline:none !important;

@@ -45,7 +45,7 @@ public class AdminNoticeService implements AdminNoticeServiceInter{
         result.add(startPage);
         result.add(currPage);
         result.add(lastPage);
-        result.add(m.getCount()/PPP + (m.getCount() % PPP));
+        result.add(m.getCount()/PPP + (m.getCount() % PPP > 0 ? 1 : 0));
 
 
 

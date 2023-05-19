@@ -39,7 +39,7 @@
                     and content like concat ('%', #{keyword},'%')
                 </when>
                 <when test="searchtype !=null and searchtype.equals('writer')">
-                    and writer like concat ('%', #{keyword},'%')
+                    and qna_name like concat ('%', #{keyword},'%')
                 </when>
             </choose>
         </if>
@@ -79,7 +79,7 @@
                     and content like concat ('%', #{keyword},'%')
                 </when>
                 <when test="searchtype !=null and searchtype.equals('writer')">
-                    and writer like concat ('%', #{keyword},'%')
+                    and qna_name like concat ('%', #{keyword},'%')
                 </when>
             </choose>
         </if>
