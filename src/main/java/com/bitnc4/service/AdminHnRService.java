@@ -40,7 +40,9 @@ public class AdminHnRService implements AdminHnRServiceInter{
 
     @Override
     public int insertHotel(HotelDto dto){
+        log.info("before : {}", dto.toString());
         m.insertHotel(dto);
+        log.info("after : {}", dto.toString());
         return dto.getNum();
     }
 

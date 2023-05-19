@@ -53,16 +53,8 @@ $("#login_id, #login_pw").keyup(function(e) {
 });
 
 $("#login_login_select").click(function() {
-   $("#login_login_subject").css("display", "flex");
-   $("#login_reservation").css("display", "none");
-});
-
-$("#login_nomember_select").click(function() {
-    $("#login_reservation").css("display", "block");
-    $("#login_login_subject").css("display", "none");
-});
-
-$("#login_login_select").click(function() {
+    $("#login_login_subject").css("display", "flex");
+    $("#login_reservation").css("display", "none");
     $(this).css({
         "border-top": "1px solid black",
         "border-left": "1px solid black",
@@ -78,6 +70,8 @@ $("#login_login_select").click(function() {
 });
 
 $("#login_nomember_select").click(function() {
+    $("#login_reservation").css("display", "block");
+    $("#login_login_subject").css("display", "none");
     $(this).css({
         "border-top": "1px solid black",
         "border-right": "1px solid black",

@@ -17,6 +17,8 @@ public interface AdminNoticeMapper {
 
     public List<NoticeDto> getAllNotice(Map<String, Object> page);
 
+    public int getCountData(String search);
+
     public void viewCount(int num);
 
     public int getViewCount(int num);

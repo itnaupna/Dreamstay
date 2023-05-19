@@ -82,9 +82,10 @@ public class AdminNoticeService implements AdminNoticeServiceInter{
     }
 
     @Override
-    public Map<String, Integer> getCountData(int currentPage) {
+    public Map<String, Integer> getCountData(int currentPage, String search) {
         Map<String, Integer> paging = new HashMap<>();
-        int totalCount = m.getCount();
+        int totalCount = m.getCountData(search);
+        System.out.println(totalCount);
         int perPage = 10; // 한페이지에 보여질 글 개수
         int perBlock = 10; // 페이징 개수
         int start = (currentPage - 1) * perPage;

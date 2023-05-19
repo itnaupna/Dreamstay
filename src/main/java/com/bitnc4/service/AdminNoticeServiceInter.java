@@ -13,9 +13,10 @@ public interface AdminNoticeServiceInter {
     public boolean deleteNotice(int num);
     public NoticeDto readNotice(int num);
 
-    public Map<String, Integer> getCountData(int currentPage);
+    public Map<String, Integer> getCountData(int currentPage, String search);
 
     public List<NoticeDto> getAllNotice(int start, int perpage, String search);
+
 
     public void viewCount(int num);
 
