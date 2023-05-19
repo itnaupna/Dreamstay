@@ -991,25 +991,25 @@
         });
     }
 
-        var company = $("#company").val();
-        var card_month = $("#card_month").val();
-        var card_year = $("#card_year").val();
+    var company = $("#company").val();
+    var card_month = $("#card_month").val();
+    var card_year = $("#card_year").val();
 
-        $(".options2_list").click(function (){
-            var selected2 = $(this).text();
-            $("#company").val(selected2);
-            company = $("#company").val(selected2);
-        });
-        $(".options_list").click(function (){
-            var selected = $(this).text();
-            $("#card_month").val(selected);
-            card_month = $("#card_month").val(selected);
-        });
-        $(".options1_list").click(function (){
-            var selected1 = $(this).text();
-            $("#card_year").val(selected1);
-            card_year = $("#card_year").val(selected1);
-        });
+    $(".options2_list").click(function (){
+        var selected2 = $(this).text();
+        $("#company").val(selected2);
+        company = $("#company").val(selected2);
+    });
+    $(".options_list").click(function (){
+        var selected = $(this).text();
+        $("#card_month").val(selected);
+        card_month = $("#card_month").val(selected);
+    });
+    $(".options1_list").click(function (){
+        var selected1 = $(this).text();
+        $("#card_year").val(selected1);
+        card_year = $("#card_year").val(selected1);
+    });
     function payment() {
         var nomember_name = $(".nomember_name").val();
         var pay_phone = $("#pay_phone").val();
@@ -1066,46 +1066,46 @@
         if (is_checked == true && c_num4 != "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && card_year != "" && card_month != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
             document.getElementById("bookform").submit();
         }
-
-        //영어와 숫자만
-        function onlyEngNum(e) {
-            const regex = /[^A-Za-z0-9.]/g;
-            if (regex.test(e.value)) {
-                alert('영문자,숫자, . 만 입력 가능합니다');
-                e.value = e.value.replace(regex, '');
-            }
-        }
-
-        // 전화번호 입력
-        function onlyPhone(target) {
-            target.value = target.value
-                .replace(/[^0-9]/g, '')
-                .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
-        }
-
-        const phoneInput = document.querySelector('#pay_phone');
-        phoneInput.addEventListener('input', (e) => {
-            if (/[^0-9]/g.test(e.target.value)) {
-                e.target.value = e.target.value.replace(/[^0-9]/g, '');
-            }
-        });
-
-        // 한글과 영문만
-        function onlyKoEng(e) {
-            const regex = /[^(ㄱ-힣a-zA-Z)]/gi;
-            if (regex.test(e.value)) {
-                alert("한글과 영문만 입력 가능합니다");
-                e.value = e.value.replace(regex, '');
-            }
-        }
-
-        // 숫자만 입력
-        function onlyNum(e) {
-            const regex = /[^0-9]/g;
-            if (regex.test(e.value)) {
-                alert("숫자만 입력 가능합니다");
-                e.value = e.value.replace(regex, '');
-            }
+    }
+    //영어와 숫자만
+    function onlyEngNum(e) {
+        const regex = /[^A-Za-z0-9.]/g;
+        if (regex.test(e.value)) {
+            alert('영문자,숫자, . 만 입력 가능합니다');
+            e.value = e.value.replace(regex, '');
         }
     }
+
+    // 전화번호 입력
+    function onlyPhone(target) {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+    }
+
+    const phoneInput = document.querySelector('#pay_phone');
+    phoneInput.addEventListener('input', (e) => {
+        if (/[^0-9]/g.test(e.target.value)) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        }
+    });
+
+    // 한글과 영문만
+    function onlyKoEng(e) {
+        const regex = /[^(ㄱ-힣a-zA-Z)]/gi;
+        if (regex.test(e.value)) {
+            alert("한글과 영문만 입력 가능합니다");
+            e.value = e.value.replace(regex, '');
+        }
+    }
+
+    // 숫자만 입력
+    function onlyNum(e) {
+        const regex = /[^0-9]/g;
+        if (regex.test(e.value)) {
+            alert("숫자만 입력 가능합니다");
+            e.value = e.value.replace(regex, '');
+        }
+    }
+
 </script>
