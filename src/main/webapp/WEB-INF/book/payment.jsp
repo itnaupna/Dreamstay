@@ -6,6 +6,12 @@
 
 <style>
     <%-- first div --%>
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+    }
     .book_main {
         width: 2000px;
         height: 1900px;
@@ -50,6 +56,7 @@
         margin-top: 120px;
         font-size: 20px;
         margin-left: 260px;
+        font-family: 'GmarketSansMedium';
     }
 
     <%-- 두번째 div 큰 틀 --%>
@@ -74,11 +81,13 @@
     .book_main .book_select .book_inner dl dt {
         font-weight: bold;
         color: black;
+        font-family: 'Playfair Display SC', serif;
     }
 
     .book_main .book_select .book_inner dl dd input[type=text] {
         border: none;
         background-color: #f9f9f9;
+        font-family: 'GmarketSansMedium';
     }
 
     .book_main .book_select .book_inner dl dd input[type=text]:focus {
@@ -97,7 +106,7 @@
         cursor: pointer;
         margin-top: 10px;
         transition: 0.6s;
-
+        font-family: 'Playfair Display SC', serif;
     }
     .mainbtn:hover{
         color: #ffffff;
@@ -133,6 +142,9 @@
     .pay .pay_main .pay_name span {
         margin-bottom: 30px;
     }
+    .pay_name input{
+        font-family: 'GmarketSansMedium';
+    }
 
     .pay .pay_main .pay_phone {
         margin-top: 50px;
@@ -153,6 +165,7 @@
         position: relative;
         font-size: 15px;
         margin-top: 10px;
+        font-family: 'GmarketSansMedium' !important;
     }
 
     .pay .pay_main .pay_phone input[type=text]:focus {
@@ -283,6 +296,8 @@
         position: relative;
         width: 400px;
         margin-top: 30px;
+        font-family: 'GmarketSansMedium' !important;
+
     }
 
     .selected {
@@ -331,6 +346,7 @@
         width: 400px;
         margin-top: 30px;
         margin-left: 100px;
+        font-family: 'GmarketSansMedium' !important;
     }
 
     .selected1 {
@@ -374,6 +390,7 @@
         position: relative;
         width: 400px;
         margin-top: 30px;
+
     }
 
     .selected2 {
@@ -446,6 +463,7 @@
         left: 0;
         margin-left: 20px;
         margin-top: 20px;
+        font-family: 'GmarketSansMedium';
     }
 
     .sideBanner .txt-label .for_num {
@@ -461,16 +479,22 @@
 
     .pay_card p {
         margin-top: 40px;
+
     }
 
     .cardnumber p {
         margin-top: 40px;
+        font-family: 'Playfair Display SC', serif;
+    }
+    .cardnumber input{
+        font-family: 'GmarketSansMedium';
     }
 
     .ex_date {
         display: flex;
         flex-direction: column;
         margin-top: 40px;
+        font-family: 'Playfair Display SC', serif;
     }
 
     .sidehr {
@@ -496,7 +520,7 @@
         overflow: hidden;
         z-index: 1;
         transition: 0.6s;
-
+        font-family: 'GmarketSansMedium';
     }
 
     .book_main .pay .sideBanner .txt-label .paybtn:hover{
@@ -519,6 +543,7 @@
 
     .pay_card span {
         margin-left: 15px;
+        font-family: 'GmarketSansMedium';
     }
 
     .ex_card {
@@ -529,6 +554,7 @@
     .gujung {
         margin-top: 100px;
         left: 0;
+        font-family: 'GmarketSansMedium';
     }
 
     .gujung span {
@@ -552,6 +578,7 @@
         width: 880px;
         height: 200px;
         border-bottom: 1px solid #ccc;
+        font-family: 'GmarketSansMedium';
     }
 
     .gujung .close_toggle {
@@ -564,6 +591,7 @@
         line-height: 40px;
         font-size: 15px;
         list-style: none;
+
     }
 
     .clickimg {
@@ -575,7 +603,7 @@
         background: #ffffff url("/photo/arrow_196221.png") no-repeat;
         background-position: 99% center;
         background-size: 10px 10px;
-        width: 400px;
+        width: 450px;
     }
 
     .close_inul {
@@ -584,12 +612,14 @@
 
     .book_memo {
         margin-top: 50px;
+        font-family: 'Playfair Display SC', serif;
     }
 
     .book_memo input[type=text] {
         width: 900px;
         height: 100px;
         text-align: left;
+        font-family: 'GmarketSansMedium';
     }
 
     .book_memo input[type=text]:focus {
@@ -604,6 +634,7 @@
         border: none;
         border-bottom: 1px solid #ccc;
         width: 300px;
+
     }
 
     .nomember_name:focus{
@@ -612,6 +643,18 @@
 
     body{
         overflow-x: hidden;
+    }
+    .pay_email input{
+        font-family: 'GmarketSansMedium';
+    }
+
+    .pay_choice p , .pay_room, .pay_name p, .pay_phone span, .pay_email span,  .ex_card,
+    .pay_card p
+    {
+        font-family: 'Playfair Display SC', serif;
+    }
+    #email_select_domain,#email_custom_option, .selected2, .options2,pay_card span{
+        font-family: 'GmarketSansMedium';
     }
 </style>
 
