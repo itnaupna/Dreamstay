@@ -27,7 +27,7 @@
 
 	}
 	#section_3_body{
-
+		border-radius: 10px;
 		display: inline-block;
 		height: 500px;
 		width: 1200px;
@@ -41,7 +41,7 @@
 		height: 400px;
 		width: 400px;
 		left: -1%;
-		top: -85px;
+		top: -135px;
 
 	}
 	#section_3_text_body{
@@ -56,7 +56,7 @@
 	}
 	#section_3_text1{
         font-weight: bold;
-		font-size: 35px;
+		font-size: 28px;
 		height: 70px;
 	}
 	#section_3_text2{
@@ -407,10 +407,15 @@
 				<div class="section_3" id="section_3_logo"><img src="https://cdn.discordapp.com/attachments/1101378968709501008/1108947363013329046/Dream_Stay_4.png"></div>
 				<div class="section_3" id="section_3_text_body">
 					<div class="section_3" id="section_3_text1">
-						편안함(Easy), 자연(Green), 어울림(Love)
+						꿈을 품은 호텔, Dream Stay가 여러분을 기다립니다.
 					</div>
-					<div class="section_3" id="section_3_text2">1914년 조선호텔이 시작된 이래, 조선호텔앤리조트는 ‘First & Best’ 정신을 이어오며 호스피탈리티 산업의 대표기업으로 자리매김 하고 있습니다.<br>
-						수많은 ‘한국 최초’의 신화를 남겨온 조선호텔앤리조트는 호텔 뿐 아니라 외식사업, 오피스 빌딩 위탁 운영 등 품격 있는 서비스와 시설을 제공합니다.</div>
+					<div class="section_3" id="section_3_text2">꿈이 펼쳐지는 곳, 드림 스테이에 오신 것을 환영합니다.<br>
+						눈부신 아침 햇살과 편안한 밤의 휴식,<br>
+						모든 순간이 고요하고 아름다운 시간으로 어우러집니다.<br>
+						풍요로운 객실과 다채로운 다이닝 옵션으로 특별한 체험을 선사합니다.<br>
+						탁월한 위치와 아름다운 전망으로 도시의 아름다움을 만끽하세요.<br>
+						최상의 품질과 서비스로 특별한 순간을 선사하는 호텔입니다.<br>
+						특별한 여정은 이곳에서 시작됩니다.</div>
 				</div>
 			</dviv>
 		</div>
