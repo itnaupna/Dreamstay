@@ -67,7 +67,7 @@
 		margin-top:50px;
 		line-height: 20px;
 		left: 30%;
-		text-align: left;
+		text-align: center;
 	}
 	#section_3_logo img {
 		width: 400px;
