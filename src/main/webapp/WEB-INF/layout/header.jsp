@@ -217,6 +217,9 @@
                         <li>
                             <a href="/mypage/" id="header_mypage">마이페이지</a>
                         </li>
+                        <li>
+                            <a href="/mypage/" id="confirmReserve">예약확인</a>
+                        </li>
                         <c:if test="${loginuser.user_level>=10}">
                             <li>
                                 <a href="/admin" id="header_admin"><b>관리 대시보드</b></a>
@@ -230,10 +233,10 @@
                         <li>
                             <a href="/signup/signup" id="join">회원가입</a>
                         </li>
+                        <li>
+                            <a href="/signup/login" id="confirmReserve">예약확인</a>
+                        </li>
                     </c:if>
-                    <li>
-                        <a href="" id="confirmReserve">예약확인</a>
-                    </li>
                 </ul>
 
 

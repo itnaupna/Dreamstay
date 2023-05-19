@@ -30,21 +30,11 @@
         align-items: center;
         border: none;
         border-radius: 15px;
-        width: 170px;
         height: 170px;
         background-color: black;
+        width: 1200px;
+        top: 20px;
     }
-
-    .tac1:hover .tac1-img,
-    .tac2:hover .tac2-img,
-    .tac3:hover .tac3-img,
-    .tac4:hover .tac4-img,
-    .tac5:hover .tac5-img,
-    .tac6:hover .tac6-img,
-    .tac7:hover .tac7-img {
-        opacity: 1;
-    }
-
     .tac1-img,
     .tac2-img,
     .tac3-img,
@@ -56,51 +46,59 @@
         /*margin-left: 50px;*/
         left: 10px;
         top: 200px;
-        width: 1300px;
-        height: 700px;
-        opacity: 0;
+        width: 1200px;
+        height: 800px;
+        opacity: 1;
         transition: opacity 0.5s ease;
+    }
+    .cont{
+        height: 960px;
+    }
+    .mypagecontent{
+        width: 1200px;
+        height: 800px;
     }
 </style>
 
-<div class="slider-wrap">
+<div class="slider-for">
     <div class="cont">
         <div class="tac1">더 많은 혜택, 더 즐거운 여행
-            <img class="tac1-img" src="/photo/tac1.png">
+            <img class="tac1-img slider-nav" src="/photo/tac1.png">
         </div>
     </div>
     <div class="cont">
         <div class="tac2">
             <span>"멤버십으로 더 많은 할인 혜택을 누리세요"</span>
-            <img class="tac2-img" src="/photo/tac2.png">
+            <img class="tac2-img slider-nav" src="/photo/tac2.png">
         </div>
     </div>
     <div class="cont">
         <div class="tac3">"특별한 혜택과 함께하는 특별한 여행"
-            <img class="tac3-img" src="/photo/tac3.png">
+            <img class="tac3-img slider-nav" src="/photo/tac3.png">
         </div>
     </div>
     <div class="cont">
         <div class="tac4">"멤버십으로 여행을 더욱 풍요롭게 즐겨보세요"
-            <img class="tac4-img" src="/photo/tac4.png">
+            <img class="tac4-img slider-nav" src="/photo/tac4.png">
         </div>
     </div>
     <div class="cont">
         <div class="tac5">"더 많은 여행, 더 많은 혜택을"
-            <img class="tac5-img" src="/photo/tac5.png">
+            <img class="tac5-img slider-nav" src="/photo/tac5.png">
         </div>
     </div>
     <div class="cont">
         <div class="tac6">"여행의 즐거움을 멤버십으로 더 높이세요"
-            <img class="tac6-img" src="/photo/tac6.png">
+            <img class="tac6-img slider-nav" src="/photo/tac6.png">
         </div>
     </div>
     <div class="cont">
         <div class="tac7">당신의 여행을 더욱 특별하게 만들어드립니다.
-            <img class="tac7-img" src="/photo/tac7.png">
+            <img class="tac7-img slider-nav" src="/photo/tac7.png">
         </div>
     </div>
 </div>
+
 
 <script>
     $(function () {
@@ -120,5 +118,27 @@
             // nextArrow : "<button type='button' class='slick-next'>Next</button>",
             draggable: true,     //드래그 가능 여부
         });
+        $('.slider-nav').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: true,
+            centerMode: true,
+            focusOnSelect: true
+        });
+        $('.slider-for').slick({
+            slide: 'div',        //슬라이드 되어야 할 태그
+            infinite: true,     //무한 반복 옵션
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            speed: 500,     // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+            arrows: false,         // 옆으로 이동하는 화살표 표시 여부
+            fade: true,
+            asNavFor: '.slider-nav',
+            autoplay: true,            // 자동 스크롤 사용 여부
+            autoplaySpeed: 1500,         // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+            pauseOnHover: true,        // 슬라이드 이동    시 마우스 호버하면 슬라이더 멈추게 설정
+        });
     })
+
 </script>

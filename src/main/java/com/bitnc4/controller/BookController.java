@@ -73,8 +73,6 @@ public class BookController {
         dto.setCheckout((String)checkOut);
         dto.setSelectedHotel((String) selectedHotel);
 
-       /* System.out.println(checkIn);
-        System.out.println(checkOut);*/
 
         List<RoomDto> roomList = bookService.searchroom(dto);
         model.addAttribute("roomList", roomList);

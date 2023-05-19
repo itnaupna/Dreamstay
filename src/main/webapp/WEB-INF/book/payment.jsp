@@ -665,7 +665,7 @@
                     <hr class="sidehr">
                     <div class="divbtn">
                         <input type="hidden" name="peopleinfo">
-                        <button type="submit" id="paybtn" class="paybtn" onclick=""disabled='disabled'>예약완료</button>
+                        <button type="button" id="paybtn" class="paybtn" onclick="payment()">예약완료</button>
                     </div>
                 </div>
             </div>
@@ -684,10 +684,10 @@
                 <div class="pay_name">
                     <p>RESERVATION NAME *</p>
                     <c:if  test="${memberDto.user_name == null}">
-                        <span><input type="text" value="" name="nomember_name" class="nomember_name" required oninput="onlyKoEng(this)" maxlength="10"></span>
+                        <span><input type="text" value="" name="nomember_name" class="nomember_name" required oninput="onlyKoEng(this)" maxlength="10" autofocus></span>
                     </c:if>
                     <c:if  test="${memberDto.user_name != null}">
-                        <span><input type="text" value="${familyname}${firstname}" name="nomember_name" class="nomember_name" readonly></span>
+                        <span><input type="text" value="${familyname}${firstname}" name="nomember_name" class="nomember_name" readonly autofocus></span>
                     </c:if>
                 </div>
 
@@ -719,14 +719,16 @@
                         <input type="text" name="input_domain" class="input_domain" id="input_domain" value="${domain}" readonly>
                     </c:if>
                     <div class="email_selectbox">
-                        <div id="email_select_domain">직접 입력</div>
-                        <ul id="email_custom_option">
-                            <li class="email_select_option">naver.com</li>
-                            <li class="email_select_option">gmail.com</li>
-                            <li class="email_select_option">hanmail.net</li>
-                            <li class="email_select_option">hotmail.com</li>
-                            <li class="email_select_option">nate.com</li>
-                        </ul>
+                        <c:if  test="${memberDto.user_name == null}">
+                            <div id="email_select_domain">직접 입력</div>
+                            <ul id="email_custom_option">
+                                <li class="email_select_option">naver.com</li>
+                                <li class="email_select_option">gmail.com</li>
+                                <li class="email_select_option">hanmail.net</li>
+                                <li class="email_select_option">hotmail.com</li>
+                                <li class="email_select_option">nate.com</li>
+                            </ul>
+                        </c:if>
                     </div>
                 </div>
 
@@ -817,7 +819,7 @@
                 </div>
 
                 <div class="book_memo">
-                    <span>REQUESTS *</span>
+                    <span>REQUESTS  </span>
                     <div class="book_memo_input">
                         <input type="text" name="memo" class="memo" placeholder="추가 요구사항을 적어주세요">
                     </div>
@@ -829,7 +831,7 @@
 
                     <ul class="open_ul">
                         <li class="open_li">
-                            <input type="checkbox" required>
+                            <input type="checkbox" id="checkbox">
                             <label class="clickimg">
                                 [필수] 취소 및 노쇼(No - Show) 규정에 동의합니다
                             </label>
@@ -989,76 +991,121 @@
         });
     }
 
-    var company = $("#company").val();
-    var card_month = $("#card_month").val();
-    var card_year = $("#card_year").val();
-    $(".options2_list").click(function (){
-        var selected2 = $(this).text();
-        $("#company").val(selected2);
-        company = $("#company").val(selected2);
-        if(company != "" && card_month != "" && card_year != ""){
-            const target = document.getElementById('paybtn');
-            target.disabled = false;
-        }
-    });
-    $(".options_list").click(function (){
-        var selected = $(this).text();
-        $("#card_month").val(selected);
-        card_month = $("#card_month").val(selected);
-        if(company != "" && card_month != "" && card_year != ""){
-            const target = document.getElementById('paybtn');
-            target.disabled = false;
-        }
-    });
-    $(".options1_list").click(function (){
-        var selected1 = $(this).text();
-        $("#card_year").val(selected1);
-        card_year = $("#card_year").val(selected1);
-        if(company != "" && card_month != "" && card_year != ""){
-            const target = document.getElementById('paybtn');
-            target.disabled = false;
-        }
-    });
+        var company = $("#company").val();
+        var card_month = $("#card_month").val();
+        var card_year = $("#card_year").val();
 
-    //영어와 숫자만
-    function onlyEngNum(e) {
-        const regex = /[^A-Za-z0-9.]/g;
-        if (regex.test(e.value)) {
-            alert('영문자,숫자, . 만 입력 가능합니다');
-            e.value = e.value.replace(regex, '');
+        $(".options2_list").click(function (){
+            var selected2 = $(this).text();
+            $("#company").val(selected2);
+            company = $("#company").val(selected2);
+        });
+        $(".options_list").click(function (){
+            var selected = $(this).text();
+            $("#card_month").val(selected);
+            card_month = $("#card_month").val(selected);
+        });
+        $(".options1_list").click(function (){
+            var selected1 = $(this).text();
+            $("#card_year").val(selected1);
+            card_year = $("#card_year").val(selected1);
+        });
+    function payment() {
+        var nomember_name = $(".nomember_name").val();
+        var pay_phone = $("#pay_phone").val();
+        var input_email = $("#input_email").val();
+        var input_domain = $("#input_domain").val();
+        var c_num1 = $("#c_num1").val();
+        var c_num2 = $("#c_num2").val();
+        var c_num3 = $("#c_num3").val();
+        var c_num4 = $("#c_num4").val();
+        const checkbox = document.getElementById('checkbox');
+        const is_checked = checkbox.checked;
+
+
+        if (nomember_name == "") {
+            alert("이름을 입력해 주세요.");
+            $(".nomember_name").focus();
+        }
+        if (pay_phone == "" && nomember_name != "") {
+            alert("휴대폰 번호를 입력해 주세요.");
+            $("#pay_phone").focus();
+        }
+        if (input_email == "" && nomember_name != "" && pay_phone != "" || input_domain == "" && nomember_name != "" && pay_phone != "") {
+            alert("이메일을 입력해 주세요.");
+            $("#input_email").focus();
+        }
+        if (company == "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
+            alert("카드 회사를 선택해 주세요.");
+        }
+        if (c_num1 == "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
+            alert("카드번호를 입력해 주세요.");
+            $("#c_num1").focus();
+        }
+        if (c_num2 == "" && c_num1 != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
+            alert("카드번호를 입력해 주세요.");
+            $("#c_num2").focus();
+        }
+        if (c_num3 == "" && c_num2 != "" && c_num1 != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
+            alert("카드번호를 입력해 주세요.");
+            $("#c_num3").focus();
+        }
+        if (c_num4 == "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
+            alert("카드번호를 입력해 주세요.");
+            $("#c_num4").focus();
+        }
+        if (card_month == "" && c_num4 != "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
+            alert("카드 유효기간(월)을 선택해 주세요.");
+        }
+        if (card_year == "" && card_month != "" && c_num4 != "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
+            alert("카드 유효기간(년도)을 선택해 주세요.");
+        }
+        if (is_checked == false && c_num4 != "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && card_year != "" && card_month != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
+            alert("필수 규정을 확인하시고 체크해 주세요.");
+        }
+        if (is_checked == true && c_num4 != "" && c_num3 != "" && c_num2 != "" && c_num1 != "" && card_year != "" && card_month != "" && company != "" && input_email != "" && input_domain != "" && nomember_name != "" && pay_phone != "") {
+            document.getElementById("bookform").submit();
+        }
+
+        //영어와 숫자만
+        function onlyEngNum(e) {
+            const regex = /[^A-Za-z0-9.]/g;
+            if (regex.test(e.value)) {
+                alert('영문자,숫자, . 만 입력 가능합니다');
+                e.value = e.value.replace(regex, '');
+            }
+        }
+
+        // 전화번호 입력
+        function onlyPhone(target) {
+            target.value = target.value
+                .replace(/[^0-9]/g, '')
+                .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+        }
+
+        const phoneInput = document.querySelector('#pay_phone');
+        phoneInput.addEventListener('input', (e) => {
+            if (/[^0-9]/g.test(e.target.value)) {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            }
+        });
+
+        // 한글과 영문만
+        function onlyKoEng(e) {
+            const regex = /[^(ㄱ-힣a-zA-Z)]/gi;
+            if (regex.test(e.value)) {
+                alert("한글과 영문만 입력 가능합니다");
+                e.value = e.value.replace(regex, '');
+            }
+        }
+
+        // 숫자만 입력
+        function onlyNum(e) {
+            const regex = /[^0-9]/g;
+            if (regex.test(e.value)) {
+                alert("숫자만 입력 가능합니다");
+                e.value = e.value.replace(regex, '');
+            }
         }
     }
-
-    // 전화번호 입력
-    function onlyPhone(target) {
-        target.value = target.value
-            .replace(/[^0-9]/g, '')
-            .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
-    }
-
-    const phoneInput = document.querySelector('#pay_phone');
-    phoneInput.addEventListener('input', (e) => {
-        if (/[^0-9]/g.test(e.target.value)) {
-            e.target.value = e.target.value.replace(/[^0-9]/g, '');
-        }
-    });
-
-    // 한글과 영문만
-    function onlyKoEng(e){
-        const regex = /[^(ㄱ-힣a-zA-Z)]/gi;
-        if (regex.test(e.value)){
-            alert("한글과 영문만 입력 가능합니다");
-            e.value = e.value.replace(regex, '');
-        }
-    }
-
-    // 숫자만 입력
-    function onlyNum(e) {
-        const regex = /[^0-9]/g;
-        if(regex.test(e.value)){
-            alert("숫자만 입력 가능합니다");
-            e.value = e.value.replace(regex, '');
-        }
-    }
-
 </script>
