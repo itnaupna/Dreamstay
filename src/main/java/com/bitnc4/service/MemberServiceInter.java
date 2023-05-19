@@ -50,11 +50,10 @@ public interface MemberServiceInter {
     public void resetLockCount(String id);
 
     // 소셜 첫 로그인 시 db에 추가
-    public void socialJoin(MemberDto social);
+    public void socialJoin(MemberDto socialData);
 
     // 소셜 로그인 시 기존에 해당소셜로 가입한 회원인지 확인
     public MemberDto getSocialMember(String id, String issocial, String social);
-
 
 
     //멤버 num으로 DTO 얻기

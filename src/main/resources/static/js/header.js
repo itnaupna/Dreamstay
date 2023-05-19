@@ -115,3 +115,8 @@ $(function() {
         }
     });
 });
+
+$(document).on("click", "#header_notice_board",function(){
+    location.href="/notice/noticeboard";
+});
+

@@ -34,7 +34,6 @@ public class MyPageController {
         List<Map<String, String>> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
         model.addAttribute("data",map);
         model.addAttribute("size", map.size());
-
         String[] fnFn = dto.getUser_name().split("/");
         model.addAttribute("familyname", fnFn[0]);
         model.addAttribute("firstname", fnFn[1]);
@@ -153,9 +152,4 @@ public class MyPageController {
         return "/mypage/dining";
     }
 
-    @GetMapping("/test")
-    public String test()
-    {
-        return "/mypage/test";
-    }
 }

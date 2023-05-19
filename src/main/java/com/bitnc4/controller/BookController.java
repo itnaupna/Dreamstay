@@ -73,6 +73,8 @@ public class BookController {
         dto.setCheckout((String)checkOut);
         dto.setSelectedHotel((String) selectedHotel);
 
+       /* System.out.println(checkIn);
+        System.out.println(checkOut);*/
 
         List<RoomDto> roomList = bookService.searchroom(dto);
         //String[] photoArr = roomList.get(0).getRoomphoto().split(",");// roomList의 i번쨰 인덱스에서 roomphoto가져온 후 스플릿 -> 아중배열에 저장

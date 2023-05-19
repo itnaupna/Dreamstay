@@ -21,6 +21,7 @@ import java.util.HashMap;
 public class MemberController {
 
     private final String kCode = "09e7bd588320e6991f62d894f6a723a6";
+    private final String nCode = "2plAFu6gKZlsog8ZfGkK";
 
     @Autowired
     MemberService memberService;
@@ -87,7 +88,7 @@ public class MemberController {
         dto.setAddr("(" + zipcode + ")" + dto.getAddr() + addrdetail);
         dto.setEmail(dto.getEmail() + "@" + email_domain);
         memberService.joinMember(dto);
-        return "/main";
+        return "redirect:/";
     }
 
     // 로그인
@@ -200,20 +201,29 @@ public class MemberController {
     // 카카오 로그인
     @PostMapping("/kakaologin")
     @ResponseBody
-    public String kakaoLogin(MemberDto socialLogin, String social, HttpSession session) {
-        boolean memberChk = memberService.getSocialMember(socialLogin.getId(), String.valueOf(socialLogin.getIssocial()), social ) != null;
+    public String kakaoLogin(MemberDto socialLogin, HttpSession session) {
+        MemberDto socialMember =  memberService.getSocialMember(socialLogin.getId(), String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial());
+        boolean memberChk = socialMember != null;
         System.out.println(memberChk);
         System.out.println(socialLogin.getUser_name());
         if(memberChk) {
             System.out.println("아이디 있음");
-            session.setAttribute("loginuser", socialLogin);
+            session.setAttribute("loginuser", socialMember);
             System.out.println(session.getAttribute("loginuser"));
         } else {
             System.out.println("아이디 없음");
             memberService.socialJoin(socialLogin);
-            session.setAttribute("loginuser", socialLogin);
+            session.setAttribute("loginuser", memberService.getSocialMember(socialLogin.getId(), String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial()));
         }
         return "redirect:/";
+    }
+
+    // 네이버 키 가져오기
+    @PostMapping("/ncode")
+    @ResponseBody
+    public String nCode() {
+        System.out.println(nCode);
+        return nCode;
     }
 
     // 네이버 팝업
@@ -225,17 +235,18 @@ public class MemberController {
     // 네이버 로그인
     @PostMapping("/naverlogin")
     @ResponseBody
-    public String naverLogin(MemberDto socialLogin, String social, HttpSession session) {
-        boolean memberChk = memberService.getSocialMember(socialLogin.getId() , String.valueOf(socialLogin.getIssocial()), social) != null;
+    public String naverLogin(MemberDto socialLogin, HttpSession session) {
+        MemberDto socialMember =  memberService.getSocialMember(socialLogin.getId(), String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial());
+        boolean memberChk = socialMember != null;
         System.out.println(memberChk);
         if(memberChk) {
             System.out.println("아이디 있음");
-            session.setAttribute("loginuser", socialLogin);
+            session.setAttribute("loginuser", socialMember);
             System.out.println(session.getAttribute("loginuser"));
         } else {
             System.out.println("아이디 없음");
             memberService.socialJoin(socialLogin);
-            session.setAttribute("loginuser", socialLogin);
+            session.setAttribute("loginuser", memberService.getSocialMember(socialLogin.getId(), String.valueOf(socialLogin.getIssocial()), socialLogin.getSocial()));
         }
         return "redirect:/";
     }

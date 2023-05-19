@@ -2,7 +2,9 @@ package com.bitnc4.controller;
 
 import com.bitnc4.dto.HotelDto;
 import com.bitnc4.dto.MemberDto;
+import com.bitnc4.dto.NoticeDto;
 import com.bitnc4.dto.QnaBoardDto;
+import com.bitnc4.service.AdminNoticeService;
 import com.bitnc4.service.HotelService;
 import com.bitnc4.service.QnaBoardService;
 import naver.cloud.NcpObjectStorageService;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +26,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.*;
 
 
@@ -31,6 +37,9 @@ public class QnaboardController {
 
     @Autowired
     private QnaBoardService qnaBoardService;
+
+    @Autowired
+    AdminNoticeService adminNoticeService;
 
     @Autowired
     private NcpObjectStorageService storageService;
@@ -98,17 +107,14 @@ public class QnaboardController {
         }
         //dto에 id 저장
         dto.setWriter(writer);
-        System.out.println(writer);
 
         //radio 값 저장
         String qnaType = request.getParameter("qna_type");
         dto.setQna_type(qnaType);
-        System.out.println("qnaType="+qnaType);
 
         // 사용일자 파싱
         String usedayStr = request.getParameter("useday");
-        System.out.println("usedayStr="+usedayStr);
-
+        System.out.println(usedayStr);
 
         String resrevenum = request.getParameter("resrevenum");
         dto.setReservenum(resrevenum);
@@ -122,17 +128,17 @@ public class QnaboardController {
     public String qnalist(QnaBoardDto dto, HttpSession session, HttpServletResponse response,
                           Model model, @RequestParam(defaultValue = "1") int currentPage){
         //세션에 저장된 id
-        String writer=(String)session.getAttribute("userid");
+        MemberDto writer= (MemberDto)session.getAttribute("loginuser");
 
         // 비회원으로 로그인 시 로그인 페이지로 이동
-        if (writer == null || writer.isEmpty()) {
+        if (writer == null || writer.getId().isEmpty()) {
             return "/main/signup/login";
         }
         //dto에 id 저장
-        dto.setWriter(writer);
+        dto.setWriter(writer.getId());
 
         //게시판의 총 글갯수 얻기
-        int totalCount= qnaBoardService.getQnaCount(writer);
+        int totalCount= qnaBoardService.getQnaCount(writer.getId());
         int totalPage;//총 페이지수
         int perPage=5; //한 페이지당 보여질 글의 갯수
         int perBlock=10;//한 블럭당 보여질 페이지의 갯수
@@ -158,7 +164,7 @@ public class QnaboardController {
         no=totalCount-startNum;
 
         //각 페이지에 필요한 게스글 db 에서 가져오기
-        List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(startNum,perPage,writer);
+        List<QnaBoardDto> qnaBoardList = qnaBoardService.qnaList(startNum,perPage,writer.getId());
 
         //출력시 필요한 변수들을 model 에 몽땅 저장
         model.addAttribute("totalCount", totalCount);
@@ -220,5 +226,53 @@ public class QnaboardController {
         return "redirect:/mypage/qnalist";
     }
 
+ /*   @PostMapping("/updateQnaBoard")
+    public String updateQnaBoard(QnaBoardDto dto,MultipartFile photo,int currentPage){
 
+        String filename="";
+        if(!photo.getOriginalFilename().equals("")) {
+            //기존 파일명 알아내기
+            filename=qnaBoardService.getQna(dto.getNum()).getQna_photo();
+            //버켓에서 삭제
+            storageService.deleteFile(bucketName, "qnaboard", filename);
+
+            //다시 업로드후 업로드한 파일명 얻기
+            filename=storageService.uploadFile(bucketName, "qnaboard", photo);
+        }
+        dto.setQna_photo(filename);
+
+        qnaBoardService.updateQnaBoard(dto);
+
+        return "/mypage/qnadetail?num="+dto.getNum()+"&currentPage="+currentPage;
+
+    }
+
+    @GetMapping("/mypage/updateqna")
+    public String updateqna(int num,int currentPage,Model model)
+    {
+        QnaBoardDto dto=qnaBoardService.getQna(num);
+
+        model.addAttribute("dto", dto);
+        model.addAttribute("currentPage", currentPage);
+
+        return "/mypage/qnaboard/qnaupdateform";
+    }
+*/
+
+    @GetMapping("/notice/noticeboard")
+    public String noticeBoard(@RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "") String search ,Model model) {
+        Map<String, Integer> paging = adminNoticeService.getCountData(currentPage, search);
+        List<NoticeDto> data = adminNoticeService.getAllNotice(paging.get("start"), paging.get("perPage"), search);
+        model.addAttribute("data", data);
+        model.addAttribute("paging", paging);
+        model.addAttribute("search", search);
+        return "/main/qnaboard/noticeboard";
+    }
+
+    @PostMapping("/notice/viewcount")
+    @ResponseBody
+    public int viewCount(int num) {
+        adminNoticeService.viewCount(num);
+        return adminNoticeService.getViewCount(num);
+    }
 }

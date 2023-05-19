@@ -21,4 +21,19 @@
         delete from board_notice where num=#{num}
     </delete>
 
+    <select id="getAllNotice" parameterType="Map" resultType="NoticeDto">
+        select * from board_notice where subject like concat("%", #{search} , "%") order by num desc limit #{start},#{perpage}
+    </select>
+
+    <select id="getCountData" parameterType="String" resultType="int">
+        select count(*) from board_notice where subject like concat("%", #{search} , "%")
+    </select>
+
+    <update id="viewCount" parameterType="int">
+        update board_notice set count = count + 1 where num = ${num}
+    </update>
+
+    <select id="getViewCount" parameterType="int" resultType="int">
+        select count from board_notice where num = #{num}
+    </select>
 </mapper>
