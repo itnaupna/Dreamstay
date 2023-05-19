@@ -250,4 +250,10 @@ public class MemberController {
         }
         return "redirect:/";
     }
+
+    //mail 양식 만들기
+    @GetMapping("/mail")
+    public String mail() {
+        return "/main/signup/mail";
+    }
 }

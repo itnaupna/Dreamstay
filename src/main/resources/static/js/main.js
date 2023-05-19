@@ -696,6 +696,8 @@ $(document).on("click","#select_hotel_list",function (){
 
     document.querySelector("#main_mini_dl_02_hotel").innerHTML = select_hotel_list_name;
     $("#select_hotel_hidden").val(select_hotel_val);
+});
 
-
+$("#main_kimchi").click(function() {
+   location.href = "/hotel/kimchi";
 });

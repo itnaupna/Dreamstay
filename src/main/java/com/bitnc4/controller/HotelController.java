@@ -40,4 +40,10 @@ public class HotelController {
         model.addAttribute("roomphoto", roomphoto);
         return "/main/hotel/hoteldetail";
     }
+
+    @GetMapping("/kimchi")
+    public String kimchi() {
+        return "/main/hotel/kimchi";
+    }
+
 }

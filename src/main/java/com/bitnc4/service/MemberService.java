@@ -5,8 +5,12 @@ import com.bitnc4.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,13 +27,28 @@ public class MemberService implements MemberServiceInter {
     @Override
     public void mailCode(String mail, String code) {
 
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom("helloa1109@naver.com");
-        msg.setTo(mail);
-        msg.setSubject("Dream Stay 이메일 인증번호");
-        msg.setText(code);
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
 
-        mailSender.send(msg);
+        try {
+            MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, "UTF-8");
+
+            mmh.setFrom("helloa1109@naver.com");
+            mmh.setTo(mail);
+            mmh.setSubject("Dream Stay 이메일 인증번호");
+            mmh.setText("<div style='background-color: black; width: 800px; height: 700px; margin: 80px auto 0 auto'>\n" +
+                    "    <img src='https://kr.object.ncloudstorage.com/dreamsstaybucket/logo_black500x150.png' style='margin: 40px 0 0 20px;'>\n" +
+                    "    <div style='text-align: center'>\n" +
+                    "        <span style='color: white; display: inline-block; font-size: 30px; width: 400px; margin: 100px 0 30px 0'>Dream Stay 가입 인증번호</span>\n" +
+                    "        <div style='width: 400px; height: 60px; line-height:60px; display: inline-block; background-color: #ffffff'>\n" +
+                    "            <span style='color: black; font-size: 25px; font-weight: bold;'>" + code + "</span>\n" +
+                    "        </div>\n" +
+                    "    </div>\n" +
+                    "</div>", true);
+
+            mailSender.send(mimeMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // 이미 가입된 이메일이 있는지 확인

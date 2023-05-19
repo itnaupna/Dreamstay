@@ -90,7 +90,7 @@
     .noticeboard_view {
         text-align: center;
         width: 100px;
-        margin: 0 0 0 0;
+        margin: 0 0 0 30px;
     }
     #noticeboard_noticebox {
         /*border: 1px solid gray; !*영역*!*/
@@ -160,7 +160,7 @@
     <c:forEach var="notice" items="${data}">
         <div id="noticeboard_noticebox">
             <div class="noticeboard_subject" id="noticeboard_subjectbox" value="${notice.num}">
-                <span class="noticeboard_title">${notice.num} ${notice.subject}</span>
+                <span class="noticeboard_title">${notice.subject}</span>
                 <span class="noticeboard_witer">${notice.writer}</span>
                 <span class="noticeboard_writeday"><fmt:formatDate value="${notice.writeday}" pattern="yyyy-MM-dd H:mm"/></span>
                 <span class="noticeboard_viewcnt noticeboard_view">${notice.count}</span>
@@ -220,4 +220,11 @@
         searchValue = $("#noticeboard_search").val();
         location.href = "/notice/noticeboard?search=" + searchValue;
     });
+
+    $("#noticeboard_search").keyup(function(e) {
+          if(e.which === 13) {
+              $("#noticeboard_searchbtn").click();
+          }
+    });
+
 </script>
