@@ -16,7 +16,7 @@
 		text-align: center;
 		color: #000000;
 		font-size: 20px;
-		font-weight: bold;
+
 
 	}
 	#section_3_body{
@@ -48,6 +48,7 @@
 		padding-top: 65px;
 	}
 	#section_3_text1{
+        font-weight: bold;
 		font-size: 35px;
 		height: 70px;
 	}
@@ -387,7 +388,7 @@
 	<div class="section bg_imgs03" >
 		<div class="section_3">
 			<dviv class="section_3" id="section_3_body">
-				<div class="section_3" id="section_3_logo"><img src="https://cdn.discordapp.com/attachments/1100773197546279023/1106018603955916890/Dream_Stay.png"></div>
+				<div class="section_3" id="section_3_logo"><img src="https://cdn.discordapp.com/attachments/1101378968709501008/1108947363013329046/Dream_Stay_4.png"></div>
 				<div class="section_3" id="section_3_text_body">
 					<div class="section_3" id="section_3_text1">
 						편안함(Easy), 자연(Green), 어울림(Love)
