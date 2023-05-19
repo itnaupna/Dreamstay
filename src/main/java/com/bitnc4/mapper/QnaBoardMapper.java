@@ -24,7 +24,7 @@ public interface QnaBoardMapper {
     public int getQnaCount(String witer);
     public void insertQnaPhoto(QnaBoardDto dto);
     public int isEqualQna(Map <String, Object> map);
-    public List<QnaBoardDto> searchQna(QnaBoardDto dto);
+    public List<QnaBoardDto> searchQna(Map <String, Object> map);
     public int searchQnaCount(String writer);
 
 }

@@ -72,9 +72,9 @@
         margin-left: 150px;
     }
 
-     #findarticlediv .form-select{
-         flex:initial !important;
-     }
+    #findarticlediv .form-select{
+        flex:initial !important;
+    }
 </style>
 
 
@@ -186,25 +186,18 @@
 
 
 <div id="findarticlediv" class="input-group" style="position: absolute; top:600px; width: 300px;">
-    <form action="./seachQna" method="post" name="search-form">
-        <select name="searchtype" class="form-select" style="width:100px;">
-            <option value="title" selected>제목</option>
-            <option value="content">내용</option>
-            <option value="writer">작성자</option>
+        <select name="searchtype" id ="q_searchtype" class="form-select" style="width:100px;">
+            <option name="title" value="title" selected>제목</option>
+            <option name="content" value="content">내용</option>
+            <option name="qna_name" value="qna_name">작성자</option>
         </select>
-
-        <input type="text" name="keyword" value="" class="form-control">
-        <button type="submit" class="seachbutton">검색</button>
-    </form>
+        <input type="text" id="q_keyword" name="keyword" value="" class="form-control">
+        <button type="button" id="searchbutton" class="searchbutton">검색</button>
 </div>
-</div>
-
-
-
-
 
 
 <script type="text/javascript">
+
     $(function () {
         $(".qnum").click(function () {
             var num = $(this).data("value");
@@ -223,7 +216,7 @@
                             location.href = './qnanodetail?num=' + num;
                         } else {
                             // 비밀번호가 틀린 경우 알림 메시지 출력
-                            alert('비밀번호가 맞지 않습니다');
+                            alert('비밀번호가 일치하지않습니다');
                             // 모달 창 요소 초기화
                             $("input[name='qna_pass']").val("");
                             // 모달 창 닫기
@@ -241,6 +234,50 @@
         });
     });
 
+
+        // 검색 버튼 클릭 이벤트 처리
+        $('#searchbutton').click(function () {
+
+            // 검색어 가져오기
+            var keyword = $('#q_keyword').val();
+            var searchtype = $('#q_searchtype').val();
+
+            // AJAX 요청 보내기
+            $.ajax({
+                url: './searchQna',
+                type: 'POST',
+                data: {
+                    keyword: keyword,
+                    searchtype: searchtype
+                },
+                success: function (result) {
+                    console.log(result);
+                    // 검색 결과를 테이블에 추가
+                    var tableBody = $('#qmalisttable tbody');
+                    tableBody.empty(); // 기존 내용 삭제
+
+                    if (result.length === 0) {
+                        tableBody.append('<tr><td colspan="4">검색된 게시물이 없습니다.</td></tr>');
+                    } else {
+                        $.each(result, function (index, item) {
+                            var row = '<tr>' +
+                                '<td>' + item.hotelname + '</td>';
+                            tableBody.append(row);
+                        });
+                    }
+                },
+                error: function () {
+                    // 오류 처리
+                }
+            });
+        });
+    $('input[name="keyword"]').on({
+        'keydown':(e)=>{
+            if(e.keyCode==13){
+                $('#searchbutton').click();
+            }
+        }
+    });
 
 
 </script>

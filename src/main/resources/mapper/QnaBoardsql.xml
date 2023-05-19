@@ -41,25 +41,23 @@
     </select>
 
     <select id="searchQna" parameterType="Map" resultType="QnaBoardDto">
-        select * from board_qna
-        where writer = #{writer}
-
+        SELECT *
+        FROM board_qna
+        WHERE writer = #{writer}
         <if test="searchtype != null and keyword != null">
             <choose>
-                <when test="searchtype !=null and searchtype.equals('title')">
-                    and subject like concat ('%', #{keyword},'%')
+                <when test="searchtype != null and searchtype.equals('title')">
+                    AND subject LIKE CONCAT('%', #{keyword}, '%')
                 </when>
-                <when test="searchtype !=null and searchtype.equals('content')">
-                    and content like concat ('%', #{keyword},'%')
+                <when test="searchtype != null and searchtype.equals('content')">
+                    AND content LIKE CONCAT('%', #{keyword}, '%')
                 </when>
-                <when test="searchtype !=null and searchtype.equals('writer')">
-                    and writer like concat ('%', #{keyword},'%')
+                <when test="searchtype != null and searchtype.equals('qna_name')">
+                    AND qna_name LIKE CONCAT('%', #{keyword}, '%')
                 </when>
             </choose>
         </if>
-
-        order by num desc
-
+        ORDER BY num DESC limit #{start},#{perpage}
     </select>
 
     <select id="searchQnaCount" parameterType="String" resultType="int">
@@ -73,8 +71,8 @@
                 <when test="searchtype !=null and searchtype.equals('content')">
                     and content like concat ('%', #{keyword},'%')
                 </when>
-                <when test="searchtype !=null and searchtype.equals('writer')">
-                    and writer like concat ('%', #{keyword},'%')
+                <when test="searchtype !=null and searchtype.equals('qna_name')">
+                    and qna_name like concat ('%', #{keyword},'%')
                 </when>
             </choose>
         </if>

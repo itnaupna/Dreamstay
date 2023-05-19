@@ -1,6 +1,7 @@
 package com.bitnc4.dto;
 
 import lombok.Data;
+import lombok.ToString;
 import org.apache.ibatis.type.Alias;
 
 import java.sql.Date;
@@ -8,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 
+@ToString
 @Data
 @Alias("QnaBoardDto")
 public class QnaBoardDto {
