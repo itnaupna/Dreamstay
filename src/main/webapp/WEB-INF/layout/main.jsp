@@ -12,6 +12,13 @@
 
 
 <style>
+	@font-face {
+		font-family: 'GmarketSansMedium';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		font-weight: 500;
+		font-style: normal;
+	}
+
 	.section_3{
 		text-align: center;
 		color: #000000;
@@ -65,6 +72,15 @@
 	#section_3_logo img {
 		width: 400px;
 		height: 400px;
+	}
+	#main_txt,#main_border_01,#main_mini_dl_01_room,#main_border_02,#main_border_03,.op_select,
+	#search_box,.calendar,.one_cont_sub_txt > h2, #page4_main_title
+	{
+		font-family: 'Playfair Display SC', serif;
+	}
+	#main_mini_dl_02_hotel,#main_mini_dl_03_check,#room_option03,#room_option02,#room_option01,.dates02,.dates,.title,#select_hotels_container
+	,.one_cont_sub_txt,.section_3,#page4_sub_title,.page4_box_logo div{
+		font-family: 'GmarketSansMedium';
 	}
 
 </style>
@@ -406,7 +422,7 @@
 					<div>Retail Business</div>
 				</div>
 				<div id="page4_sub_title">
-					<div>조선호텔앤리조트의 라이프 스타일 브랜드<br>
+					<div>드림스테이의 라이프 스타일 브랜드<br>
 						호스피탈리티 전문성을 바탕으로 확장한 라이프 스타일 브랜드를 소개합니다.</div>
 				</div>
 			</div>

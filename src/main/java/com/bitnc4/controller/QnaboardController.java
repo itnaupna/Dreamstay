@@ -65,10 +65,12 @@ public class QnaboardController {
 
         if(writer!="nomember") {
             // info user name 출력 <상혁>
-            MemberDto dto = (MemberDto) session.getAttribute("loginuser");
-            String[] fnFn = dto.getUser_name().split("/");
-            model.addAttribute("familyname", fnFn[0]);
-            model.addAttribute("firstname", fnFn[1]);
+            if(session.getAttribute("loginuser") != null) {
+                MemberDto dto = (MemberDto) session.getAttribute("loginuser");
+                String[] fnFn = dto.getUser_name().split("/");
+                model.addAttribute("familyname", fnFn[0]);
+                model.addAttribute("firstname", fnFn[1]);
+            }
         }
         // 호텔 데이터 가져오기
         List<HotelDto> hotelList = hotelService.getAllHotelData();

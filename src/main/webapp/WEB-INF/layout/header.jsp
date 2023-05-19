@@ -118,69 +118,72 @@
                             </ul>
                         </div>
 
-                        <div class="btntitlebox">
-                            <span>OFFERS</span><br><br>
+
+
+                        <div class="btntitlebox" >
+                            <span>MY PAGE</span><br><br>
                             <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
-                                <li>수상내역</li>
-                                <li>ESG경영</li>
-                                <li>결산공고</li>
+                                <a href="/mypage/"><li>마이페이지</li></a>
+
+                                <a href="/mypage/updateinfo"><li>개인정보 관리</li></a>
                             </ul>
                         </div>
 
                         <div class="btntitlebox">
                             <span>MEMBERSHIP</span><br><br>
                             <ul>
-                                <a href="/qnaboard"><li>문의하기</li></a>
-                                <a href="/qnanomemberlist"><li>비회원 문의조회</li></a>
+                                <a href="/mypage/membership"><li>멤버십 안내</li></a>
+                                <%--<li>연혁</li>
                                 <li>수상내역</li>
                                 <li>ESG경영</li>
-                                <li>결산공고</li>
-                            </ul>
-                        </div>
-
-                        <div class="btntitlebox" >
-                            <span>MY PAGE</span><br><br>
-                            <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
-                                <li>수상내역</li>
-                                <li>ESG경영</li>
-                                <li>결산공고</li>
+                                <li>결산공고</li>--%>
                             </ul>
                         </div>
 
                         <div class="btntitlebox">
-                            <span>RETAIL BUSINESS</span><br><br>
+                            <span>4페이지 내용 넣을 거에요</span><br><br>
                             <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
-                                <li>수상내역</li>
+                                <a href="#"><li>4페이지 링크 1</li></a>
+                                <a href="#"><li>4페이지 링크 2</li></a>
+                                <a href="#"><li>4페이지 링크 3</li></a>
+                                <a href="#"><li>4페이지 링크 4</li></a>
+                                <a href="#"><li>4페이지 링크 5</li></a>
+                                <a href="#"><li>4페이지 링크 6</li></a>
+                                <a href="#"><li>4페이지 링크 7</li></a>
+                                <a href="#"><li>4페이지 링크 8</li></a>
+                            </ul>
+                        </div>
+
+                        <div class="btntitlebox">
+                            <span>INQUIRY</span><br><br>
+                            <ul>
+                                <a href="/qnaboard"><li>문의하기</li></a>
+                                <a href="/qnanomemberlist"><li>비회원 문의조회</li></a>
+                                <%--<li>수상내역</li>
                                 <li>ESG경영</li>
-                                <li>결산공고</li>
+                                <li>결산공고</li>--%>
                             </ul>
                         </div>
 
                         <div class="btntitlebox">
                             <span>JOSUN LOUNGE</span><br><br>
                             <ul>
-                                <a>
+                                <a href="https://lounge.josunhotel.com/04/aisle-of-dreams/?_gl=1*24rldw*_ga*MjM4ODI1OTYwLjE2ODI5MzE2NjU.*_ga_TRL4XSZ1TD*MTY4NDQ4MDAyMS41Ny4wLjE2ODQ0ODEwMTIuNjAuMC4w*_ga_ZTT88NNQSY*MTY4NDQ4MDAyMS41LjAuMTY4NDQ4MDkxNy42MC4wLjA.">
                                     <li>
-                                        <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539858&sysCode=JOSUNHOTEL">
+                                        <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539868&sysCode=JOSUNHOTEL">
                                         <h6 style="margin-top: 10px;"> Hotel Dining</h6>
                                     </li>
 
                                 </a>
 
-                                <a>
+                                <a href="https://lounge.josunhotel.com/04/joyful-josun-junior/?_gl=1*16v6ku7*_ga*MjM4ODI1OTYwLjE2ODI5MzE2NjU.*_ga_TRL4XSZ1TD*MTY4NDQ4MDAyMS41Ny4xLjE2ODQ0ODEwMjAuNTIuMC4w*_ga_ZTT88NNQSY*MTY4NDQ4MDAyMS41LjEuMTY4NDQ4MTAyMC42MC4wLjA.">
                                     <li>
                                         <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539878&sysCode=JOSUNHOTEL">
                                         <h6 style="margin-top: 10px;"> Hotel Dining</h6>
                                     </li>
                                 </a>
 
-                                <a>
+                                <a href="https://lounge.josunhotel.com/04/gift-on-demand/?_gl=1*1bkfmjv*_ga*MjM4ODI1OTYwLjE2ODI5MzE2NjU.*_ga_TRL4XSZ1TD*MTY4NDQ4MDAyMS41Ny4xLjE2ODQ0ODEyNzguNTguMC4w*_ga_ZTT88NNQSY*MTY4NDQ4MDAyMS41LjEuMTY4NDQ4MTI3OC41OC4wLjA.">
                                     <li>
                                         <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539893&sysCode=JOSUNHOTEL">
                                         <h6 style="margin-top: 10px;"> Hotel Dining</h6>

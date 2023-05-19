@@ -52,9 +52,9 @@ var main_txt = document.getElementById("main_txt");
 $(function (){
     $(".page4_box_logo").mouseenter(function () {
         const src = $(this).find(".page4_box_logo_inputs").val();
-        $(".bg_imgs04").fadeOut(600, function () {
+        $(".bg_imgs04").fadeOut(500, function () {
             $(".bg_imgs04").css("background-image", "url(" + src + ")");
-            $(".bg_imgs04").fadeIn(600);
+            $(".bg_imgs04").fadeIn(500);
 
         });
     });

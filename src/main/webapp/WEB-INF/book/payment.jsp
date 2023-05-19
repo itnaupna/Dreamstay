@@ -72,7 +72,7 @@
     }
 
     .book_main .book_select .book_inner dl dt {
-        font-weight: revert;
+        font-weight: bold;
         color: black;
     }
 
@@ -96,6 +96,12 @@
         color: black;
         cursor: pointer;
         margin-top: 10px;
+        transition: 0.6s;
+
+    }
+    .mainbtn:hover{
+        color: #ffffff;
+        background-color: #000000;
     }
 
     <%-- 3번째 div 틀 --%>
@@ -489,6 +495,8 @@
         cursor: pointer;
         overflow: hidden;
         z-index: 1;
+        transition: 0.6s;
+
     }
 
     .book_main .pay .sideBanner .txt-label .paybtn:hover{
@@ -600,6 +608,10 @@
 
     .nomember_name:focus{
         outline: none;
+    }
+
+    body{
+        overflow-x: hidden;
     }
 </style>
 
