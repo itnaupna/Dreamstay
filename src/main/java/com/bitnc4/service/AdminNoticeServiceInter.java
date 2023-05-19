@@ -15,7 +15,7 @@ public interface AdminNoticeServiceInter {
 
     public Map<String, Integer> getCountData(int currentPage);
 
-    public List<NoticeDto> getAllNotice(int start, int perpage);
+    public List<NoticeDto> getAllNotice(int start, int perpage, String search);
 
     public void viewCount(int num);
 

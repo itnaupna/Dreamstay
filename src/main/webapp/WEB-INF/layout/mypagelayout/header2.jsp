@@ -307,15 +307,8 @@
                         <div class="btntitlebox">
                         <span>ABOUT US</span><br><br>
                             <ul>
-                                <li>JOSUN HOTELS & <br>RESORTS</li>
-                                <li>기업소개</li>
-                                <li>연혁</li>
-                                <li>수상내역</li>
-                                <li>ESG경영</li>
-                                <li>결산공고</li>
-
+                                <li id="header_notice_board">공지사항</li>
                             </ul>
-
                         </div>
 
                         <div class="btntitlebox">
@@ -406,8 +399,8 @@
             </div>
 
             <div class="topUtil">
-                <a href="" class="hotelFind" style="font-size: 14px;">
-                    상품찾기
+                <a href="/notice/noticeboard" class="hotelFind" style="font-size: 14px;">
+                    공지사항
                 </a>
             </div>
 

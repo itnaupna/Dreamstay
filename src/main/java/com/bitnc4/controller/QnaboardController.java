@@ -249,9 +249,9 @@ public class QnaboardController {
 */
 
     @GetMapping("/notice/noticeboard")
-    public String noticeBoard(@RequestParam(defaultValue = "1") int currentPage, Model model) {
+    public String noticeBoard(@RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "") String search ,Model model) {
         Map<String, Integer> paging = adminNoticeService.getCountData(currentPage);
-        List<NoticeDto> data = adminNoticeService.getAllNotice(paging.get("start"), paging.get("perPage"));
+        List<NoticeDto> data = adminNoticeService.getAllNotice(paging.get("start"), paging.get("perPage"), search);
         model.addAttribute("data", data);
         model.addAttribute("paging", paging);
         return "/main/qnaboard/noticeboard";

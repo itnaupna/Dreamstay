@@ -8,100 +8,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<link rel="stylesheet" href="/css/hotel/hoteldetail.css"/>
 
-<style>
-    body {
-
-        margin: 0;
-        padding: 0;
-    }
-
-    #hoteldetail_box {
-        font-family: 'Noto Sans KR', sans-serif;
-        width: 1200px;
-        margin: 180px auto 0 auto;
-    }
-
-    .hoteldetail_slidebox {
-        width: 1200px;
-        height: 700px;
-        margin-bottom: 20px;
-    }
-
-    .hoteldetail_photo {
-        width: 1200px;
-        height: 700px;
-    }
-
-    #hoteldetail_selectbox {
-        width: 1200px;
-        height: 100px;
-    }
-
-    .hoteldetail_selectPhoto {
-        margin: 0 5px 0 5px;
-    }
-
-    .detail_span{
-        display: block;
-    }
-
-    #detail_room_subjectbox {
-        width: 1200px;
-        margin: 0 auto 0 auto;
-    }
-
-    #hoteldetail_title {
-        font-size: 20px;
-        font-weight: bold;
-        margin: 80px 0 10px 0;
-
-    }
-
-    #hoteldetail_subtitle {
-        margin-bottom: 40px;
-        color: #333333;
-    }
-
-    .detail_room_box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .detail_room_photo {
-        width: 500px;
-        height: 300px;
-    }
-
-    .detail_room_slickSlider{
-        width: 500px;
-        height: 300px;
-        margin: 25px 50px 25px 50px;
-    }
-
-    .detail_room_info {
-        width: 500px;
-        height: 300px;
-        margin: 50px 50px 50px 50px;
-    }
-
-    .hoteldetail_room_type{
-        font-size: 25px;
-        margin-bottom: 10px;
-    }
-
-    .hoteldetail_roomdetail {
-        color: #333333;
-        font-size: 15px;
-        margin-bottom: 10px;
-    }
-
-    .hoteldetail_roommemo {
-        color: #333333;
-    }
-
-</style>
 
 <div id="hoteldetail_box">
     <div class="hoteldetail_slidebox">
@@ -158,44 +66,5 @@
         </c:forEach>
     </div>
 </div>
+<script type="text/javascript" src="/js/hotel/hoteldetail.js"></script>
 
-<script>
-    $(function() {
-
-        $('.hoteldetail_slidebox').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            asNavFor: '#hoteldetail_selectbox',
-            autoplay: true,            // 자동 스크롤 사용 여부
-            autoplaySpeed: 1000
-        });
-        $('#hoteldetail_selectbox').slick({
-            slidesToShow: 8,
-            slidesToScroll: 1,
-            asNavFor: '.hoteldetail_slidebox',
-            dots: true,
-            centerMode: true,
-            focusOnSelect: true,
-        });
-
-        $('.detail_room_slickSlider').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            asNavFor: '.detail_room_photo',
-            autoplay: true,            // 자동 스크롤 사용 여부
-            autoplaySpeed: 1000
-        });
-        $('.detail_room_photo').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            asNavFor: '.detail_room_slickSlider',
-            dots: true,
-            centerMode: true,
-            focusOnSelect: true,
-        });
-    });
-</script>

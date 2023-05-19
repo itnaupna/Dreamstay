@@ -105,10 +105,11 @@ public class AdminNoticeService implements AdminNoticeServiceInter{
     }
 
     @Override
-    public List<NoticeDto> getAllNotice(int start, int perpage) {
+    public List<NoticeDto> getAllNotice(int start, int perpage, String search) {
         Map<String, Object> paging = new HashMap<>();
         paging.put("start", start);
         paging.put("perpage", perpage);
+        paging.put("search", search);
         return m.getAllNotice(paging);
     }
 

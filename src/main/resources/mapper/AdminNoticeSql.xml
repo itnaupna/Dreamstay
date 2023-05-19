@@ -22,7 +22,7 @@
     </delete>
 
     <select id="getAllNotice" parameterType="Map" resultType="NoticeDto">
-        select * from board_notice order by num desc limit #{start},#{perpage}
+        select * from board_notice where subject like concat("%", #{search} , "%") order by num desc limit #{start},#{perpage}
     </select>
 
     <update id="viewCount" parameterType="int">
