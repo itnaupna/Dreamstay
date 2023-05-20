@@ -89,7 +89,7 @@
 		width: 100%;
 		height: 100%;
 		content: "";
-		background-image: url("https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255595&cntntsSn=25559");
+		background-image: url("./photo/page4_box_logo_01.jpg");
 		background-repeat: no-repeat; /* 배경이미지X */
 		background-size: cover; /* 요소를 비율에 맞게 커버 */
 		background-position: center; /* 이미지를 요소의 정가운데로 처리 */
@@ -114,6 +114,60 @@
 	}
 	.bg_imgs04_02::after{
 		background-image: url("/photo/page4_box_logo_02.jpg");
+		opacity: 1;
+		transition: 0.3s;
+	}
+	.bg_imgs04_03::before{
+		opacity: 0;
+		transition: 0.4s;
+	}
+	.bg_imgs04_03::after{
+		background-image: url("/photo/page4_box_logo_03.jpg");
+		opacity: 1;
+		transition: 0.3s;
+	}
+	.bg_imgs04_04::before{
+		opacity: 0;
+		transition: 0.4s;
+	}
+	.bg_imgs04_04::after{
+		background-image: url("/photo/page4_box_logo_04.jpg");
+		opacity: 1;
+		transition: 0.3s;
+	}
+	.bg_imgs04_05::before{
+		opacity: 0;
+		transition: 0.4s;
+	}
+	.bg_imgs04_05::after{
+		background-image: url("/photo/page4_box_logo_05.jpg");
+		opacity: 1;
+		transition: 0.3s;
+	}
+	.bg_imgs04_06::before{
+		opacity: 0;
+		transition: 0.4s;
+	}
+	.bg_imgs04_06::after{
+		background-image: url("/photo/page4_box_logo_06.jpg");
+		opacity: 1;
+		transition: 0.3s;
+	}
+	.bg_imgs04_07::before{
+		opacity: 0;
+		transition: 0.4s;
+	}
+	.bg_imgs04_07::after{
+		background-image: url("/photo/page4_box_logo_07.jpg");
+		opacity: 1;
+		transition: 0.3s;
+	}
+	.bg_imgs04_08::before{
+		opacity: 0;
+		transition: 0.4s;
+	}
+	.bg_imgs04_08::after{
+		background-image: url("/photo/page4_box_logo_08.jpg");
 		opacity: 1;
 		transition: 0.3s;
 	}
@@ -546,91 +600,107 @@
 	$(function (){
 		$(".page4_logo01").mouseenter(function () {
 			const src = $(this).find(".page4_box_logo_inputs").val();
+			setTimeout(function(){
+				$(".bg_imgs04").removeClass("bg_imgs04_02");
+				$(".bg_imgs04").removeClass("bg_imgs04_03");
+				$(".bg_imgs04").removeClass("bg_imgs04_04");
+				$(".bg_imgs04").removeClass("bg_imgs04_05");
+				$(".bg_imgs04").removeClass("bg_imgs04_06");
+				$(".bg_imgs04").removeClass("bg_imgs04_07");
+				$(".bg_imgs04").removeClass("bg_imgs04_08")
+			},100);
 			$(".bg_imgs04").addClass("bg_imgs04_01");
-			$(".bg_imgs04").removeClass("bg_imgs04_02");
-			$(".bg_imgs04").removeClass("bg_imgs04_03");
-			$(".bg_imgs04").removeClass("bg_imgs04_04");
-			$(".bg_imgs04").removeClass("bg_imgs04_05");
-			$(".bg_imgs04").removeClass("bg_imgs04_06");
-			$(".bg_imgs04").removeClass("bg_imgs04_07");
-			$(".bg_imgs04").removeClass("bg_imgs04_08");
 		});
 		$(".page4_logo02").mouseenter(function () {
 			const src = $(this).find(".page4_box_logo_inputs").val();
+			setTimeout(function(){
+				$(".bg_imgs04").removeClass("bg_imgs04_01");
+				$(".bg_imgs04").removeClass("bg_imgs04_03");
+				$(".bg_imgs04").removeClass("bg_imgs04_04");
+				$(".bg_imgs04").removeClass("bg_imgs04_05");
+				$(".bg_imgs04").removeClass("bg_imgs04_06");
+				$(".bg_imgs04").removeClass("bg_imgs04_07");
+				$(".bg_imgs04").removeClass("bg_imgs04_08");
+			},100);
 			$(".bg_imgs04").addClass("bg_imgs04_02");
-			$(".bg_imgs04").removeClass("bg_imgs04_01");
-			$(".bg_imgs04").removeClass("bg_imgs04_03");
-			$(".bg_imgs04").removeClass("bg_imgs04_04");
-			$(".bg_imgs04").removeClass("bg_imgs04_05");
-			$(".bg_imgs04").removeClass("bg_imgs04_06");
-			$(".bg_imgs04").removeClass("bg_imgs04_07");
-			$(".bg_imgs04").removeClass("bg_imgs04_08");
 		});
 		$(".page4_logo03").mouseenter(function () {
 			const src = $(this).find(".page4_box_logo_inputs").val();
+			setTimeout(function(){
+				$(".bg_imgs04").removeClass("bg_imgs04_02");
+				$(".bg_imgs04").removeClass("bg_imgs04_01");
+				$(".bg_imgs04").removeClass("bg_imgs04_04");
+				$(".bg_imgs04").removeClass("bg_imgs04_05");
+				$(".bg_imgs04").removeClass("bg_imgs04_06");
+				$(".bg_imgs04").removeClass("bg_imgs04_07");
+				$(".bg_imgs04").removeClass("bg_imgs04_08");
+			},100);
 			$(".bg_imgs04").addClass("bg_imgs04_03");
-			$(".bg_imgs04").removeClass("bg_imgs04_02");
-			$(".bg_imgs04").removeClass("bg_imgs04_01");
-			$(".bg_imgs04").removeClass("bg_imgs04_04");
-			$(".bg_imgs04").removeClass("bg_imgs04_05");
-			$(".bg_imgs04").removeClass("bg_imgs04_06");
-			$(".bg_imgs04").removeClass("bg_imgs04_07");
-			$(".bg_imgs04").removeClass("bg_imgs04_08");
 		});
 		$(".page4_logo04").mouseenter(function () {
 			const src = $(this).find(".page4_box_logo_inputs").val();
 			$(".bg_imgs04").addClass("bg_imgs04_04");
-			$(".bg_imgs04").removeClass("bg_imgs04_02");
-			$(".bg_imgs04").removeClass("bg_imgs04_03");
-			$(".bg_imgs04").removeClass("bg_imgs04_01");
-			$(".bg_imgs04").removeClass("bg_imgs04_05");
-			$(".bg_imgs04").removeClass("bg_imgs04_06");
-			$(".bg_imgs04").removeClass("bg_imgs04_07");
-			$(".bg_imgs04").removeClass("bg_imgs04_08");
+			setTimeout(function(){
+				$(".bg_imgs04").removeClass("bg_imgs04_02");
+				$(".bg_imgs04").removeClass("bg_imgs04_03");
+				$(".bg_imgs04").removeClass("bg_imgs04_01");
+				$(".bg_imgs04").removeClass("bg_imgs04_05");
+				$(".bg_imgs04").removeClass("bg_imgs04_06");
+				$(".bg_imgs04").removeClass("bg_imgs04_07");
+				$(".bg_imgs04").removeClass("bg_imgs04_08");
+			},100);
 		});
 		$(".page4_logo05").mouseenter(function () {
 			const src = $(this).find(".page4_box_logo_inputs").val();
 			$(".bg_imgs04").addClass("bg_imgs04_05");
-			$(".bg_imgs04").removeClass("bg_imgs04_02");
-			$(".bg_imgs04").removeClass("bg_imgs04_03");
-			$(".bg_imgs04").removeClass("bg_imgs04_04");
-			$(".bg_imgs04").removeClass("bg_imgs04_01");
-			$(".bg_imgs04").removeClass("bg_imgs04_06");
-			$(".bg_imgs04").removeClass("bg_imgs04_07");
-			$(".bg_imgs04").removeClass("bg_imgs04_08");
+			setTimeout(function(){
+				$(".bg_imgs04").removeClass("bg_imgs04_02");
+				$(".bg_imgs04").removeClass("bg_imgs04_03");
+				$(".bg_imgs04").removeClass("bg_imgs04_04");
+				$(".bg_imgs04").removeClass("bg_imgs04_01");
+				$(".bg_imgs04").removeClass("bg_imgs04_06");
+				$(".bg_imgs04").removeClass("bg_imgs04_07");
+				$(".bg_imgs04").removeClass("bg_imgs04_08");
+			},100);
 		});
 		$(".page4_logo06").mouseenter(function () {
 			const src = $(this).find(".page4_box_logo_inputs").val();
 			$(".bg_imgs04").addClass("bg_imgs04_06");
-			$(".bg_imgs04").removeClass("bg_imgs04_02");
-			$(".bg_imgs04").removeClass("bg_imgs04_03");
-			$(".bg_imgs04").removeClass("bg_imgs04_04");
-			$(".bg_imgs04").removeClass("bg_imgs04_05");
-			$(".bg_imgs04").removeClass("bg_imgs04_01");
-			$(".bg_imgs04").removeClass("bg_imgs04_07");
-			$(".bg_imgs04").removeClass("bg_imgs04_08");
+			setTimeout(function(){
+				$(".bg_imgs04").removeClass("bg_imgs04_02");
+				$(".bg_imgs04").removeClass("bg_imgs04_03");
+				$(".bg_imgs04").removeClass("bg_imgs04_04");
+				$(".bg_imgs04").removeClass("bg_imgs04_05");
+				$(".bg_imgs04").removeClass("bg_imgs04_01");
+				$(".bg_imgs04").removeClass("bg_imgs04_07");
+				$(".bg_imgs04").removeClass("bg_imgs04_08");
+			},100);
 		});
 		$(".page4_logo07").mouseenter(function () {
 			const src = $(this).find(".page4_box_logo_inputs").val();
 			$(".bg_imgs04").addClass("bg_imgs04_07");
-			$(".bg_imgs04").removeClass("bg_imgs04_02");
-			$(".bg_imgs04").removeClass("bg_imgs04_03");
-			$(".bg_imgs04").removeClass("bg_imgs04_04");
-			$(".bg_imgs04").removeClass("bg_imgs04_05");
-			$(".bg_imgs04").removeClass("bg_imgs04_06");
-			$(".bg_imgs04").removeClass("bg_imgs04_01");
-			$(".bg_imgs04").removeClass("bg_imgs04_08");
+			setTimeout(function(){
+				$(".bg_imgs04").removeClass("bg_imgs04_02");
+				$(".bg_imgs04").removeClass("bg_imgs04_03");
+				$(".bg_imgs04").removeClass("bg_imgs04_04");
+				$(".bg_imgs04").removeClass("bg_imgs04_05");
+				$(".bg_imgs04").removeClass("bg_imgs04_06");
+				$(".bg_imgs04").removeClass("bg_imgs04_01");
+				$(".bg_imgs04").removeClass("bg_imgs04_08")
+			},100);
 		})
 		$(".page4_logo08").mouseenter(function () {
 			const src = $(this).find(".page4_box_logo_inputs").val();
 			$(".bg_imgs04").addClass("bg_imgs04_08");
-			$(".bg_imgs04").removeClass("bg_imgs04_02");
-			$(".bg_imgs04").removeClass("bg_imgs04_03");
-			$(".bg_imgs04").removeClass("bg_imgs04_04");
-			$(".bg_imgs04").removeClass("bg_imgs04_05");
-			$(".bg_imgs04").removeClass("bg_imgs04_06");
-			$(".bg_imgs04").removeClass("bg_imgs04_07");
-			$(".bg_imgs04").removeClass("bg_imgs04_01");
+			setTimeout(function(){
+				$(".bg_imgs04").removeClass("bg_imgs04_02");
+				$(".bg_imgs04").removeClass("bg_imgs04_03");
+				$(".bg_imgs04").removeClass("bg_imgs04_04");
+				$(".bg_imgs04").removeClass("bg_imgs04_05");
+				$(".bg_imgs04").removeClass("bg_imgs04_06");
+				$(".bg_imgs04").removeClass("bg_imgs04_07");
+				$(".bg_imgs04").removeClass("bg_imgs04_01");
+			},100);
 		});
 
 
