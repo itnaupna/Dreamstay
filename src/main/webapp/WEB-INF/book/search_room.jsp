@@ -21,7 +21,7 @@
     }
     .book_main {
         /*border: 1px solid pink;*/
-        width: 2000px;
+        width: 1900px;
         height: 1200px;
         margin: 100px auto 0;
         display: flex;
@@ -121,7 +121,8 @@
 
     .RoomList {
         margin: 10px;
-        width: 100%;
+        /*width: 1900px;*/
+        max-width: 1900px;
         height: auto;
         /*border:1px solid;*/
         border-radius: 0.825rem;
@@ -157,7 +158,7 @@
     }
 
     .test3 {
-        width: 2000px;
+        width: 1900px;
     }
     .RoomList p input{
         border:none;
@@ -196,7 +197,8 @@
         margin-top: 35px;
     }
     body{
-        overflow-x: hidden;
+        width: 1900px;
+       /* overflow-x: hidden;*/
     }
 
     .book_ol em, .RoomInfo{

@@ -13,7 +13,7 @@
         font-style: normal;
     }
     .book_main {
-        width: 2000px;
+        width: 1900px;
         height: 1900px;
         margin: 100px auto 0;
         display: flex;
@@ -642,7 +642,7 @@
     }
 
     body{
-        overflow-x: hidden;
+        /*overflow-x: hidden;*/
     }
     .pay_email input{
         font-family: 'GmarketSansMedium';
