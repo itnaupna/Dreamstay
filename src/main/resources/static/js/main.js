@@ -212,8 +212,7 @@ function fn_selectDate(date) {
     selectedDay = new Date(year, month - 1, date);
     var day = selectedDay.getDay();
     var date_txt = "";
-
-    if(selectedDay-1 > selectedDay02-2){
+    if(selectedDay-1 > selectedDay02-2 || selectedDay-selectedDay02 <= 0){
         $("#search_box").prop("disabled", true);
     }else{
         $("#search_box").prop("disabled", false);

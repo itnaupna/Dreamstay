@@ -81,6 +81,10 @@
 	,.one_cont_sub_txt,.section_3,#page4_sub_title,.page4_box_logo div{
 		font-family: 'GmarketSansMedium';
 	}
+	.page4_box_logo_img{
+		width: 160px;
+		height: 70px;
+	}
 
 </style>
 
@@ -434,28 +438,28 @@
 				<div id="page4_sub_box_01">
 					<div class="page4_box_logo" id="logo_01">
 						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_01.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo" id="logo_02">
 						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo02.png">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo02.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="/photo/page4_box_logo_02.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo04.png">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo04.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_03.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo05.png">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo05.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_04.jpg">
 							<div>자세히 보기</div>
 						</a>
@@ -464,28 +468,28 @@
 				<div id="page4_sub_box_02">
 					<div class="page4_box_logo">
 						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo06.png">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo06.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_05.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo07.png">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo07.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_06.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo08.png">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo08.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_07.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo">
 						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo09.png">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo09.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_08.jpg">
 							<div>자세히 보기</div>
 						</a>
