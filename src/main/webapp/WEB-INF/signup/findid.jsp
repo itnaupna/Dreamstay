@@ -12,6 +12,6 @@
         <div class="findid_subjectbox">
             <span class="findid_span findid_subject">아이디를 확인해 주세요</span>
             <span class="findid_span findid_text">${mDto.user_name}님의 아이디는 <span style="color: #998465;">${mDto.id}</span> 입니다.</span>
-            <button type="button" id="findid_gomain" onclick="location.href='/'">로그인 페이지로 이동</button>
+            <button type="button" id="findid_gomain" onclick="location.href='/signup/login'">로그인 페이지로 이동</button>
         </div>
     </div>

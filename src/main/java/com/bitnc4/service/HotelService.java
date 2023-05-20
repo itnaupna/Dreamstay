@@ -26,15 +26,13 @@ public class HotelService implements HotelServiceInter{
 
     @Override
     public String[][] dividePhoto(List<Map<String, String>> list) {
-
-
         int cnt = 0;
+
         for(int i = 0; i < list.size(); i++) {
             if(list.get(i).get("roomphoto") != null && !list.get(i).get("roomphoto").equals("")) {
                 cnt++;
             }
         }
-
         String[][] roomphoto = new String[cnt][];
         for(int i = 0; i < list.size(); i++) {
             if(list.get(i).get("roomphoto") != null && !list.get(i).get("roomphoto").equals("")) {

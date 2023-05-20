@@ -1,8 +1,15 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
 body{
     margin: 0;
 }
 .findidpw_mainbox {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'GmarketSansMedium';
     margin: 180px auto 0 auto;
     text-align: center;
     width: 900px;
@@ -82,6 +89,7 @@ body{
 
 #at{
     margin: 0 6px 0 5px;
+    line-height: 50px;
 }
 
 .findidpw_input:focus {
@@ -139,32 +147,21 @@ body{
     margin: 0 35px 0 25px;
 }
 
-#findidpw_sendmail{
+#findidpw_chkcode, #findidpw_sendmail {
     border: 1px solid black;
     width: 200px;
     height: 50px;
     background-color: black;
     color: white;
-    transition: all 0.5s;
 }
 
-#findidpw_sendmail:hover {
-    background-color: white;
-    color: black;
-    transition: all 0.5s;
-}
-
-#findidpw_chkcode {
-    border: 1px solid black;
-    width: 200px;
-    height: 50px;
-    background-color: black;
-    color: white;
-    transition: all 0.5s;
-}
-
-#findidpw_chkcode:hover {
+#findidpw_chkcode:focus, #findidpw_sendmail:focus  {
+    outline: none;
     color: black;
     background-color: white;
-    transition: all 0.5s;
+}
+
+#findidpw_chkcode:hover, #findidpw_sendmail:hover  {
+    color: black;
+    background-color: white;
 }

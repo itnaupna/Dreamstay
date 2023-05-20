@@ -1,5 +1,9 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+}
 .findid_titlebox {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'GmarketSansMedium';
     margin: 180px auto 0 auto;
     text-align: center;
     width: 600px;
@@ -34,15 +38,24 @@
 }
 
 #findid_gomain {
+    padding: 0;
     width: 200px;
     background-color: black;
+    font-size: 15px;
     border: none;
     color: white;
     height: 60px;
+    line-height: 60px;
     cursor: pointer;
+    border: 1px solid black;
 }
-
+#findid_gomain:focus{
+    outline: none;
+    background-color: white;
+    color: black;
+}
 #findid_gomain:hover{
     background-color: white;
     color: black;
+    transition: all 0.5s;
 }

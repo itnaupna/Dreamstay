@@ -4,16 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 다음 맵 주소 입력 코드 Key -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/member/join.css"/>
 
 <div id="signup_main">
     <form method="post" action="/signup/joinmember" id="join_form">
 
         <div id="signup_titlebox">
-            <span class="signup_title">회원가입</span>
+            <span class="signup_title">Sign up</span>
         </div>
         <hr>
 
@@ -27,7 +24,7 @@
 
         <div class="signup_subbox" id="signup_idbox">
             <span class="signup_title signup_subtitle">ID *</span>
-            <input type="text" class="signup_input" name="id" id="id" placeholder="아이디는 문자 숫자 포함 5자리 이상 15이하로 사용가능합니다">
+            <input type="text" class="signup_input" name="id" id="id" placeholder="아이디는 영문 숫자 포함 5자리 이상 15이하로 사용가능합니다">
             <button type="button" class="signup_btn" id="id_check" name="id_check">중복확인</button>
             <span class="signup_notice" id="join_idchk"></span>
         </div>
@@ -87,11 +84,11 @@
         <div id="signup_fulladdrbox">
             <div class="signup_subbox" id="signup_searchaddr">
                 <span class="signup_title signup_subtitle">ADDRESS *</span>
-                <input type="text" class="signup_input" id="zipcode" name="zipcode">
+                <input type="text" class="signup_input" id="zipcode" name="zipcode" placeholder="우편번호">
                 <button type="button" class="signup_btn" id="search_addr">우편번호 검색</button>
             </div>
             <div class="signup_subbox" id="signup_addrbox">
-                <input type="text" class="signup_input" id="addr" name="addr"/>
+                <input type="text" class="signup_input" id="addr" name="addr" placeholder="주소">
                 <input type="text" class="signup_input" name="addrdetail" id="addrdetail" placeholder="상세주소를 입력해주세요"/>
                 <span class="signup_notice" id="join_null_check_addr"></span>
             </div>

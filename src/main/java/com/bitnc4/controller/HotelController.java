@@ -35,7 +35,11 @@ public class HotelController {
     public String hotelDetail(int num, Model model) {
         List<Map<String, String>> detail = hotelService.getHotelData(num);
         String[][] roomphoto = hotelService.dividePhoto(detail);
-
+        for(int i = 0; i < roomphoto.length; i++) {
+            for(int j = 0; j < roomphoto[i].length; j++) {
+                System.out.println(i + "번지 : " + roomphoto[i][j]);
+            }
+        }
         model.addAttribute("detail", detail);
         model.addAttribute("roomphoto", roomphoto);
         return "/main/hotel/hoteldetail";
