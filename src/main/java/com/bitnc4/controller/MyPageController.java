@@ -31,6 +31,7 @@ public class MyPageController {
     public String mypage(HttpSession session, Model model)
     {
         MemberDto dto = (MemberDto)session.getAttribute("loginuser");
+        System.out.println(dto);
         List<Map<String, String>> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
         model.addAttribute("data",map);
         model.addAttribute("size", map.size());

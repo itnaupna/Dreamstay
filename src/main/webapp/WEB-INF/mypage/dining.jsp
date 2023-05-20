@@ -29,8 +29,10 @@
 
     .dining_ul li p {
         display: inline-block;
-        padding: 20px 0;
+        /*padding: 20px 0;*/
         text-transform: uppercase;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom-color 0.3s ease-in-out;
     }
 
     .dining_header {
@@ -112,6 +114,48 @@
         margin: 10px;
     }
 
+    .dining_photo_content{
+        perspective: 1000px;
+        position: relative;
+    }
+
+    .dining_photo_content img {
+        transition: transform 0.5s;
+        transform-style: preserve-3d;
+    }
+
+    .dining_photo_content:hover img {
+        transform: rotateY(180deg);
+    }
+
+    .dining_photo_content .content-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+
+
+    .dining_photo_content:hover .content-overlay {
+        opacity: 1;
+    }
+
+    .dining_photo_content .content-overlay p {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .dining_ul li p:hover{
+        border-bottom-color: rgba(139, 69, 19, 0.5);
+    }
 </style>
 <%--<p class="p_title">Honest, Comfort, Uncomplicated</p>--%>
 <div class="dining_main">
@@ -160,6 +204,10 @@
     
     <div class="dining_photo_content">
         <img src="/photo/content1.png">
+        <div class="content-overlay">
+            <p>호텔 다이닝 공간은 세련된 인테리어와 함께 탁월한 음식 경험을 제공합니다.<br>
+                고풍스러운 분위기에서 편안하게 식사를 즐길 수 있습니다.</p>
+        </div>
     </div>
 
     <div class="dining_photo_content1">

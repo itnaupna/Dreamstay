@@ -34,6 +34,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+        font-family: 'GmarketSansMedium';
     }
 
     /* 메뉴바 글씨 */
@@ -140,6 +141,12 @@
         box-shadow: -4px 4px 7px 7px #dddddd;
         margin-top: 30px;
         background-color: white;
+        transition: transform 0.5s;
+    }
+
+    .for_list:hover {
+        box-shadow: -10px 10px 7px 7px #ccc;
+        transform: translateY(-7px);
     }
 
     .for_list span {
@@ -163,46 +170,79 @@
 
     .list1 {
         border: none;
-        background-color: black;
-        color: white;
         border-radius: 5px;
         width: 100%;
-        height: 40px;
+        /*height: 40px;*/
         text-align: center;
         justify-content: center;
         align-items: center;
         display: flex;
-        font-family: 'GmarketSansMedium';
+        /*font-family: 'GmarketSansMedium';*/
         font-weight: 700;
+        font-family: 'GmarketSansMedium';
+        margin-top: 15px;
+    }
 
+    .list_box {
+        box-shadow: -2px 2px 5px 5px #dddddd;
+        display: flex;
+        /*justify-content: space-around;*/
+        height: 50px;
+        flex-direction: column;
+    }
+
+    .list0 {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .list1 span {
+        font-family: 'GmarketSansMedium';
+        font-size: 16px;
     }
 
     .list2 {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
+        justify-content: space-around;
+
+    }
+
+    .list2 span{
+        /*background-color: black;*/
+        /*color: white;*/
+        border: none;
+        border-bottom: 2px solid rgba(139, 69, 19, 0.5);
+
+        width: 120px;
+        text-align: center;
+        transition: transform 0.5s;
+        font-size: 15px;
+    }
+
+    .list2 span:hover{
+        transform: translateY(-5px);
     }
 
     .list3 {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     .list4 {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     .list5 {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     .nobooktitle {
@@ -264,6 +304,75 @@
         background-color: white;
         color: black;
     }
+
+    .list_img {
+        position: relative;
+        height: 200px;
+    }
+
+    .list_img img {
+        width: 100%;
+        height: 100%;
+        /*object-fit: cover;*/
+    }
+
+    .list_img::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .list_img:hover::before {
+        opacity: 1;
+    }
+
+    .list_img::after {
+        content: "View Details";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+
+    .list_img:hover::after {
+        opacity: 1;
+    }
+
+    @media screen and (max-width: 768px) {
+        .res_main .res_room {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .res_main .res_room a {
+            padding: 0 10px;
+        }
+
+        .res_main .res_sel {
+            width: 100%;
+        }
+
+        /*!*.for_list {*!*/
+        /*!*    width: 100%;*!*/
+        /*!*}*!*/
+        /*.for_list {*/
+        /*    width: 50%;*/
+        /*}*/
+    }
+
 </style>
 
 <div class="res_main">
@@ -307,21 +416,28 @@
                             <div class="for_list">
                                 <div class="wrapper">
                                     <div class="list_img">
-                                        <img src="https://ukkzyijeexki17078490.cdn.ntruss.com/hotel/${list.photo}?type=f&w=160&h=160&faceopt=true">
+                                        <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/hotel/${list.photo}">
                                     </div>
                                     <div class="list_data">
-                                        <div class="list1">
-                                            <span>객실타입 :</span> ${list.roomtype}<br>
+                                        <div class="list_box">
+                                            <div class="list0">
+                                                <span>체크인</span><span>체크아웃</span>
+                                            </div>
+                                            <div class="list2">
+                                                <span>
+                                                <fmt:parseDate value='${list.checkin}' var='checkin'
+                                                               pattern='yyyy-mm-dd'/>
+                                                <fmt:formatDate value="${checkin}" pattern="yyyy-mm-dd"/>
+                                                    </span>
+                                                <span>
+                                                <fmt:parseDate value='${list.checkout}' var='checkout'
+                                                               pattern='yyyy-mm-dd'/>
+                                                <fmt:formatDate value="${checkout}" pattern="yyyy-mm-dd"/><br>
+                                                    </span>
+                                            </div>
                                         </div>
-                                        <div class="list2">
-                                            <span>체크인 :</span>
-                                            <fmt:parseDate value='${list.checkin}' var='checkin'
-                                                           pattern='yyyy-mm-dd'/>
-                                            <fmt:formatDate value="${checkin}" pattern="yyyy-mm-dd"/>
-                                            <span>체크아웃 :</span>
-                                            <fmt:parseDate value='${list.checkout}' var='checkout'
-                                                           pattern='yyyy-mm-dd'/>
-                                            <fmt:formatDate value="${checkout}" pattern="yyyy-mm-dd"/><br>
+                                        <div class="list1">
+                                            <span>Type :</span>${list.roomtype}<br>
                                         </div>
                                         <div class="list3">
                                             <span>성인 :</span> ${list.adult}명
@@ -363,4 +479,24 @@
         if (!confirm("예약 취소하시겠습니까?")) return;
         location.href = "/mypage/deletebook?num=" + num;
     }
+
+    // $(document).on("click", ".header_hotel_list", function() {
+    //     var num = $(this).attr("value");
+    //     location.href = "/hotel/hoteldetail?num=" + num;
+    // });
+    //
+    // $(function() {
+    //     $.ajax({
+    //         url: "/hotel/hotellist",
+    //         type: "get",
+    //         success: function(data) {
+    //             var hotelList = "";
+    //             $.each(data, function(i, d) {
+    //                 hotelList += '<li class="header_hotel_list" value="' + d.num + '">' + d.name + '</li>';
+    //             });
+    //             $("#hotel_list").html(hotelList);
+    //         }
+    //     });
+    // });
+
 </script>

@@ -17,7 +17,6 @@
         margin: 100px auto 0;
         display: flex;
         flex-direction: column;
-
     }
 
     .book_main .book_top {
@@ -95,7 +94,7 @@
         height: 60px;
         font-size: 15px;
         margin-top: 10px;
-        border: none;
+        border: 1px solid black;
         background-color: white !important;
         color: black;
         cursor: pointer;
@@ -245,6 +244,11 @@
         align-items: center;
         justify-content: center;
     }
+
+    .hotelphoto{
+        width: 100px;
+        height: 50px;
+    }
 </style>
 <div class="book_main">
 <div class="book_top">
@@ -323,10 +327,10 @@
             <h2>Dream Stay Reservation Check</h2>
             <span><input type="text" value="${familyname}${firstname}" name="user_name" class="user_name" readonly>님 예약되었습니다.</span>
         </div>
-
         <div class="go_to_home">
-            <button type="button" class="mainbtn" onclick="location.href='/'">MAIN PAGE</button>
+            <button type="button" class="mainbtn" onclick="location.href='/mypage'">예약 확인</button>
         </div>
+
     </div>
 </c:if>
 

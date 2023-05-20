@@ -268,8 +268,7 @@ public class BookController {
         String nomemberusername = (String) session.getAttribute("nomemberusername");
         model.addAttribute("nomemberId",nomemberId);
         model.addAttribute("nomemberusername",nomemberusername);
-
-        // <상혁 추가>
+            // <상혁 추가>
         try {
             MemberDto dto1 = (MemberDto) session.getAttribute("loginuser");
             String[] fnFn = dto1.getUser_name().split("/");

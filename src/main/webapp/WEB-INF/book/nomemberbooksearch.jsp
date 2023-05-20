@@ -22,11 +22,19 @@
         margin-top: 140px;
         /*border: 1px solid orangered;*/
         width: 1000px;
-        height: 1000px;
+        height: 945px;
         margin-left: auto;
         margin-right: auto;
         /*border: 1px solid #ccc;*/
+        transition: transform 0.5s;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
     }
+
+    /*.nomember_main:hover {*/
+    /*    box-shadow: -10px 10px 7px 3px #ccc;*/
+    /*    transform: translateY(-5px);*/
+    /*}*/
 
     .nomember_header {
         /*border: 1px solid yellow;*/
@@ -44,7 +52,7 @@
 
     .nomember_hotel_photo {
         /*border: 1px solid green;*/
-        margin-top: 20px;
+        margin-top: 4px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -100,6 +108,15 @@
         margin-right: 5px;
     }
 
+    .subimg1,
+    .subimg2,
+    .subimg3,
+    .subimg4,
+    .subimg5 {
+        width: 30px;
+        height: 30px;
+    }
+
     .nomember_room_check {
         text-align: center;
     }
@@ -116,10 +133,16 @@
     }
 
     .fmt_check span {
-        background-color: black;
-        color: white;
-        border-radius: 15px;
+        /*background-color: black;*/
+        /*color: white;*/
+        border: none;
+        border-bottom: 2px solid #8B4513;
         width: 120px;
+        transition: transform 0.5s;
+    }
+
+    .fmt_check span:hover {
+        transform: translateY(-5px);
     }
 
     .nomember_room_top_title {
@@ -133,7 +156,7 @@
 
     .nomember_room_sub_info {
         /*border: 1px solid red;*/
-        height: 150px;
+        height: 170px;
         /*font-family: 'SUITE-Regular';*/
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
@@ -175,7 +198,7 @@
         background-color: black;
     }
 
-    #gohome{
+    #gohome {
         border: 1px solid #ccc;
         background-color: transparent;
         color: black;
@@ -184,21 +207,87 @@
         height: 40px;
     }
 
-    #gohome:hover{
+    #gohome:hover {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         color: white;
         background-color: black;
     }
 
-    .gohomediv{
+    .nomember_header {
+        font-size: 15px;
+    }
+
+    .gohomediv {
         margin-top: 10px;
     }
+
+    .nomember_hotel_info {
+        border-radius: 10px;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .hotel-info-row {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+
+    .hotel-info-row span {
+        margin-left: 10px;
+        font-weight: bold;
+        animation: bounce 1s infinite alternate;
+    }
+
+    .topimg1,
+    .topimg2,
+    .topimg3 {
+        width: 24px;
+        height: 24px;
+    }
+
+    @keyframes bounce {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-5px);
+        }
+    }
+
+    .bounce {
+        color: #8B4513;
+    }
+
+    .hotel-info-row:hover .topimg1,
+    .hotel-info-row:hover .topimg2,
+    .hotel-info-row:hover .topimg3 {
+        transform: translateY(-7px);
+        transition: transform 0.4s;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
 
     /* 반응형 세팅 */
     @media screen and (max-width: 768px) {
         .nomember_main {
-            margin-top: 80px;
+            margin-top: 110px;
             width: 90%;
+            height: auto;
         }
 
         .nomember_hotel_info {
@@ -228,7 +317,9 @@
             margin-top: 20px;
         }
     }
+
 </style>
+
 <div class="nomember_main">
     <div class="nomember_header">
         <div class="nomember_header_title">
@@ -236,13 +327,26 @@
             <span>${booksearch.user_name}님의 예약 정보입니다</span>
         </div>
         <div class="nomember_hotel_info">
-            <span><img src="/photo/hotel.png" class="topimg1"> 호텔명 : ${booksearch.name}</span>
-            <span><img src="/photo/pin.png" class="topimg2">주소 : ${booksearch.addr}</span>
-            <span><img src="/photo/phone-call.png" class="topimg3">전화번호 : ${booksearch.phone}</span>
+            <div class="hotel-info-row">
+                <span class="bounce"><img src="/photo/hotel.png" class="topimg1"> 호텔명</span>
+                <span class="hotel-name">${booksearch.name}</span>
+            </div>
+            <div class="hotel-info-row">
+                <span class="bounce"><img src="/photo/pin.png" class="topimg2"> 주소</span>
+                <span class="hotel-address">${booksearch.addr}</span>
+            </div>
+            <div class="hotel-info-row">
+                <span class="bounce"><img src="/photo/phone-call.png" class="topimg3"> 전화번호</span>
+                <span class="hotel-phone">${booksearch.phone}</span>
+            </div>
         </div>
     </div>
-    <div class="nomember_hotel_photo" id="shape">
-        <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/hotel/${booksearch.photo}">
+    <div class="flip_box">
+        <div class="flip">
+            <div class="nomember_hotel_photo" id="shape">
+                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/hotel/${booksearch.photo}">
+            </div>
+        </div>
     </div>
 
     <div class="nomember_room_info">
@@ -264,12 +368,15 @@
                 <div class="nomember_room_sub_div">
                     <div class="test">
                         <div class="sub_info1">
+                            <img src="/photo/bed.png" class="subimg1">
                             <span>객실 타입 : ${booksearch.roomtype}</span>
                         </div>
                         <div class="sub_info2">
+                            <img src="/photo/couple.png" class="subimg2">
                             <span>성인 : ${booksearch.adult}명</span>
                         </div>
                         <div class="sub_info3">
+                            <img src="/photo/children.png" class="subimg3">
                             <span>어린이 : ${booksearch.kids}명</span>
                         </div>
                         <div class="sub_info4">
@@ -277,10 +384,12 @@
                                 <span>요청사항이 없습니다.</span>
                             </c:if>
                             <c:if test="${not empty booksearch.roomtype}">
+                                <img src="/photo/request.png" class="subimg4">
                                 <span>요청 사항 : ${booksearch.roomtype}</span>
                             </c:if>
                         </div>
                         <div class="sub_info5">
+                            <img src="/photo/hand.png" class="subimg5">
                             <span>이용 요금 : <fmt:formatNumber value="${booksearch.total_price}"/>원</span>
                         </div>
                     </div>
