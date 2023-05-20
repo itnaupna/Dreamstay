@@ -49,17 +49,7 @@ var calendars = document.getElementById("calendars");
 var mainResveForm = document.getElementById("mainResveForm");
 var icon_scroll = document.getElementById("icon_scroll");
 var main_txt = document.getElementById("main_txt");
-$(function (){
-    $(".page4_box_logo").mouseenter(function () {
-        const src = $(this).find(".page4_box_logo_inputs").val();
-        $(".bg_imgs04").fadeOut(500, function () {
-            $(".bg_imgs04").css("background-image", "url(" + src + ")");
-            $(".bg_imgs04").fadeIn(500);
 
-        });
-    });
-    $("#search_box").prop("disabled", false);
-});
 
 /*check in*/
 document.body.style.overflow = "hidden";

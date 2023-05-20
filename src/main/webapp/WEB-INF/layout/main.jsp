@@ -85,6 +85,41 @@
 		width: 160px;
 		height: 70px;
 	}
+	.bg_imgs04::after{
+		width: 100%;
+		height: 100%;
+		content: "";
+		background-image: url("https://www.josunhotel.com/revolution/content/fileImage.do?fileId=255595&cntntsSn=25559");
+		background-repeat: no-repeat; /* 배경이미지X */
+		background-size: cover; /* 요소를 비율에 맞게 커버 */
+		background-position: center; /* 이미지를 요소의 정가운데로 처리 */
+		background-attachment: fixed !important;/* 스크롤바 움직일때 이미지가 따라다님 */
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	}
+	.bg_imgs04_01::before{
+		opacity: 0;
+		transition: 0.4s;
+	}
+	.bg_imgs04_01::after{
+		background-image: url("./photo/page4_box_logo_01.jpg");
+		opacity: 1;
+		transition: 0.3s;
+	}
+	.bg_imgs04_02::before{
+		opacity: 0;
+		transition: 0.4s;
+	}
+	.bg_imgs04_02::after{
+		background-image: url("/photo/page4_box_logo_02.jpg");
+		opacity: 1;
+		transition: 0.3s;
+	}
+
+
+
 
 </style>
 
@@ -423,7 +458,7 @@
 			</dviv>
 		</div>
 	</div>
-	<div class="section bg_imgs04" id="bg_imgs04">
+	<div class="section bg_imgs04 bg_imgs04_01" id="bg_imgs04">
 		<div id="page4">
 			<div class="page4_title">
 				<div id="page4_main_title">
@@ -436,28 +471,28 @@
 			</div>
 			<div id="page4_box">
 				<div id="page4_sub_box_01">
-					<div class="page4_box_logo" id="logo_01">
+					<div class="page4_box_logo page4_logo01" id="logo_01">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_01.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo" id="logo_02">
+					<div class="page4_box_logo page4_logo02" id="logo_02">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo02.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="/photo/page4_box_logo_02.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
+					<div class="page4_box_logo page4_logo03">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo04.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_03.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
+					<div class="page4_box_logo page4_logo04">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo05.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_04.jpg">
@@ -466,28 +501,28 @@
 					</div>
 				</div>
 				<div id="page4_sub_box_02">
-					<div class="page4_box_logo">
+					<div class="page4_box_logo page4_logo05">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo06.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_05.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
+					<div class="page4_box_logo page4_logo06">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo07.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_06.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
+					<div class="page4_box_logo page4_logo07">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo08.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_07.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
+					<div class="page4_box_logo page4_logo08">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo09.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_08.jpg">
@@ -507,5 +542,101 @@
 	</div>
 
 </div>
+<script>
+	$(function (){
+		$(".page4_logo01").mouseenter(function () {
+			const src = $(this).find(".page4_box_logo_inputs").val();
+			$(".bg_imgs04").addClass("bg_imgs04_01");
+			$(".bg_imgs04").removeClass("bg_imgs04_02");
+			$(".bg_imgs04").removeClass("bg_imgs04_03");
+			$(".bg_imgs04").removeClass("bg_imgs04_04");
+			$(".bg_imgs04").removeClass("bg_imgs04_05");
+			$(".bg_imgs04").removeClass("bg_imgs04_06");
+			$(".bg_imgs04").removeClass("bg_imgs04_07");
+			$(".bg_imgs04").removeClass("bg_imgs04_08");
+		});
+		$(".page4_logo02").mouseenter(function () {
+			const src = $(this).find(".page4_box_logo_inputs").val();
+			$(".bg_imgs04").addClass("bg_imgs04_02");
+			$(".bg_imgs04").removeClass("bg_imgs04_01");
+			$(".bg_imgs04").removeClass("bg_imgs04_03");
+			$(".bg_imgs04").removeClass("bg_imgs04_04");
+			$(".bg_imgs04").removeClass("bg_imgs04_05");
+			$(".bg_imgs04").removeClass("bg_imgs04_06");
+			$(".bg_imgs04").removeClass("bg_imgs04_07");
+			$(".bg_imgs04").removeClass("bg_imgs04_08");
+		});
+		$(".page4_logo03").mouseenter(function () {
+			const src = $(this).find(".page4_box_logo_inputs").val();
+			$(".bg_imgs04").addClass("bg_imgs04_03");
+			$(".bg_imgs04").removeClass("bg_imgs04_02");
+			$(".bg_imgs04").removeClass("bg_imgs04_01");
+			$(".bg_imgs04").removeClass("bg_imgs04_04");
+			$(".bg_imgs04").removeClass("bg_imgs04_05");
+			$(".bg_imgs04").removeClass("bg_imgs04_06");
+			$(".bg_imgs04").removeClass("bg_imgs04_07");
+			$(".bg_imgs04").removeClass("bg_imgs04_08");
+		});
+		$(".page4_logo04").mouseenter(function () {
+			const src = $(this).find(".page4_box_logo_inputs").val();
+			$(".bg_imgs04").addClass("bg_imgs04_04");
+			$(".bg_imgs04").removeClass("bg_imgs04_02");
+			$(".bg_imgs04").removeClass("bg_imgs04_03");
+			$(".bg_imgs04").removeClass("bg_imgs04_01");
+			$(".bg_imgs04").removeClass("bg_imgs04_05");
+			$(".bg_imgs04").removeClass("bg_imgs04_06");
+			$(".bg_imgs04").removeClass("bg_imgs04_07");
+			$(".bg_imgs04").removeClass("bg_imgs04_08");
+		});
+		$(".page4_logo05").mouseenter(function () {
+			const src = $(this).find(".page4_box_logo_inputs").val();
+			$(".bg_imgs04").addClass("bg_imgs04_05");
+			$(".bg_imgs04").removeClass("bg_imgs04_02");
+			$(".bg_imgs04").removeClass("bg_imgs04_03");
+			$(".bg_imgs04").removeClass("bg_imgs04_04");
+			$(".bg_imgs04").removeClass("bg_imgs04_01");
+			$(".bg_imgs04").removeClass("bg_imgs04_06");
+			$(".bg_imgs04").removeClass("bg_imgs04_07");
+			$(".bg_imgs04").removeClass("bg_imgs04_08");
+		});
+		$(".page4_logo06").mouseenter(function () {
+			const src = $(this).find(".page4_box_logo_inputs").val();
+			$(".bg_imgs04").addClass("bg_imgs04_06");
+			$(".bg_imgs04").removeClass("bg_imgs04_02");
+			$(".bg_imgs04").removeClass("bg_imgs04_03");
+			$(".bg_imgs04").removeClass("bg_imgs04_04");
+			$(".bg_imgs04").removeClass("bg_imgs04_05");
+			$(".bg_imgs04").removeClass("bg_imgs04_01");
+			$(".bg_imgs04").removeClass("bg_imgs04_07");
+			$(".bg_imgs04").removeClass("bg_imgs04_08");
+		});
+		$(".page4_logo07").mouseenter(function () {
+			const src = $(this).find(".page4_box_logo_inputs").val();
+			$(".bg_imgs04").addClass("bg_imgs04_07");
+			$(".bg_imgs04").removeClass("bg_imgs04_02");
+			$(".bg_imgs04").removeClass("bg_imgs04_03");
+			$(".bg_imgs04").removeClass("bg_imgs04_04");
+			$(".bg_imgs04").removeClass("bg_imgs04_05");
+			$(".bg_imgs04").removeClass("bg_imgs04_06");
+			$(".bg_imgs04").removeClass("bg_imgs04_01");
+			$(".bg_imgs04").removeClass("bg_imgs04_08");
+		})
+		$(".page4_logo08").mouseenter(function () {
+			const src = $(this).find(".page4_box_logo_inputs").val();
+			$(".bg_imgs04").addClass("bg_imgs04_08");
+			$(".bg_imgs04").removeClass("bg_imgs04_02");
+			$(".bg_imgs04").removeClass("bg_imgs04_03");
+			$(".bg_imgs04").removeClass("bg_imgs04_04");
+			$(".bg_imgs04").removeClass("bg_imgs04_05");
+			$(".bg_imgs04").removeClass("bg_imgs04_06");
+			$(".bg_imgs04").removeClass("bg_imgs04_07");
+			$(".bg_imgs04").removeClass("bg_imgs04_01");
+		});
+
+
+
+		$("#search_box").prop("disabled", false);
+	});
+</script>
 
 <script type="text/javascript" src="/js/main.js"></script>
