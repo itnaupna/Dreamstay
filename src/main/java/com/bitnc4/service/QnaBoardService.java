@@ -86,9 +86,13 @@ public class QnaBoardService implements QnaBoardServiceInter {
     }
 
     @Override
-    public int searchQnaCount(String writer) {
+    public int searchQnaCount(String writer,String keyword,String searchtype) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("writer",writer);
+        map.put("keyword",keyword);
+        map.put("searchtype",searchtype);
 
-        return qnaBoardMapper.searchQnaCount(writer);
+        return qnaBoardMapper.searchQnaCount(map);
     }
 
    /* @Override

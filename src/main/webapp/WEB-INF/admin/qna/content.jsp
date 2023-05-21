@@ -217,12 +217,12 @@
 
                 <c:if test="${dto.answer== '답변대기'}">
                     <button type="button" class="btnanswer" id="answer-btn" style="margin-right: 10px;">답변완료</button>
-                    <button type="button" class="btnlist" onclick="location.href='/admin/qna'" style="margin-right: 10px;">목록</button>
+                    <button type="button" class="btnlist" onclick="history.back()" style="margin-right: 10px;">목록</button>
                     <button type="button" class="btnalldel">문의 삭제</button>
                 </c:if>
 
                 <c:if test="${dto.answer== '답변완료'}">
-                    <button type="button" class="btnlist"  onclick="location.href='/admin/qna'" style="margin-right: 10px;">목록</button>
+                    <button type="button" class="btnlist"  onclick="history.back()" style="margin-right: 10px;">목록</button>
                     <button type="button" class="btndel" id="delQna">삭제</button>
                     <button type="button" class="btnalldel" >문의 삭제</button>
                 </c:if>

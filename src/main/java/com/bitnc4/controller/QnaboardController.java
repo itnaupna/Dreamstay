@@ -333,7 +333,7 @@ public class QnaboardController {
         System.out.println("savedKeyword="+savedKeyword);
 
         //게시판의 총 글갯수 얻기
-        int totalCount= qnaBoardService.searchQnaCount(writer);
+        int totalCount= qnaBoardService.searchQnaCount(writer,keyword,searchtype);
         int totalPage;//총 페이지수
         int perPage=5; //한페이지당 글갯수
         int perBlock=10;//한 블럭당 보여질 페이지의 갯수

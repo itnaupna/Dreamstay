@@ -276,9 +276,14 @@
 
     <br>
     <!-- 페이징 처리 -->
-    <div  style="width: 100%;text-align: center;font-size: 17px; ">
+        <input type="hidden" name="totalPage" value="${totalPage}">
+        <input type="hidden" name="startPage" value="${startPage}">
+        <input type="hidden" name="endPage" value="${endPage}">
+        <input type="hidden" name="currentPage" value="${currentPage}">
+
+    <div class="pagination" style="width: 100%;text-align: center;font-size: 17px; margin-left: 700px;">
         <!-- 이전 -->
-        <c:if test="${startPage>1}">8
+        <c:if test="${startPage>1}">
             <a style="color:black;text-decoration: none;cursor: pointer;"
                href="./qnanomemberlist?currentPage=${startPage-1}">이전</a>
         </c:if>
@@ -326,6 +331,12 @@
             var keyword = $('#q_keyword').val();
             var searchtype = $('#q_searchtype').val();
 
+            if(keyword=='' || keyword==null)
+            {
+                alert("검색어를 입력해주세요");
+                return false;
+            }
+
             // AJAX 요청 보내기
             $.ajax({
                 url: './searchQna',
@@ -341,7 +352,7 @@
                     tableBody.empty(); // 기존 내용 삭제
 
                     if (result.length === 0) {
-                        tableBody.append('<tr><td colspan="4">검색된 게시물이 없습니다.</td></tr>');
+                        tableBody.append('<tr><td colspan="4" style="text-align: center">검색된 게시물이 없습니다.</td></tr>');
                     } else {
                         $.each(result, function (index, item) {
                             var date = new Date(item.writeday);
@@ -366,6 +377,32 @@
                                         <td class="txtcenter">\${formattedDate}</td>
                                         </tr>`;
                             tableBody.append(row);
+
+                            // 페이징 업데이트
+                            var paging = $('.pagination');
+                            paging.empty();
+
+                            var totalPage = $("input[name=totalPage]").val();
+                            var currentPage = $("input[name=currentPage]").val();
+                            var startPage = $("input[name=startPage]").val();
+                            var endPage = $("input[name=endPage]").val();
+
+                           /* alert(totalpage);*/
+
+                            if (totalPage> 0) {
+                                for (var pp = startPage; pp < endPage; pp++) {
+                                   /* alert(pp);*/
+                                    var pageLink;
+                                    if (currentPage === pp) {
+                                        pageLink = '<a style="color:#989442;text-decoration: none;cursor: pointer;" href="./qnanomemberlist?currentPage=' + pp + '">' + pp + '</a>';
+                                    } else {
+                                        pageLink = '<a style="color:black;text-decoration: none;cursor: pointer;" href="./qnanomemberlist?currentPage=' + pp + '">' + pp + '</a>';
+                                    }
+                                    paging.append(pageLink + '&nbsp;');
+                                }
+                            }
+
+
                         });
                     }
                 }

@@ -16,6 +16,6 @@ public interface QnaBoardServiceInter {
     public int getQnaCount(String witer);
     public boolean isEqualQna(int num, String qna_pass);
     public List<QnaBoardDto> searchQna(int start, int perpage,String writer,String keyword,String searchtype);
-    public int searchQnaCount(String writer);
+    public int searchQnaCount(String writer,String keyword,String searchtype);
 
 }
