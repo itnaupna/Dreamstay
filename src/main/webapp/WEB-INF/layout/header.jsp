@@ -135,13 +135,7 @@
 
 </style>
 <!--EONG-->
-<script type="text/javascript">
-    $('body').on('scroll touchmove mousewheel', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
-    });
-</script>
+
 
 <div class="wrapper mainWrapper">
     <div class="header">

@@ -6,6 +6,8 @@ $(function(){
 
     dropdownBtn.addEventListener('click', function() {
         dropdownList.classList.toggle('open');
+
+
     });
 
     dropdownList.addEventListener('mouseleave', function() {
@@ -44,6 +46,11 @@ $(function(){
             $('.header .btnMenu').addClass('black_btnMenu').removeClass('white_btnMenu');
             $('.topUtil .hotelFind').addClass('black_find').removeClass('white_find');
             $('.btn_opener').addClass('black_btn_opener').removeClass('white_btn_opener');
+            $('body').on('scroll touchmove mousewheel', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            });
 
         } else {
             $('.btnMenulist').slideUp(300);
@@ -57,6 +64,7 @@ $(function(){
                 $('.header .btnMenu').addClass('black_btnMenu').removeClass('white_btnMenu');
                 $('.topUtil .hotelFind').addClass('black_find').removeClass('white_find');
                 $('.btn_opener').addClass('black_btn_opener').removeClass('white_btn_opener');
+                $('body').off('scroll touchmove mousewheel');
             }else {
                 $('.header').addClass('white_header').removeClass('black_header');
                 $('.header li a').addClass('white_li').removeClass('black_li');
@@ -64,6 +72,7 @@ $(function(){
                 $('.header .btnMenu').addClass('white_btnMenu').removeClass('black_btnMenu');
                 $('.topUtil .hotelFind').addClass('white_find').removeClass('black_find');
                 $('.btn_opener').addClass('white_btn_opener').removeClass('black_btn_opener');
+                $('body').off('scroll touchmove mousewheel');
 
             }
 
@@ -84,6 +93,7 @@ $(function(){
             $('.header .btnMenu').addClass('black_btnMenu').removeClass('white_btnMenu');
             $('.topUtil .hotelFind').addClass('black_find').removeClass('white_find');
             $('.btn_opener').addClass('black_btn_opener').removeClass('white_btn_opener');
+            $('body').off('scroll touchmove mousewheel');
         }else {
             $('.header').addClass('white_header').removeClass('black_header');
             $('.header li a').addClass('white_li').removeClass('black_li');
@@ -91,6 +101,7 @@ $(function(){
             $('.header .btnMenu').addClass('white_btnMenu').removeClass('black_btnMenu');
             $('.topUtil .hotelFind').addClass('white_find').removeClass('black_find');
             $('.btn_opener').addClass('white_btn_opener').removeClass('black_btn_opener');
+            $('body').off('scroll touchmove mousewheel');
 
         }
 
