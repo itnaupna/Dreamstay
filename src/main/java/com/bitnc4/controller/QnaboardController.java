@@ -47,6 +47,7 @@ public class QnaboardController {
 
     @Autowired
     HotelService hotelService;
+
     String bucketName = "dreamsstaybucket";
 
     @GetMapping("/qnaboard")
@@ -408,4 +409,5 @@ public class QnaboardController {
         adminNoticeService.viewCount(num);
         return adminNoticeService.getViewCount(num);
     }
+
 }

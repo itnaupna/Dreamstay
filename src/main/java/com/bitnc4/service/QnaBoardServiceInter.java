@@ -18,5 +18,4 @@ public interface QnaBoardServiceInter {
     public List<QnaBoardDto> searchQna(int start, int perpage,String writer,String keyword,String searchtype);
     public int searchQnaCount(String writer);
 
-    /* public void updateQnaBoard(QnaBoardDto dto);*/
 }

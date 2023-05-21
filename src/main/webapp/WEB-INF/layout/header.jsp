@@ -102,32 +102,6 @@
     }
 
 
-
-
-/*    .header .hotelFind:after {
-        content: '';
-        display: inline-block; !* 줄바꿈X(요소 자체는 인라인요소), 내부에서는 블록 요소처럼 동작 *!
-        margin-left: 2px;
-        position: absolute;
-        left: 56px;
-        top: 10px;
-        width: 11px;
-        height: 11px;
-    }*/
-
-  /*  !*상품 찾기 돋보기 (black)*!
-    .black_find:after{
-        background: url(
-        https://www.josunhotel.com/static/home/images/ko/pc/common/ico_search_black_11x11.png) no-repeat 0 0;
-    }
-
-
-    !*상품 찾기 돋보기 (white)*!
-    .white_find:after{
-        background: url(
-        https://kr.object.ncloudstorage.com/dreamsstaybucket/ico_search_white.png) no-repeat 0 0;
-    }
-*/
     .header_hotel_list {
         cursor: pointer;
     }

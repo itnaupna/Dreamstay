@@ -274,7 +274,7 @@
 </c:if>
 
 
-<div style="margin-left: 350px;">
+<div style="margin-left: 440px;">
     <button type="button" class="qnabtnlist" onclick="location.href='./qnanomemberlist?currentPage=${currentPage}'">목록</button>
     <c:if test="${dto.answer== '답변대기'}">
         <button type="button" class="delQna">삭제</button>
