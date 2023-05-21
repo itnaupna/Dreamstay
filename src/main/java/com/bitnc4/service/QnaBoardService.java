@@ -80,7 +80,7 @@ public class QnaBoardService implements QnaBoardServiceInter {
         map.put("searchtype",searchtype);
         map.put("writer",writer);
         map.put("keyword",keyword);
-        log.info("{}",map.toString());
+/*        log.info("{}",map.toString());*/
         return qnaBoardMapper.searchQna(map);
     }
 

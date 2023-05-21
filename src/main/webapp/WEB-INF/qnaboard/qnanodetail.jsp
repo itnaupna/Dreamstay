@@ -20,16 +20,20 @@
         border-top: 2px solid #ccc;
         margin: 0 auto;
         margin-top: 200px;
+        font-family: GmarketSansMedium;
     }
 
     #n_qnapage .Q>span{
         position: relative;
-        top: 10px;
+        top: 15px;
+        right: 3px;
     }
 
     .qnatitle{
         display: flex;
     }
+
+
 
 
     .qnatitle .title{
@@ -139,6 +143,13 @@
         z-index: 1;
 
 
+    }
+
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
     }
 
     .qnabtnlist:hover,.delQna:hover {
@@ -263,7 +274,7 @@
 </c:if>
 
 
-<div style="margin-left: 130px;">
+<div style="margin-left: 350px;">
     <button type="button" class="qnabtnlist" onclick="location.href='./qnanomemberlist?currentPage=${currentPage}'">목록</button>
     <c:if test="${dto.answer== '답변대기'}">
         <button type="button" class="delQna">삭제</button>

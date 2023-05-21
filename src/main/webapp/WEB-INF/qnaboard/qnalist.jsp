@@ -6,7 +6,7 @@
 <style>
     .qnaboardlist {
         position: absolute;
-        top: 80px;
+        top: 60px;
         width: 100% !important;
     }
 
@@ -18,6 +18,7 @@
     .qnatr{
        /* background-color: #001100;*/
         color: black;
+        font-size: 20px;
     }
 
     #qmalisttable{
@@ -58,6 +59,49 @@
         font-size: 15px;
     }
 
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    .qnaboardlist{
+        font-family: GmarketSansMedium;
+    }
+
+
+    #qnaboard_pagingbox {
+        /*border: 1px solid blue; !*영역*!*/
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        margin: 5px 0 5px 0;
+    }
+
+    #qnaboard_pagingbox a {
+        display: inline-block;
+        text-decoration: none;
+        color: black;
+
+    }
+    .noticeboard_paging {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .qnaboard_page {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .qnaboard_curpage {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        background-color: black;
+        color: white !important;
+    }
 
 
 
@@ -77,12 +121,6 @@
 
         <c:forEach items="${qnaBoardList}" var="qnaBoardDto">
 
-            <c:if test="${qnaBoardList.size() == 0}">
-                <tr>
-                    <td colspan="5">등록된 게시물이 없습니다.</td>
-                </tr>
-            </c:if>
-
             <tr>
                 <td>${qnaBoardDto.hotelname}</td>
                 <td>
@@ -99,12 +137,18 @@
             </tr>
         </c:forEach>
 
+        <c:if test="${qnaBoardList.size()==0}">
+            <tr>
+                <td colspan="5" style="height: 150px; font-size: 18px;">등록된 게시글이 없습니다.</td>
+            </tr>
+        </c:if>
+
 
     </table>
 
     <br>
     <!-- 페이징 처리 -->
-    <div  style="width: 100%;text-align: center;font-size: 17px; ">
+    <div  style="width: 100%; text-align: center;font-size: 17px; " id="qnaboard_pagingbox">
         <!-- 이전 -->
         <c:if test="${startPage>1}">
             <a style="color:black;text-decoration: none;cursor: pointer;"
@@ -114,11 +158,11 @@
         <!-- 페이지번호 출력 -->
         <c:forEach var="pp" begin="${startPage}" end="${endPage}">
             <c:if test="${currentPage==pp}">
-                <a style="color:#989442;text-decoration: none;cursor: pointer;"
-                   href="/mypage/qnalist?currentPage=${pp}">${pp}</a>
+                <a style="text-decoration: none;cursor: pointer; border: 1px solid black;"
+                   href="/mypage/qnalist?currentPage=${pp}" class="qnaboard_curpage">${pp}</a>
             </c:if>
             <c:if test="${currentPage!=pp}">
-                <a style="color:black;text-decoration: none;cursor: pointer;"
+                <a style="text-decoration: none;cursor: pointer; border: 1px solid black;" class="qnaboard_page"
                    href="/mypage/qnalist?currentPage=${pp}">${pp}</a>
             </c:if>
             &nbsp;

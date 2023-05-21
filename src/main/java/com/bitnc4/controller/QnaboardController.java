@@ -63,7 +63,7 @@ public class QnaboardController {
         MemberDto memberDto = qnaBoardService.searchIdOfinfo(writer);
         model.addAttribute("memberDto", memberDto);
 
-        if(writer!="nomember") {
+        if (session.getAttribute("loginuser")!=null ) {
             // info user name 출력 <상혁>
             MemberDto dto = (MemberDto) session.getAttribute("loginuser");
             String[] fnFn = dto.getUser_name().split("/");
@@ -215,36 +215,6 @@ public class QnaboardController {
         return "/mypage/qnaboard/qnadetail";
     }
 
-
-    @GetMapping("/mypage/deleteqna")
-    public String deleteqna(int num, HttpSession session, Model model) {
-        //db 삭제 전에 저장된 이미지 버켓에서 지운다
-        //String filename = qnaBoardService.getQna(num).getQna_photo();
-
-        // 이미지 파일 이름 리스트 가져오기
-        List<String> photoNames = Arrays.asList(qnaBoardService.getQna(num).getQna_photo().split(","));
-
-        // 버킷에서 이미지 삭제
-        for (String photoName : photoNames) {
-            if (photoName!= null && !photoName.equals("")) {
-                storageService.deleteFile(bucketName, "qnaboard", photoName);
-            }
-        }
-
-        //db 삭제
-        qnaBoardService.deleteQna(num);
-
-        // info user name 출력 <상혁>
-        MemberDto dto = (MemberDto) session.getAttribute("loginuser");
-        String[] fnFn = dto.getUser_name().split("/");
-        model.addAttribute("familyname", fnFn[0]);
-        model.addAttribute("firstname", fnFn[1]);
-
-        return "redirect:/mypage/qnalist";
-    }
-
-    ////////////////////비회원 list/////////////////////
-
     @GetMapping("/qnanomemberlist")
     public String nomemberlist(QnaBoardDto dto, HttpSession session, HttpServletResponse response,
                                Model model, @RequestParam(defaultValue = "1") int currentPage){
@@ -291,9 +261,55 @@ public class QnaboardController {
         return "/main/qnaboard/qnanolist";
     }
 
+
+
+    @GetMapping("/mypage/deleteqna")
+    public String deleteqna(int num, HttpSession session, Model model) {
+        //db 삭제 전에 저장된 이미지 버켓에서 지운다
+        //String filename = qnaBoardService.getQna(num).getQna_photo();
+
+        // 이미지 파일 이름 리스트 가져오기
+        List<String> photoNames = Arrays.asList(qnaBoardService.getQna(num).getQna_photo().split(","));
+
+        // 버킷에서 이미지 삭제
+        for (String photoName : photoNames) {
+            if (photoName!= null && !photoName.equals("")) {
+                storageService.deleteFile(bucketName, "qnaboard", photoName);
+            }
+        }
+
+        //db 삭제
+        qnaBoardService.deleteQna(num);
+
+        // info user name 출력 <상혁>2
+        if(session.getAttribute("loginuser")!=null) {
+            MemberDto dto = (MemberDto) session.getAttribute("loginuser");
+            String[] fnFn = dto.getUser_name().split("/");
+            model.addAttribute("familyname", fnFn[0]);
+            model.addAttribute("firstname", fnFn[1]);
+
+            if(dto.getUser_level()==10)
+            {
+                return "redirect:/admin/qna";
+            }
+
+        }
+
+        // 비회원
+        if(session.getAttribute("loginuser")==null)
+        {
+            return "/qnanomemberlist";
+        }
+
+        return "redirect:/mypage/qnalist";
+    }
+
+    ////////////////////비회원 list/////////////////////
+
+
     @PostMapping("/searchQna")
     @ResponseBody
-    public List<QnaBoardDto> seachQna(String writer, String keyword, String searchtype, HttpSession session,Model model,
+    public List<QnaBoardDto> searchQna(String writer, String keyword, String searchtype, HttpSession session,Model model,
                                  @RequestParam(defaultValue = "1") int currentPage)
     {
         writer = "nomember";
@@ -338,7 +354,7 @@ public class QnaboardController {
         startNum=(currentPage-1)*perPage;
 
         no=totalCount-startNum;
-    log.info("start {} / perpage {} / writer {}",startNum,perPage,writer);
+        /*log.info("start {} / perpage {} / writer {}",startNum,perPage,writer);*/
         //게시글 db 에서 가져오기
         result = qnaBoardService.searchQna(startNum,perPage,writer,searchtype,keyword);
 
@@ -349,10 +365,6 @@ public class QnaboardController {
         model.addAttribute("totalPage", totalPage);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("no", no);
-   /* List<QnaBoardDto> test = new ArrayList<>();
-    test = qnaBoardService.searchQna(startNum,perPage,writer);
-    log.info(test.toString());
-        result.add(qnaBoardService.searchQna(startNum,perPage,writer));*/
 
         return result;
     }
@@ -379,39 +391,6 @@ public class QnaboardController {
 
         return "/main/qnaboard/qnanodetail";
     }
-
- /*   @PostMapping("/updateQnaBoard")
-    public String updateQnaBoard(QnaBoardDto dto,MultipartFile photo,int currentPage){
-
-        String filename="";
-        if(!photo.getOriginalFilename().equals("")) {
-            //기존 파일명 알아내기
-            filename=qnaBoardService.getQna(dto.getNum()).getQna_photo();
-            //버켓에서 삭제
-            storageService.deleteFile(bucketName, "qnaboard", filename);
-
-            //다시 업로드후 업로드한 파일명 얻기
-            filename=storageService.uploadFile(bucketName, "qnaboard", photo);
-        }
-        dto.setQna_photo(filename);
-
-        qnaBoardService.updateQnaBoard(dto);
-
-        return "/mypage/qnadetail?num="+dto.getNum()+"&currentPage="+currentPage;
-
-    }
-
-    @GetMapping("/mypage/updateqna")
-    public String updateqna(int num,int currentPage,Model model)
-    {
-        QnaBoardDto dto=qnaBoardService.getQna(num);
-
-        model.addAttribute("dto", dto);
-        model.addAttribute("currentPage", currentPage);
-
-        return "/mypage/qnaboard/qnaupdateform";
-    }
-*/
 
     @GetMapping("/notice/noticeboard")
     public String noticeBoard(@RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "") String search ,Model model) {
