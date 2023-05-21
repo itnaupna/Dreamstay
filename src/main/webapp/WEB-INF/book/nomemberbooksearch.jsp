@@ -228,6 +228,7 @@
         align-items: center;
         text-align: center;
         width: 100%;
+        font-size: 14px;
     }
 
     .hotel-info-row {
