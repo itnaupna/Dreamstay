@@ -80,7 +80,18 @@ public class BookController {
         //String[] photoArr = roomList.get(0).getRoomphoto().split(",");// roomList의 i번쨰 인덱스에서 roomphoto가져온 후 스플릿 -> 아중배열에 저장
         //{"photo1","photo2"}{"photo3","photo4"}{"photo5","photo6"}
         // 1번지 불러올 경우 -> {"photo1","photo2"} ->for문으로 하나씩
+        String[][] photoArr = new String[roomList.size()][];
+        for(int i = 0; i < roomList.size(); i++) {
+            photoArr[i] = roomList.get(i).getRoomphoto().split(",");
+        }
 
+        for(int i = 0; i < photoArr.length; i++) {
+            for(int j = 0; j < photoArr[i].length; j++) {
+                System.out.println(i + "번지: " + photoArr[i][j]);
+            }
+        }
+
+        model.addAttribute("photoArr", photoArr);
         model.addAttribute("roomList", roomList);
 
         String hotelname = bookService.hotelname(Integer.parseInt((String) selectedHotel));

@@ -6,12 +6,17 @@ body {
 hr {
     margin: 0;
 }
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+}
 
 #signup_main {
-    font-family: 'Noto Sans KR', sans-serif;
     margin: 180px auto 0 auto;
     width: 1000px;
     height: 1000px;
+    font-family: 'GmarketSansMedium';
+
 }
 
 #signup_titlebox {
@@ -19,7 +24,8 @@ hr {
 }
 
 #signup_titlebox span {
-    font-size: 35px;
+    font-family: "Playfair Display", serif;
+    font-size: 45px;
     font-weight: bold;
 }
 
@@ -93,6 +99,7 @@ hr {
 .signup_title {
     display: block;
     font-weight: bold;
+    font-size: 15px;
 }
 .signup_subbox {
     margin-bottom: 30px;
@@ -103,6 +110,8 @@ hr {
 
 .signup_notice {
     display: block;
+    margin: 10px 0 5px 10px;
+    font-size: 14px;
 }
 
 .signup_input {
@@ -110,6 +119,7 @@ hr {
     border: none;
     border-bottom: 1px solid #cccccc;
     padding-left: 10px;
+    font-size: 15px;
 }
 
 #family_name, #user_name, #phone {
@@ -136,35 +146,41 @@ hr {
 #signup_btnbox {
     text-align: center;
 }
-
 #signup_btnbox button {
     margin: 30px 10px 30px 10px;
     width: 250px;
     height: 60px;
 }
-
 .signup_btn {
     width: 150px;
     height: 50px;
     border: 1px solid black;
     color: white;
     margin-left: 20px;
+    font-size: 15px;
 }
-
 .signup_btn:hover {
     color: black;
 }
-
+.signup_btn:focus {
+    color: black;
+}
 #id_check, #SendEmailBtn, #CheckEmailBtn, #search_addr, #signup_back, #signupBtn {
     background-color: black;
+}
+#id_check:focus, #SendEmailBtn:focus, #CheckEmailBtn:focus, #search_addr:focus, #signup_back:focus, #signupBtn:focus {
+    outline: none;
+    background-color: white;
 }
 #id_check:hover, #SendEmailBtn:hover, #CheckEmailBtn:hover, #search_addr:hover, #signup_back:hover, #signupBtn:hover {
     background-color: white;
 }
-#at {
-    margin: 0 8px 0 8px;
+#signup_back:hover, #signupBtn:hover {
+    transition: all 0.5s;
 }
 
-.signup_notice {
-    margin: 5px 0 5px 10px;
+#at {
+    margin: 0 8px 0 8px;
+    line-height: 50px;
 }
+

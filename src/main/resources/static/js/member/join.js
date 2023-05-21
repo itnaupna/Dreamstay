@@ -133,7 +133,7 @@ $('#CheckEmailBtn').click(function (e) {
 });
 
 // 아이디 중복체크 스크립트
-let idOverlapReg = /^[a-zA-Z0-9]{5,15}$/;
+let idOverlapReg = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{5,15}$/;
 $("#id_check").click(function (e) {
 
     let id = $("#id").val();
@@ -158,7 +158,7 @@ $("#id_check").click(function (e) {
             }
         });
     } else {
-        alert("아이디는 문자 숫자 포함 5자리 이상 15이하로 사용가능합니다");
+        alert("아이디는 영문 숫자 포함 5자리 이상 15이하로 사용가능합니다");
     }
 
 });
@@ -201,7 +201,7 @@ $("#signupBtn").click(function(){
             $("#search_addr").focus();
         }
         if(joinConfirm.c_phonenum == false) {
-            $("#join_null_check_phonenum").html("휴대폰 번호를 입력해주세요").css("color", "red");
+            $("#join_null_check_phonenum").html("휴대폰 번호를 입력해주세요(9 ~ 11 자리 숫자)").css("color", "red");
             $("#phone").focus();
         }
         if (joinConfirm.c_email == false) {
@@ -239,8 +239,6 @@ $("#family_name, #user_name").on("input", function() {
         console.log(name);
         name = name.replaceAll(nameReg, "");
         $(this).val(name);
-        joinConfirm.c_name = false;
-        console.log(joinConfirm.c_name);
     } else{
         $("#join_null_check_name").html("");
         joinConfirm.c_name = true;
@@ -265,11 +263,15 @@ let numReg = /[^0-9]/g;
 $("#phone").on("input", function() {
     let phoneVal = $(this).val();
 
-    if(phoneVal.match(numReg) != null || phoneVal.match(phoneReg) == null) {
+    if(phoneVal.match(numReg) != null) {
         phoneVal = phoneVal.replaceAll(numReg, "");
         $(this).val(phoneVal);
         joinConfirm.c_phonenum = false;
         console.log(joinConfirm.c_phonenum);
+    } else if(phoneVal.length > 11) {
+        alert("번호가 너무 깁니다");
+        phoneVal = phoneVal.substring(0, 11);
+        $(this).val(phoneVal);
     } else if(phoneVal.match(numReg) == null && phoneVal.match(phoneReg) != null) {
         joinConfirm.c_phonenum = true;
         $("#join_null_check_phonenum").html("");

@@ -2,9 +2,13 @@ body {
     margin: 0;
     padding: 0;
 }
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+}
 
 #hoteldetail_box {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'GmarketSansMedium';
     width: 1200px;
     margin: 180px auto 0 auto;
 }
@@ -18,6 +22,7 @@ body {
 .hoteldetail_photo {
     width: 1200px;
     height: 700px;
+    cursor: pointer;
 }
 
 #hoteldetail_selectbox {
@@ -27,6 +32,7 @@ body {
 
 .hoteldetail_selectPhoto {
     margin: 0 5px 0 5px;
+    cursor: pointer;
 }
 
 .detail_span{
@@ -59,6 +65,7 @@ body {
 .detail_room_photo {
     width: 500px;
     height: 300px;
+    cursor: pointer;
 }
 
 .detail_room_slickSlider{

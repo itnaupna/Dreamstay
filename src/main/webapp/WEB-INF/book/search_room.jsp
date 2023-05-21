@@ -257,11 +257,11 @@
     </div>
     <div class="test3">
 
-    <c:forEach var="room" items="${roomList}">
+    <c:forEach var="room" items="${roomList}" varStatus="i">
         <form action="../payment" method="post" name="payment">
             <span id="roomPhotos">
-                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${room.roomphoto}" name="roomphoto"style="position:relative;display: flex;float: left;margin-left: 65px;margin-top: 30px;width:350px;height: 182px;
-padding-right: 50px; border-radius: 10px">
+                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${photoArr[i.index][0]}" name="roomphoto"style="position:relative;display: flex;float: left;margin-left: 70px;margin-top: 40px;width:250px;height: 182px;
+padding-right: 50px; border-radius:10px;">
             </span>
             <div class="RoomList">
                 <div class="RoomInfo">

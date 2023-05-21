@@ -6,11 +6,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/member/changepassword.css"/>
-<style>
-    body {
 
-    }
-</style>
 <div class="changepassword_box">
     <div class="changepassword_mainbox">
         <div class="changepassword_titlebox">
@@ -36,6 +32,5 @@
         </ul>
     </div>
 </div>
-
 
 <script type="text/javascript" src="/js/member/changepassword.js"></script>

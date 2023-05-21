@@ -317,7 +317,7 @@
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo page4_logo04">
+					<div class="page4_box_logo" id="main_kimchi">
 						<a href="#">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo05.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_04.jpg">
