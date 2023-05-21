@@ -53,124 +53,86 @@
         z-index: 9999;
     }
 
+    /*호텔 로고 이미지 (white)*/
+    .white_logo{
+        /* background: url(https://kr.object.ncloudstorage.com/dreamsstaybucket/bg_logo_shinsegae.png) no-repeat 0 0;*/
+        background: url(https://kr.object.ncloudstorage.com/dreamsstaybucket/hotel_logo_w.png) no-repeat 0 0 ;
+        z-index: 9999;
+        margin-top: 5px;
 
-    .header .hotelFind:after {
+
+    }
+
+    /*호텔 로고 이미지 (black)*/
+    .black_logo {
+
+        /*background: url(https://kr.object.ncloudstorage.com/dreamsstaybucket/bg_logo_shinsegae.png) no-repeat 0 0;*/
+        background: url(https://kr.object.ncloudstorage.com/dreamsstaybucket/hotel_logo_b.png) no-repeat 0 0;
+        z-index: 9999;
+        margin-top: 5px;
+        /*background-position: 0 -60px;*/
+
+    }
+
+
+
+    /* ****로고 위치***** */
+
+    .header .logo a {
+        display: block; /* 새로운 라인(line)에서 시작, 시작 라인 width 100% 적용됨*/
+        width: 350px;
+        height: 24px;
+    }
+
+    .header .logo{
+        display: block;
+        position: absolute;
+        right: 40%;
+        top: 25px;
+        z-index: 1;
+        width: 400px;
+        margin-top: 5px;
+        height: 60px;
+        text-indent: -9999px;
+        overflow: hidden;
+
+    }
+
+
+
+
+/*    .header .hotelFind:after {
         content: '';
-        display: inline-block; /* 줄바꿈X(요소 자체는 인라인요소), 내부에서는 블록 요소처럼 동작 */
+        display: inline-block; !* 줄바꿈X(요소 자체는 인라인요소), 내부에서는 블록 요소처럼 동작 *!
         margin-left: 2px;
         position: absolute;
         left: 56px;
         top: 10px;
         width: 11px;
         height: 11px;
-    }
+    }*/
 
-    /*상품 찾기 돋보기 (black)*/
+  /*  !*상품 찾기 돋보기 (black)*!
     .black_find:after{
         background: url(
         https://www.josunhotel.com/static/home/images/ko/pc/common/ico_search_black_11x11.png) no-repeat 0 0;
     }
 
 
-    /*상품 찾기 돋보기 (white)*/
+    !*상품 찾기 돋보기 (white)*!
     .white_find:after{
         background: url(
         https://kr.object.ncloudstorage.com/dreamsstaybucket/ico_search_white.png) no-repeat 0 0;
     }
-
+*/
     .header_hotel_list {
         cursor: pointer;
     }
 
-    /*@media (max-width: 768px) {*/
-    /*    .header {*/
-    /*        height: auto;*/
-    /*        padding-bottom: 20px;*/
-    /*        transition: height 0.3s ease;*/
-    /*    }*/
 
-    /*    .logo {*/
-    /*        text-align: center;*/
-    /*        margin: 50px 0;*/
-    /*        right: auto;*/
-    /*        left: 70px;*/
-    /*        transition: left 0.3s ease;*/
-    /*    }*/
-
-    /*    .btnMenu {*/
-    /*        position: absolute;*/
-    /*        !*right: 20px;*!*/
-    /*        !*top: 100px;*!*/
-    /*    }*/
-
-    /*    .header .headArea {*/
-    /*        padding: 0;*/
-    /*    }*/
-
-    /*    .topUtil {*/
-    /*        !*position: static;*!*/
-    /*        !*margin-top: 20px;*!*/
-    /*        !*text-align: center;*!*/
-    /*        display: none;*/
-    /*    }*/
-
-    /*    .gnbUtil {*/
-    /*        !*position: static;*!*/
-    /*        margin-top: 20px;*/
-    /*        text-align: center;*/
-    /*    }*/
-
-    /*    .dropdown_list{*/
-    /*        display: none;*/
-    /*    }*/
-
-    /*    .header .dropdown_list .item_list {*/
-    /*        position: static;*/
-    /*        display: block;*/
-    /*        box-shadow: none;*/
-    /*        background: none;*/
-    /*    }*/
-
-    /*    .header .topUtil .hotelFind,*/
-    /*    .header .topUtil .gnbUtil {*/
-    /*        display: flex;*/
-    /*        align-items: center;*/
-    /*        top: 100px;*/
-    /*    }*/
-
-    /*    .header .topUtil .hotelFind .header_hotel_list,*/
-    /*    .header .topUtil .gnbUtil li {*/
-    /*        display: block;*/
-    /*        margin-bottom: 10px;*/
-    /*    }*/
-
-    /*    .header .topUtil .hotelFind .header_hotel_list img,*/
-    /*    .header .topUtil .gnbUtil li img {*/
-    /*        margin-bottom: 5px;*/
-    /*    }*/
-
-    /*    .gnbUtil > ul{*/
-    /*        top: 0;*/
-    /*        transform: translateY(-400%);*/
-    /*    }*/
-
-    /*    .resvBtn{*/
-    /*        display: none;*/
-    /*    }*/
-    /*    !*.dropdown_list .item_list li{*!*/
-    /*    !*    display: none;*!*/
-    /*    !*}*!*/
-    /*    .btntitlebox ul {*/
-    /*        display: none;*/
-    /*        transition: display 0.3s ease;*/
-    /*    }*/
-
-    /*    .btntitlebox.open ul {*/
-    /*        display: block;*/
-    /*    }*/
-    /*}*/
 </style>
 <!--EONG-->
+
 
 <div class="wrapper mainWrapper">
     <div class="header">
@@ -299,7 +261,7 @@
                             <a href="/mypage/" id="header_mypage">마이페이지</a>
                         </li>
                         <li>
-                            <a href="/mypage/" id="confirmReserve">예약확인</a>
+                            <a href="/mypage/" id="confirmReserve2">예약확인</a>
                         </li>
                         <c:if test="${loginuser.user_level>=10}">
                             <li>

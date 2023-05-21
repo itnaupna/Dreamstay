@@ -11,7 +11,7 @@
         /*border: 1px solid red;*/
         height: 1400px;
         margin-top: 55px;
-        font-family: 'Nanum Gothic';
+        font-family: 'GmarketSansMedium';
     }
 
     .custom-select1,
@@ -101,13 +101,15 @@
     .qnaboard_main_content4,
     .qnaboard_main_content5,
     .qnaboard_main_content6,
-    .qnaboard_main_content7
+    .qnaboard_main_content7,
+    #qnaboard_sub_content2,
+    #qnaboard_sub_content1
     {
         /*border: 1px solid pink;*/
         margin-top: 60px;
     }
 
-    .qnaboard_main_content input[type=text] {
+    .qnaboard_main_content input[type=text]{
         border: none;
         border-bottom: 1px solid #ccc;
         width: 100%;
@@ -161,7 +163,8 @@
     .qnaboard_main_content4 input[type=text],
     .qnaboard_main_content5 input[type=text],
     .qnaboard_main_content6 input[type=text],
-    .qnaboard_main_content7 input[type=password]
+    .qnaboard_main_content7 input[type=password],
+    #qnaboard_sub_content2 input[type=date]
     {
         margin-top: 10px;
         border: none;
@@ -228,7 +231,7 @@
 
     .qnaboard_top{
         font-size: 18px;
-        margin-top: 30px;
+        margin-top: 50px;
     }
 
     .qnaboard{
@@ -238,7 +241,7 @@
 
     .customer_text .maintext{
         font-size: 60px;
-        font-family: "Playfair Display SC";
+        font-family: "Playfair Display SC" !important;
     }
 
     .customer_text .subtext{
@@ -279,6 +282,26 @@
         font-size: 16px;
     }
 
+    .qnaform_all{
+        font-family: GmarketSansMedium;
+    }
+
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    .suball{
+        font-family: GmarketSansMedium;
+    }
+
+    .suball a{
+        text-decoration: none;
+        color: black;
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -314,136 +337,159 @@
     });
 
 </script>
-
-
-<div class="qnaboard">
-    <div class="customer_text">
+<div class="qnaform_all">
+    <div class="customer_text" style="margin: 180px 0px 0px 120px;">
         <span class="maintext">Customer Service</span><br><br>
-        <span class="subtext">조선호텔앤리조트는 언제나 고객의 목소리에 귀기울이고 있습니다.</span><br>
+        <span class="subtext">드림스테이는 언제나 고객의 목소리에 귀기울이고 있습니다.</span><br>
         <span class="subtext">소중한 충고와 격려, 또는 제안의 말씀을 남겨 주시면 최대한 반영하여 더 나은 서비스로 보답하겠습니다.</span>
     </div>
-
-    <c:if test="${writer=='nomember'}">
-        <div class="nomember">
-            <span class="qna">Q&A</span>
-            <div class="nomember_box">
-                <div class="nomember_box_list">
-                    <span>Dream Stay 회원이신가요?</span>
-                    <button type="button" onclick="location.href='/signup/login'">로그인하기<strong style="font-family: 'Playfair Display SC'"> ></strong></button>
+    <div class="suball" style="display: flex; margin: 0px 0px 0px 120px;">
+        <div class="side" style="/*border: 1px solid black;*/ width: 320px; height: 500px; margin-top: 50px;">
+            <div style="background-color: #F9F9F9; width: 310px; height: 250px;margin-top: 10px; /*border: 2px solid green;*/">
+                <div style="font-size: 19px; left: 40px; /*border: 2px solid blue;*/ position: relative; top: 70px;">
+                    <a href="/qnaboard">
+                        <strong><span style="display: block; margin-bottom: 9px;">Q&A</span></strong>
+                    </a>
+                    <a href="/mypage/qnalist">
+                        <span style="display: block; margin-bottom: 9px;">문의내역 조회</span>
+                    </a>
+                    <a href="/qnanomemberlist">
+                        <span>비회원 문의</span>
+                    </a>
                 </div>
             </div>
         </div>
-    </c:if>
-    <div class="qnaboard_full">
-        <form action="/insertqna" method="post" name="qnaboard" enctype="multipart/form-data">
-            <div class="qnaboard_top">
-                <span>* 문의유형</span><br><br>
-                <label>
-                    <input type="radio" name="qna_type" value="문의" checked>문의
-                </label>
-                <label>
-                    <input type="radio" name="qna_type" value="의견">의견
-                </label>
-                <%--<div class="qnaboard_main_title">
-                    <span>Q&A</span>
-                </div>--%>
-            </div>
-            <div class="selectli1">
-                <div class="custom-select1">
-                    <span style="font-size: 18px;">* 호텔</span>
-                    <div class="selected1">호텔선택</div>
-                    <ul class="options1">
-                        <c:forEach var="hotel" items="${hotelList}">
-                            <li class="options1_list" value="${hotel.name}" onclick="selectHotel('${hotel.name}')">${hotel.name}</li>
-                        </c:forEach>
-                    </ul>
-                    <input type="hidden" name="hotelname" value="" id="hotelname" required>
-                </div>
-            </div>
 
-            <div class="selectli2">
-                <div class="custom-select2">
-                    <span style="font-size: 18px; margin-bottom: 20px;">* 관련문의</span>
-                    <div class="selected2">관련문의</div>
-                    <ul class="options2">
-                        <li class="options2_list" value="1" onclick="setCategoryValue(1)">가입문의</li>
-                        <li class="options2_list" value="2" onclick="setCategoryValue(2)">예약문의</li>
-                        <li class="options2_list" value="3" onclick="setCategoryValue(3)">객실/패키지문의</li>
-                        <li class="options2_list" value="4" onclick="setCategoryValue(4)">기타</li>
-                    </ul>
-                    <input type="hidden" id="categoryInput" name="category" required>
-                </div>
-            </div>
-
-
-
-            <div class="qnaboard_main_content">
-                <span>TITLE *</span>
-                <div class="qnaboard_main_content_subject">
-                    <input type="text" id="subject" name="subject" class="subject" required>
-                </div>
-            </div>
-
-            <div class="qnaboard_main_content6">
-                <span>예약번호</span>
-                <div class="qnaboard_main_content_reserve">
-                    <input type="text" id="reservenum" name="reservenum" class="reservenum">
-                </div>
-            </div>
-
-
-            <div class="useday" id="qnaboard_sub_content1">
-                <input type="date" name="useday" class="flatpickr flatpickr-input">
-            </div>
-
-            <div class="filebox preview-image" id="qnaboard_sub_content2">
-             <input class="upload-name" value="파일선택" disabled="disabled" >
-
-                <label for="input-file">업로드</label>
-                <input type="file" id="input-file" class="upload-hidden" name="photo" multiple>
-            </div>
-
-            <div class="qnaboard_main_content2">
-                    <span>CONTENT *</span>
-                    <div class="qnaboard_main_content2_subject">
-                        <textarea name="content" class="content" required placeholder="불건전한 내용(예: 개인정보보안, 불충분한 증거/귀책 사유에 대한 개인 음해성/음란성 비방 등) 또는 광고성 게시물은 사전 통보없이 삭제 처리될 수 있으며, 등록된 의겨은 수정이 불가능하오니이 점 양지하여 주시기 바랍니다"></textarea>
-                </div>
-            </div>
-
-            <div class="qnaboard_main_content3">
-                <span>NAME *</span>
-                <div class="qnaboard_main_content3_subject">
-                    <input type="text" name="qna_name" value="${familyname}${firstname}" class="qna_name" required>
-                </div>
-            </div>
-
+        <div class="qnaboard" style="margin: 40px 0px 0px 80px;">
             <c:if test="${writer=='nomember'}">
-                <div class="qnaboard_main_content7">
-                    <span>PASSWORD *</span>
-                    <div class="qnaboard_main_content7_subject">
-                        <input type="password" name="qna_pass" class="qna_pass" minlength="4" maxlength="12" required>
+                <div class="nomember">
+                    <span class="qna">Q&A</span>
+                    <div class="nomember_box">
+                        <div class="nomember_box_list">
+                            <span>Dream Stay 회원이신가요?</span>
+                            <button type="button" onclick="location.href='/signup/login'">로그인하기<strong
+                                    style="font-family: 'Playfair Display SC'"> ></strong></button>
+                        </div>
                     </div>
                 </div>
             </c:if>
+            <div class="qnaboard_full">
+                <form action="/insertqna" method="post" name="qnaboard" enctype="multipart/form-data">
+                    <div class="qnaboard_top">
+                        <span>* 문의유형</span><br><br>
+                        <label>
+                            <input type="radio" name="qna_type" value="문의" checked>문의
+                        </label>
+                        <label>
+                            <input type="radio" name="qna_type" value="의견">의견
+                        </label>
+                        <%--<div class="qnaboard_main_title">
+                            <span>Q&A</span>
+                        </div>--%>
+                    </div>
+                    <div class="selectli1">
+                        <div class="custom-select1">
+                            <span style="font-size: 18px;">* 호텔</span>
+                            <div class="selected1">호텔선택</div>
+                            <ul class="options1">
+                                <c:forEach var="hotel" items="${hotelList}">
+                                    <li class="options1_list" value="${hotel.name}"
+                                        onclick="selectHotel('${hotel.name}')">${hotel.name}</li>
+                                </c:forEach>
+                            </ul>
+                            <input type="hidden" name="hotelname" value="" id="hotelname" required>
+                        </div>
+                    </div>
 
-            <div class="qnaboard_main_content4">
-                <span>EMAIL *</span>
-                <div class="qnaboard_main_content4_subject">
-                    <input type="text" name="qna_email" value="${memberDto.email}" class="qna_email" required>
-                </div>
-            </div>
+                    <div class="selectli2">
+                        <div class="custom-select2">
+                            <span style="font-size: 18px; margin-bottom: 20px;">* 관련문의</span>
+                            <div class="selected2">관련문의</div>
+                            <ul class="options2">
+                                <li class="options2_list" value="1" onclick="setCategoryValue(1)">가입문의</li>
+                                <li class="options2_list" value="2" onclick="setCategoryValue(2)">예약문의</li>
+                                <li class="options2_list" value="3" onclick="setCategoryValue(3)">객실/패키지문의</li>
+                                <li class="options2_list" value="4" onclick="setCategoryValue(4)">기타</li>
+                            </ul>
+                            <input type="hidden" id="categoryInput" name="category" required>
+                        </div>
+                    </div>
 
-            <div class="qnaboard_main_content5">
-                <span>PHONE *</span>
-                <div class="qnaboard_main_content5_subject">
-                    <input type="text" name="qna_phone" value="${memberDto.phone}" class="qna_phone" required>
-                </div>
-            </div>
 
-            <div class="qnaboard_btn">
-                <button type="submit" class="submit_btn" onclick="return validateSelection()">등록</button>
+                    <div class="qnaboard_main_content">
+                        <span>TITLE *</span>
+                        <div class="qnaboard_main_content_subject">
+                            <input type="text" id="subject" name="subject" class="subject" required>
+                        </div>
+                    </div>
+
+                    <div class="qnaboard_main_content6">
+                        <span>예약번호</span>
+                        <div class="qnaboard_main_content_reserve">
+                            <input type="text" id="reservenum" name="reservenum" class="reservenum">
+                        </div>
+                    </div>
+
+
+                    <div class="useday" id="qnaboard_sub_content1">
+                        <span style="font-size: 18px;">이용일</span><br>
+                        <input type="date" name="useday" class="" style="width: 250px; height: 40px;">
+                    </div>
+
+                    <div class="filebox preview-image" id="qnaboard_sub_content2">
+                        <span style="font-size: 18px;">사친 첨부</span><br>
+                        <input class="upload-name" value="파일선택" disabled="disabled">
+
+                        <label for="input-file">업로드</label>
+                        <input type="file" id="input-file" class="upload-hidden" name="photo" multiple>
+                    </div>
+
+                    <div class="qnaboard_main_content2">
+                        <span>CONTENT *</span>
+                        <div class="qnaboard_main_content2_subject">
+                            <textarea name="content" class="content" required
+                                      placeholder="불건전한 내용(예: 개인정보보안, 불충분한 증거/귀책 사유에 대한 개인 음해성/음란성 비방 등) 또는 광고성 게시물은 사전 통보없이 삭제 처리될 수 있으며, 등록된 의겨은 수정이 불가능하오니이 점 양지하여 주시기 바랍니다"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="qnaboard_main_content3">
+                        <span>NAME *</span>
+                        <div class="qnaboard_main_content3_subject">
+                            <input type="text" name="qna_name" value="${familyname}${firstname}" class="qna_name"
+                                   required>
+                        </div>
+                    </div>
+
+                    <c:if test="${writer=='nomember'}">
+                        <div class="qnaboard_main_content7">
+                            <span>PASSWORD *</span>
+                            <div class="qnaboard_main_content7_subject">
+                                <input type="password" name="qna_pass" class="qna_pass" minlength="4" maxlength="12"
+                                       required>
+                            </div>
+                        </div>
+                    </c:if>
+
+                    <div class="qnaboard_main_content4">
+                        <span>EMAIL *</span>
+                        <div class="qnaboard_main_content4_subject">
+                            <input type="text" name="qna_email" value="${memberDto.email}" class="qna_email" required>
+                        </div>
+                    </div>
+
+                    <div class="qnaboard_main_content5">
+                        <span>PHONE *</span>
+                        <div class="qnaboard_main_content5_subject">
+                            <input type="text" name="qna_phone" value="${memberDto.phone}" class="qna_phone" required>
+                        </div>
+                    </div>
+
+                    <div class="qnaboard_btn">
+                        <button type="submit" class="submit_btn" onclick="return validateSelection()">등록</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 

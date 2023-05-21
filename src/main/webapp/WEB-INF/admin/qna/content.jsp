@@ -57,6 +57,43 @@
         resize: none;
     }
 
+    .dream2{
+        font-size: 20px;
+    }
+
+
+    #answeradmin .colortd{
+        background-color: #F3F3F3;
+
+    }
+
+    .btnanswer, .btnlist, .btndel{
+        width: 120px;
+        height: 60px;
+        padding: 0 25px;
+        font-size: 15px;
+        letter-spacing: -.01em;
+        text-align: center;
+        vertical-align: middle;
+        background-color: black;
+        color: white;
+        border: thin solid #000000;
+        border-radius: 0;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
+
+
+    }
+
+    .btnanswer:hover,.btnlist:hover, .btndel:hover {
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        background-color: white;
+        color: black;
+
+    }
+
+
 
 </style>
 
@@ -121,7 +158,7 @@
     </c:if>
 
     <tr>
-        <td colspan="5">${dto.content}</td>
+        <td colspan="5" style="height: 200px;">${dto.content}</td>
     </tr>
 
 </table>
@@ -129,10 +166,19 @@
 
 
 <c:if test="${dto.answer== '답변완료'}">
-    <div class="anserwqna" style="border: 1px solid gray; height: 200px;">
-        <span>관리자 답글</span> <br><br>
-        <span id="answer-admin">${dto.answer_text}</span>
-    </div>
+
+    <table class="table table-bordered" id="answeradmin" style=" width: 1000px;">
+        <tr>
+            <td class="colortd">
+                <span class="dream2">관리자답글</span> <br>
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 200px;">
+                <span id="answer-admin">${dto.answer_text}</span>
+            </td>
+        </tr>
+    </table>
 </c:if>
 
 
@@ -143,10 +189,17 @@
         <tr>
             <td>
                 <textarea name="answer_text" class="answer_text"></textarea><br>
-                <button type="button" class="btn btn-outline-secondary" id="answer-btn" style="margin-right: 10px;">답변완료</button>
-                <button type="button" class="btn btn-outline-secondary" onclick="history.back()" style="margin-right: 10px;">목록</button>
+
                 <c:if test="${dto.answer== '답변대기'}">
-                    <button type="button" class="btn btn-outline-secondary" id="delQna">삭제</button>
+                    <button type="button" class="btnanswer" id="answer-btn" style="margin-right: 10px;">답변완료</button>
+                    <button type="button" class="btnlist" onclick="location.href='/admin/qna'" style="margin-right: 10px;">목록</button>
+                    <button type="button" class="btnalldel">문의 삭제</button>
+                </c:if>
+
+                <c:if test="${dto.answer== '답변완료'}">
+                    <button type="button" class="btnlist"  onclick="location.href='/admin/qna'" style="margin-right: 10px;">목록</button>
+                    <button type="button" class="btndel" id="delQna">삭제</button>
+                    <button type="button" class="btnalldel" >문의 삭제</button>
                 </c:if>
             </td>
         </tr>
@@ -173,4 +226,23 @@
         });
     });
     SetAdminTitle("문의사항");
+
+    // 댓글 삭제
+    $("#delQna").click(function (){
+        let a = confirm("삭제하려면 확인을 누르세요");
+        if(a){
+            let num = $("input[name='num']").val();
+            location.href = "/admin/qna/delete?num=" + num;
+        }
+    });
+
+    // 게시글 삭제
+    $(".btnalldel").click(function (){
+        let a = confirm("삭제하려면 확인을 누르세요");
+        if(a){
+            let num = $("input[name='num']").val();
+            location.href = "/mypage/deleteqna?num=" + num;
+        }
+    });
+
 </script>

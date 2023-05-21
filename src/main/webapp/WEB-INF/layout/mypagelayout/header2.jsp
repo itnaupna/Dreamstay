@@ -55,18 +55,7 @@
     }
 
 
-    .header .hotelFind:after {
-        content: '';
-        display: inline-block; /* 줄바꿈X(요소 자체는 인라인요소), 내부에서는 블록 요소처럼 동작 */
-        margin-left: 2px;
-        position: absolute;
-        left: 56px;
-        top: 10px;
-        width: 11px;
-        height: 11px;
-        background: url(
-        https://www.josunhotel.com/static/home/images/ko/pc/common/ico_search_black_11x11.png) no-repeat 0 0;
-    }
+
 
 
     /*태그 밑줄 제거*/
@@ -143,17 +132,16 @@
 
     .header .logo{
         display: block;
-        display: block;
         position: absolute;
-        right: 41%;
-        top: 23px;
+        right: 40%;
+        top: 25px;
         z-index: 1;
-        width: 350px;
+        width: 400px;
+        margin-top: 5px;
         height: 60px;
-        text-indent: -9999px; /* 요소에 텍스트 안보이도록 (조선 호텔 홈페이지에서 요소에 어떤 기능인지 텍스트로 써놓은게 있어서  주석용으로 화면엔 안보이게 텍스트를 밖으로 내보냄)*/
-        overflow: hidden; /* 텍스트가 이미지 또는 요소 경계 상자 외부로 나가는 것을 방지 */
-        background: url(https://kr.object.ncloudstorage.com/dreamsstaybucket/bg_logo_shinsegae.png) no-repeat 0 0;
-        background-position: 0 -60px;
+        text-indent: -9999px;
+        overflow: hidden;
+        background: url(https://kr.object.ncloudstorage.com/dreamsstaybucket/hotel_logo_b.png) no-repeat 0 0;
     }
 
 
@@ -168,12 +156,6 @@
         position: absolute;
         left: 110px;
         top: 38px;
-    }
-
-    /* 상품찾기 */
-    .topUtil .hotelFind {
-        font-size: 11px;
-        color: #000;
     }
 
     /*회원가입,로그인*,예약확인 div 위치*/

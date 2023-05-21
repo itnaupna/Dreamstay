@@ -249,11 +249,14 @@ public class AdminController {
     }
 
     @GetMapping("/qna/content")
-    public String content(int num, Model model)
+    public String content(int num, Model model, HttpSession session)
     {
 
         QnaBoardDto dto = adminQnaServeice.getQna(num);
         model.addAttribute("dto", dto);
+
+        // 세션에 현재 페이지 정보 저장
+        session.setAttribute("currentPage", session.getAttribute("currentPage"));
 
 
         return "/admin/qna/content";
@@ -284,7 +287,7 @@ public class AdminController {
 
         session.setAttribute("currentPage", page);
 
-        System.out.println("page="+page);
+        /*System.out.println("page="+page);*/
 
         result.add(adminQnaServeice.getQnaList(page,dto));
         result.add(adminQnaServeice.getQnaCount(page, dto));
@@ -292,6 +295,14 @@ public class AdminController {
 
 
         return result;
+    }
+
+    @GetMapping("/qna/delete")
+    public String deleteqna(QnaBoardDto dto)
+    {
+        adminQnaServeice.delQnaAnswer(dto);
+        return "redirect:/admin/qna/content?num="+dto.getNum();
+
     }
 
     @GetMapping("/book")

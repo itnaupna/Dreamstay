@@ -59,6 +59,11 @@ public class AdminQnaServeice implements AdminQnaServeiceInter{
     }
 
     @Override
+    public void delQnaAnswer(QnaBoardDto dto) {
+        AdminqnaMapper.delQnaAnswer(dto);
+    }
+
+    @Override
     public List<Integer> getQnaCount(int currPage, QnaBoardDto dto) {
         final int PAGE_SIZE = 10;
         List<Integer> result = new ArrayList<>();

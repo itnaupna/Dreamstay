@@ -23,7 +23,8 @@
 
     #qnapage .Q>span{
         position: relative;
-        top: 10px;
+        top: 15px;
+        right: 3px;
     }
 
     .qnatitle{
@@ -102,7 +103,8 @@
 
     #aswertable .A>span{
         position: relative;
-        top: 18px;
+        top: 21px;
+        right: 3px;
 
     }
 
@@ -112,7 +114,7 @@
 
     .hotelqna .answerhotel{
         margin-left: 20px;
-        font-size: 30px;
+        font-size: 25px;
         font-weight: bold;
         /* border: 1px solid black;*/
         height: 40px;
@@ -143,6 +145,16 @@
         background-color: white;
         color: black;
 
+    }
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    #qnapage, .detailbtns, #aswertable{
+        font-family: GmarketSansMedium;
     }
 
 </style>
@@ -260,7 +272,7 @@
 </c:if>
 
 
-<div>
+<div class="detailbtns">
     <button type="button" class="qnabtnlist" onclick="history.back()">목록</button>
     <c:if test="${dto.answer== '답변대기'}">
         <button type="button" class="delQna">삭제</button>
