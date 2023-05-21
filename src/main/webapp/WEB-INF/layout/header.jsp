@@ -21,8 +21,6 @@
         cursor: pointer;
     }
 
-
-
     /*3줄 메뉴 클릭시 나오는 박스에 타이틀*/
     .btnMenuText .header_btntitle{
         font-weight: bold;
@@ -49,7 +47,6 @@
         width: 180px;
         height: 140px;
     }
-
 
     .btnMenulist{
         position: absolute;
@@ -85,8 +82,93 @@
         cursor: pointer;
     }
 
+    /*@media (max-width: 768px) {*/
+    /*    .header {*/
+    /*        height: auto;*/
+    /*        padding-bottom: 20px;*/
+    /*        transition: height 0.3s ease;*/
+    /*    }*/
 
+    /*    .logo {*/
+    /*        text-align: center;*/
+    /*        margin: 50px 0;*/
+    /*        right: auto;*/
+    /*        left: 70px;*/
+    /*        transition: left 0.3s ease;*/
+    /*    }*/
 
+    /*    .btnMenu {*/
+    /*        position: absolute;*/
+    /*        !*right: 20px;*!*/
+    /*        !*top: 100px;*!*/
+    /*    }*/
+
+    /*    .header .headArea {*/
+    /*        padding: 0;*/
+    /*    }*/
+
+    /*    .topUtil {*/
+    /*        !*position: static;*!*/
+    /*        !*margin-top: 20px;*!*/
+    /*        !*text-align: center;*!*/
+    /*        display: none;*/
+    /*    }*/
+
+    /*    .gnbUtil {*/
+    /*        !*position: static;*!*/
+    /*        margin-top: 20px;*/
+    /*        text-align: center;*/
+    /*    }*/
+
+    /*    .dropdown_list{*/
+    /*        display: none;*/
+    /*    }*/
+
+    /*    .header .dropdown_list .item_list {*/
+    /*        position: static;*/
+    /*        display: block;*/
+    /*        box-shadow: none;*/
+    /*        background: none;*/
+    /*    }*/
+
+    /*    .header .topUtil .hotelFind,*/
+    /*    .header .topUtil .gnbUtil {*/
+    /*        display: flex;*/
+    /*        align-items: center;*/
+    /*        top: 100px;*/
+    /*    }*/
+
+    /*    .header .topUtil .hotelFind .header_hotel_list,*/
+    /*    .header .topUtil .gnbUtil li {*/
+    /*        display: block;*/
+    /*        margin-bottom: 10px;*/
+    /*    }*/
+
+    /*    .header .topUtil .hotelFind .header_hotel_list img,*/
+    /*    .header .topUtil .gnbUtil li img {*/
+    /*        margin-bottom: 5px;*/
+    /*    }*/
+
+    /*    .gnbUtil > ul{*/
+    /*        top: 0;*/
+    /*        transform: translateY(-400%);*/
+    /*    }*/
+
+    /*    .resvBtn{*/
+    /*        display: none;*/
+    /*    }*/
+    /*    !*.dropdown_list .item_list li{*!*/
+    /*    !*    display: none;*!*/
+    /*    !*}*!*/
+    /*    .btntitlebox ul {*/
+    /*        display: none;*/
+    /*        transition: display 0.3s ease;*/
+    /*    }*/
+
+    /*    .btntitlebox.open ul {*/
+    /*        display: block;*/
+    /*    }*/
+    /*}*/
 </style>
 <!--EONG-->
 

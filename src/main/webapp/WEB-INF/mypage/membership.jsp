@@ -54,10 +54,7 @@
     .cont{
         height: 960px;
     }
-    .mypagecontent{
-        width: 1200px;
-        height: 800px;
-    }
+
 </style>
 
 <div class="slider-for">

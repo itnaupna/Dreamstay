@@ -53,33 +53,27 @@
         /*border: 3px solid red;*/
         width: 1800px;
         height: 230px;
-        /*margin: 0 50px;*/
-
-        /*vertical-align: middle;*/
-    }
-
-    .f_footer .f_top2 .f_logo {
-        display: flex;
-        align-items: center;
-        /*border: 1px solid aqua;*/
-        width: 250px;
-        height: 230px;
-        justify-content: center;
     }
 
     .f_footer .f_top2 .f_banner {
         /*border: 2px solid beige;*/
-        width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
-
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+        box-sizing: border-box;
     }
 
     .f_footer .f_top2 .f_banner .f_info {
-        /*border: 3px solid chartreuse;*/
-        /*float: left;*/
-        width: 900px;
-        height: 20px;
+        display: flex;
+        height: auto;
+        width: auto;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
     }
 
     .f_footer .f_top2 .f_banner .f_info a {
@@ -87,26 +81,39 @@
         font-size: 15px;
         margin-right: 20px;
         color: white;
+        margin-bottom: 10px;
     }
 
-    /* 개인정보 방침만 색상 다르게*/
     .f_footer .f_top2 .f_banner .f_info .f_gaein {
         color: #989442;
     }
 
-    .f_footer .f_top2 .f_banner .f_company {
-        /*border: 2px dotted pink;*/
-        width: 900px;
-        height: 100px;
-        font-size: 14px;
-        color: #ccc;
-        /*align-items: center;*/
-        /*margin-top: 20px;*/
-    }
-    .f_footer .f_top2 .f_banner .f_company p{
-        margin-top: 30px;
+    .f_footer .f_top2 .f_banner .f_info2 {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 10px;
     }
 
+    .f_footer .f_top2 .f_banner .f_info2 a {
+        display: inline-block;
+        font-size: 15px;
+        margin-right: 20px;
+        color: white;
+    }
+
+    .f_footer .f_top2 .f_banner .f_company {
+        width: 100%;
+        font-size: 14px;
+        color: #ccc;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* 반응형 설정 */
     @media (max-width: 768px) {
         .f_top1 {
             width: 100%;
@@ -125,36 +132,69 @@
             flex-wrap: wrap;
         }
 
-        .f_logo {
-            width: 100%;
-            justify-content: center;
-        }
-
         .f_banner {
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            transition: transform 0.3s ease-in-out;
         }
 
-        .f_banner .f_info {
-            float: none;
+        .f_footer .f_top2 .f_banner .f_info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
             margin-bottom: 10px;
-            width: 100%;
         }
 
         .f_footer .f_top2 .f_banner .f_info a {
             margin-right: 10px;
+            font-size: 10px;
+            height: auto;
+            width: auto;
+            transition: margin-right 0.6s ease-in-out, font-size 0.6s ease-in-out;
+        }
+
+        .f_footer .f_top2 .f_banner .f_info2 {
+            font-size: 10px;
+            justify-content: center;
+            transition: font-size 0.3s ease-in-out;
         }
 
         .f_footer .f_top2 .f_banner .f_company {
-            width: 100%;
             font-size: 12px;
+            text-align: center;
+            margin-top: 20px;
+            transition: font-size 0.6s ease-in-out;
         }
 
         .f_footer .f_top2 .f_banner .f_company p {
             margin-top: 10px;
         }
+
+        .f_banner .f_info a,
+        .f_banner .f_info2 a {
+            font-size: 12px;
+        }
+
+        .f_company {
+            font-size: 10px;
+        }
+
+        .f_footer .f_top2 .f_banner {
+            height: auto;
+            width: auto;
+        }
+
+        /* Additional style to handle transform animation */
+        .f_footer .f_top2 .f_banner.transformed {
+            transform: translateX(-100%);
+        }
     }
+
 </style>
 <footer class="f_footer">
     <div class="f_top1">
@@ -172,12 +212,6 @@
     </div>
 
     <div class="f_top2">
-        <div class="f_logo">
-            <a href="#">
-                <img src="./photo/josunresort.png">
-            </a>
-        </div>
-
         <div class="f_banner">
             <div class="f_info">
                 <a href="#">고객센터</a>
@@ -197,8 +231,12 @@
                 <p>사업자등록번호 222-11-00000 통신판매신고번호 강남 0000호</p>
                 <p>© 2023 Dream Stay &amp; RESORTS Co. All rights reserved.</p>
             </div>
-
         </div>
     </div>
-
 </footer>
+
+
+
+
+
+

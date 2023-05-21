@@ -23,6 +23,7 @@
 .m_main .mtop_area .mtop_inner span{
     margin-top: 40px;
     font-size: 17px;
+    font-family: 'GmarketSansMedium';
 }
 
 /* 마이페이지 소개글 */
@@ -52,6 +53,7 @@
     position: absolute;
     padding: 30px;
     margin: 10px 30px;
+    font-family: 'GmarketSansMedium';
 }
 
 .m_main .m_myinfo {
