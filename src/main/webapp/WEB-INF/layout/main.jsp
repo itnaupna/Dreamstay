@@ -9,63 +9,7 @@
 <!-- animate.css 라이브러리 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <link rel="stylesheet" href="/css/main.css" />
-<style>
-	.section_3{
-		text-align: center;
-		color: #000000;
-		font-size: 20px;
 
-
-	}
-	#section_3_body{
-
-		display: inline-block;
-		height: 500px;
-		width: 1200px;
-		background-color: #ffffff;
-		text-align: center;
-	}
-	#section_3_logo{
-
-		display: inline-block;
-		position: relative;
-		height: 400px;
-		width: 400px;
-		left: -1%;
-		top: -85px;
-
-	}
-	#section_3_text_body{
-
-		display: inline-block;
-		height: 350px;
-		width: 700px;
-		margin-top: 75px;
-		line-height: 20px;
-		left: 30%;
-		padding-top: 65px;
-	}
-	#section_3_text1{
-		font-weight: bold;
-		font-size: 35px;
-		height: 70px;
-	}
-	#section_3_text2{
-
-		display: inline-block;
-		height: 100px;
-		width: 700px;
-		margin-top:50px;
-		line-height: 20px;
-		left: 30%;
-		text-align: left;
-	}
-	#section_3_logo img {
-		width: 400px;
-		height: 400px;
-	}
-
-</style>
 <div id="fullpage">
 	<div class="section bg_imgs01" >
 		<strong id="main_txt" class="animate__animated animate__fadeIn">
@@ -326,81 +270,86 @@
 				<div class="section_3" id="section_3_logo"><img src="https://cdn.discordapp.com/attachments/1101378968709501008/1108947363013329046/Dream_Stay_4.png"></div>
 				<div class="section_3" id="section_3_text_body">
 					<div class="section_3" id="section_3_text1">
-						편안함(Easy), 자연(Green), 어울림(Love)
+						꿈을 품은 호텔, Dream Stay가 여러분을 기다립니다.
 					</div>
-					<div class="section_3" id="section_3_text2">1914년 조선호텔이 시작된 이래, 조선호텔앤리조트는 ‘First & Best’ 정신을 이어오며 호스피탈리티 산업의 대표기업으로 자리매김 하고 있습니다.<br>
-						수많은 ‘한국 최초’의 신화를 남겨온 조선호텔앤리조트는 호텔 뿐 아니라 외식사업, 오피스 빌딩 위탁 운영 등 품격 있는 서비스와 시설을 제공합니다.</div>
+					<div class="section_3" id="section_3_text2">꿈이 펼쳐지는 곳, 드림 스테이에 오신 것을 환영합니다.<br>
+						눈부신 아침 햇살과 편안한 밤의 휴식,<br>
+						모든 순간이 고요하고 아름다운 시간으로 어우러집니다.<br>
+						풍요로운 객실과 다채로운 다이닝 옵션으로 특별한 체험을 선사합니다.<br>
+						탁월한 위치와 아름다운 전망으로 도시의 아름다움을 만끽하세요.<br>
+						최상의 품질과 서비스로 특별한 순간을 선사하는 호텔입니다.<br>
+						특별한 여정은 이곳에서 시작됩니다.</div>
 				</div>
 			</dviv>
 		</div>
 	</div>
-	<div class="section bg_imgs04" id="bg_imgs04">
+	<div class="section bg_imgs04 bg_imgs04_01" id="bg_imgs04">
 		<div id="page4">
 			<div class="page4_title">
 				<div id="page4_main_title">
 					<div>Retail Business</div>
 				</div>
 				<div id="page4_sub_title">
-					<div>조선호텔앤리조트의 라이프 스타일 브랜드<br>
+					<div>드림스테이의 라이프 스타일 브랜드<br>
 						호스피탈리티 전문성을 바탕으로 확장한 라이프 스타일 브랜드를 소개합니다.</div>
 				</div>
 			</div>
 			<div id="page4_box">
 				<div id="page4_sub_box_01">
-					<div class="page4_box_logo" id="logo_01">
-						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png">
+					<div class="page4_box_logo page4_logo01" id="logo_01">
+						<a href="https://cafe.naver.com/zipsy">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_01.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo" id="logo_02">
-						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo02.png">
+					<div class="page4_box_logo page4_logo02" id="logo_02">
+						<a href="https://heroesofthestorm.com/ko-kr/">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo02.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="/photo/page4_box_logo_02.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
-						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo04.png">
+					<div class="page4_box_logo page4_logo03">
+						<a href="https://www.josunhotel.com/retail/jaju.do">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo04.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_03.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
+					<div class="page4_box_logo page4_logo04">
 						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo05.png">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo05.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_04.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 				</div>
 				<div id="page4_sub_box_02">
-					<div class="page4_box_logo">
-						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo06.png">
+					<div class="page4_box_logo page4_logo05">
+						<a href="https://www.josunhotel.com/product/kyukmul.do">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo06.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_05.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
-						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo07.png">
+					<div class="page4_box_logo page4_logo06">
+						<a href="https://www.josunhotel.com/product/janePacker.do">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo07.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_06.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
-						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo08.png">
+					<div class="page4_box_logo page4_logo07">
+						<a href="https://www.youtube.com/watch?v=VmgzvfIX14Q&ab_channel=STEVENHWANG">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo08.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_07.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
-					<div class="page4_box_logo">
-						<a href="#">
-							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo09.png">
+					<div class="page4_box_logo page4_logo08">
+						<a href="https://cafe.naver.com/funcc">
+							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo09.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_08.jpg">
 							<div>자세히 보기</div>
 						</a>

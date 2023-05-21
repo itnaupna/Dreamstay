@@ -13,9 +13,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <style>
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+    }
     .book_main {
         /*border: 1px solid pink;*/
-        width: 2000px;
+        width: 1900px;
         height: 1200px;
         margin: 100px auto 0;
         display: flex;
@@ -80,13 +86,14 @@
     }
 
     .book_main .book_select .book_inner dl dt {
-        font-weight: revert;
+        font-weight: bold;
         color: black;
     }
 
     .book_main .book_select .book_inner dl dd input[type=text] {
         border: none;
         background-color: #f9f9f9;
+        font-family: 'GmarketSansMedium';
     }
 
     .book_main .book_select .book_inner dl dd input[type=text]:focus {
@@ -104,12 +111,18 @@
         color: black;
         cursor: pointer;
         font-weight: 700 !important;
-
+        transition: 0.6s;
+        font-family: 'GmarketSansMedium';
+    }
+    .mainbtn:hover{
+        color: #ffffff;
+        background-color: #000000;
     }
 
     .RoomList {
         margin: 10px;
-        width: 100%;
+        /*width: 1900px;*/
+        max-width: 1900px;
         height: auto;
         /*border:1px solid;*/
         border-radius: 0.825rem;
@@ -135,12 +148,17 @@
         height: 60px;
         color: white;
         cursor: pointer;
-        margin-right: 350px;
-
+        margin-right: 235px;
+        transition: 0.6s;
+        font-family: 'GmarketSansMedium';
+    }
+    #BookBtn:hover{
+        color: black;
+        background-color: #ffffff;
     }
 
     .test3 {
-        width: 2000px;
+        width: 1900px;
     }
     .RoomList p input{
         border:none;
@@ -148,14 +166,14 @@
         border-top: 0px;
         border-left: 0px;
         border-bottom: 0px;
-        width: 500px;
+        width: 900px;
     }
     .RoomList p input:focus{
         outline:none;
     }
     .RoomInfo{
         margin: 10px;
-        width: 50%;
+        width: 85%;
         height: auto;
         /*border:1px solid;*/
         border-radius: 0.825rem;
@@ -167,6 +185,7 @@
         padding-left: 30px;
         padding-top:20px;
         padding-bottom: 20px;
+        margin-left: 100px;
 
     }
     .roomimg{
@@ -177,8 +196,17 @@
         margin-left: 45px;
         margin-top: 35px;
     }
+    body{
+        width: 1900px;
+       /* overflow-x: hidden;*/
+    }
 
-
+    .book_ol em, .RoomInfo{
+        font-family: 'GmarketSansMedium';
+    }
+    span .booking, .dl_list{
+        font-family: 'Playfair Display SC', serif;
+    }
 </style>
 
 <div class="book_main">
@@ -199,29 +227,29 @@
         <div class="book_inner">
 
             <dl class="dl01">
-                <dt>HOTEL</dt>
+                <dt class="dl_list">HOTEL</dt>
                 <input type="hidden" value="${selectedHotel }" readonly="readonly">
                 <dd><input type="text" value="${hotelname }" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl02">
-                <dt>DATE</dt>
+                <dt class="dl_list">DATE</dt>
                 <dd><input type="text" value="${sessionScope.checkInShow}" readonly="readonly">
                     <input type="text" value="${sessionScope.checkOutShow}" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl03">
-                <dt>ROOMS</dt>
+                <dt class="dl_list">ROOMS</dt>
                 <dd><input type="text" value="${sessionScope.roomCount}" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl04">
-                <dt>Adults</dt>
+                <dt class="dl_list">Adults</dt>
                 <dd><input type="text" value="${sessionScope.adultCount}" readonly="readonly"></dd>
             </dl>
 
             <dl class="dl05">
-                <dt>Children</dt>
+                <dt class="dl_list">Children</dt>
                 <dd><input type="text" value="${sessionScope.childrenCount}" readonly="readonly"></dd>
             </dl>
             <button type="button" class="mainbtn" onclick="location.href='/'">다시 검색하기</button>
@@ -232,8 +260,8 @@
     <c:forEach var="room" items="${roomList}">
         <form action="../payment" method="post" name="payment">
             <span id="roomPhotos">
-                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${room.roomphoto}" name="roomphoto"style="position:relative;display: flex;float: left;margin-left: 70px;margin-top: 40px;width:250px;height: 182px;
-padding-right: 50px;">
+                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${room.roomphoto}" name="roomphoto"style="position:relative;display: flex;float: left;margin-left: 65px;margin-top: 30px;width:350px;height: 182px;
+padding-right: 50px; border-radius: 10px">
             </span>
             <div class="RoomList">
                 <div class="RoomInfo">

@@ -30,17 +30,18 @@ public class MyPageController {
     @GetMapping("")
     public String mypage(HttpSession session, Model model)
     {
-        MemberDto dto = (MemberDto)session.getAttribute("loginuser");
-        List<Map<String, String>> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
-        model.addAttribute("data",map);
-        model.addAttribute("size", map.size());
-        String[] fnFn = dto.getUser_name().split("/");
-        model.addAttribute("familyname", fnFn[0]);
-        model.addAttribute("firstname", fnFn[1]);
+        if(session.getAttribute("loginuser") != null) {
+            MemberDto dto = (MemberDto) session.getAttribute("loginuser");
+            List<Map<String, String>> map = mypageService.getmemberBookData(String.valueOf(dto.getNum()));
+            model.addAttribute("data", map);
+            model.addAttribute("size", map.size());
+            String[] fnFn = dto.getUser_name().split("/");
+            model.addAttribute("familyname", fnFn[0]);
+            model.addAttribute("firstname", fnFn[1]);
 
-        List<BookDto> list = mypageService.selectForBookNum();
-        model.addAttribute("list", list);
-
+            List<BookDto> list = mypageService.selectForBookNum();
+            model.addAttribute("list", list);
+        }
         return "/mypage/mypage";
     }
 
@@ -61,15 +62,16 @@ public class MyPageController {
     @GetMapping("/updateinfo")
     public String updateinfo(HttpSession session,Model model)
     {
-        String id = ((MemberDto)(session.getAttribute("loginuser"))).getId();
-        MemberDto dto = mypageService.selectInfoToId(id);
-        System.out.println(dto.getUser_name());
-        String[] fnFn = dto.getUser_name().split("/");
+        if(session.getAttribute("loginuser") != null) {
+            String id = ((MemberDto) (session.getAttribute("loginuser"))).getId();
+            MemberDto dto = mypageService.selectInfoToId(id);
+            System.out.println(dto.getUser_name());
+            String[] fnFn = dto.getUser_name().split("/");
 
-        model.addAttribute("memberDto", dto);
-        model.addAttribute("familyname", fnFn[0]);
-        model.addAttribute("firstname", fnFn[1]);
-
+            model.addAttribute("memberDto", dto);
+            model.addAttribute("familyname", fnFn[0]);
+            model.addAttribute("firstname", fnFn[1]);
+        }
         return "/mypage/updateinfo";
     }
 
@@ -132,6 +134,7 @@ public class MyPageController {
     @GetMapping("/membership")
     public String myreservation(HttpSession session, Model model)
     {
+        if(session.getAttribute("loginuser") != null) {
         String id = ((MemberDto)session.getAttribute("loginuser")).getId();
         model.addAttribute("memberDto",mypageService.selectInfoToId(id));
         MemberDto dto = (MemberDto)session.getAttribute("loginuser");
@@ -139,6 +142,7 @@ public class MyPageController {
         model.addAttribute("familyname", fnFn[0]);
         model.addAttribute("firstname", fnFn[1]);
         model.addAttribute("memberDto",mypageService.selectInfoToId(id));
+        }
         return "/mypage/membership";
     }
 
