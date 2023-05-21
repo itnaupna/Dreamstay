@@ -143,14 +143,14 @@
                         <div class="btntitlebox">
                             <span>4페이지 내용 넣을 거에요</span><br><br>
                             <ul>
-                                <a href="#"><li>4페이지 링크 1</li></a>
-                                <a href="#"><li>4페이지 링크 2</li></a>
-                                <a href="#"><li>4페이지 링크 3</li></a>
-                                <a href="#"><li>4페이지 링크 4</li></a>
-                                <a href="#"><li>4페이지 링크 5</li></a>
-                                <a href="#"><li>4페이지 링크 6</li></a>
-                                <a href="#"><li>4페이지 링크 7</li></a>
-                                <a href="#"><li>4페이지 링크 8</li></a>
+                                <a href="https://cafe.naver.com/zipsy"><li>호경전</li></a>
+                                <a href="https://heroesofthestorm.com/ko-kr/"><li>호무랑</li></a>
+                                <a href="https://www.josunhotel.com/retail/jaju.do"><li>Jaju Table</li></a>
+                                <a href="#"><li>조선호텔 김치</li></a>
+                                <a href="https://www.josunhotel.com/product/kyukmul.do"><li>Kyukmul Gongboo</li></a>
+                                <a href="https://www.josunhotel.com/product/janePacker.do"><li>Jane Packer</li></a>
+                                <a href="https://www.youtube.com/watch?v=VmgzvfIX14Q&ab_channel=STEVENHWANG"><li>State Tower</li></a>
+                                <a href="https://cafe.naver.com/funcc"><li>CENTERFIELD</li></a>
                             </ul>
                         </div>
 
@@ -245,8 +245,8 @@
                             <button type="button" aria-label="목록열기" class="btn_opener">RESERVATION</button>
                         </div>
                         <ul class="item_list" role="listbox" style="width: 120px;">
-                            <li role="option" style="font-size: 13px"><a href="">ROOM</a></li>
-                            <li role="option" style="font-size: 13px"><a href="">MEMBERSHIP</a></li>
+                            <li role="option" style="font-size: 13px"><a href="/notice/noticeboard">NOTICE</a></li>
+                            <li role="option" style="font-size: 13px"><a href="/mypage/membership">MEMBERSHIP</a></li>
                         </ul>
                     </div>
                 </div>

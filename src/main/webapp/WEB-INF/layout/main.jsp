@@ -359,21 +359,21 @@
 			<div id="page4_box">
 				<div id="page4_sub_box_01">
 					<div class="page4_box_logo page4_logo01" id="logo_01">
-						<a href="#">
+						<a href="https://cafe.naver.com/zipsy">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo03.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_01.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo page4_logo02" id="logo_02">
-						<a href="#">
+						<a href="https://heroesofthestorm.com/ko-kr/">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo02.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="/photo/page4_box_logo_02.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo page4_logo03">
-						<a href="#">
+						<a href="https://www.josunhotel.com/retail/jaju.do">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo04.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_03.jpg">
 							<div>자세히 보기</div>
@@ -389,28 +389,28 @@
 				</div>
 				<div id="page4_sub_box_02">
 					<div class="page4_box_logo page4_logo05">
-						<a href="#">
+						<a href="https://www.josunhotel.com/product/kyukmul.do">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo06.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_05.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo page4_logo06">
-						<a href="#">
+						<a href="https://www.josunhotel.com/product/janePacker.do">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo07.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_06.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo page4_logo07">
-						<a href="#">
+						<a href="https://www.youtube.com/watch?v=VmgzvfIX14Q&ab_channel=STEVENHWANG">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo08.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_07.jpg">
 							<div>자세히 보기</div>
 						</a>
 					</div>
 					<div class="page4_box_logo page4_logo08">
-						<a href="#">
+						<a href="https://cafe.naver.com/funcc">
 							<img src="https://www.josunhotel.com/static/home/images/ko/pc/HUMA/img_oblist_logo09.png" class="page4_box_logo_img">
 							<input type="hidden" class="page4_box_logo_inputs" value="./photo/page4_box_logo_08.jpg">
 							<div>자세히 보기</div>
@@ -429,8 +429,5 @@
 	</div>
 
 </div>
-<script>
-
-</script>
 
 <script type="text/javascript" src="/js/main.js"></script>
