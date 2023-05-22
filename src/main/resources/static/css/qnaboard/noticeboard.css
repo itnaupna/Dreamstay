@@ -1,9 +1,13 @@
-.noticeboard_content {
-    display: none;
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
 }
 
 #noticeboard_mainbox {
     /*border: 1px solid red; !*영역*!*/
+    font-family: 'GmarketSansMedium';
     width: 1200px;
     margin: 180px auto 0 auto;
 }
@@ -91,7 +95,7 @@
     /*border: 1px solid gray; !*영역*!*/
 }
 
-#noticeboard_subjectbox{
+.noticeboard_subjectbox{
     /*border: 1px solid purple; !*영역*!*/
     height: 60px;
     line-height: 60px;
@@ -99,12 +103,13 @@
     cursor: pointer;
 }
 
-#noticeboard_subjectbox span{
+.noticeboard_subjectbox span{
     font-size: 18px;
 }
 
-#noticeboard_contentbox {
+.noticeboard_contentbox {
     /*border: 1px solid green; !*영역*!*/
+    display: none;
     height: 500px;
     overflow-y: scroll;
     padding: 25px 50px 25px 50px;
