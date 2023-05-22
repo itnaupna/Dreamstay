@@ -18,6 +18,7 @@
         position: absolute;
         top: 100px;
         margin-left: 250px;
+        font-weight: bold;
     }
     /*닫기 버튼 이미지 */
     .btnMenulist>img{
@@ -163,6 +164,7 @@
         position: absolute;
         left: 110px;
         top: 38px;
+        font-weight: bold;
     }
 
     /*회원가입,로그인*,예약확인 div 위치*/
@@ -170,6 +172,7 @@
         position: absolute;
         right: 50px;
         top: 30px;
+        font-weight: bold;
     }
 
     .gnbUtil > ul {

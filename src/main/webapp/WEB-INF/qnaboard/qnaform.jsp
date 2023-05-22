@@ -138,7 +138,7 @@
         border-bottom: 1px solid #ccc;
         margin-top: 20px;
         resize: none;
-        font-family: 'Nanum Gothic';
+        font-family: GmarketSansMedium;
         font-size: 17px;
     }
 

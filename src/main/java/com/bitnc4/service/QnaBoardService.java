@@ -5,6 +5,7 @@ import com.bitnc4.dto.QnaBoardDto;
 import com.bitnc4.mapper.QnaBoardMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -85,9 +86,28 @@ public class QnaBoardService implements QnaBoardServiceInter {
     }
 
     @Override
-    public int searchQnaCount(String writer) {
+    public int searchQnaCount(String writer,String keyword,String searchtype) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("writer",writer);
+        map.put("keyword",keyword);
+        map.put("searchtype",searchtype);
 
-        return qnaBoardMapper.searchQnaCount(writer);
+        return qnaBoardMapper.searchQnaCount(map);
     }
+
+   /* @Override
+    public void mailCode(String mail, String code) {
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom("helloa1109@naver.com");
+        msg.setTo(mail);
+        msg.setSubject("Dream Stay 이메일 인증번호");
+        msg.setText(code);
+
+        mailSender.send(msg);
+    }
+*/
+
+
 
 }

@@ -60,7 +60,7 @@
         ORDER BY num DESC limit #{start},#{perpage}
     </select>
 
-    <select id="searchQnaCount" parameterType="String" resultType="int">
+    <select id="searchQnaCount" parameterType="Map" resultType="int">
         select count(*) from board_qna
         where writer = #{writer}
         <if test="searchtype != null and keyword != null">

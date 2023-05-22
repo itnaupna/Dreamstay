@@ -93,6 +93,31 @@
 
     }
 
+    .btnalldel{
+        width: 120px;
+        height: 60px;
+        padding: 0 25px;
+        font-size: 15px;
+        letter-spacing: -.01em;
+        text-align: center;
+        vertical-align: middle;
+        background-color: white;
+        color: black;
+        border: thin solid #000000;
+        border-radius: 0;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
+
+    }
+
+    .btnalldel:hover {
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        background-color: black;
+        color: white;
+
+    }
+
 
 
 </style>
@@ -192,12 +217,12 @@
 
                 <c:if test="${dto.answer== '답변대기'}">
                     <button type="button" class="btnanswer" id="answer-btn" style="margin-right: 10px;">답변완료</button>
-                    <button type="button" class="btnlist" onclick="location.href='/admin/qna'" style="margin-right: 10px;">목록</button>
+                    <button type="button" class="btnlist" onclick="history.back()" style="margin-right: 10px;">목록</button>
                     <button type="button" class="btnalldel">문의 삭제</button>
                 </c:if>
 
                 <c:if test="${dto.answer== '답변완료'}">
-                    <button type="button" class="btnlist"  onclick="location.href='/admin/qna'" style="margin-right: 10px;">목록</button>
+                    <button type="button" class="btnlist"  onclick="history.back()" style="margin-right: 10px;">목록</button>
                     <button type="button" class="btndel" id="delQna">삭제</button>
                     <button type="button" class="btnalldel" >문의 삭제</button>
                 </c:if>
