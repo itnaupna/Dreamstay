@@ -454,8 +454,7 @@
                                             </c:if>
                                         </div>
                                         <div class="list5">
-                                            <span>가격 :</span><fmt:formatNumber value="${list.total_price}"
-                                                                               type="currency"/>
+                                            <span>가격 : </span>₩<fmt:formatNumber value="${list.total_price}"/>
                                         </div>
                                         <div class="buttondiv">
                                             <button type="button" id="del_btn" class="del_btn"

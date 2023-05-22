@@ -198,7 +198,7 @@
     }
     body{
         width: 1900px;
-       /* overflow-x: hidden;*/
+        /* overflow-x: hidden;*/
     }
 
     .book_ol em, .RoomInfo{
@@ -257,32 +257,41 @@
     </div>
     <div class="test3">
 
-    <c:forEach var="room" items="${roomList}" varStatus="i">
-        <form action="../payment" method="post" name="payment">
-            <span id="roomPhotos">
-                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${photoArr[i.index][0]}" name="roomphoto"style="position:relative;display: flex;float: left;margin-left: 70px;margin-top: 40px;width:250px;height: 182px;
-padding-right: 50px; border-radius:10px;">
-            </span>
-            <div class="RoomList">
-                <div class="RoomInfo">
-                    <input type="hidden" value="${totaldays}" name="totaldays" readonly>
-                    <p><input value="${room.num}" type="hidden" name="roomnum" readonly></p>
-                    <p><input value="${room.hotelnum}" type="hidden" name="hotelnum" readonly></p>
-                    <p>방 타입 : <input value="${room.roomtype}" type="text" name="roomtype" readonly></p>
-                <c:if test="${totaldays >= 3}">
-                    <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays * roomCount)/10*9}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
-                </c:if>
-                <c:if test="${totaldays < 3}">
-                    <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays * roomCount)}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
-                </c:if>
-                    <p>상세정보 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
-<%--                    <p>상세정보 : <input value="TODO : 수정요함" type="text" name="roomdetail" readonly></p>--%>
-                </div>
-                <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>
-            <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
+        <c:if test="${fn:length(roomList)==0}">
+            <div style="text-align: center;padding-top:100px;">
+                예약 가능한 객실이 없습니다.<br/>
+                다른 날짜 또는 다른 호텔을 선택해주세요.
             </div>
-        </form>
-    </c:forEach>
+        </c:if>
+        <c:if test="${fn:length(roomList) != 0}">
+
+            <c:forEach var="room" items="${roomList}" varStatus="i">
+                <form action="../payment" method="post" name="payment">
+            <span id="roomPhotos">
+                <img src="https://kr.object.ncloudstorage.com/dreamsstaybucket/room/${photoArr[i.index][0]}" name="roomphoto"style="position:relative;display: flex;float: left;margin-left: 65px;margin-top: 30px;width:350px;height: 182px;
+padding-right: 50px; border-radius: 10px;">
+            </span>
+                    <div class="RoomList">
+                        <div class="RoomInfo">
+                            <input type="hidden" value="${totaldays}" name="totaldays" readonly>
+                            <p><input value="${room.num}" type="hidden" name="roomnum" readonly></p>
+                            <p><input value="${room.hotelnum}" type="hidden" name="hotelnum" readonly></p>
+                            <p>방 타입 : <input value="${room.roomtype}" type="text" name="roomtype" readonly></p>
+                            <c:if test="${totaldays >= 3}">
+                                <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays * roomCount)/10*9}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
+                            </c:if>
+                            <c:if test="${totaldays < 3}">
+                                <p>방 가격 : <input value="<fmt:formatNumber value="${(room.roomprice * totaldays * roomCount)}" pattern="#,##0원"/>" type="text" name="roomprice" readonly></p>
+                            </c:if>
+                            <p>상세정보 : <input value="${room.roommemo}" type="text" name="roommemo" readonly></p>
+                                <%--                    <p>상세정보 : <input value="TODO : 수정요함" type="text" name="roomdetail" readonly></p>--%>
+                        </div>
+                        <button type="submit" id="BookBtn" class="btn btn-secondary">예약하기</button>
+                        <!-- 필요한 방 정보를 출력하거나 처리하는 코드 추가 -->
+                    </div>
+                </form>
+            </c:forEach>
+        </c:if>
     </div>
 </div>
 
