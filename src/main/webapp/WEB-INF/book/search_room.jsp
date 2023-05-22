@@ -259,8 +259,8 @@
 
         <c:if test="${fn:length(roomList)==0}">
             <div style="text-align: center;padding-top:100px;">
-                예약 가능한 객실이 없습니다.<br/>
-                다른 날짜 또는 다른 호텔을 선택해주세요.
+                <h2>예약 가능한 객실이 없습니다.<br/>
+                    다른 날짜 또는 다른 호텔을 선택해주세요.</h2>
             </div>
         </c:if>
         <c:if test="${fn:length(roomList) != 0}">
