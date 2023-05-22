@@ -332,7 +332,7 @@
                         </div>
 
                         <div class="btntitlebox">
-                            <span>4페이지 내용 넣을 거에요</span><br><br>
+                            <span>Dreamstay Brand</span><br><br>
                             <ul>
                                 <a href="https://cafe.naver.com/zipsy"><li>호경전</li></a>
                                 <a href="https://heroesofthestorm.com/ko-kr/"><li>호무랑</li></a>
