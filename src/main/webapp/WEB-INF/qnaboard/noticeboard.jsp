@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" href="/css/qnaboard/noticeboard.css">
+
 <div id="noticeboard_mainbox">
     <div id="noticeboard_headbox">
         <span id="noticeboard_head">Notice</span>
