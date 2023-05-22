@@ -31,7 +31,7 @@ naver.properties, application.yml
 |이상혁|마이페이지,결제페이지, 결제성공페이지, 비회원예약확인, 메인페이지(푸터)|[helloa1109](https://github.com/helloa1109)|
 |박재희|문의게시판, 메인페이지(헤더)|[jaehhee](https://github.com/jaehhee)|
 |박성준|로그인, 회원가입, 비회원예약확인, 공지사항, 호텔 상세페이지|[Psj109079](https://github.com/Psj109079)|
-|김석진|관리자페이지(CSS),채팅페이지(CSS),DB데이터 관리[jameskim0208](https://github.com/jameskim0208)|
+|김석진|관리자페이지(CSS),채팅페이지(CSS),DB데이터 관리|[jameskim0208](https://github.com/jameskim0208)|
 
 ## 사용 기술
 ### Front-End
