@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
 /* info 전체 틀 */
 .m_main {
     position: absolute;
@@ -112,6 +119,6 @@
 }
 
 .m_main .m_info .m_infoul span{
-    font-weight: bold;
+    /*font-weight: bold;*/
     font-size: 20px;
 }
