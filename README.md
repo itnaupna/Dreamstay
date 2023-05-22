@@ -24,7 +24,7 @@ naver.properties, application.yml
 
 
 ## 팀원
-|팀원|담당|Git URL|
+|팀원|작업했던 것|Git URL|
 |-------------------|---|---|
 |최용주|관리자페이지, 채팅|[Itnaupna](https://github.com/itnaupna)|
 |유찬민|메인페이지, 예약페이지|[Deko252](https://github.com/Deko252)|
@@ -49,6 +49,7 @@ naver.properties, application.yml
   <img src="https://img.shields.io/badge/apache tomcat 9-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black">
   <img src="https://img.shields.io/badge/mysql 8-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
   <img src="https://img.shields.io/badge/spring_boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> 
+  <img src="https://img.shields.io/badge/Maven-c71a36?style=for-the-badge&logo=Apache Maven&logoColor=white"> 
   <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
   <img src="https://img.shields.io/badge/jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white">
   <img src="https://img.shields.io/badge/ubuntu 20.04-e95420?style=for-the-badge&logo=ubuntu&logoColor=black"> 
