@@ -7,6 +7,13 @@
 <%--<script src="/js/header.js"> </script>--%>
 
 <style>
+    li#header_notice_board, li.header_hotel_list{
+        cursor:pointer;
+    }
+    .gnbUtil *{
+        font-weight:bold;
+    }
+
     .btnMenuText {
         position: absolute;
         top: 100px;
@@ -270,23 +277,24 @@
 
 
 
-<body>
-<div class="wrappe mainWrapper">
+
+<div class="wrapper mainWrapper">
     <div class="header">
         <div class="headArea">
             <a href="/">
                 <strong class="logo">
-                        JOSUN HOTELS & RESORTS
+                    JOSUN HOTELS & RESORTS
                 </strong>
             </a>
-            <button type="button" class="btnMenu">메뉴 열기</button>
+            <%--            <button type="button" class="btnMenu">메뉴 열기</button>--%>
+            <button type="button" id="header_menu" class="btnMenu">메뉴 열기</button>
             <div class="btnMenulist">
                 <img class="btnMenuClose" src="https://www.josunhotel.com/static/home/images/ko/pc/common/btn_close_white_25x25.png">
 
                 <div class="btnMenuText">
                     <div class="header_btntitle">
                         <div class="btntitlebox">
-                        <span>ABOUT US</span><br><br>
+                            <span>ABOUT US</span><br><br>
                             <ul>
                                 <li id="header_notice_board">공지사항</li>
                             </ul>
@@ -294,78 +302,76 @@
 
                         <div class="btntitlebox">
                             <span>HOTELS</span><br><br>
-                            <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
-                                <li>수상내역</li>
-                                <li>ESG경영</li>
-                                <li>결산공고</li>
+                            <ul id="hotel_list">
                             </ul>
                         </div>
 
-                        <div class="btntitlebox">
-                            <span>OFFERS</span><br><br>
+
+
+                        <div class="btntitlebox" >
+                            <span>MY PAGE</span><br><br>
                             <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
-                                <li>수상내역</li>
-                                <li>ESG경영</li>
-                                <li>결산공고</li>
+                                <a href="/mypage/"><li>마이페이지</li></a>
+
+                                <a href="/mypage/updateinfo"><li>개인정보 관리</li></a>
                             </ul>
                         </div>
 
                         <div class="btntitlebox">
                             <span>MEMBERSHIP</span><br><br>
                             <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
+                                <a href="/mypage/membership"><li>멤버십 안내</li></a>
+                                <%--<li>연혁</li>
                                 <li>수상내역</li>
                                 <li>ESG경영</li>
-                                <li>결산공고</li>
-                            </ul>
-                        </div>
-
-                        <div class="btntitlebox" >
-                            <span>MY PAGE</span><br><br>
-                            <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
-                                <li>수상내역</li>
-                                <li>ESG경영</li>
-                                <li>결산공고</li>
+                                <li>결산공고</li>--%>
                             </ul>
                         </div>
 
                         <div class="btntitlebox">
-                            <span>RETAIL BUSINESS</span><br><br>
+                            <span>4페이지 내용 넣을 거에요</span><br><br>
                             <ul>
-                                <li>기업소개</li>
-                                <li>연혁</li>
-                                <li>수상내역</li>
+                                <a href="https://cafe.naver.com/zipsy"><li>호경전</li></a>
+                                <a href="https://heroesofthestorm.com/ko-kr/"><li>호무랑</li></a>
+                                <a href="https://www.josunhotel.com/retail/jaju.do"><li>Jaju Table</li></a>
+                                <a href="#"><li>조선호텔 김치</li></a>
+                                <a href="https://www.josunhotel.com/product/kyukmul.do"><li>Kyukmul Gongboo</li></a>
+                                <a href="https://www.josunhotel.com/product/janePacker.do"><li>Jane Packer</li></a>
+                                <a href="https://www.youtube.com/watch?v=VmgzvfIX14Q&ab_channel=STEVENHWANG"><li>State Tower</li></a>
+                                <a href="https://cafe.naver.com/funcc"><li>CENTERFIELD</li></a>
+                            </ul>
+                        </div>
+
+                        <div class="btntitlebox">
+                            <span>INQUIRY</span><br><br>
+                            <ul>
+                                <a href="/qnaboard"><li>문의하기</li></a>
+                                <a href="/qnanomemberlist"><li>비회원 문의조회</li></a>
+                                <%--<li>수상내역</li>
                                 <li>ESG경영</li>
-                                <li>결산공고</li>
+                                <li>결산공고</li>--%>
                             </ul>
                         </div>
 
                         <div class="btntitlebox">
                             <span>JOSUN LOUNGE</span><br><br>
                             <ul>
-                                <a>
-                                <li>
-                                    <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539858&sysCode=JOSUNHOTEL">
-                                    <h6 style="margin-top: 10px;"> Hotel Dining</h6>
-                                </li>
+                                <a href="https://lounge.josunhotel.com/04/aisle-of-dreams/?_gl=1*24rldw*_ga*MjM4ODI1OTYwLjE2ODI5MzE2NjU.*_ga_TRL4XSZ1TD*MTY4NDQ4MDAyMS41Ny4wLjE2ODQ0ODEwMTIuNjAuMC4w*_ga_ZTT88NNQSY*MTY4NDQ4MDAyMS41LjAuMTY4NDQ4MDkxNy42MC4wLjA.">
+                                    <li>
+                                        <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539868&sysCode=JOSUNHOTEL">
+                                        <h6 style="margin-top: 10px;"> Hotel Dining</h6>
+                                    </li>
 
-                               </a>
+                                </a>
 
-                                <a>
+                                <a href="https://lounge.josunhotel.com/04/joyful-josun-junior/?_gl=1*16v6ku7*_ga*MjM4ODI1OTYwLjE2ODI5MzE2NjU.*_ga_TRL4XSZ1TD*MTY4NDQ4MDAyMS41Ny4xLjE2ODQ0ODEwMjAuNTIuMC4w*_ga_ZTT88NNQSY*MTY4NDQ4MDAyMS41LjEuMTY4NDQ4MTAyMC42MC4wLjA.">
                                     <li>
                                         <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539878&sysCode=JOSUNHOTEL">
                                         <h6 style="margin-top: 10px;"> Hotel Dining</h6>
                                     </li>
                                 </a>
 
-                                <a>
+                                <a href="https://lounge.josunhotel.com/04/gift-on-demand/?_gl=1*1bkfmjv*_ga*MjM4ODI1OTYwLjE2ODI5MzE2NjU.*_ga_TRL4XSZ1TD*MTY4NDQ4MDAyMS41Ny4xLjE2ODQ0ODEyNzguNTguMC4w*_ga_ZTT88NNQSY*MTY4NDQ4MDAyMS41LjEuMTY4NDQ4MTI3OC41OC4wLjA.">
                                     <li>
                                         <img src="https://www.josunhotel.com/util/file/download.do?fileSn=1539893&sysCode=JOSUNHOTEL">
                                         <h6 style="margin-top: 10px;"> Hotel Dining</h6>
@@ -380,9 +386,13 @@
             </div>
 
             <div class="topUtil">
-                <a href="/notice/noticeboard" class="hotelFind" style="font-size: 14px;">
-                    공지사항
-                </a>
+                <ul>
+                    <li>
+                        <a href="/notice/noticeboard" class="hotelFind" style="font-size: 14px;">
+                            공지사항
+                        </a>
+                    </li>
+                </ul>
             </div>
 
             <div class="gnbUtil" >
@@ -393,6 +403,9 @@
                         </li>
                         <li>
                             <a href="/mypage/" id="header_mypage">마이페이지</a>
+                        </li>
+                        <li>
+                            <a href="/mypage/" id="confirmReserve2">예약확인</a>
                         </li>
                         <c:if test="${loginuser.user_level>=10}">
                             <li>
@@ -407,10 +420,10 @@
                         <li>
                             <a href="/signup/signup" id="join">회원가입</a>
                         </li>
+                        <li>
+                            <a href="/signup/login" id="confirmReserve">예약확인</a>
+                        </li>
                     </c:if>
-                    <li>
-                        <a href="" id="confirmReserve">예약확인</a>
-                    </li>
                 </ul>
 
 
@@ -420,8 +433,8 @@
                             <button type="button" aria-label="목록열기" class="btn_opener">RESERVATION</button>
                         </div>
                         <ul class="item_list" role="listbox" style="width: 120px;">
-                            <li role="option" style="font-size: 13px"><a href="">ROOM</a></li>
-                            <li role="option" style="font-size: 13px"><a href="">MEMBERSHIP</a></li>
+                            <li role="option" style="font-size: 13px"><a href="/notice/noticeboard">NOTICE</a></li>
+                            <li role="option" style="font-size: 13px"><a href="/mypage/membership">MEMBERSHIP</a></li>
                         </ul>
                     </div>
                 </div>
@@ -432,4 +445,6 @@
 
     </div> <%--wrapper mainWrapper END--%>
 
-</body>
+
+
+
